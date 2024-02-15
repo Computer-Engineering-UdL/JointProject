@@ -35,16 +35,21 @@ Manual installation of the project:
 $ git clone https://github.com/Aniol0012/JointProject.git
 ```
 
-2. Execute the following command to start the server
+2. Navigate to the project folder
 
 ```bash
-$ python manage.py runserver
+$ cd JointProject
 ```
 
 ## Usage
 
-The project is a web application that allows the user to manage the hotel. The user can manage the rooms, the clients,
-the reservations, the employees and the services. The user can also see the statistics of the hotel.
+Execute the following command to start the server
+
+```bash
+$ python manage.py runserver
+```
+    
+Then, open your browser and go to the [localhost](http://127.0.0.1:8000/) url.
 
 ## Licence
 
