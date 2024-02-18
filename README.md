@@ -62,7 +62,7 @@ details.
 ## Authors
 
 - [Fernández Espona, Sergi](https://github.com/SergiFn)
-- [Lamrabat, Abdellah](https://github.com/abde-eps)
+- [Lamrabat, Abdellah](https://github.com/AbdeDevs)
 - [Nogales López, Júlia](https://github.com/julianogales)
-- [Salvia Pérez, Abel](https://github.com/Abelitux)
+- [Pérez Salvia, Abel](https://github.com/Abelitux)
 - [Serrano Ortega, Aniol](https://github.com/Aniol0012)
