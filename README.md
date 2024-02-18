@@ -11,7 +11,7 @@ in UdL at the software branch.
 
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django) <!-- try: ?style=plastic -->
-![Django](https://img.shields.io/badge/django-TO_DETERMINE-green.svg)
+![Django](https://img.shields.io/badge/django-5.0.2-green.svg)
 ![Contributors](https://img.shields.io/badge/contributors-5-gre)
 
 
