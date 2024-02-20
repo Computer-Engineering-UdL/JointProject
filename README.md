@@ -1,4 +1,8 @@
-# JointProject
+<h1 style="text-align: center;">Joint Project</h1>
+
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django) <!-- try: ?style=plastic -->
+![Django](https://img.shields.io/badge/django-5.0.2-green.svg)
+![Contributors](https://img.shields.io/badge/contributors-5-gre)
 
 ## Description
 
@@ -10,9 +14,6 @@ in UdL at the software branch.
 > We follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
 
 
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django) <!-- try: ?style=plastic -->
-![Django](https://img.shields.io/badge/django-5.0.2-green.svg)
-![Contributors](https://img.shields.io/badge/contributors-5-gre)
 
 
 
