@@ -1,4 +1,4 @@
-<h1 style="text-align: center;">Joint Project</h1>
+<h1 align="center">Joint Project</h1>
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django) <!-- try: ?style=plastic -->
 ![Django](https://img.shields.io/badge/django-5.0.2-green.svg)
