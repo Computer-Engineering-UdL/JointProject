@@ -13,18 +13,13 @@ in UdL at the software branch.
 > [!NOTE]  
 > We follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
 
-
-
-
-
 ## Table of Contents
 
-- [JointProject](#jointproject)
-    - [Description](#description)
-    - [Installation](#installation)
-    - [Usage](#usage)
-    - [Licence](#licence)
-    - [Authors](#authors)
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Licence](#licence)
+- [Authors](#authors)
 
 ## Installation
 
