@@ -1,4 +1,9 @@
-# JointProject
+<!-- <h1 align="center">Joint Project</h1> -->
+# Joint Project - _Hotel Las Palmeras_ 
+
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django) <!-- try: ?style=plastic -->
+![Django](https://img.shields.io/badge/django-5.0.2-green.svg)
+![Contributors](https://img.shields.io/badge/contributors-5-gre)
 
 ## Description
 
@@ -9,21 +14,13 @@ in UdL at the software branch.
 > [!NOTE]  
 > We follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification.
 
-
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django) <!-- try: ?style=plastic -->
-![Django](https://img.shields.io/badge/django-5.0.2-green.svg)
-![Contributors](https://img.shields.io/badge/contributors-5-gre)
-
-
-
 ## Table of Contents
 
-- [JointProject](#jointproject)
-    - [Description](#description)
-    - [Installation](#installation)
-    - [Usage](#usage)
-    - [Licence](#licence)
-    - [Authors](#authors)
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Licence](#licence)
+- [Authors](#authors)
 
 ## Installation
 
