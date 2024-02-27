@@ -15,7 +15,7 @@ jobs:
           route: POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
           assignees: '["Aniol0012", "SergiFn", "AbdeDevs"]'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
       - name: Assign for database
         if: contains(github.event.issue.labels.*.name, 'database')
@@ -24,7 +24,7 @@ jobs:
           route: POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
           assignees: '["Aniol0012", "SergiFn"]'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
       - name: Assign for documentation
         if: contains(github.event.issue.labels.*.name, 'documentation')
@@ -33,7 +33,7 @@ jobs:
           route: POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
           assignees: '["julianogales", "Aniol0012"]'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
       - name: Assign for front-end
         if: contains(github.event.issue.labels.*.name, 'front-end')
@@ -42,7 +42,7 @@ jobs:
           route: POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
           assignees: '["AbdeDevs", "julianogales", "Abelitux"]'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
       - name: Assign for tests
         if: contains(github.event.issue.labels.*.name, 'tests')
@@ -51,4 +51,4 @@ jobs:
           route: POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
           assignees: '["julianogales", "Aniol0012", "AbdeDevs", "Abelitux"]'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
