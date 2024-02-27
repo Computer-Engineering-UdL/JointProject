@@ -2,7 +2,7 @@
 # Joint Project - _Hotel Las Palmeras_ 
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django) <!-- try: ?style=plastic -->
-![Django](https://img.shields.io/badge/django-5.0.2-green.svg)
+[![Django](https://img.shields.io/badge/django-5.0.2-green.svg)](https://djangoproject.com)
 ![Contributors](https://img.shields.io/badge/contributors-5-gre)
 
 ## Description
