@@ -1,0 +1,54 @@
+name: Auto Assign to Teams Based on Labels
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  assign-to-users:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign for back-end
+        if: contains(github.event.issue.labels.*.name, 'back-end')
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
+          assignees: '["Aniol0012", "SergiFn", "AbdeDevs"]'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Assign for database
+        if: contains(github.event.issue.labels.*.name, 'database')
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
+          assignees: '["Aniol0012", "SergiFn"]'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Assign for documentation
+        if: contains(github.event.issue.labels.*.name, 'documentation')
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
+          assignees: '["julianogales", "Aniol0012"]'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Assign for front-end
+        if: contains(github.event.issue.labels.*.name, 'front-end')
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
+          assignees: '["AbdeDevs", "julianogales", "Abelitux"]'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Assign for tests
+        if: contains(github.event.issue.labels.*.name, 'tests')
+        uses: octokit/request-action@v2.x
+        with:
+          route: POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
+          assignees: '["julianogales", "Aniol0012", "AbdeDevs", "Abelitux"]'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
