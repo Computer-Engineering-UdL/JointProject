@@ -2,18 +2,24 @@ name: Auto Assign to Teams Based on Labels
 
 on:
   issues:
-    types: [labeled]
+    types: [ labeled ]
 
 jobs:
   assign-to-users:
     runs-on: ubuntu-latest
+    env:
+      BACKEND_TEAM: '["Aniol0012", "SergiFn", "AbdeDevs"]'
+      DATABASE_TEAM: '["Aniol0012", "SergiFn"]'
+      DOCUMENTATION_TEAM: '["julianogales", "Aniol0012"]'
+      FRONTEND_TEAM: '["AbdeDevs", "julianogales", "Abelitux"]'
+      TESTS_TEAM: '["julianogales", "Aniol0012", "AbdeDevs", "Abelitux"]'
     steps:
       - name: Assign for back-end
         if: contains(github.event.issue.labels.*.name, 'back-end')
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
-          assignees: '["Aniol0012", "SergiFn", "AbdeDevs"]'
+          assignees: ${{ env.BACKEND_TEAM }}
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
@@ -22,7 +28,7 @@ jobs:
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
-          assignees: '["Aniol0012", "SergiFn"]'
+          assignees: ${{ env.DATABASE_TEAM }}
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
@@ -31,7 +37,7 @@ jobs:
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
-          assignees: '["julianogales", "Aniol0012"]'
+          assignees: ${{ env.DOCUMENTATION_TEAM }}
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
@@ -40,7 +46,7 @@ jobs:
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
-          assignees: '["AbdeDevs", "julianogales", "Abelitux"]'
+          assignees: ${{ env.FRONTEND_TEAM }}
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
@@ -49,6 +55,61 @@ jobs:
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
-          assignees: '["julianogales", "Aniol0012", "AbdeDevs", "Abelitux"]'
+          assignees: ${{ env.TESTS_TEAM }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+
+      - name: Unassign for back-end
+        if: |
+          github.event.action == 'unlabeled' &&
+          contains(github.event.issue.labels.*.name, 'back-end') == false
+        uses: octokit/request-action@v2.x
+        with:
+          route: DELETE /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
+          assignees: ${{ env.BACKEND_TEAM }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+
+      - name: Unassign for database
+        if: |
+          github.event.action == 'unlabeled' &&
+          contains(github.event.issue.labels.*.name, 'database') == false
+        uses: octokit/request-action@v2.x
+        with:
+          route: DELETE /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
+          assignees: ${{ env.DATABASE_TEAM }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+
+      - name: Unassign for documentation
+        if: |
+          github.event.action == 'unlabeled' &&
+          contains(github.event.issue.labels.*.name, 'documentation') == false
+        uses: octokit/request-action@v2.x
+        with:
+          route: DELETE /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
+          assignees: ${{ env.DOCUMENTATION_TEAM }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+
+      - name: Unassign for front-end
+        if: |
+          github.event.action == 'unlabeled' &&
+          contains(github.event.issue.labels.*.name, 'front-end') == false
+        uses: octokit/request-action@v2.x
+        with:
+          route: DELETE /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
+          assignees: ${{ env.FRONTEND_TEAM }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+
+      - name: Unassign for tests
+        if: |
+          github.event.action == 'unlabeled' &&
+          contains(github.event.issue.labels.*.name, 'tests') == false
+        uses: octokit/request-action@v2.x
+        with:
+          route: DELETE /repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/assignees
+          assignees: ${{ env.TESTS_TEAM }}
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
