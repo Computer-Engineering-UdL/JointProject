@@ -18,6 +18,10 @@ todo: #456
 
 <!--Here link the issues that this pull request is solving.-->
 
+## Branch Deletion
+
+- [ ] I confirm that after my PR is successfully merged, this branch can be deleted.
+
 ## Additional Comments
 
 <!--Here you can add any additional comments or questions that you have.-->
