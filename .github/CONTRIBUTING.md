@@ -66,4 +66,4 @@ prettier --write .
 
 ### 3. Pull requests
 
-Finally, it is strongly recommended to create a pull request using the [Conventional Comments](https://www.conventionalcomments.org/) specification. This means that every pull request should follow the next pattern:
+Finally, it is strongly recommended to create a pull request using the [Conventional Comments](https://conventionalcomments.org/) specification. This means that every pull request should follow the next pattern:

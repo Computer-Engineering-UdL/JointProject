@@ -15,13 +15,16 @@
 
 ## Linked Issues
 
-
-- fixes #123
-- resolves #456
+issue: #123
+todo: #456
 
 <!--Here link the issues that this pull request is solving.-->
 
 ## Additional Comments
 
-
 <!--Here you can add any additional comments or questions that you have.-->
+
+
+> [!IMPORTANT]
+> I understand that this pull request is strongly recommended to follow
+> the [Conventional Comments](https://conventionalcomments.org/) specification.
