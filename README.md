@@ -56,7 +56,7 @@ Then, open your browser and go to the [localhost](http://localhost:8000/) url.
 
 ## Contributing
 
-To contribute to this project go to the [CONTRIBUTING.md](./CONTRIBUTING.md) file.
+To contribute to this project go to the [CONTRIBUTING.md](.github/CONTRIBUTING.md) file.
 
 
 ## Licence
