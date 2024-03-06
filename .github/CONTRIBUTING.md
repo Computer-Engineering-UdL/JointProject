@@ -2,7 +2,7 @@
 
 ### 1. Conventional Commits
 
-In order to mantain a clean and organized code, this project uses
+In order to maintain a clean and organized code, this project uses
 the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification. This means that every commit
 message should follow the next pattern:
 
@@ -20,7 +20,7 @@ Where `<type>` can be one of the following:
 - `perf`: A code change that improves performance.
 - `refactor`: A code change that neither fixes a bug nor adds a feature.
 - `revert`: Changes that revert a previous commit.
-- `style`: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc).
+- `style`: Changes that do not affect the meaning of the code (white-space, formatting, missing semicolons, etc.).
 - `test`: Adding missing tests or correcting existing tests.
 - `security`: Changes that affect the security of the project.
 - `translation`: Changes that affect the translation of the project.
@@ -48,7 +48,7 @@ flake8 . --exclude=venv,migrations
 <--
 ### 3. Prettier
 
-This project aloso uses the [Prettier](https://prettier.io/) linter to check the code style. This means that
+This project also uses the [Prettier](https://prettier.io/) linter to check the code style. This means that
 every pull request should pass the Prettier checks in order to be merged.
 
 In order to check the code style, run the following command:
