@@ -1,0 +1,27 @@
+# Title of the Pull Request
+
+## Description
+
+<!--Here explain the problem/feature that this pull request is solving.-->
+
+## Changelog
+
+- Feature 1
+- Feature 2
+- Bug fix 1
+- Bug fix 2
+
+<!--Here explain the changes that you have made in this pull request.-->
+
+## Linked Issues
+
+
+- fixes #123
+- resolves #456
+
+<!--Here link the issues that this pull request is solving.-->
+
+## Additional Comments
+
+
+<!--Here you can add any additional comments or questions that you have.-->
