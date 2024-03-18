@@ -1,10 +1,11 @@
 <!-- <h1 align="center">Joint Project</h1> -->
-# Joint Project - _Hotel Las Palmeras_ 
+
+# Joint Project - _Hotel Las Palmeras_
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django?style=plastic)
 [![Django](https://img.shields.io/badge/django-5.0.2-green.svg?style=plastic)](https://djangoproject.com)
 [![Flake8](https://img.shields.io/badge/flake8-7.0.0-blueviolet?style=plastic)](https://flake8.pycqa.org/en/latest/)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-orange.svg?style=plastic)](https://www.conventionalcommits.org/en/v1.0.0/)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 ![Contributors](https://img.shields.io/badge/contributors-5-g?style=plastic)
 <!--[![Licence](https://img.shields.io/github/license/Computer-Engineering-UdL/JointProject?style=plastic&color=red)](./LICENSE)-->
 <!---![Contributors](https://img.shields.io/github/Computer-Engineering-UdL/JointProject?style=plastic&color=blue)-->
@@ -15,7 +16,8 @@
 
 ## Description
 
-This project is a [django](https://www.djangoproject.com/) web application that allows the user to manage a hotel named _Hotel Las Palmeras_. The user can manage
+This project is a [django](https://www.djangoproject.com/) web application that allows the user to manage a hotel named
+_Hotel Las Palmeras_. The user can manage
 the rooms, the clients, the reservations, the employees and the services. This project is part of the Joint Project made
 in UdL at the software branch.
 
@@ -32,13 +34,13 @@ Manual installation of the project:
 git clone https://github.com/Aniol0012/JointProject.git
 ```
 
-1. Navigate to the project folder
+2. Navigate to the project folder
 
 ```bash
 cd JointProject
 ```
 
-1. Install the required packages
+3. Install the required packages
 
 ```bash
 pip install -r requirements.txt
@@ -54,18 +56,29 @@ python manage.py runserver
 
 Then, open your browser and go to the [localhost](http://localhost:8000/) url.
 
+## Matrix of responsibilities
+
+In order to organize the work, we have divided the project into different sectors and assigned people to each of them.
+
+| **Sector**            | **Head of the sector** | **People involved**          |
+|-----------------------|------------------------|------------------------------|
+| Frontend              | Abel                   | Abdellah, Júlia              |
+| Backend               | Sergi                  | Abdellah, Aniol              |
+| Testing               | Abdellah               | Aniol, Júlia, Abel           |
+| Database              | Aniol                  | Sergi                        |
+| Product Documentation | Aniol                  | Abel, Abdellah, Júlia, Sergi |
+| Project Management    | Júlia                  | Aniol                        |
+
 ## Contributing
 
 To contribute to this project go to the [CONTRIBUTING.md](.github/CONTRIBUTING.md) file.
-
 
 ## Licence
 
 This project is under [MIT Licence](https://opensource.org/license/mit/) - see the [LICENCE](./LICENSE) file for
 details.
 
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?)](#)
-
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?)](https://opensource.org/license/mit/)
 
 ## Authors
 
