@@ -3,7 +3,7 @@
 # Joint Project - _Hotel Las Palmeras_
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django?style=plastic)
-[![Django](https://img.shields.io/badge/django-5.0.2-green.svg?style=plastic)](https://djangoproject.com)
+[![Django](https://img.shields.io/badge/django-5.0.3-green.svg?style=plastic)](https://djangoproject.com)
 [![Flake8](https://img.shields.io/badge/flake8-7.0.0-blueviolet?style=plastic)](https://flake8.pycqa.org/en/latest/)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 ![Contributors](https://img.shields.io/badge/contributors-5-g?style=plastic)
