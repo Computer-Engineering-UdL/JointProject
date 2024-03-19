@@ -1,7 +1,9 @@
 name: Conventional Commits Check
 
 on:
-  pull_request || push:
+  push:
+    branches: [main, development]
+  pull_request:
     branches: [main, development]
 
 jobs:

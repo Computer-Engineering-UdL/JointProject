@@ -1,7 +1,9 @@
 name: Python Lint
 
 on:
-  pull_request || push:
+  push:
+      branches: [main, development]
+  pull_request:
     branches: [main, development]
 
 jobs:
