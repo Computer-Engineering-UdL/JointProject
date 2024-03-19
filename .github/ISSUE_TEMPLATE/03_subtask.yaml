@@ -1,5 +1,5 @@
-name: Task creation
-description: Task required by the product owner for the JointProject.
+name: Subtask creation
+description: Subtask of a story requested by the product owner for the JointProject.
 body:
   - type: markdown
     attributes:
@@ -21,6 +21,15 @@ body:
       label: Task description
       description: Detailed description of the task.
       placeholder: "Describe what needs to be done, any relevant details, and expected outcomes."
+    validations:
+      required: true
+
+  - type: textarea
+    id: parent_task
+    attributes:
+      label: Parent task
+      description: 'Provide the issue number of the parent task. Format your input in Markdown to link directly to the parent task, for example, typing `#4` will link to issue #4. Make sure to verify the issue number before submitting.'
+      placeholder: "Type the parent task link in Markdown format, e.g., `#4`."
     validations:
       required: true
 

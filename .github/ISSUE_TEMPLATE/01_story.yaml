@@ -24,28 +24,9 @@ body:
     validations:
       required: true
 
-  - type: dropdown
-    id: priority
-    attributes:
-      label: Priority
-      description: Priority of this user story.
-      options:
-        - P0 - Maximum
-        - P1 - High
-        - P2 - Medium
-    validations:
-      required: true
 
-  - type: textarea
-    id: parent_task
-    attributes:
-      label: Parent task
-      description: 'Provide the issue number of the parent task. Format your input in Markdown to link directly to the parent task, for example, typing `#4` will link to issue #4. Make sure to verify the issue number before submitting.'
-      placeholder: "Type the parent task link in Markdown format, e.g., `#4`."
-    validations:
-      required: true
 
   - type: markdown
     attributes:
       value: |
-        Make sure to link this task to the appropriate parent task and milestone to ensure proper tracking and visibility in the project management process.
+        Make sure to link this task to the appropriate milestone and project to ensure proper tracking and visibility in the project management process.
