@@ -69,6 +69,8 @@ In order to organize the work, we have divided the project into different sector
 | Product Documentation | Aniol                  | Abel, Abdellah, Júlia, Sergi |
 | Project Management    | Júlia                  | Aniol                        |
 
+To check the work done by each sprint, check the documentation in the [documentation](./documentation) folder.
+
 ## Contributing
 
 To contribute to this project go to the [CONTRIBUTING.md](.github/CONTRIBUTING.md) file.
