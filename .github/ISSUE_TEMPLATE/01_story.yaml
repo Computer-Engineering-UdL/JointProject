@@ -36,14 +36,16 @@ body:
     validations:
       required: true
 
-  - type: dropdown
-    id: milestone
+  - type: textarea
+    id: parent_task
     attributes:
-      label: Milestone
-      description: Select the milestone this user story is part of.
-      options:
-        - Sprint 1
-        - Sprint 2
-        - Sprint 3
+      label: Parent task
+      description: 'Provide the issue number of the parent task. Format your input in Markdown to link directly to the parent task, for example, typing `#4` will link to issue #4. Make sure to verify the issue number before submitting.'
+      placeholder: "Type the parent task link in Markdown format, e.g., `#4`."
     validations:
       required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        Make sure to link this task to the appropriate parent task and milestone to ensure proper tracking and visibility in the project management process.
