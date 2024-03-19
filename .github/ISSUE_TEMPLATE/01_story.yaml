@@ -30,9 +30,9 @@ body:
       label: Priority
       description: Priority of this user story.
       options:
-        - High
-        - Medium
-        - Low
+        - P0 - Maximum
+        - P1 - High
+        - P2 - Medium
     validations:
       required: true
 
