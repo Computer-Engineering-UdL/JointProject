@@ -1,0 +1,30 @@
+name: Task creation
+description: Task required by the product owner for the JointProject.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please, fill out this form to help us track the progress of the JointProject more effectively. Your contribution is highly appreciated!
+
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      description: Short and descriptive title of the task.
+      placeholder: "e.g., Implement feature X"
+    validations:
+      required: true
+
+  - type: textarea
+    id: task_description
+    attributes:
+      label: Task description
+      description: Detailed description of the task.
+      placeholder: "Describe what needs to be done, any relevant details, and expected outcomes."
+    validations:
+      required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        Make sure to link this task to the appropriate parent task and milestone to ensure proper tracking and visibility in the project management process.
