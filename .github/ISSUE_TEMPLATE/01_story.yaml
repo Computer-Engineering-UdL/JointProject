@@ -1,0 +1,49 @@
+name: User Story
+description: A user story for the JointProject to outline new features or improvements from the user's perspective.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A good user story should be "INVEST" (Independent, Negotiable, Valuable, Estimable, Small, Testable). Please provide as much detail as possible to help us understand the context and the value of this story.
+
+  - type: input
+    id: user_story_title
+    attributes:
+      label: User Story Title
+      description: Brief title summarizing the user story.
+      placeholder: "As a [role], I want [feature], so that [benefit]."
+    validations:
+      required: true
+
+  - type: textarea
+    id: user_story_description
+    attributes:
+      label: Detailed Description
+      description: Detailed description of the user story, including acceptance criteria.
+      placeholder: "Provide a detailed description, including any acceptance criteria or specific requirements."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: Priority of this user story.
+      options:
+        - High
+        - Medium
+        - Low
+    validations:
+      required: true
+
+  - type: dropdown
+    id: milestone
+    attributes:
+      label: Milestone
+      description: Select the milestone this user story is part of.
+      options:
+        - Sprint 1
+        - Sprint 2
+        - Sprint 3
+    validations:
+      required: true
