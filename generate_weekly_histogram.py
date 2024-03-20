@@ -19,11 +19,13 @@ labels_count = {
 
 
 def get_date_range_of_current_week():
-    """Gets the date range of the current week."""
+    """Gets the date range of the current week as datetime objects."""
     current_date = datetime.datetime.now()
     start_of_week = current_date - datetime.timedelta(days=current_date.weekday())
     end_of_week = start_of_week + datetime.timedelta(days=6)
-    return start_of_week.date(), end_of_week.date()
+    start_of_week = datetime.datetime.combine(start_of_week.date(), datetime.datetime.min.time())
+    return start_of_week, end_of_week.date()
+
 
 
 def count_labels(state="open") -> None:
