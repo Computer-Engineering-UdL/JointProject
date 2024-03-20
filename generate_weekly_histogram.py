@@ -27,12 +27,11 @@ def get_date_range_of_current_week():
     return start_of_week, end_of_week.date()
 
 
-
 def count_labels(state="open") -> None:
     """Counts the number of issues with each label, filtering for the current week."""
     start_of_week, end_of_week = get_date_range_of_current_week()
 
-    for issue in repo.get_issues(state=state, since=start_of_week.isoformat()):
+    for issue in repo.get_issues(state=state, since=start_of_week):
         if issue.created_at.date() <= end_of_week:
             for label in issue.labels:
                 if label.name in labels_count:
