@@ -45,7 +45,7 @@ To ignore any file or directory use the `--exclude` flag, for example:
 flake8 . --exclude=venv,migrations
 ```
 
-<--
+
 ### 3. Prettier
 
 This project also uses the [Prettier](https://prettier.io/) linter to check the code style. This means that
@@ -62,8 +62,8 @@ Or if you want to format the code:
 ```bash
 prettier --write .
 ```
--->
+
 
 ### 3. Pull requests
 
-Finally, it is strongly recommended to create a pull request using the [Conventional Comments](https://conventionalcomments.org/) specification. This means that every pull request should follow the next pattern:
+Finally, it is strongly recommended to create a pull request using the [Conventional Comments](https://conventionalcomments.org/) specification.
