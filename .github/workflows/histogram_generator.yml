@@ -26,5 +26,5 @@ jobs:
     - name: Upload Histogram
       uses: actions/upload-artifact@v2
       with:
-        name: histograma_issues
-        path: histograma_issues.png
+        name: histogram_issues
+        path: histogram_issues.png
