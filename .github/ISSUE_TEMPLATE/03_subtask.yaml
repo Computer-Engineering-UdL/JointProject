@@ -6,15 +6,6 @@ body:
       value: |
         Please, fill out this form to help us track the progress of the JointProject more effectively. Your contribution is highly appreciated!
 
-  - type: input
-    id: title
-    attributes:
-      label: Title
-      description: Short and descriptive title of the task.
-      placeholder: "e.g., Implement feature X"
-    validations:
-      required: true
-
   - type: textarea
     id: task_description
     attributes:
