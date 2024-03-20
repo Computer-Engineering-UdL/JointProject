@@ -31,14 +31,30 @@ def get_date():
     return f"M{month}-W{week_of_month}-Report"
 
 
-for issue in repo.get_issues(state="all"):
-    for label in issue.labels:
-        if label.name in labels_count:
-            labels_count[label.name] += 1
+def count_labels() -> None:
+    """Count the number of issues with each label"""
+    for issue in repo.get_issues(state="all"):
+        for label in issue.labels:
+            if label.name in labels_count:
+                labels_count[label.name] += 1
 
-plt.bar(labels_count.keys(), labels_count.values())
-plt.xlabel('Labels')
-plt.ylabel('Number of Issues')
-plt.title(f'Histogram of Issues by Label - {get_date()}')
-plt.xticks(rotation=30)
-plt.savefig("histogram_issues.png")
+
+def generate_plot() -> None:
+    """Generate a histogram of the number of issues with each label"""
+    plt.figure(figsize=(10, 6))
+    plt.bar(labels_count.keys(), labels_count.values())
+    plt.xlabel('Labels')
+    plt.ylabel('Number of Issues')
+    plt.title(f'Histogram of Issues by Label - {get_date()}')
+    plt.xticks(rotation=20)
+    plt.yticks(range(0, max(labels_count.values()) + 1))
+    plt.savefig("histogram_issues.png")
+
+
+def main() -> None:
+    count_labels()
+    generate_plot()
+
+
+if __name__ == '__main__':
+    main()
