@@ -1,6 +1,5 @@
 from github import Github
 import matplotlib.pyplot as plt
-import os
 import datetime
 from generate_histogram import token, repo_name
 import argparse
@@ -55,8 +54,10 @@ def generate_plot(state="open") -> None:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description='Generate a histogram of the number of issues with each label')
-    parser.add_argument('--state', type=str, help='The state of the issues that this is gathering')
+    parser = argparse.ArgumentParser(
+        description='Generate a histogram of the number of issues with each label')
+    parser.add_argument('--state', type=str,
+                        help='The state of the issues that this is gathering')
     return parser.parse_args()
 
 

@@ -49,7 +49,7 @@ def generate_plot() -> None:
     plt.bar(labels_count.keys(), labels_count.values())
     plt.xlabel('Labels')
     plt.ylabel('Number of Issues')
-    plt.title(f'Histogram of Issues by Label - General Report')
+    plt.title('Histogram of Issues by Label - General Report')
     plt.xticks(rotation=20)
     plt.yticks(range(0, max(labels_count.values()) + 1))
     plt.savefig("histogram_issues.png")
