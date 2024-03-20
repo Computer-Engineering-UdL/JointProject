@@ -51,7 +51,7 @@ def generate_plot(state="open") -> None:
     plt.title(f'Histogram of Issues ({state}) by Label - {get_date()}')
     plt.xticks(rotation=20)
     plt.yticks(range(0, max(labels_count.values()) + 1))
-    plt.savefig("histogram_issues.png")
+    plt.savefig(f"histogram_issues_{state}.png")
 
 
 def parse_args() -> argparse.Namespace:

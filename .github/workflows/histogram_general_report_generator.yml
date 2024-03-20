@@ -1,8 +1,6 @@
-name: Generate Histogram of Issues
+name: Generate Histogram of Issues (all)
 
 on:
-  schedule:
-    - cron:  '0 0 * * 5' # Every Friday at 00:00
   workflow_dispatch:
 
 jobs:
@@ -19,14 +17,10 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install PyGithub matplotlib
-    - name: Generate histogram with open issues
-      run: python generate_weekly_histogram.py
+    - name: Generate histogram (all issues)
+      run: python generate_histogram.py
       env:
         GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-    - name : Generate histogram with closed issues
-      run: python generate_weekly_histogram.py --state closed
-      env:
-          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
     - name: Upload Histogram
       uses: actions/upload-artifact@v2
       with:
