@@ -1,17 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 class Worker(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     schedule = models.CharField(max_length=100)
     type = models.CharField(max_length=100)
+
     def __str__(self):
         return self.user.first_name
 
 
 class Client(models.Model):
-
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_hosted = models.BooleanField()
 
@@ -26,9 +27,10 @@ class Room(models.Model):
     room_num = models.IntegerField()
     room_price = models.IntegerField()
 
-
     def __str__(self):
         return self.room_num
+
+
 class Room_reservation(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
@@ -37,8 +39,8 @@ class Room_reservation(models.Model):
     pension_type = models.CharField(max_length=100)
     num_guests = models.IntegerField()
 
-
     class Meta:
         unique_together = ('room', 'check_in', 'check_out')
+
     def __str__(self):
         return self.room.room_num
