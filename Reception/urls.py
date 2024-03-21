@@ -7,4 +7,4 @@ urlpatterns = [
     path("", TemplateView.as_view(template_name="reception_home.html"), name="home"),
     path('add_client/', add_client, name='add_client'),
     path('room_reservation/', room_reservation, name='room_reservation'),
-    ]
+]
