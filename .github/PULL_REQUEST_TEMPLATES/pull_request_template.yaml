@@ -1,0 +1,24 @@
+name: Pull Request Template
+description: Template for pull requests
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Description
+        Please include a detailed description of the changes you are proposing. What problem does it solve?
+
+  - type: checkboxes
+    id: change-type
+    attributes:
+      label: ''
+      options:
+        - label: New feature (non-breaking change which adds functionality)
+        - label: Bug fix (non-breaking change which fixes an issue)
+        - label: Breaking change (fix or feature that would cause existing functionality to not work as expected)
+        - label: Other (please describe)
+  - type: textarea
+    id: special-considerations
+    attributes:
+      label: Special Considerations
+      description: Is there anything else we should know?
+      placeholder: Additional details, context, etc...
