@@ -45,6 +45,7 @@ To ignore any file or directory use the `--exclude` flag, for example:
 flake8 . --exclude=venv,migrations
 ```
 
+<!--
 ### 3. Prettier
 
 This project also uses the [Prettier](https://prettier.io/) linter to check the code style. This means that
@@ -61,6 +62,7 @@ Or if you want to format the code:
 ```bash
 prettier --write .
 ```
+-->
 
 ### 3. Pull requests
 

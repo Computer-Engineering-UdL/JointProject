@@ -62,7 +62,7 @@ Then, open your browser and go to the [localhost](http://localhost:8000/) url.
 In order to organize the work, we have divided the project into different sectors and assigned people to each of them.
 
 | **Sector**            | **Head of the sector** | **People involved**          |
-| --------------------- | ---------------------- | ---------------------------- |
+|-----------------------|------------------------|------------------------------|
 | Frontend              | Abel                   | Abdellah, Júlia              |
 | Backend               | Sergi                  | Abdellah, Aniol              |
 | Testing               | Abdellah               | Aniol, Júlia, Abel           |
