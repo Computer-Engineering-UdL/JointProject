@@ -6,7 +6,14 @@ exclude =
     __pycache__,
     manage.py,
     settings.py
+    .git,
+    __pycache__,
+    .venv,
+    venv,
+    lib,
+    bin
 
 ignore =
     W503,
     E203,
+    F401,
