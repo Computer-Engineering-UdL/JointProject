@@ -1,10 +1,18 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
+
+from JointProject import settings
 
 
 # Create your models here.
+class HotelUser(AbstractUser):
+    dni = models.CharField(max_length=9)
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=9)
+
+
 class Worker(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     schedule = models.CharField(max_length=100)
     type = models.CharField(max_length=100)
 
@@ -13,7 +21,7 @@ class Worker(models.Model):
 
 
 class Client(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     is_hosted = models.BooleanField()
 
     def __str__(self):
@@ -33,7 +41,7 @@ class Room(models.Model):
     room_num = models.IntegerField()
     room_price = models.IntegerField()
     room_type = models.CharField(
-        max_length=3,
+        max_length=10,
         choices=ROOM_TYPES,
         default='Individual'
     )
@@ -53,7 +61,7 @@ class RoomReservation(models.Model):
     check_in = models.DateField()
     check_out = models.DateField()
     pension_type = models.CharField(
-        max_length=3,
+        max_length=15,
         choices=PENSION_TYPES,
         default='Sense pensió'
     )
