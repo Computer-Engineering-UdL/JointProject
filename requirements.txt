@@ -3,7 +3,6 @@ click==8.1.7
 colorama==0.4.6
 Django==5.0.3
 flake8==7.0.0
-Markdown==3.5.2
 mccabe==0.7.0
 npx==0.1.2
 numpy==1.26.4

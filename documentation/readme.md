@@ -1,7 +1,10 @@
 # Documentation
 
 ## Description
-This file serves as a guide to navigate through the documentation of the project. This project it has been done using the SCRUM methodology, so the documentation is divided into sprints. Each sprint has its own folder in the [documentation](./documentation) folder. In each sprint, you will find the following files:
+
+This file serves as a guide to navigate through the documentation of the project. This project it has been done using
+the SCRUM methodology, so the documentation is divided into sprints. Each sprint has its own folder in this folder. For
+each sprint, at least it has the following files:
 
 - **Sprint Planning**: This file contains the planning of the sprint.
 - **Sprint Review**: This file contains the review of the sprint.
@@ -15,6 +18,7 @@ In total this project has 3 sprints:
 3. [Sprint 3](./sprint3): 07/05/2024 - 25/05/2024
 
 ## Database schema
+
 To model the database it has been done using schemas. The latest schema is the following:
 
 ![Database schema](./database_schema/database_schema_v0.png)
