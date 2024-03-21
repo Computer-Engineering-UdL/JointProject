@@ -1,16 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Hotel las Palmeras</title>
     {% load static %}
-    <link
-            rel="stylesheet"
-            type="text/css"
-            href="{% static '/style.css' %}"
-    />
-</head>
-<body>
-
-</body>
+    <link rel="stylesheet" type="text/css" href="{% static '/style.css' %}" />
+  </head>
+  <body>
+    {% block content %} {% endblock %}
+  </body>
 </html>
