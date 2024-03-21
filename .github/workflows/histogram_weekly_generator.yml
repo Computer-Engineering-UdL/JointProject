@@ -2,7 +2,7 @@ name: Generate Histogram of Issues
 
 on:
   schedule:
-    - cron:  '0 0 * * 5' # Every Friday at 00:00
+    - cron: "0 0 * * 5" # Every Friday at 00:00
   workflow_dispatch:
 
 jobs:
@@ -10,30 +10,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install PyGithub matplotlib
-    - name: Generate histogram with open issues
-      run: python generate_weekly_histogram.py
-      env:
-        GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-    - name : Generate histogram with closed issues
-      run: python generate_weekly_histogram.py --state closed
-      env:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install PyGithub matplotlib
+      - name: Generate histogram with open issues
+        run: python generate_weekly_histogram.py
+        env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-    - name: Upload Histogram open issues
-      uses: actions/upload-artifact@v2
-      with:
-        name: histogram_issues_open
-        path: histogram_issues_open.png
-    - name: Upload Histogram closed issues
-      uses: actions/upload-artifact@v2
-      with:
-        name: histogram_issues_closed
-        path: histogram_issues_closed.png
+      - name: Generate histogram with closed issues
+        run: python generate_weekly_histogram.py --state closed
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+      - name: Upload Histogram open issues
+        uses: actions/upload-artifact@v2
+        with:
+          name: histogram_issues_open
+          path: histogram_issues_open.png
+      - name: Upload Histogram closed issues
+        uses: actions/upload-artifact@v2
+        with:
+          name: histogram_issues_closed
+          path: histogram_issues_closed.png
