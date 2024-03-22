@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import TemplateView
 
-from Reception.views import add_room,add_client, room_reservation
+from Reception.views import add_room, add_client, room_reservation
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="reception/reception_home.html"), name="home"),
