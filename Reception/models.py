@@ -56,6 +56,12 @@ class RoomReservation(models.Model):
         ('Completa', 'Completa'),
         ('Sense pensió', 'Sense pensió')
     ]
+    ROOM_TYPES = [
+        ('Individual', 'Individual'),
+        ('Double', 'Double'),
+        ('Suite', 'Suite'),
+        ('Deluxe', 'Deluxe')
+    ]
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     check_in = models.DateField()
@@ -64,6 +70,11 @@ class RoomReservation(models.Model):
         max_length=15,
         choices=PENSION_TYPES,
         default='Sense pensió'
+    )
+    room_type = models.CharField(
+        max_length=10,
+        choices=ROOM_TYPES,
+        default='Individual'
     )
     num_guests = models.IntegerField()
 
