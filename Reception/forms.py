@@ -1,11 +1,41 @@
 from django import forms
-from .models import RoomReservation, Client
+from django.contrib.auth import get_user_model
+
+from .models import RoomReservation, Client, Room
+
+
+class RoomForm(forms.ModelForm):
+    ROOM_TYPES = [
+        ('Individual', 'Individual'),
+        ('Double', 'Double'),
+        ('Suite', 'Suite'),
+        ('Deluxe', 'Deluxe')
+    ]
+    is_clean = forms.BooleanField(required=False)
+    is_taken = forms.BooleanField(required=False)
+    room_num = forms.IntegerField()
+    room_price = forms.IntegerField()
+    room_type = forms.ChoiceField(choices=ROOM_TYPES)
+
+    class Meta:
+        model = Room
+        fields = ['room_num', 'room_price', 'room_type', 'is_clean', 'is_taken']
 
 
 class RoomReservationForm(forms.ModelForm):
+    PENSION_TYPES = [
+        ('Esmorzar Buffet', 'Esmorzar Buffet'),
+        ('Completa', 'Completa'),
+        ('Sense pensió', 'Sense pensió')
+    ]
+    check_in = forms.DateField(input_formats=['%d/%m/%Y'])
+    check_out = forms.DateField(input_formats=['%d/%m/%Y'])
+    pension_type = forms.ChoiceField(choices=PENSION_TYPES)
+    num_guests = forms.IntegerField()
+
     class Meta:
         model = RoomReservation
-        fields = ['check_in', 'check_out', 'pension_type','room_type', 'num_guests']
+        fields = ['check_in', 'check_out', 'pension_type', 'num_guests']
 
 
 class AddClientForm(forms.ModelForm):
@@ -19,27 +49,3 @@ class AddClientForm(forms.ModelForm):
     class Meta:
         model = Client
         fields = ['first_name', 'last_name', 'dni', 'email', 'phone_number', 'is_hosted']
-
-    def __init__(self, *args, **kwargs):
-        super(AddClientForm, self).__init__(*args, **kwargs)
-        if self.instance.pk:
-            self.fields['first_name'].initial = self.instance.user.first_name
-            self.fields['last_name'].initial = self.instance.user.last_name
-            self.fields['dni'].initial = self.instance.user.dni
-            self.fields['email'].initial = self.instance.user.email
-            self.fields['phone_number'].initial = self.instance.user.phone_number
-            self.fields['is_hosted'].initial = self.instance.is_hosted
-
-    def save(self, commit=True):
-        instance = super(AddClientForm, self).save(commit=False)
-        user = instance.user
-        user.first_name = self.cleaned_data['first_name']
-        user.last_name = self.cleaned_data['last_name']
-        user.dni = self.cleaned_data['dni']
-        user.email = self.cleaned_data['email']
-        user.phone_number = self.cleaned_data['phone_number']
-        instance.is_hosted = self.cleaned_data['is_hosted']
-        if commit:
-            user.save()
-            instance.save()
-        return instance
