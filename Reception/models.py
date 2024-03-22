@@ -40,7 +40,7 @@ class Room(models.Model):
     )
 
     def __str__(self):
-        return self.room_num
+        return "Habitació " + str(self.room_num)
 
 
 class RoomReservation(models.Model):
