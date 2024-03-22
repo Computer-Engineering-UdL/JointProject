@@ -30,7 +30,7 @@
 
 This workflow it automatically triggered every Friday at 00:00. Then after the workflow is finished, it will create a
 png in the artifacts section of that workflow run. This can be found on
-your `repository -> Actions -> Generate Histogram of Issues`.
+your `repository -> Actions -> Weekly Report - Histogram of Issues (open and closed)`.
 
 This workflow can be manually triggered for testing
 purposes on Actions tab on your repository.
@@ -38,6 +38,6 @@ purposes on Actions tab on your repository.
 ### General report
 
 This workflow is **NOT** automatically triggered. It can be manually triggered on the Actions tab on your repository. Go
-to the `Generate Histogram of Issues (all)` and run the workflow.
+to the `Weekly Report - Histogram of Issues (open and closed)` and run the workflow.
 
 Thanks, _GROUP-C_.

@@ -61,6 +61,7 @@ def get_date() -> str:
 
 
 def parse_args() -> argparse.Namespace:
+    """Parses the arguments for the script."""
     parser = argparse.ArgumentParser(
         description='Generates a histogram of the number of issues with each label')
     parser.add_argument('--state', type=str,
