@@ -16,4 +16,9 @@
    ```python
    repository = "username/repo_name" # Replace this
    ```
-7. Create 
+7. Go to
+   your `profile settings -> Scroll down to Developer settings -> Personal access tokens -> Tokens (classic) -> Generate new token -> Generate new token (classic)`.
+   Name the token `MY_GITHUB_TOKEN`, select the `repo` scope and set an expiration date of 3 months or more. **Copy the
+   token and save it**, once you leave that page you will never see that token again.
+8. Go to your `repository settings -> Secrets and variables -> New repository secret -> Name the secret: 
+   `**`MY_GITHUB_TOKEN`** `-> Paste the token you copied in the previous step -> Add secret`.

@@ -20,7 +20,7 @@ jobs:
       - name: Generate histogram (all issues)
         run: python generate_histogram.py
         env:
-          GITHUB_TOKEN: ${{ secrets.TEST_SECRET }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
       - name: Upload Histogram
         uses: actions/upload-artifact@v2
         with:
