@@ -1,5 +1,28 @@
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: navajowhite;
+    color: white;
+}
+
+.menu{
+    display: flex;
+    list-style-type: none;
+    background-color: navajowhite;
+    color: white;
+    justify-content: flex-end;
+    padding: 5px;
+    gap: 20px;
+}
+
+#logo {
+    order: 1;
+    text-align: left;
+}
+
 body{
-    background-color: #f0f0f0;
+    background-color: beige;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
