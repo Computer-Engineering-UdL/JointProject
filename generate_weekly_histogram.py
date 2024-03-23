@@ -18,7 +18,7 @@ labels_count = {
 }
 
 
-def get_date_range_of_current_week():
+def get_date_range_of_current_week() -> tuple:
     """Gets the date range of the current week as datetime objects."""
     current_date = datetime.datetime.now()
     start_of_week = current_date - datetime.timedelta(days=current_date.weekday())
@@ -42,7 +42,6 @@ def generate_plot(state="open") -> None:
     """Generates a histogram of the number of issues with each label."""
     plt.figure(figsize=(10, 6))
     plt.bar(labels_count.keys(), labels_count.values())
-    plt.xlabel('Labels')
     plt.ylabel(f'Number of Issues ({state})')
     plt.title(f'Histogram of Issues ({state}) by Label - {get_date()}')
     plt.xticks(rotation=20)
@@ -50,7 +49,7 @@ def generate_plot(state="open") -> None:
     plt.savefig(f"histogram_issues_{state}.png")
 
 
-def get_date():
+def get_date() -> str:
     """The format is: MX-WY-Report -> where X is the month number and Y is the week number"""
     now = datetime.datetime.now()
     month = now.strftime("%m")
@@ -62,6 +61,7 @@ def get_date():
 
 
 def parse_args() -> argparse.Namespace:
+    """Parses the arguments for the script."""
     parser = argparse.ArgumentParser(
         description='Generates a histogram of the number of issues with each label')
     parser.add_argument('--state', type=str,

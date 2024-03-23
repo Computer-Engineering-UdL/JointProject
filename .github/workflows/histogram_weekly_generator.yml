@@ -1,4 +1,4 @@
-name: Generate Histogram of Issues
+name: Weekly Report - Histogram of Issues (open and closed)
 
 on:
   schedule:

@@ -47,7 +47,6 @@ def generate_plot() -> None:
     """Generate a histogram of the number of issues with each label"""
     plt.figure(figsize=(10, 6))
     plt.bar(labels_count.keys(), labels_count.values())
-    plt.xlabel('Labels')
     plt.ylabel('Number of Issues')
     plt.title('Histogram of Issues by Label - General Report')
     plt.xticks(rotation=20)

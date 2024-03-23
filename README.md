@@ -62,13 +62,13 @@ Then, open your browser and go to the [localhost](http://localhost:8000/) url.
 In order to organize the work, we have divided the project into different sectors and assigned people to each of them.
 
 | **Sector**            | **Head of the sector** | **People involved**          |
-| --------------------- | ---------------------- | ---------------------------- |
+|-----------------------|------------------------|------------------------------|
 | Frontend              | Abel                   | Abdellah, Júlia              |
 | Backend               | Sergi                  | Abdellah, Aniol              |
 | Testing               | Abdellah               | Aniol, Júlia, Abel           |
 | Database              | Aniol                  | Sergi                        |
 | Product Documentation | Aniol                  | Abel, Abdellah, Júlia, Sergi |
-| Project Management    | Júlia                  | Aniol                        |
+| Project Management    | Aniol                  | Aniol                        |
 
 To check the work done by each sprint, check the documentation in the [documentation](./documentation) folder.
 

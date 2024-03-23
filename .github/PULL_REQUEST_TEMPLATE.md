@@ -1,33 +1,23 @@
 ## Description
 
-<!--Here explain the problem/feature that this pull request is solving.-->
 
-## Changelog
 
-- Feature 1
-- Feature 2
-- Bug fix 1
-- Bug fix 2
-
-<!--Here explain the changes that you have made in this pull request.-->
-
-## Linked Issues
-
-issue: #123
-todo: #456
-
-<!--Here link the issues that this pull request is solving.-->
+> [!IMPORTANT]
+> Every pull request has to be reviewed by at least one maintainer.
+> The pull request should also pass the following checks:
+> - **Ruff**: Every pull request should pass the Ruff checks in order to be merged. In order to check the code style, run the
+> - **Run the project**: Every pull request must run the project without errors, specially the new features or changes.
+> - **Tests**: Every pull request should pass the tests in order to be merged. In order to run the tests, run the following
+> ```bash
+> python manage.py test 
+> ```
 
 ## Branch Deletion
 
 - [ ] I confirm that after my PR is successfully merged, this branch can be deleted.
 
-## Additional Comments
+<!--Mark this checkbox once the pull request has been created-->
 
-<!--Here you can add any additional comments or questions that you have.-->
-
-> [!IMPORTANT]
+> [!NOTE]
 > I understand that this pull request is strongly recommended to follow
 > the [Conventional Comments](https://conventionalcomments.org/) specification.
-
-<!--Do not delete this comment.-->

@@ -1,4 +1,4 @@
-name: Generate Histogram of Issues (all)
+name: General Report - Histogram of Issues (all)
 
 on:
   workflow_dispatch:
