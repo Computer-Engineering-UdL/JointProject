@@ -1,12 +1,47 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Hotel las Palmeras</title>
+<head>
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static '/style.css' %}" />
-  </head>
-  <body>
-    {% block content %} {% endblock %}
-  </body>
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+
+    <meta charset="UTF-8">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Game Management">
+    <meta name="keywords" content="Game, Management, Admin, Panel">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- OPENGRAPH -->
+    <meta property="og:title" content="Game Management">
+    <meta property="og:description" content="Game management website">
+    <!--<meta property="og:image" content="https://www.example.com/image.jpg">
+    <meta property="og:url" content="https://www.example.com"> -->
+    <meta property="og:type" content="website">
+
+    <title>{% block title %}Las Palmeras Hotel{% endblock title %}</title>
+
+    {% block extra_meta_tags %}{% endblock extra_meta_tags %}
+</head>
+
+<body>
+    <header>
+        {% block header %}
+            <ul class="menu">
+                <li><img width="50" src="{% static 'img/test-logo-las-palmeras.png' %}" alt="Las Palmeras Hotel"></li>
+                <li>BOOKING</li>
+                <li>OFFERS</li>
+                <li>GASTRONOMY</li>
+            </ul>
+        {% endblock header %}
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock content %}
+    </main>
+
+    <footer>
+        {% block footer %}
+        {% endblock footer %}
+    </footer>
+</body>
 </html>
