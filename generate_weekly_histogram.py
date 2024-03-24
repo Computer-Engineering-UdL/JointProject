@@ -21,8 +21,8 @@ labels_count = {
 def get_date_range_of_current_week() -> tuple:
     """Gets the date range of the current week from Saturday to Friday as datetime objects."""
     current_date = datetime.datetime.now()
-    start_of_week = current_date - datetime.timedelta(days=current_date.weekday() + 2)  # Saturday as start of the week
-    end_of_week = start_of_week + datetime.timedelta(days=6)  # Next Friday
+    start_of_week = current_date - datetime.timedelta(days=current_date.weekday())
+    end_of_week = start_of_week + datetime.timedelta(days=6)
     start_of_week = datetime.datetime.combine(start_of_week.date(), datetime.datetime.min.time())
     return start_of_week, end_of_week.date()
 
