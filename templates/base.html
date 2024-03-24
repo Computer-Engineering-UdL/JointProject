@@ -26,11 +26,14 @@
     <header>
         {% block header %}
             <img id="logo" width="50" src="{% static 'img/test-logo-las-palmeras.png' %}" alt="Las Palmeras Hotel">
-            <ul class="menu">
-                <li>BOOKING</li>
-                <li>OFFERS</li>
-                <li>GASTRONOMY</li>
-            </ul>
+            <nav>
+                <ul class="menu">
+                    <li>BOOKING</li>
+                    <li>OFFERS</li>
+                    <li>GASTRONOMY</li>
+                </ul>
+            </nav>
+            <img id="user" width="50" src="{% static 'img/user-icon.png' %}" alt="User">
         {% endblock header %}
     </header>
 

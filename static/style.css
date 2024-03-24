@@ -7,17 +7,18 @@ header{
 }
 
 .menu{
+    order: 1;
     display: flex;
     list-style-type: none;
     background-color: navajowhite;
-    color: white;
+    color: black;
     justify-content: flex-end;
     padding: 5px;
     gap: 20px;
 }
 
 #logo {
-    order: 1;
+    order: 0;
     text-align: left;
 }
 
