@@ -19,10 +19,10 @@ labels_count = {
 
 
 def get_date_range_of_current_week() -> tuple:
-    """Gets the date range of the current week as datetime objects."""
+    """Gets the date range of the current week from Saturday to Friday as datetime objects."""
     current_date = datetime.datetime.now()
-    start_of_week = current_date - datetime.timedelta(days=current_date.weekday())
-    end_of_week = start_of_week + datetime.timedelta(days=6)
+    start_of_week = current_date - datetime.timedelta(days=current_date.weekday() + 2)  # Saturday as start of the week
+    end_of_week = start_of_week + datetime.timedelta(days=6)  # Next Friday
     start_of_week = datetime.datetime.combine(start_of_week.date(), datetime.datetime.min.time())
     return start_of_week, end_of_week.date()
 
@@ -31,8 +31,14 @@ def count_labels(state="open") -> None:
     """Counts the number of issues with each label, filtering for the current week."""
     start_of_week, end_of_week = get_date_range_of_current_week()
 
-    for issue in repo.get_issues(state=state, since=start_of_week):
-        if issue.created_at.date() <= end_of_week:
+    if state == "closed":
+        issues = repo.get_issues(state=state, since=start_of_week)
+    else:
+        issues = repo.get_issues(state=state)
+
+    for issue in issues:
+        if issue.created_at.date() <= end_of_week and \
+                (state != "closed" or issue.closed_at.date() <= end_of_week):
             for label in issue.labels:
                 if label.name in labels_count:
                     labels_count[label.name] += 1
