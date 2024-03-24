@@ -1,21 +1,11 @@
 from github import Github
 import matplotlib.pyplot as plt
 import datetime
-from generate_histogram import token, repo_name
+from generate_histogram import token, repo_name, labels_count
 import argparse
 
 g = Github(token)
 repo = g.get_repo(repo_name)
-
-labels_count = {
-    "back-end": 0,
-    "bug": 0,
-    "database": 0,
-    "documentation": 0,
-    "front-end": 0,
-    "tests": 0,
-    "wontfix": 0,
-}
 
 
 def get_date_range_of_current_week() -> tuple:
