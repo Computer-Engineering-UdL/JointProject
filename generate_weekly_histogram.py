@@ -24,13 +24,11 @@ def count_labels(state="open") -> None:
     issues = repo.get_issues(state="all", since=start_of_week)
 
     for issue in issues:
-        if issue.created_at <= end_of_week:
-            if issue.state == state and \
-               ((state == "open" and issue.created_at >= start_of_week) or \
-               (state == "closed" and issue.closed_at is not None and issue.closed_at >= start_of_week)):
-                for label in issue.labels:
-                    if label.name in labels_count:
-                        labels_count[label.name] += 1
+        issue_date = issue.created_at if state == "open" else (issue.closed_at if issue.closed_at else None)
+        if issue_date and start_of_week <= issue_date <= end_of_week:
+            for label in issue.labels:
+                if label.name in labels_count:
+                    labels_count[label.name] += 1
 
 
 def generate_plot(state="open") -> None:
