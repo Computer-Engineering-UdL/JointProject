@@ -1,6 +1,6 @@
 from github import Github
 import matplotlib.pyplot as plt
-import datetime
+from datetime import datetime, timedelta, timezone
 from generate_histogram import token, repo_name, labels_count
 import argparse
 
@@ -9,12 +9,12 @@ repo = g.get_repo(repo_name)
 
 
 def get_date_range_of_current_week() -> tuple:
-    """Gets the date range of the current week from Monday to Sunday as datetime objects."""
-    current_date = datetime.datetime.now()
-    start_of_week = current_date - datetime.timedelta(days=current_date.weekday())
-    end_of_week = start_of_week + datetime.timedelta(days=6)
-    start_of_week = datetime.datetime.combine(start_of_week.date(), datetime.datetime.min.time())
-    end_of_week = datetime.datetime.combine(end_of_week, datetime.datetime.max.time())
+    """Gets the date range of the current week from Monday to Sunday as datetime objects, making them timezone aware."""
+    current_date = datetime.now(timezone.utc)
+    start_of_week = current_date - timedelta(days=current_date.weekday())
+    end_of_week = start_of_week + timedelta(days=6)
+    start_of_week = datetime.combine(start_of_week.date(), datetime.min.time(), tzinfo=timezone.utc)
+    end_of_week = datetime.combine(end_of_week.date(), datetime.max.time(), tzinfo=timezone.utc)
     return start_of_week, end_of_week
 
 
