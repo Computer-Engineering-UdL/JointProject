@@ -29,7 +29,7 @@
 
 ### Weekly report
 
-This workflow it automatically triggered every Friday at 00:00. Then after the workflow is finished, it will create a
+This workflow it automatically triggered every Sunday at 23:59. Then after the workflow is finished, it will create a
 png file in the artifacts section of that workflow run. This can be found on
 your `repository -> Actions -> Weekly Report - Histogram of Issues (open and closed) -> Scroll down to Artifacts`.
 
