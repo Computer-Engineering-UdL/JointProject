@@ -1,5 +1,14 @@
 # How to use histogram generator workflow
 
+This workflow generates a histogram of the issues in your repository. It counts the number of open and closed issues and
+creates a histogram of the issues by label. The workflow is divided into two parts: a weekly report and a general
+report.
+
+The weekly report is automatically triggered every Sunday at 23:59 and shows the issues that have been opened and closed
+**only during that week**. The general report can be manually triggered on the Actions tab on your repository, and shows
+all the issues that have been opened during the whole project development. The reports are saved as png files in the
+artifacts section of the workflow run.
+
 ## Installation
 
 1. Go to the **workflows folder** in your repository. This can be found at `.github/workflows/`. If it does not exist,
