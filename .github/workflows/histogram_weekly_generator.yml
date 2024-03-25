@@ -2,7 +2,7 @@ name: Weekly Report - Histogram of Issues (open and closed)
 
 on:
   schedule:
-    - cron: "0 0 * * 5" # Every Friday at 00:00
+    - cron: "59 23 * * 0" # Every Sunday at 23:59
   workflow_dispatch:
 
 jobs:

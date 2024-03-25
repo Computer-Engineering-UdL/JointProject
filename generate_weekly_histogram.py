@@ -9,29 +9,28 @@ repo = g.get_repo(repo_name)
 
 
 def get_date_range_of_current_week() -> tuple:
-    """Gets the date range of the current week from Saturday to Friday as datetime objects."""
+    """Gets the date range of the current week from Monday to Sunday as datetime objects."""
     current_date = datetime.datetime.now()
     start_of_week = current_date - datetime.timedelta(days=current_date.weekday())
     end_of_week = start_of_week + datetime.timedelta(days=6)
     start_of_week = datetime.datetime.combine(start_of_week.date(), datetime.datetime.min.time())
-    return start_of_week, end_of_week.date()
+    end_of_week = datetime.datetime.combine(end_of_week, datetime.datetime.max.time())
+    return start_of_week, end_of_week
 
 
 def count_labels(state="open") -> None:
     """Counts the number of issues with each label, filtering for the current week."""
     start_of_week, end_of_week = get_date_range_of_current_week()
-
-    if state == "closed":
-        issues = repo.get_issues(state=state, since=start_of_week)
-    else:
-        issues = repo.get_issues(state=state)
+    issues = repo.get_issues(state="all", since=start_of_week)
 
     for issue in issues:
-        if issue.created_at.date() <= end_of_week and \
-                (state != "closed" or issue.closed_at.date() <= end_of_week):
-            for label in issue.labels:
-                if label.name in labels_count:
-                    labels_count[label.name] += 1
+        if issue.created_at <= end_of_week:
+            if issue.state == state and \
+               ((state == "open" and issue.created_at >= start_of_week) or \
+               (state == "closed" and issue.closed_at is not None and issue.closed_at >= start_of_week)):
+                for label in issue.labels:
+                    if label.name in labels_count:
+                        labels_count[label.name] += 1
 
 
 def generate_plot(state="open") -> None:
@@ -60,7 +59,7 @@ def parse_args() -> argparse.Namespace:
     """Parses the arguments for the script."""
     parser = argparse.ArgumentParser(
         description='Generates a histogram of the number of issues with each label')
-    parser.add_argument('--state', type=str,
+    parser.add_argument('--state', choices=['open', 'closed', 'all'], default='open',
                         help='The state of the issues being gathered')
     return parser.parse_args()
 
