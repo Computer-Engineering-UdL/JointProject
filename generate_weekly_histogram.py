@@ -44,7 +44,7 @@ def generate_plot(state="open") -> None:
 
 def get_date() -> str:
     """The format is: MX-WY-Report -> where X is the month number and Y is the week number"""
-    now = datetime.datetime.now()
+    now = datetime.now()
     month = now.strftime("%m")
     week_of_year = int(now.strftime("%U"))
     first_day_of_month = now.replace(day=1)
