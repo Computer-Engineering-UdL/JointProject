@@ -36,7 +36,7 @@ def add_room(request):
         form = RoomForm(request.POST)
         if form.is_valid():
             chosen_room = form.cleaned_data['room']
-            room = Room.objects.get(id=chosen_room.id)
+            Room.objects.get(id=chosen_room.id)
             form.save()
     else:
         form = RoomForm()
