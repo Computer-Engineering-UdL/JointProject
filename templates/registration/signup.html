@@ -21,8 +21,8 @@
       {{ form.non_field_errors.as_p }}
       {% for field in form %}
         <div class="user-box">
-          {{ field.label_tag }}<br>
           {{ field }}
+          <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
         </div>
       {% endfor %}
       <p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>

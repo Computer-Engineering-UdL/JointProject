@@ -59,6 +59,8 @@ body {
     color: #fff;
     pointer-events: none;
     transition: .5s;
+    display: inline-block;
+    white-space: nowrap
 }
 
 .login-box .user-box input:focus ~ label,
