@@ -1,26 +1,28 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Signup</title>
-    <style>
-      ul.errorlist {
-        margin-left: 5%;
-      }
-    </style>
-  </head>
-  <body>
-    {% extends "base.html" %} {% block content %}
-      <h2>Sign up</h2>
-      <form method="post">
-        {% csrf_token %} {{ form.as_p }} {% if form.errors %}
-          <p class="notification">
-            There it was an error <br />please, check the form and try again
-          </p>
-        {% endif %}
-        <p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>
-        <button type="submit">Sign up</button>
-      </form>
-    {% endblock %}
-  </body>
-</html>
+{% extends "base.html" %}
+<title>{% block title %}Sign Up{% endblock %}</title>
+{% load static %}
+{% block content %}
+  <link rel="stylesheet" type="text/css" href="{% static 'auth.css' %}"/>
+
+  <div class="login-box">
+    <h2>Sign up</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.non_field_errors.as_p }}
+      {% for field in form %}
+        <p class="user-box">
+          {{ field.label_tag }}<br>
+          {{ field }}
+          {% if field.errors %}
+            {% for error in field.errors %}
+              <p class="notification-err">{{ error }}</p>
+            {% endfor %}
+          {% endif %}
+        </p>
+      {% endfor %}
+      <p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>
+      <button type="submit" class="submit-button">Sign up</button>
+    </form>
+
+  </div>
+{% endblock %}
