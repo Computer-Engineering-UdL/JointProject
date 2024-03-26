@@ -20,8 +20,8 @@ class RoomForm(forms.ModelForm):
 
 class RoomReservationForm(forms.ModelForm):
 
-    check_in = forms.DateField(input_formats=['%d/%m/%Y'])
-    check_out = forms.DateField(input_formats=['%d/%m/%Y'])
+    entry = forms.DateField(input_formats=['%d/%m/%Y'])
+    exit = forms.DateField(input_formats=['%d/%m/%Y'])
     pension_type = forms.ChoiceField(choices=RoomReservation.PENSION_TYPES)
     num_guests = forms.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(4)])
     room_type = forms.ChoiceField(choices=Room.ROOM_TYPES)
@@ -31,6 +31,8 @@ class RoomReservationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(RoomReservationForm, self).__init__(*args, **kwargs)
         self.fields['room'].choices = [(room.id, room.room_num) for room in Room.objects.all()]
+        self.fields['entry'].widget.attrs['id'] = 'entrada'
+        self.fields['exit'].widget.attrs['id'] = 'sortida'
 
     def clean_room(self):
         room_id = self.cleaned_data.get('room')
@@ -44,9 +46,26 @@ class RoomReservationForm(forms.ModelForm):
             raise forms.ValidationError("Room with given id does not exist.")
         return room
 
+    def clean(self):
+        cleaned_data = super().clean()
+        room = cleaned_data.get('room')
+        entry = cleaned_data.get('entry')
+        exit = cleaned_data.get('exit')
+
+        if room and entry and exit:
+            overlapping_reservations = RoomReservation.objects.filter(
+                room=room,
+                entry__lt=exit,
+                exit__gt=entry
+            )
+            if overlapping_reservations.exists():
+                raise forms.ValidationError("The selected room is not available for the chosen dates.")
+
+        return cleaned_data
+
     class Meta:
         model = RoomReservation
-        fields = ['check_in', 'check_out', 'pension_type', 'num_guests', 'room_type', 'room', 'client']
+        fields = ['entry', 'exit', 'pension_type', 'num_guests', 'room_type', 'room', 'client']
 
 
 class AddClientForm(forms.ModelForm):

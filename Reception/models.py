@@ -52,8 +52,8 @@ class RoomReservation(models.Model):
     ]
     # client = models.ForeignKey(Client, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE, to_field='id')
-    check_in = models.DateField()
-    check_out = models.DateField()
+    entry = models.DateField()
+    exit = models.DateField()
     pension_type = models.CharField(
         max_length=15,
         choices=PENSION_TYPES,
@@ -62,7 +62,7 @@ class RoomReservation(models.Model):
     num_guests = models.IntegerField()
 
     class Meta:
-        unique_together = ('room', 'check_in', 'check_out')
+        unique_together = ('room', 'entry', 'exit')
 
     def __str__(self):
         return self.room.room_num
