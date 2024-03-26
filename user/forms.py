@@ -13,21 +13,10 @@ class SignUpForm(UserCreationForm):
     phone_number = forms.CharField(max_length=9, label='Phone Number',
                                    error_messages={'required': 'Required. Select your ID type.'})
 
-    ID_TYPE_CHOICES = [
-        ('DNI', 'DNI'),
-        ('NIE', 'NIE'),
-        ('Passport', 'Passport'),
-    ]
-
-    id_type = forms.ChoiceField(choices=ID_TYPE_CHOICES, label='ID Type',
-                                error_messages={'required': 'Required. Select your ID type.'})
-
-    # TODO: Validate the ID number (length and constraints) depending on the ID type
-
     id_number = forms.CharField(max_length=20,
                                 required=False,
                                 label='ID Number',
-                                error_messages={'required': 'Required. Inform your ID number.'})
+                                error_messages={'invalid': 'Invalid ID number.'})
 
     email = forms.EmailField(max_length=100,
                              error_messages={'required': 'Required. Inform a valid email address.',
