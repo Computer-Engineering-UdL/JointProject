@@ -36,7 +36,7 @@ class Room(models.Model):
     room_type = models.CharField(
         max_length=10,
         choices=ROOM_TYPES,
-        default='Individual'
+        default='Double'
     )
 
     def __str__(self):

@@ -32,12 +32,17 @@ class RoomReservationForm(forms.ModelForm):
     check_out = forms.DateField(input_formats=['%d/%m/%Y'])
     pension_type = forms.ChoiceField(choices=PENSION_TYPES)
     num_guests = forms.IntegerField()
-    room = forms.ModelChoiceField(queryset=Room.objects.all())
+    room_type = forms.ChoiceField(choices=Room.ROOM_TYPES)
+    room = forms.ModelChoiceField(queryset=Room.objects.none())
     client = forms.ModelChoiceField(queryset=Client.objects.all())
+
+    def __init__(self, *args, **kwargs):
+        super(RoomReservationForm, self).__init__(*args, **kwargs)
+        self.fields['room'].queryset = Room.objects.none()
 
     class Meta:
         model = RoomReservation
-        fields = ['check_in', 'check_out', 'pension_type', 'num_guests', 'room', 'client']
+        fields = ['check_in', 'check_out', 'pension_type', 'num_guests', 'room_type', 'room', 'client']
 
 
 class AddClientForm(forms.ModelForm):

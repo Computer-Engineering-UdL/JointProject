@@ -1,7 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="{% static 'js/reservation_form.js' %}"></script>
         <title>Reserva Habitació - Hotel Las Palmeras</title>
     </head>
     <body>
@@ -10,5 +13,6 @@
             {{ form.as_p }}
             <input type="submit" value="Create">
         </form>
+        
     </body>
 </html>

@@ -1,6 +1,8 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 
 from Reception.forms import AddClientForm, RoomReservationForm, RoomForm
+from Reception.models import Room
 
 
 # Create your views here.
@@ -35,3 +37,10 @@ def add_room(request):
     else:
         form = RoomForm()
     return render(request, 'reception/add_room.html', {'form': form})
+
+
+def fetch_rooms(request):
+    room_type = request.GET.get('room_type')
+    rooms = Room.objects.filter(room_type=room_type, is_taken=False, is_clean=True).order_by('room_num')
+    data = {'rooms': list(rooms.values('id', 'room_num'))}
+    return JsonResponse(data)
