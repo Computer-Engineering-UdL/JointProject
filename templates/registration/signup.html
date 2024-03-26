@@ -4,25 +4,29 @@
 {% block content %}
   <link rel="stylesheet" type="text/css" href="{% static 'auth.css' %}"/>
 
+  <div id="notifications">
+    {% for field in form %}
+      {% if field.errors %}
+        {% for error in field.errors %}
+          <p class="notification-err">{{ error }}</p>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </div>
+
   <div class="login-box">
     <h2>Sign up</h2>
     <form method="post">
       {% csrf_token %}
       {{ form.non_field_errors.as_p }}
       {% for field in form %}
-        <p class="user-box">
+        <div class="user-box">
           {{ field.label_tag }}<br>
           {{ field }}
-          {% if field.errors %}
-            {% for error in field.errors %}
-              <p class="notification-err">{{ error }}</p>
-            {% endfor %}
-          {% endif %}
-        </p>
+        </div>
       {% endfor %}
       <p>Already have an account? <a href="{% url 'login' %}">Log in</a></p>
       <button type="submit" class="submit-button">Sign up</button>
     </form>
-
   </div>
 {% endblock %}
