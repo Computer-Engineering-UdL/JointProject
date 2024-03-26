@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 
 from Reception.forms import AddClientForm, RoomReservationForm, RoomForm
-from Reception.models import Room
+from Reception.models import Room, RoomReservation
 
 
 # Create your views here.
@@ -23,6 +23,8 @@ def room_reservation(request):
         form = RoomReservationForm(request.POST)
         if form.is_valid():
             form.save()
+        else:
+            print("Form is not valid. Errors: ", form.errors)
     else:
         form = RoomReservationForm()
     return render(request, 'reception/room_reservation.html', {'form': form})
@@ -33,6 +35,8 @@ def add_room(request):
     if request.method == 'POST':
         form = RoomForm(request.POST)
         if form.is_valid():
+            chosen_room = form.cleaned_data['room']
+            room = Room.objects.get(id=chosen_room.id)
             form.save()
     else:
         form = RoomForm()
@@ -41,6 +45,6 @@ def add_room(request):
 
 def fetch_rooms(request):
     room_type = request.GET.get('room_type')
-    rooms = Room.objects.filter(room_type=room_type, is_taken=False, is_clean=True).order_by('room_num')
+    rooms = Room.objects.filter(room_type=room_type, is_taken=False).order_by('room_num')
     data = {'rooms': list(rooms.values('id', 'room_num'))}
     return JsonResponse(data)

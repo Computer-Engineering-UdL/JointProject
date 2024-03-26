@@ -23,6 +23,7 @@ class Client(HotelUser):
 
 class Room(models.Model):
     ROOM_TYPES = [
+        ('No seleccionat', 'No seleccionat'),
         ('Individual', 'Individual'),
         ('Double', 'Double'),
         ('Suite', 'Suite'),
@@ -34,29 +35,23 @@ class Room(models.Model):
     room_num = models.IntegerField()
     room_price = models.IntegerField()
     room_type = models.CharField(
-        max_length=10,
+        max_length=15,
         choices=ROOM_TYPES,
         default='Double'
     )
 
     def __str__(self):
-        return "Habitació " + str(self.room_num)
+        return str(self.id)
 
 
 class RoomReservation(models.Model):
     PENSION_TYPES = [
+        ('Sense pensió', 'Sense pensió'),
         ('Esmorzar Buffet', 'Esmorzar Buffet'),
-        ('Completa', 'Completa'),
-        ('Sense pensió', 'Sense pensió')
-    ]
-    ROOM_TYPES = [
-        ('Individual', 'Individual'),
-        ('Double', 'Double'),
-        ('Suite', 'Suite'),
-        ('Deluxe', 'Deluxe')
+        ('Completa', 'Completa')
     ]
     # client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, to_field='id')
     check_in = models.DateField()
     check_out = models.DateField()
     pension_type = models.CharField(
@@ -71,3 +66,4 @@ class RoomReservation(models.Model):
 
     def __str__(self):
         return self.room.room_num
+
