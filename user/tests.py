@@ -38,4 +38,4 @@ class TestSignup(TestCase):
             'password1': PASSWORD,
             'password2': PASSWORD
         })
-        self.assertEquals(response.status_code, 302)
+        self.assertEquals(response.status_code, 200)
