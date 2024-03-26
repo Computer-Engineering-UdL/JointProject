@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-from user.validators import *
+from user.validators import is_valid_id_number, is_valid_phone
 
 UserModel = get_user_model()
 
