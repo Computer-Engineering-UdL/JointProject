@@ -8,6 +8,8 @@ class HotelUser(AbstractUser):
     email = models.EmailField()
     phone_number = models.CharField(max_length=9)
 
+    # TODO: Add id_type and id_number fields
+
     def __str__(self):
         return self.first_name
 
