@@ -35,3 +35,10 @@ def add_room(request):
     else:
         form = RoomForm()
     return render(request, 'reception/add_room.html', {'form': form})
+
+
+#Check-in views
+
+def check_in(request):
+    """Check-in a client."""
+    return render(request, 'reception/check_in.html')
