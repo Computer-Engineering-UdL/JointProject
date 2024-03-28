@@ -51,3 +51,20 @@ class AddClientForm(forms.ModelForm):
     class Meta:
         model = Client
         fields = ['first_name', 'last_name', 'dni', 'email', 'phone_number', 'is_hosted']
+
+#Check-in forms
+
+class InfoClientForm(forms.ModelForm):
+
+    num_reservation = forms.CharField(label="Introduce el número de reserva")
+    dni = forms.CharField(max_length=9, label="Introduce el DNI")
+
+    class Meta:
+        model = RoomReservation
+        fields = ['num_reservation', 'dni']
+
+
+
+
+
+

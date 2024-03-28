@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from Reception.forms import AddClientForm, RoomReservationForm, RoomForm
+from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm
 
 
 # Create your views here.
@@ -41,4 +41,10 @@ def add_room(request):
 
 def check_in(request):
     """Check-in a client."""
-    return render(request, 'reception/check_in.html')
+    if request.method == 'POST':
+        form = InfoClientForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = InfoClientForm()
+    return render(request, 'reception/check_in.html', {'form': form})
