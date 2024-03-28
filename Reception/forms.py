@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 
-from .models import RoomReservation, Client, Room
+from .models import RoomReservation, Client, Room, CheckIn
 
 
 class RoomForm(forms.ModelForm):
@@ -56,11 +56,21 @@ class AddClientForm(forms.ModelForm):
 
 class InfoClientForm(forms.ModelForm):
 
-    num_reservation = forms.CharField(label="Introduce el número de reserva")
-    dni = forms.CharField(max_length=9, label="Introduce el DNI")
+    num_reservation = forms.CharField(label="Introduce el número de reserva", required=False)
+    dni = forms.CharField(max_length=9, label="Introduce el DNI", required=False)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        num_reservation = cleaned_data.get("num_reservation")
+        dni = cleaned_data.get("dni")
+
+        if not num_reservation and not dni:
+            raise forms.ValidationError("Introduce el número de reserva o el DNI del cliente")
+
+        return cleaned_data
 
     class Meta:
-        model = RoomReservation
+        model = CheckIn
         fields = ['num_reservation', 'dni']
 
 
