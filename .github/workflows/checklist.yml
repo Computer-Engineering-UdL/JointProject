@@ -33,5 +33,5 @@ jobs:
     - name: Upload generated report
       uses: actions/upload-artifact@v2
       with:
-        name: tabla-semanal
-        path: tabla_semanal.png
+        name: weekly_table
+        path: weekly_table.png
