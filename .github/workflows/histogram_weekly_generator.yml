@@ -20,11 +20,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install PyGithub matplotlib
       - name: Generate histogram with open issues
-        run: python generate_weekly_histogram.py
+        run: python Ichicawa_tools_generators/generate_weekly_histogram.py
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
       - name: Generate histogram with closed issues
-        run: python generate_weekly_histogram.py --state closed
+        run: python Ichicawa_tools_generators/generate_weekly_histogram.py --state closed
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
       - name: Upload Histogram open issues
