@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     {% load static %}
-        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
 
     <meta charset="UTF-8">
     <meta name="robots" content="index, follow">
@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://www.example.com"> -->
     <meta property="og:type" content="website">
 
-    <title>{% block title %}Las Palmeras Hotel{% endblock title %}</title>
+    <title>{% block title %}Las Palmeras Hotel - Base{% endblock title %}</title>
 
     {% block extra_meta_tags %}{% endblock extra_meta_tags %}
 </head>
@@ -28,9 +28,9 @@
             <img id="logo" width="50" src="{% static 'img/test-logo-las-palmeras.png' %}" alt="Las Palmeras Hotel">
             <nav>
                 <ul class="menu">
-                    <li>BOOKING</li>
-                    <li>OFFERS</li>
-                    <li>GASTRONOMY</li>
+                    <li>EXAMPLE</li>
+                    <li>EXAMPLE</li>
+                    <li>EXAMPLE</li>
                 </ul>
             </nav>
             <img id="user" width="50" src="{% static 'img/user-icon.png' %}" alt="User">
