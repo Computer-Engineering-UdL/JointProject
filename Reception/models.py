@@ -1,46 +1,68 @@
+from django.contrib.auth import get_user_model
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 
 
-# Create your models here.
-class Worker(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+class HotelUser(AbstractUser):
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=9)
+    id_number = models.CharField(max_length=20, blank=True)
+
+    def __str__(self):
+        return self.first_name
+
+
+class Worker(HotelUser):
     schedule = models.CharField(max_length=100)
     type = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.user.first_name
 
-
-class Client(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+class Client(HotelUser):
     is_hosted = models.BooleanField()
-
-    def __str__(self):
-        return self.user.first_name
 
 
 class Room(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    ROOM_TYPES = [
+        ('No seleccionat', 'No seleccionat'),
+        ('Individual', 'Individual'),
+        ('Double', 'Double'),
+        ('Suite', 'Suite'),
+        ('Deluxe', 'Deluxe')
+    ]
+    # client = models.ForeignKey(Client, on_delete=models.CASCADE)
     is_clean = models.BooleanField()
     is_taken = models.BooleanField()
     room_num = models.IntegerField()
     room_price = models.IntegerField()
+    room_type = models.CharField(
+        max_length=15,
+        choices=ROOM_TYPES,
+        default='Double'
+    )
 
     def __str__(self):
-        return self.room_num
+        return str(self.id)
 
 
-class Room_reservation(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.CASCADE)
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)
-    check_in = models.DateField()
-    check_out = models.DateField()
-    pension_type = models.CharField(max_length=100)
+class RoomReservation(models.Model):
+    PENSION_TYPES = [
+        ('Sense pensió', 'Sense pensió'),
+        ('Esmorzar Buffet', 'Esmorzar Buffet'),
+        ('Completa', 'Completa')
+    ]
+    # client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, to_field='id')
+    entry = models.DateField()
+    exit = models.DateField()
+    pension_type = models.CharField(
+        max_length=15,
+        choices=PENSION_TYPES,
+        default='Sense pensió'
+    )
     num_guests = models.IntegerField()
 
     class Meta:
-        unique_together = ('room', 'check_in', 'check_out')
+        unique_together = ('room', 'entry', 'exit')
 
     def __str__(self):
         return self.room.room_num

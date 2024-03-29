@@ -11,12 +11,4 @@
 
 ## Spring Planing Overview
 
-_Here you need to include a picture of the Spring Planning in the model Kanban_
-
-Considering the proposed distribution in the model Kanban, the overall activities to be performed by the team are:
-
-| Team Member | Overall Task Desription          |
-|-------------|----------------------------------|
-| Abel        | Client reservation prototype     |
-| Júlia       | Receptionist interface prototype |
-| XXXXX       | Task Description                 |
+The link of the project kanban board is [this](https://github.com/orgs/Computer-Engineering-UdL/projects/2).
