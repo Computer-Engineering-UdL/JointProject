@@ -39,7 +39,7 @@ def add_room(request):
 
 #Check-in views
 
-def check_in(request):
+def check_in_1(request):
     """Check-in a client."""
     if request.method == 'POST':
         form = InfoClientForm(request.POST)
@@ -47,4 +47,4 @@ def check_in(request):
             form.save()
     else:
         form = InfoClientForm()
-    return render(request, 'reception/check_in.html', {'form': form})
+    return render(request, 'reception/check_in_1.html', {'form': form})
