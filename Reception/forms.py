@@ -1,21 +1,17 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db.models import Subquery
 
 from .models import RoomReservation, Client, Room, CheckIn
 
 
 class RoomForm(forms.ModelForm):
-    ROOM_TYPES = [
-        ('Individual', 'Individual'),
-        ('Double', 'Double'),
-        ('Suite', 'Suite'),
-        ('Deluxe', 'Deluxe')
-    ]
     is_clean = forms.BooleanField(required=False)
     is_taken = forms.BooleanField(required=False)
-    room_num = forms.IntegerField()
-    room_price = forms.IntegerField()
-    room_type = forms.ChoiceField(choices=ROOM_TYPES)
+    room_num = forms.IntegerField(validators=[MinValueValidator(200), MaxValueValidator(499)])
+    room_price = forms.IntegerField(validators=[MinValueValidator(20), MaxValueValidator(1000)])
+    room_type = forms.ChoiceField(choices=Room.ROOM_TYPES)
 
     class Meta:
         model = Room
@@ -23,21 +19,53 @@ class RoomForm(forms.ModelForm):
 
 
 class RoomReservationForm(forms.ModelForm):
-    PENSION_TYPES = [
-        ('Esmorzar Buffet', 'Esmorzar Buffet'),
-        ('Completa', 'Completa'),
-        ('Sense pensió', 'Sense pensió')
-    ]
-    check_in = forms.DateField(input_formats=['%d/%m/%Y'])
-    check_out = forms.DateField(input_formats=['%d/%m/%Y'])
-    pension_type = forms.ChoiceField(choices=PENSION_TYPES)
-    num_guests = forms.IntegerField()
-    room = forms.ModelChoiceField(queryset=Room.objects.all())
-    client = forms.ModelChoiceField(queryset=Client.objects.all())
+
+    entry = forms.DateField(input_formats=['%d/%m/%Y'])
+    exit = forms.DateField(input_formats=['%d/%m/%Y'])
+    pension_type = forms.ChoiceField(choices=RoomReservation.PENSION_TYPES)
+    num_guests = forms.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(4)])
+    room_type = forms.ChoiceField(choices=Room.ROOM_TYPES)
+    room = forms.ChoiceField()
+    client = forms.ModelChoiceField(queryset=Client.objects.all(), empty_label="Select a client")
+
+    def __init__(self, *args, **kwargs):
+        super(RoomReservationForm, self).__init__(*args, **kwargs)
+        self.fields['room'].choices = [(room.id, room.room_num) for room in Room.objects.all()]
+        self.fields['entry'].widget.attrs['id'] = 'entrada'
+        self.fields['exit'].widget.attrs['id'] = 'sortida'
+
+    def clean_room(self):
+        room_id = self.cleaned_data.get('room')
+        try:
+            room_id = int(room_id)
+        except ValueError:
+            raise forms.ValidationError("Invalid room id.")
+        try:
+            room = Room.objects.get(id=room_id)
+        except Room.DoesNotExist:
+            raise forms.ValidationError("Room with given id does not exist.")
+        return room
+
+    def clean(self):
+        cleaned_data = super().clean()
+        room = cleaned_data.get('room')
+        entry = cleaned_data.get('entry')
+        exit = cleaned_data.get('exit')
+
+        if room and entry and exit:
+            overlapping_reservations = RoomReservation.objects.filter(
+                room=room,
+                entry__lt=exit,
+                exit__gt=entry
+            )
+            if overlapping_reservations.exists():
+                raise forms.ValidationError("The selected room is not available for the chosen dates.")
+
+        return cleaned_data
 
     class Meta:
         model = RoomReservation
-        fields = ['check_in', 'check_out', 'pension_type', 'num_guests', 'room', 'client']
+        fields = ['entry', 'exit', 'pension_type', 'num_guests', 'room_type', 'room', 'client']
 
 
 class AddClientForm(forms.ModelForm):
@@ -72,4 +100,4 @@ class InfoClientForm(forms.ModelForm):
 
     class Meta:
         model = CheckIn
-        fields = ['num_reservation', 'dni']
+        fields = ['first_name', 'last_name', 'id_number', 'email', 'phone_number', 'is_hosted']
