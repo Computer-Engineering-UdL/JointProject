@@ -9,7 +9,7 @@
         <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
         <script src="{% static 'js/reservation_form.js' %}"></script>
         <script src="{% static 'js/date_picker.js' %}"></script>
-        <title>Reserva Habitació - Hotel Las Palmeras</title>
+        <title>{% block title %}Reserva habitació{% endblock %}</title>
     </head>
     <body>
         <form method="post">
