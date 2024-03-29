@@ -3,11 +3,12 @@ import pandas as pd
 from datetime import datetime, timedelta
 from github import Github
 import matplotlib.pyplot as plt
+from generate_histogram import repo_name
 
 
-def generate_weekly_report(github_token, username, repository_name) -> None:
+def generate_weekly_report(github_token) -> None:
     g = Github(github_token)
-    repo = g.get_repo(f"{username}/{repository_name}")
+    repo = g.get_repo(f"{repo_name}")
 
     # Get all issues for the repo
     issues = repo.get_issues(state='all')
@@ -73,7 +74,4 @@ def generate_weekly_report(github_token, username, repository_name) -> None:
 
 github_token = os.getenv('GITHUB_TOKEN')
 
-username = os.getenv('Computer-Engineering-UdL')
-repository_name = os.getenv('JointProject')
-
-generate_weekly_report(github_token, username, repository_name)
+generate_weekly_report(github_token)
