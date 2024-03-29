@@ -19,7 +19,6 @@ class RoomForm(forms.ModelForm):
 
 
 class RoomReservationForm(forms.ModelForm):
-
     entry = forms.DateField(input_formats=['%d/%m/%Y'])
     exit = forms.DateField(input_formats=['%d/%m/%Y'])
     pension_type = forms.ChoiceField(choices=RoomReservation.PENSION_TYPES)
@@ -82,8 +81,6 @@ class AddClientForm(forms.ModelForm):
 
 
 # Check-in forms
-
-
 class InfoClientForm(forms.ModelForm):
     num_reservation = forms.CharField(label="Introduce el número de reserva", required=False)
     dni = forms.CharField(max_length=9, label="Introduce el DNI", required=False)
@@ -100,4 +97,4 @@ class InfoClientForm(forms.ModelForm):
 
     class Meta:
         model = CheckIn
-        fields = ['first_name', 'last_name', 'id_number', 'email', 'phone_number', 'is_hosted']
+        fields = ['num_reservation', 'dni']
