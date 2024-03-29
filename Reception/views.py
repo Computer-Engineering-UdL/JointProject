@@ -1,8 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
-
-from Reception.forms import AddClientForm, RoomReservationForm, RoomForm
-from Reception.models import Room, RoomReservation
+from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm
+from Reception.models import Room
 
 
 # Create your views here.
@@ -41,6 +40,18 @@ def add_room(request):
     else:
         form = RoomForm()
     return render(request, 'reception/add_room.html', {'form': form})
+
+
+# Check-in views
+def check_in_1(request):
+    """Check-in a client."""
+    if request.method == 'POST':
+        form = InfoClientForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = InfoClientForm()
+    return render(request, 'reception/check_in_1.html', {'form': form})
 
 
 def fetch_rooms(request):

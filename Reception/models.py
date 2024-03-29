@@ -66,3 +66,15 @@ class RoomReservation(models.Model):
 
     def __str__(self):
         return self.room.room_num
+
+
+class CheckIn(models.Model):
+    num_reservation = models.CharField(max_length=5)
+    dni = models.CharField(max_length=9)
+
+    # Las siguientes dos lines son las originales, pero debe haber información en la base de datos sino no funcionan
+    # num_reservation = models.ForeignKey(RoomReservation, on_delete=models.CASCADE)
+    # dni = models.ForeignKey(Client, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.num_reservation
