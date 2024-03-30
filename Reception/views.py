@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm
-from Reception.models import Room
+from Reception.models import Room, RoomReservation, Client
 
 
 def worker_home(request):
@@ -53,6 +53,26 @@ def check_in_1(request):
         form = InfoClientForm(request.POST)
         if form.is_valid():
             form.save()
+            num_reservation = form.cleaned_data['num_reservation']
+            dni = form.cleaned_data['dni']
+            client = None
+            reservation = None
+            if num_reservation:
+                try:
+                    reservation = RoomReservation.objects.get(id=num_reservation)
+                    # client = reservation.client
+                except RoomReservation.DoesNotExist:
+                    pass
+            if dni and not client:
+                try:
+                    client = Client.objects.get(id_number=dni)
+                    # reservation = RoomReservation.objects.get(client=client)
+                except Client.DoesNotExist:
+                    pass
+            if client or reservation:
+                return render(request, 'reception/check_in_2.html', {'client': client, 'reservation': reservation})
+            else:
+                form.add_error(None, "No existeix cap reserva amb aquestes dades.")
     else:
         form = InfoClientForm()
     return render(request, 'worker/reception/check_in_1.html', {'form': form})
@@ -63,3 +83,9 @@ def fetch_rooms(request):
     rooms = Room.objects.filter(room_type=room_type, is_taken=False).order_by('room_num')
     data = {'rooms': list(rooms.values('id', 'room_num'))}
     return JsonResponse(data)
+
+
+# Check in views
+
+def check_in_2(request):
+    return render(request, 'reception/check_in_2.html', {})
