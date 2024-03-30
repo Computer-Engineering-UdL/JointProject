@@ -56,16 +56,16 @@ def check_in_1(request):
             if num_reservation:
                 try:
                     reservation = RoomReservation.objects.get(id=num_reservation)
-                    #client = reservation.client
+                    # client = reservation.client
                 except RoomReservation.DoesNotExist:
                     pass
             if dni and not client:
                 try:
                     client = Client.objects.get(id_number=dni)
-                    #reservation = RoomReservation.objects.get(client=client)
+                    # reservation = RoomReservation.objects.get(client=client)
                 except Client.DoesNotExist:
                     pass
-            if  client or reservation:
+            if client or reservation:
                 return render(request, 'reception/check_in_2.html', {'client': client, 'reservation': reservation})
             else:
                 form.add_error(None, "No existeix cap reserva amb aquestes dades.")
