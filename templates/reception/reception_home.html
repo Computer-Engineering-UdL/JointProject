@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Recepció{% endblock %}</title>
+    </head>
+    <body>
+
+        <h1>Home page</h1>
+        <p>
+            <a href={% url 'add_client' %}>Afegir nou hoste </a> <span style="color: red; "> No funciona </span>
+        </p>
+        <p>
+            <a href={% url 'room_reservation' %}>Reservar una habitació </a>
+        </p>
+        <p>
+            <a href={% url 'add_room' %}>Afegir una habitació al sistema </a><span style="color: blue; ">Nomes usuari admin </span>
+        </body>
+    </html>
