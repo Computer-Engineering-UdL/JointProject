@@ -8,18 +8,6 @@ def worker_home(request):
     return render(request, 'worker/base_worker.html')
 
 
-# Create your views here.
-def add_client(request):
-    """Add a new client to the database."""
-    if request.method == 'POST':
-        form = AddClientForm(request.POST)
-        if form.is_valid():
-            form.save()
-    else:
-        form = AddClientForm()
-    return render(request, 'worker/reception/add_client.html', {'form': form})
-
-
 def room_reservation(request):
     """Reserve a room for a client."""
     if request.method == 'POST':
@@ -30,7 +18,7 @@ def room_reservation(request):
             print("Form is not valid. Errors: ", form.errors)
     else:
         form = RoomReservationForm()
-    return render(request, 'worker/reception/room_reservation.html', {'form': form})
+    return render(request, 'worker/receptionist/reservation/new reservation/new_reservation_1.html', {'form': form})
 
 
 def add_room(request):
@@ -43,7 +31,19 @@ def add_room(request):
             form.save()
     else:
         form = RoomForm()
-    return render(request, 'worker/reception/add_room.html', {'form': form})
+    return render(request, 'worker/receptionist/reservation/new reservation/new_reservation_2.html', {'form': form})
+
+
+# Create your views here.
+def add_client(request):
+    """Add a new client to the database."""
+    if request.method == 'POST':
+        form = AddClientForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = AddClientForm()
+    return render(request, 'worker/receptionist/reservation/new reservation/new_reservation_3.html', {'form': form})
 
 
 # Check-in views
@@ -55,7 +55,7 @@ def check_in_1(request):
             form.save()
     else:
         form = InfoClientForm()
-    return render(request, 'worker/reception/check_in_1.html', {'form': form})
+    return render(request, 'worker/receptionist/check-in/check_in_1.html', {'form': form})
 
 
 def fetch_rooms(request):

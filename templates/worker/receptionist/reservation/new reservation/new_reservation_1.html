@@ -1,0 +1,20 @@
+{% extends "worker/base_worker.html" %}
+<!-- This template shows the room reservation form, where the receptionist fills all the reservation fields -->
+{% load static %}
+
+{% block content %}
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="{% static 'js/reservation_form.js' %}"></script>
+    <script src="{% static 'js/date_picker.js' %}"></script>
+    <title>{% block title %}Reserva habitació{% endblock %}</title>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Create">
+    </form>
+{% endblock content %}
