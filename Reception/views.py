@@ -4,6 +4,8 @@ from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoCl
 from Reception.models import Room
 
 
+def worker_home(request):
+    return render(request, 'worker/base_worker.html')
 # Create your views here.
 def add_client(request):
     """Add a new client to the database."""
