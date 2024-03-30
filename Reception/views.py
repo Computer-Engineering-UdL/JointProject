@@ -81,7 +81,7 @@ def fetch_rooms(request):
     return JsonResponse(data)
 
 
-#Check in views
+# Check in views
 
 def check_in_2(request):
     return render(request, 'reception/check_in_2.html', {})
