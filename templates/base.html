@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         {% load static %}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
+            <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
 
         <meta charset="UTF-8">
         <meta name="robots" content="index, follow">
@@ -25,7 +25,6 @@
     <body>
         <header>
             {% block header %}
-                <img id="logo" width="50" src="{% static 'img/test-logo-las-palmeras.png' %}" alt="Las Palmeras Hotel">
                 <nav>
                     <ul class="menu">
                         <li>EXAMPLE</li>
@@ -33,12 +32,36 @@
                         <li>EXAMPLE</li>
                     </ul>
                 </nav>
+                <h1>Hotel Las Palmeras</h1>
                 <img id="user" width="50" src="{% static 'img/user-icon.png' %}" alt="User">
             {% endblock header %}
         </header>
 
         <main>
             {% block content %}
+                <button> <a href="{% url 'worker_home' %}">
+                    RECEPTION - Add Client
+                </a></button>
+                
+                <button> <a href="{% url 'add_client' %}">
+                    RECEPTION - Add Client
+                </a></button>
+
+                <button> <a href="{% url 'room_reservation' %}">
+                    RECEPTION - Room Reservation
+                </a></button>
+                
+                <button> <a href="{% url 'add_room' %}">
+                    RECEPTION - Add Room
+                </a></button>
+                
+                <button> <a href="{% url 'check_in' %}">
+                    RECEPTION - Check-in
+                </a></button>
+                
+                <button> <a href="{% url 'fetch_rooms' %}">
+                    RECEPTION - Fetch Rooms
+                </a></button>
             {% endblock content %}
         </main>
 

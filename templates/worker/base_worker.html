@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block extra_meta_tags %}
+    {% load static %}
+        <link rel="stylesheet" href="{% static 'css/worker/worker.css' %}">
+{% endblock extra_meta_tags %}
+{% block title %}Worker{% endblock title %}
+
+{% block header %}
+    <nav>
+        <ul class="menu">
+            <li>EXAMPLE</li>
+            <li>EXAMPLE</li>
+            <li>EXAMPLE</li>
+        </ul>
+    </nav>
+    <p id="language">CAT</p>
+    <p>|</p>
+    <img id="user" width="50" src="{% static 'img/user-icon.png' %}" alt="User">
+{% endblock header %}
+
+{% block content %}
+    <p>worker</p>
+{% endblock content %}
+
+{% block footer %}
+{% endblock footer %}

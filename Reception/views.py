@@ -4,6 +4,10 @@ from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoCl
 from Reception.models import Room, RoomReservation, Client
 
 
+def worker_home(request):
+    return render(request, 'worker/base_worker.html')
+
+
 # Create your views here.
 def add_client(request):
     """Add a new client to the database."""
@@ -13,7 +17,7 @@ def add_client(request):
             form.save()
     else:
         form = AddClientForm()
-    return render(request, 'reception/add_client.html', {'form': form})
+    return render(request, 'worker/reception/add_client.html', {'form': form})
 
 
 def room_reservation(request):
@@ -26,7 +30,7 @@ def room_reservation(request):
             print("Form is not valid. Errors: ", form.errors)
     else:
         form = RoomReservationForm()
-    return render(request, 'reception/room_reservation.html', {'form': form})
+    return render(request, 'worker/reception/room_reservation.html', {'form': form})
 
 
 def add_room(request):
@@ -39,7 +43,7 @@ def add_room(request):
             form.save()
     else:
         form = RoomForm()
-    return render(request, 'reception/add_room.html', {'form': form})
+    return render(request, 'worker/reception/add_room.html', {'form': form})
 
 
 # Check-in views
@@ -71,7 +75,7 @@ def check_in_1(request):
                 form.add_error(None, "No existeix cap reserva amb aquestes dades.")
     else:
         form = InfoClientForm()
-    return render(request, 'reception/check_in_1.html', {'form': form})
+    return render(request, 'worker/reception/check_in_1.html', {'form': form})
 
 
 def fetch_rooms(request):
