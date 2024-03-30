@@ -89,5 +89,7 @@ def fetch_rooms(request):
 
 # Check in views
 
+
+
 def check_in_2(request):
     return render(request, 'reception/check_in_2.html', {})

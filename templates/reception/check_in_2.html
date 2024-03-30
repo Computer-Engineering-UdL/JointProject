@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'worker/base_worker.html' %}
 
 {% block content %}
     <h4>Resumen de la reserva</h4>
@@ -19,5 +19,7 @@
         <li>Correo electrónico: {{ client.email }}</li>
         <li>Teléfono: {{ client.phone_number }}</li>
     </ul>
+    
+    <button onclick="window.location.href='send_data_authorities_confirmation.html'">Enviar informació a les autoritats</button>
 {% endblock %}
 
