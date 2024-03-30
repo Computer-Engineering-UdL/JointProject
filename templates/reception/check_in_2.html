@@ -3,16 +3,16 @@
 {% block content %}
     <h4>Resumen de la reserva</h4>
     <ul class="first_block">
-        <li>Fecha de entrada: {{ booking.entry }}</li>
-        <li>Fecha de salida: {{ booking.exit }}</li>
-        <li>Número de húespedes: {{ booking.num_guests }}</li>
-        <li>Tipo de habitación: {{ booking.room.room_type }}</li>
-        <li>Pensión: {{ booking.pension_type }}</li>
-        <li>Número de habitación: {{ booking.room.room_num }}</li>
+        <li>Fecha de entrada: {{ reservation.entry }}</li>
+        <li>Fecha de salida: {{ reservation.exit }}</li>
+        <li>Número de húespedes: {{ reservation.num_guests }}</li>
+        <li>Tipo de habitación: {{ reservation.room.room_type }}</li>
+        <li>Pensión: {{ reservation.pension_type }}</li>
+        <li>Número de habitación: {{ reservation.room.room_num }}</li>
     </ul>
 
     <ul class="second_block">
-        <li>Número de reserva: {{ booking.id }}</li>
+        <li>Número de reserva: {{ reservation.id }}</li>
         <li>DNI: {{ client.id_number }}</li>
         <li>Nombre: {{ client.first_name }}</li>
         <li>Apellido: {{ client.last_name }}</li>
@@ -20,6 +20,7 @@
         <li>Teléfono: {{ client.phone_number }}</li>
     </ul>
     
-    <button onclick="window.location.href='send_data_authorities_confirmation.html'">Enviar informació a les autoritats</button>
+    <button onclick="window.location.href='send_data'">Enviar informació a les autoritats</button>
+    
 {% endblock %}
 

@@ -3,6 +3,8 @@
 {% block content %}
 
     <h4>Informació enviada a les autoritats amb èxit</h4>
-    <button onclick="window.location.href='check_in_4.html'">Continuar</button>
+         <p>
+            <a href={% url 'check_in_summary' %} > Continuar</a>
+        </p>
         
 {%  endblock %}

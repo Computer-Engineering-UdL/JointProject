@@ -2,6 +2,10 @@
 
 {% block content %}
     
-    <h4>Check in 4</h4>
+    <h6>El check in s'ha realitzat correctament</h6>
+    
+    <p>Procedeix a entregar la clau de l'habitació {{ reservation.room.room_num }} a Abdellah </p>
+    
+    <a href="{% url 'worker_home' %}" class="btn btn-primary">Imprimir comprovant</a>
     
 {% endblock %}

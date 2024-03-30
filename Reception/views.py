@@ -62,13 +62,13 @@ def check_in_1(request):
             if num_reservation:
                 try:
                     reservation = RoomReservation.objects.get(id=num_reservation)
-                    # client = reservation.client
+                    request.session['reservation_id'] = reservation.id
                 except RoomReservation.DoesNotExist:
                     pass
             if dni and not client:
                 try:
                     client = Client.objects.get(id_number=dni)
-                    # reservation = RoomReservation.objects.get(client=client)
+                    request.session['client_id'] = client.id
                 except Client.DoesNotExist:
                     pass
             if client or reservation:
@@ -77,7 +77,7 @@ def check_in_1(request):
                 form.add_error(None, "No existeix cap reserva amb aquestes dades.")
     else:
         form = InfoClientForm()
-    return render(request, 'worker/reception/check_in_1.html', {'form': form})
+    return render(request, 'reception/check_in_1.html', {'form': form})
 
 
 def fetch_rooms(request):
@@ -88,8 +88,14 @@ def fetch_rooms(request):
 
 
 # Check in views
+def send_data(request):
+    return render(request, 'reception/send_data.html')
 
 
+def check_in_summary(request):
+    reservation_id = request.session.get('reservation_id')
+    client_id = request.session.get('client_id')
+    reservation = RoomReservation.objects.get(id=reservation_id)
+    #client = Client.objects.get(id=client_id)
 
-def check_in_2(request):
-    return render(request, 'reception/check_in_2.html', {})
+    return render(request, 'reception/check_in_4.html', {'reservation': reservation})
