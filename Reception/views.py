@@ -10,7 +10,9 @@ def add_client(request):
     if request.method == 'POST':
         form = AddClientForm(request.POST)
         if form.is_valid():
-            form.save()
+            client = form.save(commit=False)
+            client.username = 'default'
+            client.save()
     else:
         form = AddClientForm()
     return render(request, 'reception/add_client.html', {'form': form})
