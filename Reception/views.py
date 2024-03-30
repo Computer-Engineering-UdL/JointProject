@@ -79,3 +79,9 @@ def fetch_rooms(request):
     rooms = Room.objects.filter(room_type=room_type, is_taken=False).order_by('room_num')
     data = {'rooms': list(rooms.values('id', 'room_num'))}
     return JsonResponse(data)
+
+
+#Check in views
+
+def check_in_2(request):
+    return render(request, 'reception/check_in_2.html', {})
