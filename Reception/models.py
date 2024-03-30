@@ -29,7 +29,6 @@ class Room(models.Model):
         ('Suite', 'Suite'),
         ('Deluxe', 'Deluxe')
     ]
-    # client = models.ForeignKey(Client, on_delete=models.CASCADE)
     is_clean = models.BooleanField()
     is_taken = models.BooleanField()
     room_num = models.IntegerField()
@@ -50,7 +49,7 @@ class RoomReservation(models.Model):
         ('Esmorzar Buffet', 'Esmorzar Buffet'),
         ('Completa', 'Completa')
     ]
-    # client = models.ForeignKey(Client, on_delete=models.CASCADE)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, default=4)
     room = models.ForeignKey(Room, on_delete=models.CASCADE, to_field='id')
     entry = models.DateField()
     exit = models.DateField()
