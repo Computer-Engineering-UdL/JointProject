@@ -39,6 +39,29 @@
 
         <main>
             {% block content %}
+                <button> <a href="{% url 'home' %}">
+                    RECEPTION - Add Client
+                </a></button>
+                
+                <button> <a href="{% url 'add_client' %}">
+                    RECEPTION - Add Client
+                </a></button>
+
+                <button> <a href="{% url 'room_reservation' %}">
+                    RECEPTION - Room Reservation
+                </a></button>
+                
+                <button> <a href="{% url 'add_room' %}">
+                    RECEPTION - Add Room
+                </a></button>
+                
+                <button> <a href="{% url 'check_in' %}">
+                    RECEPTION - Check-in
+                </a></button>
+                
+                <button> <a href="{% url 'fetch_rooms' %}">
+                    RECEPTION - Fetch Rooms
+                </a></button>
             {% endblock content %}
         </main>
 

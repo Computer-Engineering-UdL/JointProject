@@ -13,7 +13,7 @@ def add_client(request):
             form.save()
     else:
         form = AddClientForm()
-    return render(request, 'reception/add_client.html', {'form': form})
+    return render(request, 'worker/reception/add_client.html', {'form': form})
 
 
 def room_reservation(request):
@@ -26,7 +26,7 @@ def room_reservation(request):
             print("Form is not valid. Errors: ", form.errors)
     else:
         form = RoomReservationForm()
-    return render(request, 'reception/room_reservation.html', {'form': form})
+    return render(request, 'worker/reception/room_reservation.html', {'form': form})
 
 
 def add_room(request):
@@ -39,7 +39,7 @@ def add_room(request):
             form.save()
     else:
         form = RoomForm()
-    return render(request, 'reception/add_room.html', {'form': form})
+    return render(request, 'worker/reception/add_room.html', {'form': form})
 
 
 # Check-in views
@@ -51,7 +51,7 @@ def check_in_1(request):
             form.save()
     else:
         form = InfoClientForm()
-    return render(request, 'reception/check_in_1.html', {'form': form})
+    return render(request, 'worker/reception/check_in_1.html', {'form': form})
 
 
 def fetch_rooms(request):
