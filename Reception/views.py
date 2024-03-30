@@ -32,7 +32,7 @@ def room_reservation(request):
             print("Form is not valid. Errors: ", form.errors)
     else:
         form = RoomReservationForm()
-    return render(request, 'worker/reception/room_reservation.html', {'form': form})
+    return render(request, 'worker/receptionist/reservation/new reservation/new_reservation_1.html', {'form': form})
 
 
 def add_room(request):
@@ -45,7 +45,19 @@ def add_room(request):
             form.save()
     else:
         form = RoomForm()
-    return render(request, 'worker/reception/add_room.html', {'form': form})
+    return render(request, 'worker/receptionist/reservation/new reservation/new_reservation_2.html', {'form': form})
+
+
+# Create your views here.
+def add_client(request):
+    """Add a new client to the database."""
+    if request.method == 'POST':
+        form = AddClientForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = AddClientForm()
+    return render(request, 'worker/receptionist/reservation/new reservation/new_reservation_3.html', {'form': form})
 
 
 # Check-in views
@@ -77,7 +89,8 @@ def check_in_1(request):
                 form.add_error(None, "No existeix cap reserva amb aquestes dades.")
     else:
         form = InfoClientForm()
-    return render(request, 'reception/check_in_1.html', {'form': form})
+    return render(request, 'worker/receptionist/check-in/check_in_1.html', {'form': form})
+
 
 
 def fetch_rooms(request):
