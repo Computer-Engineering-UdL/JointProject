@@ -1,6 +1,9 @@
 {% extends "worker/base_worker.html" %}
 <!-- This template shows the room reservation form, where the receptionist fills all the reservation fields -->
 {% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/receptionist/new_reservation/new_reservation_1.css' %}">
+{% endblock extra_css %}
 
 {% block content %}
     <meta charset="UTF-8">
