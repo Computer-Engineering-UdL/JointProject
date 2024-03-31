@@ -19,7 +19,7 @@ def add_client(request):
             client.save()
     else:
         form = AddClientForm()
-    return render(request, 'worker/reception/add_client.html', {'form': form})
+    return render(request, 'admin-tests/add_client.html', {'form': form})
 
 
 def room_reservation(request):
@@ -32,7 +32,7 @@ def room_reservation(request):
             print("Form is not valid. Errors: ", form.errors)
     else:
         form = RoomReservationForm()
-    return render(request, 'worker/receptionist/reservation/new reservation/new_reservation_1.html', {'form': form})
+    return render(request, 'worker/receptionist/reservation/new_reservation/new_reservation_1.html', {'form': form})
 
 
 def add_room(request):
@@ -45,7 +45,7 @@ def add_room(request):
             form.save()
     else:
         form = RoomForm()
-    return render(request, 'worker/receptionist/reservation/new reservation/new_reservation_2.html', {'form': form})
+    return render(request, 'worker/receptionist/reservation/new_reservation/new_reservation_2.html', {'form': form})
 
 
 # Create your views here.
@@ -57,7 +57,7 @@ def add_client(request):
             form.save()
     else:
         form = AddClientForm()
-    return render(request, 'worker/receptionist/reservation/new reservation/new_reservation_3.html', {'form': form})
+    return render(request, 'worker/receptionist/reservation/new_reservation/new_reservation_3.html', {'form': form})
 
 
 # Check-in views
@@ -84,7 +84,8 @@ def check_in_1(request):
                 except Client.DoesNotExist:
                     pass
             if client or reservation:
-                return render(request, 'reception/check_in_2.html', {'client': client, 'reservation': reservation})
+                return render(request, 'worker/receptionist/check-in/check_in_2.html',
+                              {'client': client, 'reservation': reservation})
             else:
                 form.add_error(None, "No existeix cap reserva amb aquestes dades.")
     else:
@@ -102,4 +103,4 @@ def fetch_rooms(request):
 # Check in views
 
 def check_in_2(request):
-    return render(request, 'reception/check_in_2.html', {})
+    return render(request, 'worker/receptionist/check-in/check_in_2.html', {})
