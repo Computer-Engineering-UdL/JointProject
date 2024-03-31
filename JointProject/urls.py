@@ -25,5 +25,5 @@ urlpatterns = [
     path('accounts/signup/', user.views.signup, name='signup'),
     path('receptionist/', include('Reception.urls')),
     path("", TemplateView.as_view(template_name="base.html"), name="base"),
-    #path("", TemplateView.as_view(template_name="worker/receptionist/receptionist_home.html"), name="base"),
+    # path("", TemplateView.as_view(template_name="worker/receptionist/receptionist_home.html"), name="base"),
 ]

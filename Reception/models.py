@@ -49,7 +49,7 @@ class RoomReservation(models.Model):
         ('Esmorzar Buffet', 'Esmorzar Buffet'),
         ('Completa', 'Completa')
     ]
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, default=4)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE, to_field='id')
     entry = models.DateField()
     exit = models.DateField()
