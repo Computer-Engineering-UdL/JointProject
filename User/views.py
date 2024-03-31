@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from User.forms import SignUpForm
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
+from JointProject.settings import LOGOUT_REDIRECT_URL
 
 
 def signup(request):
@@ -18,3 +20,9 @@ def signup(request):
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
+
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect(LOGOUT_REDIRECT_URL)

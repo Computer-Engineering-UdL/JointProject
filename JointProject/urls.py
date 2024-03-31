@@ -22,8 +22,10 @@ import User.views
 urlpatterns = [
     path('admin-tests/', admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
-    path('accounts/signup/', User.views.signup, name='signup'),
+    path("accounts/signup/", User.views.signup, name="signup"),
+    path('logout/', User.views.user_logout, name='logout'),
     path('receptionist/', include('Reception.urls')),
     path("", TemplateView.as_view(template_name="base.html"), name="base"),
-    # path("", TemplateView.as_view(template_name="worker/receptionist/receptionist_home.html"), name="base"),
+    # path("", TemplateView.as_view(template_name="worker/receptionist/receptionist_home.html"),
+    # name="recepcionist_home")
 ]

@@ -26,7 +26,7 @@ class TestLogin(TestCase):
         self.assertEqual(response.status_code, 302)
 
     def test_logout_redirect(self):
-        response = self.client.post('/accounts/logout/')
+        response = self.client.post('/logout/')
         self.assertEqual(response.status_code, 302)
 
 
