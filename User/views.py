@@ -3,6 +3,7 @@ from django.contrib import messages
 from User.forms import SignUpForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from JointProject.settings import LOGOUT_REDIRECT_URL
 
 
 def signup(request):
@@ -24,5 +25,4 @@ def signup(request):
 @login_required
 def user_logout(request):
     logout(request)
-    return redirect('login')
-    # return render(request, 'registration/logged_out.html', {})
+    return redirect(LOGOUT_REDIRECT_URL)
