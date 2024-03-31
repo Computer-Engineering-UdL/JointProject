@@ -1,7 +1,5 @@
-{% extends "base.html" %} {% block content %}
-  <h2>Log Out</h2>
-  <form method="post">
-    {% csrf_token %} {{ form.as_p }}
-    <button type="submit">Log Out</button>
-  </form>
-{% endblock %}
+<form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+
