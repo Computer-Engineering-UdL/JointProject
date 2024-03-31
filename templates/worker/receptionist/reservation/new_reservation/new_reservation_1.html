@@ -40,7 +40,10 @@
                 <p>Tipus de pensió</p>
                 {{ form.pension_type }}
             </div>
-            <input class="add-form-button" type="submit" value="Create">
+            <div class="buttons">
+                <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
+                <button class="add-form-button" type="submit">Create &#10093;</button>
+            </div>
         </div>
     </form>
 {% endblock content %}

@@ -43,6 +43,7 @@ p{
     font-size: 0.8em;
 }
 
+
 .reservation-info-form{
     display: flex;
     flex-direction: column;
@@ -52,6 +53,7 @@ p{
     margin: 10px;
     width: 30%;
 }
+
 .guests-number{
     /*background-color: #e1e7e3;*/
     outline: solid 1px #000000;
@@ -73,6 +75,7 @@ p{
 .guests-number p{
     padding-left: 7px;
 }
+
 .room-type{
     outline: solid 1px #000;
     border-radius: 8px;
@@ -113,18 +116,47 @@ p{
     text-align: center;
 }
 
-/* Style for the submit button */
-.add-form-button {
-    /* Add your styles here */
-    background-color: #007bff; /* Example button color */
-    color: #fff; /* Example text color */
-    padding: 10px 20px; /* Example padding */
-    border: none; /* Example no border */
-    cursor: pointer; /* Example cursor */
-    /* Add more styles as needed */
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
 }
-/* Hover effect for the submit button */
+button{
+    width: 48%;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    padding: 15px 25px;
+}
+
+.cancel-button{
+    color: #ff0000;
+    background-color: #ffffff;
+    border: 1px solid #ff0000;
+}
+.cancel-button:hover {
+    color: #ffffff;
+    background-color: #ff0000;
+    border: 1px solid #ff0000;
+}
+.cancel-button:active {
+    opacity: 0.4;
+}
+.add-form-button {
+    color: #14b909;
+    background-color: #ffffff;
+    border: 1px solid #14b909;
+}
 .add-form-button:hover {
-    background-color: #0056b3; /* Example hover color */
-    /* Add more hover styles as needed */
+    color: #ffffff;
+    background-color: #14b909;
+    border: 1px solid #14b909;
+}
+.add-form-button:active {
+    opacity: 0.4;
 }
