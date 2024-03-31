@@ -26,5 +26,6 @@ urlpatterns = [
     path('logout/', User.views.user_logout, name='logout'),
     path('receptionist/', include('Reception.urls')),
     path("", TemplateView.as_view(template_name="base.html"), name="base"),
-    # path("", TemplateView.as_view(template_name="worker/receptionist/receptionist_home.html"), name="recepcionist_home")
+    # path("", TemplateView.as_view(template_name="worker/receptionist/receptionist_home.html"),
+    # name="recepcionist_home")
 ]
