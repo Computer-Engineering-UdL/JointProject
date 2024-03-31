@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
-{% block extra_css %}
+{% block css %}
     <link rel="stylesheet" href="{% static 'css/worker/worker.css' %}">
-{% endblock extra_css %}
+    {% block extra_css %}{% endblock extra_css %}
+{% endblock css %}
 
 {% block title %}Worker{% endblock title %}
 {% block extra_meta_tags %}
