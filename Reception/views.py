@@ -9,7 +9,7 @@ def worker_home(request):
 
 
 # Create your views here.
-def add_client(request):
+def add_client_admin(request):
     """Add a new client to the database."""
     if request.method == 'POST':
         form = AddClientForm(request.POST)
