@@ -1,0 +1,40 @@
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    color: white;
+    height: 65px;
+}
+
+.menu{
+    order: 1;
+    display: flex;
+    list-style-type: none;
+    background-color: #ffffff;
+    color: black;
+    justify-content: flex-end;
+    padding: 5px;
+    margin: 0;
+    gap: 20px;
+}
+
+#right-header{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+#language{
+    color: #000000;
+    font-weight: bold;
+}
+#separator{
+    width: 1px;
+    background-color: #3d3d3d;
+    border: 1px solid #3d3d3d;
+    border-radius: 50px;
+    height: 40px;
+}
+#user{
+    width: 50px;
+}

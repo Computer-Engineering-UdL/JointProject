@@ -15,11 +15,11 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='client',
-            options={'verbose_name': 'user', 'verbose_name_plural': 'users'},
+            options={'verbose_name': 'User', 'verbose_name_plural': 'users'},
         ),
         migrations.AlterModelOptions(
             name='worker',
-            options={'verbose_name': 'user', 'verbose_name_plural': 'users'},
+            options={'verbose_name': 'User', 'verbose_name_plural': 'users'},
         ),
         migrations.AlterModelManagers(
             name='client',
@@ -39,7 +39,7 @@ class Migration(migrations.Migration):
         ),
         migrations.RemoveField(
             model_name='client',
-            name='user',
+            name='User',
         ),
         migrations.RemoveField(
             model_name='room',
@@ -55,7 +55,7 @@ class Migration(migrations.Migration):
         ),
         migrations.RemoveField(
             model_name='worker',
-            name='user',
+            name='User',
         ),
         migrations.AddField(
             model_name='client',
