@@ -86,8 +86,10 @@ def check_in_1(request):
                     reservation = RoomReservation.objects.get(client_id=client.id)
 
                 except HotelUser.DoesNotExist:
-                    print(f"No existe un usuario con el DNI {dni}")
-            if client or reservation:
+                    pass
+                except RoomReservation.DoesNotExist:
+                    pass
+            if client and reservation:
                 request.session['reservation_id'] = reservation.id
                 request.session['client_id'] = client
                 return render(request, 'worker/receptionist/check-in/check_in_2.html',
