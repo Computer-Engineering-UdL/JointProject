@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render
 from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm
-from Reception.models import Room, RoomReservation, Client
+from Reception.models import Room, RoomReservation, Client, HotelUser
 
 
 def worker_home(request):
@@ -81,8 +81,8 @@ def check_in_1(request):
                 try:
                     client = Client.objects.get(id_number=dni)
                     request.session['client_id'] = client.id
-                except Client.DoesNotExist:
-                    pass
+                except HotelUser.DoesNotExist:
+                    print(f"No existe un usuario con el DNI {dni}")
             if client or reservation:
                 return render(request, 'worker/receptionist/check-in/check_in_2.html', {'client': client, 'reservation': reservation})
             else:
