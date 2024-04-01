@@ -69,10 +69,9 @@ class RoomReservation(models.Model):
 
 
 class CheckIn(models.Model):
-    reservation = models.ForeignKey(RoomReservation, on_delete=models.CASCADE)
-    client = models.ForeignKey(HotelUser, on_delete=models.CASCADE)
+    reservation = models.CharField(max_length=100)
+    client = models.CharField(max_length=100)
     check_in_time = models.DateTimeField(auto_now_add=True)
 
-
     def __str__(self):
-        return self.reservation.id
+        return self.reservation

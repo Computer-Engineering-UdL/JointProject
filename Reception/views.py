@@ -2,7 +2,7 @@ from django.http import JsonResponse, FileResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm
-from Reception.models import Room, RoomReservation, Client, HotelUser
+from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn
 from reportlab.pdfgen import canvas
 from io import BytesIO
 
@@ -73,7 +73,7 @@ def check_in_1(request):
     if request.method == 'POST':
         form = InfoClientForm(request.POST)
         if form.is_valid():
-            form.save()
+
             num_reservation = form.cleaned_data['num_reservation']
             dni = form.cleaned_data['dni']
             hotel_user = None
@@ -96,13 +96,20 @@ def check_in_1(request):
                     pass
                 except RoomReservation.DoesNotExist:
                     pass
-            if client and reservation:
+
+            if client and reservation and not CheckIn.objects.filter(reservation=reservation.id).exists():
+                check_in = CheckIn.objects.create(reservation=reservation.id, client=hotel_user.id)
+                check_in.save()
+
                 request.session['reservation_id'] = reservation.id
                 request.session['client_id'] = client
                 return render(request, 'worker/receptionist/check-in/check_in_2.html',
                               {'client': hotel_user, 'reservation': reservation})
             else:
-                form.add_error(None, "No existeix cap reserva amb aquestes dades.")
+                if CheckIn.objects.filter(reservation=reservation.id).exists():
+                    form.add_error(None, "Ja s'ha fet el check-in d'aquesta reserva.")
+                else:
+                    form.add_error(None, "No existeix cap reserva amb aquestes dades.")
     else:
         form = InfoClientForm()
     return render(request, 'worker/receptionist/check-in/check_in_1.html', {'form': form})
