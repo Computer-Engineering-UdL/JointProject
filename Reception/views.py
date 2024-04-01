@@ -120,29 +120,22 @@ RESERVATION_DETAIL_PATH = 'worker/receptionist/reservation/modify_reservation/re
 
 @login_required
 def search_reservation(request):
+    form = SearchReservationForm(request.GET or None)
     reservations = RoomReservation.objects.all()
 
-    if request.method == 'GET':
-        form = SearchReservationForm()
-        return render(request, SEARCH_RESERVATION_PATH, {'form': form, 'reservations': reservations})
+    if form.is_valid():
+        num_reservation = form.cleaned_data.get('num_reservation')
+        id_number = form.cleaned_data.get('id_number')
+        room_num = form.cleaned_data.get('room_num')
 
-    elif request.method == 'POST':
-        form = SearchReservationForm(request.POST)
-        if form.is_valid():
-            num_reservation = form.cleaned_data.get('num_reservation')
+        if num_reservation:
+            reservations = reservations.filter(id=num_reservation)
+        if id_number:
+            reservations = reservations.filter(client__id_number=id_number)
+        if room_num:
+            reservations = reservations.filter(room__room_num=room_num)
 
-            if num_reservation:
-                try:
-                    reservation = RoomReservation.objects.get(id=num_reservation)
-                    return redirect('reservation_details', pk=reservation.pk)
-                except RoomReservation.DoesNotExist:
-                    form.add_error('num_reservation', 'No existeix cap reserva amb aquest identificador.')
-        else:
-            form.add_error(None, 'Introdueix dades per a cercar la reserva')
-
-        return render(request, SEARCH_RESERVATION_PATH, {'form': form, 'reservations': reservations})
-
-    return render(request, SEARCH_RESERVATION_PATH, {'reservations': reservations})
+    return render(request, SEARCH_RESERVATION_PATH, {'form': form, 'reservations': reservations})
 
 
 @login_required

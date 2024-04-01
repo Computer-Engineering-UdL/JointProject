@@ -15,7 +15,7 @@
                 <p>Tipus de pensió: {{ reservation.pension_type }}</p>
                 <p>Número d'hostes: {{ reservation.num_guests }}</p>
             </div>
-            
+
             <form action="{% url 'delete_reservation' reservation.id %}" method="post">
                 {% csrf_token %}
                 <button type="submit" onclick="return confirm('Estàs segur que vols eliminar aquesta reserva?');">Eliminar Reserva</button>
