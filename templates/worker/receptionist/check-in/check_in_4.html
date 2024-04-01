@@ -1,2 +1,14 @@
 {% extends "worker/base_worker.html" %}
 <!-- This template allows to select method of payment for the client reservation -->
+
+{% block title %} Check In {% endblock %}
+
+{% block content %}
+    
+    <h6>El check in s'ha realitzat correctament</h6>
+    
+    <p>Procedeix a entregar la clau de l'habitació {{ reservation.room.room_num }} a nom_client </p>
+    
+    <a href="{% url 'worker_home' %}" class="btn btn-primary">Imprimir comprovant</a>
+    
+{% endblock %}

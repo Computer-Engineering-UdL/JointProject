@@ -1,2 +1,30 @@
 {% extends "worker/base_worker.html" %}
 <!-- This template shows all the info of the client reservation -->
+
+{% block title %}Check in{% endblock %}
+
+{% block content %}
+    
+     <h4>Resumen de la reserva</h4>
+    <ul class="first_block">
+        <li>Fecha de entrada: {{ reservation.entry }}</li>
+        <li>Fecha de salida: {{ reservation.exit }}</li>
+        <li>Número de húespedes: {{ reservation.num_guests }}</li>
+        <li>Tipo de habitación: {{ reservation.room.room_type }}</li>
+        <li>Pensión: {{ reservation.pension_type }}</li>
+        <li>Número de habitación: {{ reservation.room.room_num }}</li>
+    </ul>
+
+    <ul class="second_block">
+        <li>Número de reserva: {{ reservation.id }}</li>
+        <li>DNI: {{ client.id_number }}</li>
+        <li>Nombre: {{ client.first_name }}</li>
+        <li>Apellido: {{ client.last_name }}</li>
+        <li>Correo electrónico: {{ client.email }}</li>
+        <li>Teléfono: {{ client.phone_number }}</li>
+    </ul>
+    
+    <button onclick="window.location.href='summary'">Enviar informació a les autoritats</button>
+    
+
+{% endblock %}

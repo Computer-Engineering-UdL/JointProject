@@ -25,9 +25,9 @@ class CheckInViewTest(TestCase):
     def test_check_in_view_redirect_with_reservation(self):
         url = reverse('check_in')
         response = self.client.post(url, {'num_reservation': self.reservation.id})
-        self.assertTemplateUsed(response, 'reception/check_in_2.html')
+        self.assertTemplateUsed(response, 'worker/receptionist/check-in/check_in_2.html')
 
     def test_check_in_view_redirect_with_dni(self):
         url = reverse('check_in')
         response = self.client.post(url, {'dni': self.client_obj.id_number})
-        self.assertTemplateUsed(response, 'reception/check_in_2.html')
+        self.assertTemplateUsed(response, 'worker/receptionist/check-in/check_in_2.html')
