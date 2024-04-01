@@ -2,7 +2,8 @@
 <html lang="en">
     <head>
         {% load static %}
-            <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
+        {% block css %}{% endblock css %}
 
         <meta charset="UTF-8">
         <meta name="robots" content="index, follow">
@@ -40,9 +41,9 @@
         <main>
             {% block content %}
                 <button> <a href="{% url 'worker_home' %}">
-                    RECEPTION - Add Client
+                    RECEPTION - Worker Home
                 </a></button>
-                
+
                 <button> <a href="{% url 'add_client' %}">
                     RECEPTION - Add Client
                 </a></button>
@@ -50,23 +51,28 @@
                 <button> <a href="{% url 'room_reservation' %}">
                     RECEPTION - Room Reservation
                 </a></button>
-                
+
                 <button> <a href="{% url 'add_room' %}">
                     RECEPTION - Add Room
                 </a></button>
-                
+
                 <button> <a href="{% url 'check_in' %}">
                     RECEPTION - Check-in
                 </a></button>
-                
+
                 <button> <a href="{% url 'fetch_rooms' %}">
                     RECEPTION - Fetch Rooms
+                </a></button>
+
+                <button> <a href="{% url 'receptionist_home'%}">
+                    RECEPTION - Home
                 </a></button>
             {% endblock content %}
         </main>
 
         <footer>
             {% block footer %}
+                <p>Usuari loguejat: {{ user.username }}</p>
             {% endblock footer %}
         </footer>
     </body>

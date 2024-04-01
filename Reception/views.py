@@ -9,7 +9,7 @@ def worker_home(request):
 
 
 # Create your views here.
-def add_client(request):
+def add_client_admin(request):
     """Add a new client to the database."""
     if request.method == 'POST':
         form = AddClientForm(request.POST)
@@ -19,7 +19,7 @@ def add_client(request):
             client.save()
     else:
         form = AddClientForm()
-    return render(request, 'worker/reception/add_client.html', {'form': form})
+    return render(request, 'admin-tests/add_client.html', {'form': form})
 
 
 def room_reservation(request):
@@ -32,7 +32,7 @@ def room_reservation(request):
             print("Form is not valid. Errors: ", form.errors)
     else:
         form = RoomReservationForm()
-    return render(request, 'worker/receptionist/reservation/new reservation/new_reservation_1.html', {'form': form})
+    return render(request, 'worker/receptionist/reservation/new_reservation/new_reservation_1.html', {'form': form})
 
 
 def add_room(request):
@@ -45,7 +45,7 @@ def add_room(request):
             form.save()
     else:
         form = RoomForm()
-    return render(request, 'worker/receptionist/reservation/new reservation/new_reservation_2.html', {'form': form})
+    return render(request, 'worker/receptionist/reservation/new_reservation/new_reservation_2.html', {'form': form})
 
 
 # Create your views here.
@@ -57,7 +57,7 @@ def add_client(request):
             form.save()
     else:
         form = AddClientForm()
-    return render(request, 'worker/receptionist/reservation/new reservation/new_reservation_3.html', {'form': form})
+    return render(request, 'worker/receptionist/reservation/new_reservation/new_reservation_3.html', {'form': form})
 
 
 # Check-in views
@@ -84,15 +84,13 @@ def check_in_1(request):
                 except HotelUser.DoesNotExist:
                     print(f"No existe un usuario con el DNI {dni}")
             if client or reservation:
-                return render(request, 'worker/receptionist/check-in/check_in_2.html', {'client': client, 'reservation': reservation})
+                return render(request, 'worker/receptionist/check-in/check_in_2.html',
+                              {'client': client, 'reservation': reservation})
             else:
                 form.add_error(None, "No existeix cap reserva amb aquestes dades.")
     else:
         form = InfoClientForm()
     return render(request, 'worker/receptionist/check-in/check_in_1.html', {'form': form})
-
-
-
 
 
 def fetch_rooms(request):
@@ -107,6 +105,6 @@ def check_in_summary(request):
     reservation_id = request.session.get('reservation_id')
     client_id = request.session.get('client_id')
     reservation = RoomReservation.objects.get(id=reservation_id)
-    #client = Client.objects.get(id=client_id)
+    # client = Client.objects.get(id=client_id)
 
     return render(request, 'worker/receptionist/check-in/check_in_4.html', {'reservation': reservation})
