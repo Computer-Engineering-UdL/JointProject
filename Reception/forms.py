@@ -110,14 +110,17 @@ class CancelReservationForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
         num_reservation = cleaned_data.get("num_reservation")
+        id_number = cleaned_data.get("id_number")
+        num_room = cleaned_data.get("num_room")
 
-        if not num_reservation:
-            raise forms.ValidationError("Introdueix el número de reserva")
+        if num_reservation and not num_reservation.isdigit():
+            raise forms.ValidationError("Introdueix un número de reserva vàlid")
+
+        if not num_reservation and not id_number and num_room is None:
+            raise forms.ValidationError("Almenys un dels tres camps ha de ser omplert")
 
         return cleaned_data
 
     class Meta:
         model = RoomReservation
-        fields = ['num_reservation']
-
-
+        fields = ['num_reservation', 'id_number', 'num_room']
