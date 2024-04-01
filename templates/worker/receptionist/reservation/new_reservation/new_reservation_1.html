@@ -17,27 +17,30 @@
 {% block content %}
     <form class="add-reservation-form" method="post">
         {% csrf_token %}
-        <div class="date-form">
-            <div class="date-input">
-                <p class="title-input">Data d'entrada</p>
-                {{ form.entry }}
-            </div>
-            <div class="date-input">
-                <p class="title-input">Data de sortida</p>
-                {{ form.exit }}
+        <div class="date">
+            <h2>Introdueixi la data i el tipus d'habitació desitjada:</h2>
+            <div class="date-form">
+                <div class="date-input">
+                    <p class="title-input">Data d'entrada</p>
+                    {{ form.entry }}
+                </div>
+                <div class="date-input">
+                    <p class="title-input">Data de sortida</p>
+                    {{ form.exit }}
+                </div>
             </div>
         </div>
         <div class="reservation-info-form">
             <div class="guests-number">
-                <p>Nombre d'hostes</p>
+                <p class="title-input">Nombre d'hostes</p>
                 {{ form.num_guests }}
             </div>
             <div class="room-type">
-                <p>Tipus d'habitació</p>
+                <p class="title-input">Tipus d'habitació</p>
                 {{ form.room_type }}
             </div>
             <div class="pension-type">
-                <p>Tipus de pensió</p>
+                <p class="title-input">Tipus de pensió</p>
                 {{ form.pension_type }}
             </div>
             <div class="buttons">

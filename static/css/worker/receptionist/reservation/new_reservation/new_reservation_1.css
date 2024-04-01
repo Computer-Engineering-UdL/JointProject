@@ -3,24 +3,48 @@ p{
     font-size: 1.2em;
 }
 
+main{
+    display: flex;
+    height: 90vh;
+    align-items: center;
+    justify-content: center;
+}
+
 .add-reservation-form {
-    /* Add your styles here */
+    max-height: 900px;
+    max-width: 1900px;
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     gap: 50px;
-    outline: 1px solid #000000;
+    background-color: rgba(165, 157, 190, 0.5);
+    /*outline: 1px solid #000000;*/
     justify-content: center;
     border-radius: 8px;
     margin: 10px;
 }
 
+.date{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 10px;
+    margin: 10px;
+    width: 50%;
+}
+.date h2{
+    text-align: left;
+    font-size: 1.3em;
+}
 .date-form{
-    width: 45%;
-    height: 60px;
+    margin-left: 15px;
+    width: 100%;
+    height: 28%;
     display: flex;
     justify-content: space-between;
     gap: 10px;
-    margin: 10px;
 }
 .date-input{
     width: 48%;
@@ -28,19 +52,22 @@ p{
     flex-direction: column;
     align-items: stretch;
     justify-content: space-between;
-    gap: 10px;
     outline: solid 1px #000;
+    background-color: #c7c7c7;
     border-radius: 8px;
 }
 .title-input{
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
 }
 .date-input input[type="text"]{
-    height: 30px;
+    height: 50%;
     border: transparent;
     text-align: center;
     border-radius: 8px;
-    font-size: 0.8em;
+    font-size: 1em;
 }
 
 
@@ -48,15 +75,16 @@ p{
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    justify-content: flex-end;
+    justify-content: space-evenly;
     gap: 10px;
     margin: 10px;
     width: 30%;
 }
 
 .guests-number{
-    /*background-color: #e1e7e3;*/
+    height: 14%;
     outline: solid 1px #000000;
+    background-color: #c7c7c7;
     border-radius: 8px;
     display: flex;
     flex-direction: row;
@@ -65,31 +93,32 @@ p{
     justify-content: space-between;
 }
 .guests-number input[type="number"]{
-    width: 30px;
-    height: 30px;
+    width: 20%;
+    height: 100%;
     text-align: center;
     border: transparent;
     border-radius: 8px;
-    font-size: 0.8em;
+    font-size: 1em;
 }
 .guests-number p{
-    padding-left: 7px;
+    padding-left: 5%;
 }
 
 .room-type{
+    height: 28%;
     outline: solid 1px #000;
+    background-color: #c7c7c7;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 10px;
 }
 .room-type select{
     width: 100%;
-    height: 30px;
+    height: 50%;
     border: transparent;
     border-radius: 8px;
-    font-size: 0.8em;
+    font-size: 1em;
     text-align: center;
 }
 .room-type p{
@@ -97,19 +126,20 @@ p{
 }
 
 .pension-type{
+    height: 28%;
     outline: solid 1px #000;
+    background-color: #c7c7c7;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 10px;
 }
 .pension-type select{
     width: 100%;
-    height: 30px;
+    height: 50%;
     border: transparent;
     border-radius: 8px;
-    font-size: 0.8em;
+    font-size: 1em;
     text-align: center;
 }
 .pension-type p{
@@ -117,18 +147,20 @@ p{
 }
 
 .buttons{
+    height: 12%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     gap: 10px;
 }
 button{
+    height: 100%;
     width: 48%;
     margin-top: 0;
     margin-bottom: 0;
     font-size: 15px;
     font-weight: bold;
-    border-radius: 8px;
+    border-radius: 15px;
     cursor: pointer;
     transition: opacity 0.2s;
     padding: 15px 25px;
