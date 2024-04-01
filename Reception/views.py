@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, SearchReservationForm
@@ -157,8 +157,10 @@ def reservation_details(request, pk):
 
 
 @login_required
-def delete_reservation(request, num_reservation):
-    reservation = RoomReservation.objects.get(id=num_reservation)
-    reservation.delete()
-    print("Reservation deleted")
-    messages.success(request, 'La reserva s\'ha cancel·lat amb èxit!')
+def delete_reservation(request, pk):
+    reservation = get_object_or_404(RoomReservation, pk=pk)
+    if request.method == 'POST':
+        reservation.delete()
+        messages.success(request, "La reserva s'ha eliminat amb èxit")
+        return redirect('search_reservation')
+    return redirect('reservation_details', pk=pk)
