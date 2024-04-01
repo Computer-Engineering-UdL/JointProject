@@ -3,6 +3,7 @@
     <head>
         {% load static %}
         <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
+        {% block css %}{% endblock css %}
 
         <meta charset="UTF-8">
         <meta name="robots" content="index, follow">
@@ -40,7 +41,7 @@
         <main>
             {% block content %}
                 <button> <a href="{% url 'worker_home' %}">
-                    RECEPTION - Add Client
+                    RECEPTION - Worker Home
                 </a></button>
 
                 <button> <a href="{% url 'add_client' %}">
@@ -61,6 +62,10 @@
 
                 <button> <a href="{% url 'fetch_rooms' %}">
                     RECEPTION - Fetch Rooms
+                </a></button>
+                
+                <button> <a href="{% url 'receptionist_home'%}">
+                    RECEPTION - Home
                 </a></button>
             {% endblock content %}
         </main>
