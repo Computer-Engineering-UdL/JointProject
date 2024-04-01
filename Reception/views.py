@@ -69,23 +69,29 @@ def check_in_1(request):
             form.save()
             num_reservation = form.cleaned_data['num_reservation']
             dni = form.cleaned_data['dni']
+            hotel_user = None
             client = None
             reservation = None
             if num_reservation:
                 try:
                     reservation = RoomReservation.objects.get(id=num_reservation)
-                    request.session['reservation_id'] = reservation.id
+                    client = reservation.client_id
+                    hotel_user = HotelUser.objects.get(id=client)
+
                 except RoomReservation.DoesNotExist:
                     pass
             if dni and not client:
                 try:
-                    client = Client.objects.get(id_number=dni)
-                    request.session['client_id'] = client.id
+                    client = HotelUser.objects.get(id_number=dni)
+                    reservation = RoomReservation.objects.get(client_id=client.id)
+
                 except HotelUser.DoesNotExist:
                     print(f"No existe un usuario con el DNI {dni}")
             if client or reservation:
+                request.session['reservation_id'] = reservation.id
+                request.session['client_id'] = client
                 return render(request, 'worker/receptionist/check-in/check_in_2.html',
-                              {'client': client, 'reservation': reservation})
+                              {'client': hotel_user, 'reservation': reservation})
             else:
                 form.add_error(None, "No existeix cap reserva amb aquestes dades.")
     else:
