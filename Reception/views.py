@@ -120,9 +120,11 @@ RESERVATION_DETAIL_PATH = 'worker/receptionist/reservation/modify_reservation/re
 
 @login_required
 def search_reservation(request):
+    reservations = RoomReservation.objects.all()
+
     if request.method == 'GET':
         form = SearchReservationForm()
-        return render(request, SEARCH_RESERVATION_PATH, {'form': form})
+        return render(request, SEARCH_RESERVATION_PATH, {'form': form, 'reservations': reservations})
 
     elif request.method == 'POST':
         form = SearchReservationForm(request.POST)
@@ -138,9 +140,9 @@ def search_reservation(request):
         else:
             form.add_error(None, 'Introdueix dades per a cercar la reserva')
 
-        return render(request, SEARCH_RESERVATION_PATH, {'form': form})
+        return render(request, SEARCH_RESERVATION_PATH, {'form': form, 'reservations': reservations})
 
-    return render(request, SEARCH_RESERVATION_PATH, {})
+    return render(request, SEARCH_RESERVATION_PATH, {'reservations': reservations})
 
 
 @login_required

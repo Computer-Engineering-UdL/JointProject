@@ -7,10 +7,17 @@
             <div>
                 <h1>Reserva {{ reservation.id }}</h1>
             </div>
-            
-            
+            <div>
+                <p>Hoste: {{ reservation.client }}</p>
+                <p>Habitació: {{ reservation.room }}</p>
+                <p>Data entrada: {{ reservation.entry }}</p>
+                <p>Data sortida: {{ reservation.exit }}</p>
+                <p>Tipus de pensió: {{ reservation.pension_type }}</p>
+                <p>Número d'hostes: {{ reservation.num_guests }}</p>
+            </div>
             <div>
                 <a href="{% url 'receptionist_home' %}">Torna a Inici</a>
+                <a href="{% url 'search_reservation' %}">Torna a Cerca Reserva</a>
             </div>
         </div>
     </div>

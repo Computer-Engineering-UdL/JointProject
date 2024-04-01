@@ -3,8 +3,7 @@
 
 {% block content %}
   <div class="container">
-    <h2>Cancelar reserva</h2>
-    <p>Per a iniciar el procés de "Cancel·lar reserva" introdueixi una de les següents dades sol·licitades:</p>
+    <h2>Buscar reserva</h2>
     <form method="post">
       {% csrf_token %}
         <!--General errors-->
@@ -28,5 +27,17 @@
 
       <button type="submit">Buscar</button>
     </form>
+
+    <h3>Llista de Reserves</h3>
+    <div>
+      <ul>
+        {% for reservation in reservations %}
+          <li>
+            Reserva {{ reservation.id }}:
+            <a href="{% url 'reservation_details' pk=reservation.pk %}">Veure Detalls</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 {% endblock %}
