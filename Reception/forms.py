@@ -1,9 +1,7 @@
 from django import forms
-from django.contrib.auth import get_user_model
 from django.core.validators import MinValueValidator, MaxValueValidator
-from django.db.models import Subquery
-
-from .models import RoomReservation, Client, Room, CheckIn
+from User.validators import is_valid_id_number
+from .models import RoomReservation, Client, Room, CheckIn, HotelUser
 
 
 class RoomForm(forms.ModelForm):
@@ -102,25 +100,40 @@ class InfoClientForm(forms.ModelForm):
 
 # Cancel reservation form
 
-class CancelReservationForm(forms.ModelForm):
+class SearchReservationForm(forms.ModelForm):
     num_reservation = forms.CharField(label="Introdueix el número de reserva", required=False)
-    id_number = forms.CharField(max_length=20, label="Introdueix el número del document identificatiu", required=False)
-    num_room = forms.IntegerField(label="Introdueix el número de l'habitació", required=False)
+    id_number = forms.CharField(label="Introdueix el número d'identificació", required=False)
+    room_num = forms.IntegerField(label="Introdueix el número d'habitació", required=False,
+                                  validators=[MinValueValidator(1)])
 
     def clean(self):
         cleaned_data = super().clean()
         num_reservation = cleaned_data.get("num_reservation")
         id_number = cleaned_data.get("id_number")
-        num_room = cleaned_data.get("num_room")
+        room_num = cleaned_data.get("room_num")
 
         if num_reservation and not num_reservation.isdigit():
             raise forms.ValidationError("Introdueix un número de reserva vàlid")
 
-        if not num_reservation and not id_number and num_room is None:
-            raise forms.ValidationError("Almenys un dels tres camps ha de ser omplert")
+        if id_number and not is_valid_id_number(id_number):
+            raise forms.ValidationError("Introdueix un número d'identificació vàlid")
+
+        # Room num is not required to be validated since it is an integer field
+
+        if room_num and not Room.objects.filter(room_num=room_num).exists():
+            raise forms.ValidationError("No existeix cap habitació amb aquest número")
+
+        if room_num and not RoomReservation.objects.filter(room__room_num=room_num).exists():
+            raise forms.ValidationError("No existeix cap reserva per aquesta habitació")
+
+        if num_reservation and not RoomReservation.objects.filter(id=num_reservation).exists():
+            raise forms.ValidationError("No existeix cap reserva amb aquest número")
+
+        if id_number and not HotelUser.objects.filter(id_number=id_number).exists():
+            raise forms.ValidationError("No existeix cap client amb aquest número d'identificació")
 
         return cleaned_data
 
     class Meta:
         model = RoomReservation
-        fields = ['num_reservation', 'id_number', 'num_room']
+        fields = []

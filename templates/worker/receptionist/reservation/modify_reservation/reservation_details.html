@@ -1,0 +1,28 @@
+{% extends "worker/base_worker.html" %}
+<!-- This template shows all the info of the client reservation -->
+
+{% block content %}
+    <div>
+        <div>
+            <div>
+                <h1>Reserva {{ reservation.id }}</h1>
+            </div>
+            <div>
+                <p>Hoste: {{ reservation.client }}</p>
+                <p>Habitació: {{ reservation.room }}</p>
+                <p>Data entrada: {{ reservation.entry }}</p>
+                <p>Data sortida: {{ reservation.exit }}</p>
+                <p>Tipus de pensió: {{ reservation.pension_type }}</p>
+                <p>Número d'hostes: {{ reservation.num_guests }}</p>
+            </div>
+
+            <form action="{% url 'delete_reservation' reservation.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" onclick="return confirm('Estàs segur que vols eliminar aquesta reserva?');">Eliminar Reserva</button>
+            </form>
+
+            <a href="{% url 'receptionist_home' %}">Torna a Inici</a>
+            <a href="{% url 'search_reservation' %}">Torna a Cerca Reserva</a>
+        </div>
+    </div>
+{% endblock %}

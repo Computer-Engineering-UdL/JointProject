@@ -1,7 +1,8 @@
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, CancelReservationForm
+from django.contrib import messages
+from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, SearchReservationForm
 from Reception.models import Room, RoomReservation, Client
 
 
@@ -113,45 +114,46 @@ def check_in_2(request):
 
 # Cancel reservation views
 
-CANCEL_RESERVATION1_PATH = 'worker/receptionist/reservation/cancel_reservation/cancel_reservation_1.html'
-CANCEL_RESERVATION2_PATH = 'worker/receptionist/reservation/cancel_reservation/cancel_reservation_2.html'
+SEARCH_RESERVATION_PATH = 'worker/receptionist/reservation/modify_reservation/search_reservation.html'
+RESERVATION_DETAIL_PATH = 'worker/receptionist/reservation/modify_reservation/reservation_details.html'
 
 
 @login_required
-def cancel_reservation(request):
-    if request.method == 'GET':
-        form = CancelReservationForm()
-        return render(request, CANCEL_RESERVATION1_PATH, {'form': form})
+def search_reservation(request):
+    form = SearchReservationForm(request.GET or None)
+    reservations = RoomReservation.objects.all()
 
-    # TODO: Move this into an other view to use it in another template
-    elif request.method == 'POST':
-        form = CancelReservationForm(request.POST)
-        if form.is_valid():
-            num_reservation = form.cleaned_data.get('num_reservation')
-            id_number = form.cleaned_data.get('id_number')
-            num_room = form.cleaned_data.get('num_room')
+    if form.is_valid():
+        num_reservation = form.cleaned_data.get('num_reservation')
+        id_number = form.cleaned_data.get('id_number')
+        room_num = form.cleaned_data.get('room_num')
 
-            if num_reservation:
-                try:
-                    reservation = RoomReservation.objects.get(id=num_reservation)
-                    reservation.delete()
-                    return redirect('reservation_cancelled')
-                except RoomReservation.DoesNotExist:
-                    form.add_error('num_reservation', 'No existeix cap reserva amb aquest identificador.')
-            elif id_number:
-                client = Client.objects.filter(id_number=id_number).first()
-                if client:
-                    RoomReservation.objects.filter(client=client).delete()
-                    return redirect('reservation_cancelled')
-            elif num_room is not None:
-                RoomReservation.objects.filter(room=num_room).delete()
-                return redirect('reservation_cancelled')
+        if num_reservation:
+            reservations = reservations.filter(id=num_reservation)
+        if id_number:
+            reservations = reservations.filter(client__id_number=id_number)
+        if room_num:
+            reservations = reservations.filter(room__room_num=room_num)
 
-        return render(request, CANCEL_RESERVATION1_PATH, {'form': form})
-
-    return render(request, CANCEL_RESERVATION1_PATH, {})
+    return render(request, SEARCH_RESERVATION_PATH, {'form': form, 'reservations': reservations})
 
 
 @login_required
-def reservation_cancelled(request):
-    return render(request, CANCEL_RESERVATION2_PATH, {'message': 'La reserva s\'ha cancel·lat amb èxit!'})
+def reservation_details(request, pk):
+    try:
+        reservation = RoomReservation.objects.get(pk=pk)
+    except RoomReservation.DoesNotExist:
+        messages.error(request, "No s'ha trobat la reserva.")
+        return redirect('search_reservation')
+
+    return render(request, RESERVATION_DETAIL_PATH, {'reservation': reservation})
+
+
+@login_required
+def delete_reservation(request, pk):
+    reservation = get_object_or_404(RoomReservation, pk=pk)
+    if request.method == 'POST':
+        reservation.delete()
+        messages.success(request, "La reserva s'ha eliminat amb èxit")
+        return redirect('search_reservation')
+    return redirect('reservation_details', pk=pk)

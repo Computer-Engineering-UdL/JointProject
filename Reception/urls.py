@@ -1,8 +1,7 @@
-from django.contrib import admin
-from django.urls import path, include
-from django.views.generic.base import TemplateView
+from django.urls import path
+from django.views.generic import TemplateView
 from Reception.views import (worker_home, add_client, room_reservation, add_room, check_in_1, fetch_rooms,
-                             cancel_reservation, reservation_cancelled)
+                             search_reservation, reservation_details, delete_reservation)
 
 
 urlpatterns = [
@@ -14,6 +13,7 @@ urlpatterns = [
     path('add_room/', add_room, name='add_room'),
     path('check-in/', check_in_1, name='check_in'),
     path('fetch_rooms/', fetch_rooms, name='fetch_rooms'),
-    path('cancel_reservation/', cancel_reservation, name='cancel_reservation'),
-    path('reservation_cancelled/', reservation_cancelled, name='reservation_cancelled'),
+    path('search_reservation/', search_reservation, name='search_reservation'),
+    path('reservation_details/<int:pk>/', reservation_details, name='reservation_details'),
+    path('reservation/delete/<int:pk>/', delete_reservation, name='delete_reservation'),
 ]
