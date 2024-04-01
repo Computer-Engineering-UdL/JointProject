@@ -3,12 +3,17 @@
 
 {% block content %}
     <div class="container">
-        <h2>Search for a reservation</h2>
+        <h2>Cancelar reserva</h2>
+        <p>Per a iniciar el procés de "Cancel·lar reserva" introdueixi una de les següents dades sol·licitades:</p>
         <form method="POST">
             {% csrf_token %}
             <div class="form-group col-md-6">
                 <label for="id">Enter the reservation id:</label>
                 <input type="text" class="form-control" id="id" name="id">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="dni">Enter the client DNI:</label>
+                <input type="text" class="form-control" id="dni" name="dni">
             </div>
             <button type="submit" class="btn btn-primary">Search</button>
         </form>

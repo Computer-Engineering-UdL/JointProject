@@ -122,9 +122,20 @@ def cancel_reservation(request):
     def post(self, request):
         form = CancelReservationForm(request.POST)
         if form.is_valid():
-            num_reservation = form.cleaned_data.get('num_reservation')
-            RoomReservation.objects.filter(num_reservation=num_reservation).delete()
-            return redirect('reservation_cancelled')
+            if form.cleaned_data.get('num_reservation'):
+                num_reservation = form.cleaned_data.get('num_reservation')
+                RoomReservation.objects.filter(num_reservation=num_reservation).delete()
+                return redirect('reservation_cancelled')
+            elif form.cleaned_data.get('dni'):
+                dni = form.cleaned_data.get('dni')
+                client = Client.objects.get(dni=dni)
+                RoomReservation.objects.filter(client=client).delete()
+                return redirect('reservation_cancelled')
+            elif form.cleaned_data.get('room'):
+                room = form.cleaned_data.get('room')
+                RoomReservation.objects.filter(room=room).delete()
+            else:
+                form.add_error(None, "Introdueix el número de reserva o el número del document identificatiu")
         return render(request, CANCEL_RESERVATION_PATH, {'form': form})
 
     return render(request, CANCEL_RESERVATION_PATH, {})

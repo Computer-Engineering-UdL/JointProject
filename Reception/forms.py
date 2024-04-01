@@ -104,6 +104,8 @@ class InfoClientForm(forms.ModelForm):
 
 class CancelReservationForm(forms.ModelForm):
     num_reservation = forms.CharField(label="Introdueix el número de reserva", required=False)
+    id_number = forms.CharField(max_length=20, label="Introdueix el número del document identificatiu", required=False)
+    num_room = forms.IntegerField(label="Introdueix el número de l'habitació", required=False)
 
     def clean(self):
         cleaned_data = super().clean()
