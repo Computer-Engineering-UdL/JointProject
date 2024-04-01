@@ -1,7 +1,7 @@
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm
+from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, CancelReservationForm
 from Reception.models import Room, RoomReservation, Client
 
 
@@ -109,3 +109,49 @@ def fetch_rooms(request):
 @login_required
 def check_in_2(request):
     return render(request, 'worker/receptionist/check-in/check_in_2.html', {})
+
+
+# Cancel reservation views
+
+CANCEL_RESERVATION1_PATH = 'worker/receptionist/reservation/cancel_reservation/cancel_reservation_1.html'
+CANCEL_RESERVATION2_PATH = 'worker/receptionist/reservation/cancel_reservation/cancel_reservation_2.html'
+
+
+@login_required
+def cancel_reservation(request):
+    if request.method == 'GET':
+        form = CancelReservationForm()
+        return render(request, CANCEL_RESERVATION1_PATH, {'form': form})
+
+    # TODO: Move this into an other view to use it in another template
+    elif request.method == 'POST':
+        form = CancelReservationForm(request.POST)
+        if form.is_valid():
+            num_reservation = form.cleaned_data.get('num_reservation')
+            id_number = form.cleaned_data.get('id_number')
+            num_room = form.cleaned_data.get('num_room')
+
+            if num_reservation:
+                try:
+                    reservation = RoomReservation.objects.get(id=num_reservation)
+                    reservation.delete()
+                    return redirect('reservation_cancelled')
+                except RoomReservation.DoesNotExist:
+                    form.add_error('num_reservation', 'No existeix cap reserva amb aquest identificador.')
+            elif id_number:
+                client = Client.objects.filter(id_number=id_number).first()
+                if client:
+                    RoomReservation.objects.filter(client=client).delete()
+                    return redirect('reservation_cancelled')
+            elif num_room is not None:
+                RoomReservation.objects.filter(room=num_room).delete()
+                return redirect('reservation_cancelled')
+
+        return render(request, CANCEL_RESERVATION1_PATH, {'form': form})
+
+    return render(request, CANCEL_RESERVATION1_PATH, {})
+
+
+@login_required
+def reservation_cancelled(request):
+    return render(request, CANCEL_RESERVATION2_PATH, {'message': 'La reserva s\'ha cancel·lat amb èxit!'})

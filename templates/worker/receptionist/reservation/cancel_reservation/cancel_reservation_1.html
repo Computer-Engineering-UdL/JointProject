@@ -1,0 +1,52 @@
+{% extends "worker/base_worker.html" %}
+<!-- This template allows to enter an id to search for a client reservation -->
+
+{% block content %}
+  <div class="container">
+    <h2>Cancelar reserva</h2>
+    <p>Per a iniciar el procés de "Cancel·lar reserva" introdueixi una de les següents dades sol·licitades:</p>
+    <form method="post">
+      {% csrf_token %}
+        <!--General errors-->
+      <div id="notifications">
+        {% if form.non_field_errors %}
+          {% for error in form.non_field_errors %}
+            <p class="notification-err">{{ error }}</p>
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      <div>
+        {{ form.num_reservation.label_tag }}
+        {{ form.num_reservation }}
+        {% if form.num_reservation.errors %}
+          {% for error in form.num_reservation.errors %}
+            <p class="notification-err">{{ error }}</p>
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      <div>
+        {{ form.id_number.label_tag }}
+        {{ form.id_number }}
+        {% if form.id_number.errors %}
+          {% for error in form.id_number.errors %}
+            <p class="notification-err">{{ error }}</p>
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      <div>
+        {{ form.num_room.label_tag }}
+        {{ form.num_room }}
+        {% if form.num_room.errors %}
+          {% for error in form.num_room.errors %}
+            <p class="notification-err">{{ error }}</p>
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "worker/base_worker.html" %}
+<!-- This template shows all the info of the client reservation -->
+
+{% block content %}
+    <div>
+        <div>
+            <div>
+                <h1>Cancel·lació de Reserva</h1>
+            </div>
+
+            <div id="notifications">
+                <p class="notification-success">{{ message }}</p>
+            </div>
+            
+            <div class="mt-4">
+                <a href="{% url 'receptionist_home' %}">Torna a Inici</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
