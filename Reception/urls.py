@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.generic import TemplateView
 from Reception.views import (worker_home, add_client, room_reservation, add_room, check_in_1, fetch_rooms,
                              search_reservation, reservation_details, delete_reservation)
 
