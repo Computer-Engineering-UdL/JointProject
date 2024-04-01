@@ -1,7 +1,9 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, FileResponse
 from django.shortcuts import render
 from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm
 from Reception.models import Room, RoomReservation, Client, HotelUser
+from reportlab.pdfgen import canvas
+from io import BytesIO
 
 
 def worker_home(request):
@@ -113,6 +115,34 @@ def check_in_summary(request):
     reservation_id = request.session.get('reservation_id')
     client_id = request.session.get('client_id')
     reservation = RoomReservation.objects.get(id=reservation_id)
-    # client = Client.objects.get(id=client_id)
+    client = HotelUser.objects.get(id=client_id)
 
-    return render(request, 'worker/receptionist/check-in/check_in_4.html', {'reservation': reservation})
+    return render(request, 'worker/receptionist/check-in/check_in_4.html', {'client': client, 'reservation': reservation})
+
+def print_receipt(request, client_id, reservation_id):
+    client = HotelUser.objects.get(id=client_id)
+    reservation = RoomReservation.objects.get(id=reservation_id)
+
+    buffer = BytesIO()
+    pdf = canvas.Canvas(buffer)
+
+    pdf.drawString(100, 750, f"Comprovant de reserva")
+    pdf.drawString(100, 735, f"Número de reserva: {reservation.id}")
+    pdf.drawString(100, 720, f"Data de entrada: {reservation.entry}")
+    pdf.drawString(100, 705, f"Data de sortida: {reservation.exit}")
+    pdf.drawString(100, 690, f"Número de hostes: {reservation.num_guests}")
+    pdf.drawString(100, 675, f"Tipus de pensió: {reservation.pension_type}")
+    pdf.drawString(100, 660, f"Tipus de habitació: {reservation.room.room_type}")
+    pdf.drawString(100, 645, f"Número de habitació: {reservation.room.room_num}")
+
+    pdf.drawString(100, 630, f"Nom del client: {client.first_name} {client.last_name}")
+    pdf.drawString(100, 615, f"Document identificatiu: {client.id_number}")
+    pdf.drawString(100, 600, f"Email: {client.email}")
+    pdf.drawString(100, 585, f"Telèfon: {client.phone_number}")
+
+    pdf.showPage()
+    pdf.save()
+    buffer.seek(0)
+
+    return FileResponse(buffer, as_attachment=True, filename='receipt.pdf')
+

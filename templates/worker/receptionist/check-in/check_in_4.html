@@ -5,10 +5,10 @@
 
 {% block content %}
     
-    <h6>El check in s'ha realitzat correctament</h6>
+    <h4>El check in s'ha realitzat correctament</h4>
     
-    <p>Procedeix a entregar la clau de l'habitació {{ reservation.room.room_num }} a nom_client </p>
+    <p>Procedeix a entregar la clau de l'habitació {{ reservation.room.room_num }} a {{ client.first_name }} </p>
     
-    <a href="{% url 'worker_home' %}" class="btn btn-primary">Imprimir comprovant</a>
+    <button><a href="{% url 'print_receipt' client.id reservation.id %}" class="btn btn-primary">Imprimir comprovant</a></button>
     
 {% endblock %}
