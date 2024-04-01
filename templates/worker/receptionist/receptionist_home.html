@@ -26,14 +26,14 @@
         Esculli el procediment que desitja realitzar:
     </p>
     <div class="buttons">
-        <button class="access-process-button"> <a href="{% url 'room_reservation' %}">
+        <a href="{% url 'room_reservation' %}"> <button class="access-process-button"> 
             Crear nova reserva
-        </a></button>
+        </button></a>
         <button class="access-process-button">
             Modificar reserva
         </button>
-        <button class="access-process-button"> <a href="{% url 'cancel_reservation' %}">
+        <a href="{% url 'cancel_reservation' %}"> <button class="access-process-button"> 
             Cancel·lar reserva
-        </a></button>
+        </button></a>
     </div>
 {% endblock content %}
