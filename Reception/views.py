@@ -111,14 +111,19 @@ def check_in_2(request):
     return render(request, 'worker/receptionist/check-in/check_in_2.html', {})
 
 
+# Cancel reservation views
+
+CANCEL_RESERVATION1_PATH = 'worker/receptionist/reservation/cancel_reservation/cancel_reservation_1.html'
+CANCEL_RESERVATION2_PATH = 'worker/receptionist/reservation/cancel_reservation/cancel_reservation_2.html'
+
+
 @login_required
 def cancel_reservation(request):
-    CANCEL_RESERVATION_PATH = 'worker/receptionist/reservation/cancel_reservation/cancel_reservation_1.html'
-
     if request.method == 'GET':
         form = CancelReservationForm()
-        return render(request, CANCEL_RESERVATION_PATH, {'form': form})
+        return render(request, CANCEL_RESERVATION1_PATH, {'form': form})
 
+    # TODO: Move this into an other view to use it in another template
     elif request.method == 'POST':
         form = CancelReservationForm(request.POST)
         if form.is_valid():
@@ -142,6 +147,11 @@ def cancel_reservation(request):
                 RoomReservation.objects.filter(room=num_room).delete()
                 return redirect('reservation_cancelled')
 
-        return render(request, CANCEL_RESERVATION_PATH, {'form': form})
+        return render(request, CANCEL_RESERVATION1_PATH, {'form': form})
 
-    return render(request, CANCEL_RESERVATION_PATH, {})
+    return render(request, CANCEL_RESERVATION1_PATH, {})
+
+
+@login_required
+def reservation_cancelled(request):
+    return render(request, CANCEL_RESERVATION2_PATH, {'message': 'La reserva s\'ha cancel·lat amb èxit!'})
