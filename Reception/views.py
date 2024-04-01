@@ -1,16 +1,18 @@
 from django.http import JsonResponse, FileResponse
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm
 from Reception.models import Room, RoomReservation, Client, HotelUser
 from reportlab.pdfgen import canvas
 from io import BytesIO
 
 
+@login_required
 def worker_home(request):
     return render(request, 'worker/base_worker.html')
 
 
-# Create your views here.
+@login_required
 def add_client_admin(request):
     """Add a new client to the database."""
     if request.method == 'POST':
@@ -24,6 +26,7 @@ def add_client_admin(request):
     return render(request, 'admin-tests/add_client.html', {'form': form})
 
 
+@login_required
 def room_reservation(request):
     """Reserve a room for a client."""
     if request.method == 'POST':
@@ -37,6 +40,7 @@ def room_reservation(request):
     return render(request, 'worker/receptionist/reservation/new_reservation/new_reservation_1.html', {'form': form})
 
 
+@login_required
 def add_room(request):
     """Add a new room to the database."""
     if request.method == 'POST':
@@ -50,7 +54,7 @@ def add_room(request):
     return render(request, 'worker/receptionist/reservation/new_reservation/new_reservation_2.html', {'form': form})
 
 
-# Create your views here.
+@login_required
 def add_client(request):
     """Add a new client to the database."""
     if request.method == 'POST':
@@ -63,6 +67,7 @@ def add_client(request):
 
 
 # Check-in views
+@login_required
 def check_in_1(request):
     """Check-in a client."""
     if request.method == 'POST':
@@ -103,12 +108,12 @@ def check_in_1(request):
     return render(request, 'worker/receptionist/check-in/check_in_1.html', {'form': form})
 
 
+@login_required
 def fetch_rooms(request):
     room_type = request.GET.get('room_type')
     rooms = Room.objects.filter(room_type=room_type, is_taken=False).order_by('room_num')
     data = {'rooms': list(rooms.values('id', 'room_num'))}
     return JsonResponse(data)
-
 
 # Check in views
 def check_in_summary(request):
@@ -145,4 +150,3 @@ def print_receipt(request, client_id, reservation_id):
     buffer.seek(0)
 
     return FileResponse(buffer, as_attachment=True, filename='receipt.pdf')
-
