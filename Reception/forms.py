@@ -100,25 +100,18 @@ class InfoClientForm(forms.ModelForm):
 
 # Cancel reservation form
 
-class CancelReservationForm(forms.ModelForm):
+class SearchReservationForm(forms.ModelForm):
     num_reservation = forms.CharField(label="Introdueix el número de reserva", required=False)
-    id_number = forms.CharField(max_length=20, label="Introdueix el número del document identificatiu", required=False)
-    num_room = forms.IntegerField(label="Introdueix el número de l'habitació", required=False)
 
     def clean(self):
         cleaned_data = super().clean()
         num_reservation = cleaned_data.get("num_reservation")
-        id_number = cleaned_data.get("id_number")
-        num_room = cleaned_data.get("num_room")
 
         if num_reservation and not num_reservation.isdigit():
             raise forms.ValidationError("Introdueix un número de reserva vàlid")
-
-        if not num_reservation and not id_number and num_room is None:
-            raise forms.ValidationError("Almenys un dels tres camps ha de ser omplert")
 
         return cleaned_data
 
     class Meta:
         model = RoomReservation
-        fields = ['num_reservation', 'id_number', 'num_room']
+        fields = ['num_reservation']

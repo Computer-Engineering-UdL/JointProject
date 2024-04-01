@@ -29,11 +29,6 @@
         <button class="access-process-button"> <a href="{% url 'room_reservation' %}">
             Crear nova reserva
         </a></button>
-        <button class="access-process-button">
-            Modificar reserva
-        </button>
-        <button class="access-process-button"> <a href="{% url 'cancel_reservation' %}">
-            Cancel·lar reserva
-        </a></button>
+        <a href="{% url 'search_reservation' %}"><button class="access-process-button">Cercar reserva</button> </a>
     </div>
 {% endblock content %}

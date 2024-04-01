@@ -1,7 +1,8 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, CancelReservationForm
+from django.contrib import messages
+from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, SearchReservationForm
 from Reception.models import Room, RoomReservation, Client
 
 
@@ -113,45 +114,49 @@ def check_in_2(request):
 
 # Cancel reservation views
 
-CANCEL_RESERVATION1_PATH = 'worker/receptionist/reservation/cancel_reservation/cancel_reservation_1.html'
-CANCEL_RESERVATION2_PATH = 'worker/receptionist/reservation/cancel_reservation/cancel_reservation_2.html'
+SEARCH_RESERVATION_PATH = 'worker/receptionist/reservation/modify_reservation/search_reservation.html'
+RESERVATION_DETAIL_PATH = 'worker/receptionist/reservation/modify_reservation/reservation_details.html'
 
 
 @login_required
-def cancel_reservation(request):
+def search_reservation(request):
     if request.method == 'GET':
-        form = CancelReservationForm()
-        return render(request, CANCEL_RESERVATION1_PATH, {'form': form})
+        form = SearchReservationForm()
+        return render(request, SEARCH_RESERVATION_PATH, {'form': form})
 
-    # TODO: Move this into an other view to use it in another template
     elif request.method == 'POST':
-        form = CancelReservationForm(request.POST)
+        form = SearchReservationForm(request.POST)
         if form.is_valid():
             num_reservation = form.cleaned_data.get('num_reservation')
-            id_number = form.cleaned_data.get('id_number')
-            num_room = form.cleaned_data.get('num_room')
 
             if num_reservation:
                 try:
                     reservation = RoomReservation.objects.get(id=num_reservation)
-                    reservation.delete()
-                    return redirect('reservation_cancelled')
+                    return redirect('reservation_details', pk=reservation.pk)
                 except RoomReservation.DoesNotExist:
                     form.add_error('num_reservation', 'No existeix cap reserva amb aquest identificador.')
-            elif id_number:
-                client = Client.objects.filter(id_number=id_number).first()
-                if client:
-                    RoomReservation.objects.filter(client=client).delete()
-                    return redirect('reservation_cancelled')
-            elif num_room is not None:
-                RoomReservation.objects.filter(room=num_room).delete()
-                return redirect('reservation_cancelled')
+        else:
+            form.add_error(None, 'Introdueix dades per a cercar la reserva')
 
-        return render(request, CANCEL_RESERVATION1_PATH, {'form': form})
+        return render(request, SEARCH_RESERVATION_PATH, {'form': form})
 
-    return render(request, CANCEL_RESERVATION1_PATH, {})
+    return render(request, SEARCH_RESERVATION_PATH, {})
 
 
 @login_required
-def reservation_cancelled(request):
-    return render(request, CANCEL_RESERVATION2_PATH, {'message': 'La reserva s\'ha cancel·lat amb èxit!'})
+def reservation_details(request, pk):
+    try:
+        reservation = RoomReservation.objects.get(pk=pk)
+    except RoomReservation.DoesNotExist:
+        messages.error(request, "No s'ha trobat la reserva.")
+        return redirect('search_reservation')
+
+    return render(request, RESERVATION_DETAIL_PATH, {'reservation': reservation})
+
+
+@login_required
+def delete_reservation(request, num_reservation):
+    reservation = RoomReservation.objects.get(id=num_reservation)
+    reservation.delete()
+    print("Reservation deleted")
+    messages.success(request, 'La reserva s\'ha cancel·lat amb èxit!')
