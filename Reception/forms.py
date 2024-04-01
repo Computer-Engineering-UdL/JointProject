@@ -98,3 +98,24 @@ class InfoClientForm(forms.ModelForm):
     class Meta:
         model = CheckIn
         fields = ['num_reservation', 'dni']
+
+
+# Cancel reservation form
+
+class CancelReservationForm(forms.ModelForm):
+    num_reservation = forms.CharField(label="Introdueix el número de reserva", required=False)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        num_reservation = cleaned_data.get("num_reservation")
+
+        if not num_reservation:
+            raise forms.ValidationError("Introdueix el número de reserva")
+
+        return cleaned_data
+
+    class Meta:
+        model = RoomReservation
+        fields = ['num_reservation']
+
+

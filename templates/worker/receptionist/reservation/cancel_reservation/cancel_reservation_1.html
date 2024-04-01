@@ -1,0 +1,16 @@
+{% extends "worker/base_worker.html" %}
+<!-- This template allows to enter an id to search for a client reservation -->
+
+{% block content %}
+    <div class="container">
+        <h2>Search for a reservation</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group col-md-6">
+                <label for="id">Enter the reservation id:</label>
+                <input type="text" class="form-control" id="id" name="id">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+{% endblock %}

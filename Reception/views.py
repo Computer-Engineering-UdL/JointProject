@@ -1,7 +1,7 @@
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm
+from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, CancelReservationForm
 from Reception.models import Room, RoomReservation, Client
 
 
@@ -109,3 +109,22 @@ def fetch_rooms(request):
 @login_required
 def check_in_2(request):
     return render(request, 'worker/receptionist/check-in/check_in_2.html', {})
+
+
+@login_required
+def cancel_reservation(request):
+    CANCEL_RESERVATION_PATH = 'worker/receptionist/reservation/cancel_reservation/cancel_reservation_1.html'
+
+    def get(self, request):
+        form = CancelReservationForm()
+        return render(request, CANCEL_RESERVATION_PATH, {'form': form})
+
+    def post(self, request):
+        form = CancelReservationForm(request.POST)
+        if form.is_valid():
+            num_reservation = form.cleaned_data.get('num_reservation')
+            RoomReservation.objects.filter(num_reservation=num_reservation).delete()
+            return redirect('reservation_cancelled')
+        return render(request, CANCEL_RESERVATION_PATH, {'form': form})
+
+    return render(request, CANCEL_RESERVATION_PATH, {})
