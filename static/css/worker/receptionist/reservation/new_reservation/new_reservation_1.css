@@ -11,8 +11,9 @@ main{
 }
 
 .add-reservation-form {
+    aspect-ratio: 16 / 9;
     max-height: 900px;
-    max-width: 1900px;
+    max-width: 1600px;
     height: 100%;
     width: 100%;
     display: flex;
@@ -35,7 +36,10 @@ main{
     width: 50%;
 }
 .date h2{
-    text-align: left;
+    display: flex;
+    height: 10%;
+    align-items: center;
+    margin: 0;
     font-size: 1.3em;
 }
 .date-form{
@@ -93,7 +97,7 @@ main{
     justify-content: space-between;
 }
 .guests-number input[type="number"]{
-    width: 20%;
+    aspect-ratio: 1 / 1;
     height: 100%;
     text-align: center;
     border: transparent;

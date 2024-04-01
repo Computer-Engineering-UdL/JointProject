@@ -1,5 +1,5 @@
-from django.http import JsonResponse
-from django.shortcuts import render
+from django.http import JsonResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
 from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm
 from Reception.models import Room, RoomReservation, Client
 
@@ -22,17 +22,23 @@ def add_client_admin(request):
     return render(request, 'admin-tests/add_client.html', {'form': form})
 
 
-def room_reservation(request):
+def new_reservation_1(request):
     """Reserve a room for a client."""
     if request.method == 'POST':
         form = RoomReservationForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('new_reservation_2')
+            # return HttpResponseRedirect('/reservation/new_reservation_2/')
         else:
             print("Form is not valid. Errors: ", form.errors)
     else:
         form = RoomReservationForm()
     return render(request, 'worker/receptionist/reservation/new_reservation/new_reservation_1.html', {'form': form})
+
+
+def new_reservation_2(request):
+    return render(request, "worker/receptionist/reservation/new_reservation/new_reservation_2.html")
 
 
 def add_room(request):
@@ -104,3 +110,4 @@ def fetch_rooms(request):
 
 def check_in_2(request):
     return render(request, 'worker/receptionist/check-in/check_in_2.html', {})
+
