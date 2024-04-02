@@ -2,7 +2,8 @@ header {
 	display: flex;
 	align-items: stretch;
 	justify-content: space-between;
-	background-color: #ffffff;
+	/* NEUTRAL PALETTE */
+	background-color: #A39E94;
 	color: white;
 	height: 8vh;
 	min-height: 60px;
@@ -21,7 +22,6 @@ nav {
 	order: 1;
 	display: flex;
 	list-style-type: none;
-	background-color: #ffffff;
 	color: black;
 	justify-content: flex-start;
 	padding: 0 5px;
@@ -91,4 +91,8 @@ nav {
 
 #user {
 	width: 50px;
+}
+
+input {
+	background-color: #F8F8F2;
 }
