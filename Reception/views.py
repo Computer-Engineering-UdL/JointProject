@@ -28,7 +28,21 @@ def add_client_admin(request):
 
 
 @login_required
-def room_reservation(request):
+def add_room_admin(request):
+    """Add a new room to the database."""
+    if request.method == 'POST':
+        form = RoomForm(request.POST)
+        if form.is_valid():
+            chosen_room = form.cleaned_data['room']
+            Room.objects.get(id=chosen_room.id)
+            form.save()
+    else:
+        form = RoomForm()
+    return render(request, 'admin-tests/add_room.html', {'form': form})
+
+
+@login_required
+def new_reservation_1(request):
     """Reserve a room for a client."""
     if request.method == 'POST':
         form = RoomReservationForm(request.POST)
@@ -52,20 +66,6 @@ NEW_RESERVATION_4_PATH = 'worker/receptionist/reservation/new_reservation/new_re
 
 
 @login_required
-def add_room(request):
-    """Add a new room to the database."""
-    if request.method == 'POST':
-        form = RoomForm(request.POST)
-        if form.is_valid():
-            chosen_room = form.cleaned_data['room']
-            Room.objects.get(id=chosen_room.id)
-            form.save()
-    else:
-        form = RoomForm()
-    return render(request, 'admin-tests/add_room.html', {'form': form})
-
-
-@login_required
 def add_client(request):
     """Add a new client to the database."""
     if request.method == 'POST':
@@ -74,7 +74,7 @@ def add_client(request):
             client = form.save(commit=False)
             client.username = f"{client.first_name}_{client.last_name}"
             client.save()
-            return redirect('room_reservation')
+            return redirect('new_reservation_1')
     else:
         form = AddClientForm()
     return render(request, NEW_RESERVATION_3_PATH, {'form': form})
