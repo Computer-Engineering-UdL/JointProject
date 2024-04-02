@@ -1,7 +1,8 @@
 from django.http import JsonResponse, FileResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm
+from django.contrib import messages
+from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, SearchReservationForm
 from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn
 from reportlab.pdfgen import canvas
 from io import BytesIO
@@ -123,6 +124,7 @@ def fetch_rooms(request):
     return JsonResponse(data)
 
 
+
 # Check in views
 def check_in_summary(request):
     reservation_id = request.session.get('reservation_id')
@@ -160,3 +162,55 @@ def print_receipt(request, client_id, reservation_id):
     buffer.seek(0)
 
     return FileResponse(buffer, as_attachment=True, filename='receipt.pdf')
+
+@login_required
+def check_in_2(request):
+    return render(request, 'worker/receptionist/check-in/check_in_2.html', {})
+
+
+# Cancel reservation views
+
+SEARCH_RESERVATION_PATH = 'worker/receptionist/reservation/modify_reservation/search_reservation.html'
+RESERVATION_DETAIL_PATH = 'worker/receptionist/reservation/modify_reservation/reservation_details.html'
+
+
+@login_required
+def search_reservation(request):
+    form = SearchReservationForm(request.GET or None)
+    reservations = RoomReservation.objects.all()
+
+    if form.is_valid():
+        num_reservation = form.cleaned_data.get('num_reservation')
+        id_number = form.cleaned_data.get('id_number')
+        room_num = form.cleaned_data.get('room_num')
+
+        if num_reservation:
+            reservations = reservations.filter(id=num_reservation)
+        if id_number:
+            reservations = reservations.filter(client__id_number=id_number)
+        if room_num:
+            reservations = reservations.filter(room__room_num=room_num)
+
+    return render(request, SEARCH_RESERVATION_PATH, {'form': form, 'reservations': reservations})
+
+
+@login_required
+def reservation_details(request, pk):
+    try:
+        reservation = RoomReservation.objects.get(pk=pk)
+    except RoomReservation.DoesNotExist:
+        messages.error(request, "No s'ha trobat la reserva.")
+        return redirect('search_reservation')
+
+    return render(request, RESERVATION_DETAIL_PATH, {'reservation': reservation})
+
+
+@login_required
+def delete_reservation(request, pk):
+    reservation = get_object_or_404(RoomReservation, pk=pk)
+    if request.method == 'POST':
+        reservation.delete()
+        messages.success(request, "La reserva s'ha eliminat amb èxit")
+        return redirect('search_reservation')
+    return redirect('reservation_details', pk=pk)
+
