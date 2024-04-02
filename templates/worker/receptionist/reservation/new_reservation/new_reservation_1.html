@@ -1,10 +1,15 @@
 {% extends "worker/receptionist/base_receptionist.html" %}
 <!-- This template shows the room reservation form, where the receptionist fills all the reservation fields -->
+
 {% load static %}
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/worker/receptionist/reservation/new_reservation/new_reservation_1.css' %}">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 {% endblock extra_css %}
+
+<!-- This block must appear in every reservation template as it is -->
+{% block id_reservation %} id="current-page" {% endblock id_reservation %}
+
 {% block extra_meta_tags %}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
