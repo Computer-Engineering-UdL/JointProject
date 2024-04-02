@@ -80,8 +80,8 @@ class AddClientForm(forms.ModelForm):
 
 # Check-in forms
 class InfoClientForm(forms.ModelForm):
-    num_reservation = forms.CharField(label="Introdueix el número de reserva", required=False)
-    dni = forms.CharField(max_length=9, label="Introdueix el número del document identificatiu", required=False)
+    num_reservation = forms.CharField(label="Número de reserva", required=False)
+    dni = forms.CharField(max_length=9, label="Document identificatiu", required=False)
 
     def clean(self):
         cleaned_data = super().clean()
@@ -89,7 +89,7 @@ class InfoClientForm(forms.ModelForm):
         dni = cleaned_data.get("dni")
 
         if not num_reservation and not dni:
-            raise forms.ValidationError("Introdueix el número de reserva o el número del document identificatiu")
+            raise forms.ValidationError("Siusplau, introdueixi el número de la reserva o del document identificatiu.")
 
         return cleaned_data
 

@@ -1,18 +1,40 @@
 {% extends "worker/receptionist/base_receptionist.html" %}
 <!-- This template allows to enter an id to search for a client reservation -->
 
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/receptionist/check-in/check-in_home.css' %}">
+{% endblock extra_css %}
+
 {% block id_check-in %} id="current-page" {% endblock %}
 
 {% block title %}Check In {% endblock %}
 
 {% block content %}
 
-    <h1>Check In</h1>
-
+    <h1 class="section-title">CHECK-IN</h1>
+    
+    <p class="process-guidance">
+        Per iniciar el procés de "Check-In" introdueixi una de les següents dades sol·licitades:
+    </p>
+    
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Continuar">
+        <div class="screen-elems">
+            <div class="entry-fields">
+                <div class="reservation-entry">
+                    <p>Número de reserva</p>
+                    {{ form.num_reservation }}
+                </div>
+                <div class="id-entry">
+                    <p>Document identificatiu</p>
+                    {{ form.dni }}
+                </div>
+            </div>
+            <div class="buttons">
+                <input class="submit-button" type="submit" value="Continua">
+            </div>
+        </div>
     </form>
 
 
