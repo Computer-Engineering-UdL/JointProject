@@ -6,6 +6,7 @@ from django.contrib import messages
 from reportlab.pdfgen import canvas
 from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, SearchReservationForm
 from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn
+from User.decorators import worker_required, admin_required
 
 
 @worker_required('worker')
@@ -13,7 +14,7 @@ def worker_home(request):
     return render(request, 'worker/base_worker.html')
 
 
-@login_required
+@admin_required
 def add_client_admin(request):
     """Add a new client to the database."""
     if request.method == 'POST':
@@ -27,7 +28,7 @@ def add_client_admin(request):
     return render(request, 'admin-tests/add_client.html', {'form': form})
 
 
-@login_required
+@admin_required
 def add_room_admin(request):
     """Add a new room to the database."""
     if request.method == 'POST':
@@ -49,7 +50,7 @@ NEW_RESERVATION_3_PATH = 'worker/receptionist/reservation/new_reservation/new_re
 NEW_RESERVATION_4_PATH = 'worker/receptionist/reservation/new_reservation/new_reservation_4.html'
 
 
-@login_required
+@worker_required('receptionist')
 def new_reservation_1(request):
     """Reserve a room for a client."""
     if request.method == 'POST':
@@ -65,7 +66,7 @@ def new_reservation_1(request):
     return render(request, NEW_RESERVATION_1_PATH, {'form': form})
 
 
-@login_required
+@worker_required('receptionist')
 def new_reservation_3(request):
     """Add a new client to the database."""
     if request.method == 'POST':
@@ -74,13 +75,14 @@ def new_reservation_3(request):
             client = form.save(commit=False)
             client.username = f"{client.first_name}_{client.last_name}"
             client.save()
+
             return redirect('new_reservation_1')
     else:
         form = AddClientForm()
     return render(request, NEW_RESERVATION_3_PATH, {'form': form})
 
 
-@login_required
+@worker_required('receptionist')
 def new_reservation_4(request, pk):
     try:
         reservation = RoomReservation.objects.get(pk=pk)
@@ -91,13 +93,13 @@ def new_reservation_4(request, pk):
     return render(request, NEW_RESERVATION_4_PATH, {'reservation': reservation})
 
 
-@login_required
+@worker_required('receptionist')
 def submit_reservation(request):
     return redirect('worker_home')
 
 
 # Check-in views
-@login_required
+@worker_required('receptionist')
 def check_in_1(request):
     """Check-in a client."""
     if request.method == 'POST':
@@ -146,6 +148,7 @@ def check_in_1(request):
     return render(request, 'worker/receptionist/check-in/check_in_1.html', {'form': form})
 
 
+@worker_required('receptionist')
 def check_in_summary(request):
     reservation_id = request.session.get('reservation_id')
     client_id = request.session.get('client_id')
@@ -156,6 +159,7 @@ def check_in_summary(request):
                   {'client': client, 'reservation': reservation})
 
 
+@worker_required('receptionist')
 def print_receipt(request, client_id, reservation_id):
     client = HotelUser.objects.get(id=client_id)
     reservation = RoomReservation.objects.get(id=reservation_id)
@@ -184,7 +188,7 @@ def print_receipt(request, client_id, reservation_id):
     return FileResponse(buffer, as_attachment=True, filename='receipt.pdf')
 
 
-@login_required
+@worker_required('receptionist')
 def fetch_rooms(request):
     room_type = request.GET.get('room_type')
     rooms = Room.objects.filter(room_type=room_type, is_taken=False).order_by('room_num')
@@ -192,7 +196,7 @@ def fetch_rooms(request):
     return JsonResponse(data)
 
 
-@login_required
+@worker_required('receptionist')
 def check_in_2(request):
     return render(request, 'worker/receptionist/check-in/check_in_2.html', {})
 
@@ -203,7 +207,7 @@ SEARCH_RESERVATION_PATH = 'worker/receptionist/reservation/modify_reservation/se
 RESERVATION_DETAIL_PATH = 'worker/receptionist/reservation/modify_reservation/reservation_details.html'
 
 
-@login_required
+@worker_required('receptionist')
 def search_reservation(request):
     form = SearchReservationForm(request.GET or None)
     reservations = RoomReservation.objects.all()
@@ -223,7 +227,7 @@ def search_reservation(request):
     return render(request, SEARCH_RESERVATION_PATH, {'form': form, 'reservations': reservations})
 
 
-@login_required
+@worker_required('receptionist')
 def reservation_details(request, pk):
     try:
         reservation = RoomReservation.objects.get(pk=pk)
@@ -234,7 +238,7 @@ def reservation_details(request, pk):
     return render(request, RESERVATION_DETAIL_PATH, {'reservation': reservation})
 
 
-@login_required
+@worker_required('receptionist')
 def delete_reservation(request, pk):
     reservation = get_object_or_404(RoomReservation, pk=pk)
     if request.method == 'POST':
