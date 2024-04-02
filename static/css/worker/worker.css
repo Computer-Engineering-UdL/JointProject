@@ -47,26 +47,34 @@ nav {
 }
 
 .menu button:hover {
-	background-color: rgba(183, 197, 251, 0.47);
+	background-color: #95b0a7;
+	/*background-color: rgba(183, 197, 251, 0.47);*/
 }
 
 .menu button:active {
-	background-color: #6581f5;
-	color: white;
+	background-color: #6b7e77;
+	/*background-color: #6581f5;
+	color: white;*/
 }
 
 #current-page {
 	font-weight: bold;
-	background-color: rgb(213, 218, 224);
+	/*background-color: #A39488;*/
+	background-color: #95b0a7;
+	/*background-color: rgb(213, 218, 224);*/
 	border-bottom: solid 2px black;
 }
 
 #current-page:hover {
-	background-color: rgb(183 197 251 / 47%);
+	background-color: #6b7e77;
+	/*background-color: rgb(183 197 251 / 47%);*/
 }
 
 #current-page:active {
-	background-color: #6581f5;
+	/*background-color: #6581f5;
+	color: white;*/
+	background-color: #95B0A7FF;
+	color: #6b7e77;
 }
 
 #right-header {
