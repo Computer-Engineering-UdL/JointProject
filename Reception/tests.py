@@ -37,7 +37,7 @@ class CheckInViewTest(TestCase):
         self.client.force_login(self.client_obj)
 
     def test_check_in_view_status_code(self):
-        url = reverse('check_in')
+        url = reverse('check-in')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 

@@ -4,8 +4,8 @@
 {% block title %}Check in{% endblock %}
 
 {% block content %}
-    
-     <h4>Resumen de la reserva</h4>
+
+    <h4>Resumen de la reserva</h4>
     <ul class="first_block">
         <li>Fecha de entrada: {{ reservation.entry }}</li>
         <li>Fecha de salida: {{ reservation.exit }}</li>
@@ -23,8 +23,8 @@
         <li>Correo electrónico: {{ client.email }}</li>
         <li>Teléfono: {{ client.phone_number }}</li>
     </ul>
-    
+
     <button onclick="window.location.href='summary'">Continuar</button>
-    
+
 
 {% endblock %}

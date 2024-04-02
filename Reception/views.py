@@ -122,6 +122,7 @@ def fetch_rooms(request):
     data = {'rooms': list(rooms.values('id', 'room_num'))}
     return JsonResponse(data)
 
+
 # Check in views
 def check_in_summary(request):
     reservation_id = request.session.get('reservation_id')
@@ -129,7 +130,9 @@ def check_in_summary(request):
     reservation = RoomReservation.objects.get(id=reservation_id)
     client = HotelUser.objects.get(id=client_id)
 
-    return render(request, 'worker/receptionist/check-in/check_in_4.html', {'client': client, 'reservation': reservation})
+    return render(request, 'worker/receptionist/check-in/check_in_4.html',
+                  {'client': client, 'reservation': reservation})
+
 
 def print_receipt(request, client_id, reservation_id):
     client = HotelUser.objects.get(id=client_id)
@@ -138,7 +141,7 @@ def print_receipt(request, client_id, reservation_id):
     buffer = BytesIO()
     pdf = canvas.Canvas(buffer)
 
-    pdf.drawString(100, 750, f"Comprovant de reserva")
+    pdf.drawString(100, 750, "Comprovant de reserva")
     pdf.drawString(100, 735, f"Número de reserva: {reservation.id}")
     pdf.drawString(100, 720, f"Data de entrada: {reservation.entry}")
     pdf.drawString(100, 705, f"Data de sortida: {reservation.exit}")
