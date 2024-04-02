@@ -1,2 +1,22 @@
-{% extends "worker/base_worker.html" %}
+{% extends "worker/receptionist/base_receptionist.html" %}
 <!-- This template lets the receptionist choose the specific room for the client -->
+
+<!-- This block must appear in every reservation template as it is -->
+{% block id_reservation %} id="current-page" {% endblock id_reservation %}
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/receptionist/reservation/new_reservation/new_reservation_2.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+    <div class="room-info">
+        <h2>Habitació suggerida</h2>
+        <div>
+            {{ form.date }}
+        </div>
+    </div>
+    <div class="room-list">
+
+    </div>
+{% endblock content %}
