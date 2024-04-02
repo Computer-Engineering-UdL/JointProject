@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 UserModel = get_user_model()
 
 
-def worker_required(worker_type):
+def worker_required(worker_type=None):
     def decorator(view_func):
         @wraps(view_func)
         @login_required
@@ -14,9 +14,12 @@ def worker_required(worker_type):
             if request.user.is_superuser:
                 return view_func(request, *args, **kwargs)
 
-            if not hasattr(request.user, 'worker') or request.user.worker.type != worker_type:
-                return HttpResponseForbidden()
-            return view_func(request, *args, **kwargs)
+            if worker_type is None:
+                if hasattr(request.user, 'worker'):
+                    return view_func(request, *args, **kwargs)
+            else:
+                if hasattr(request.user, 'worker') and request.user.worker.type == worker_type:
+                    return view_func(request, *args, **kwargs)
 
         return _wrapped_view
 
