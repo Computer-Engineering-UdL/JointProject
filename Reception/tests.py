@@ -1,20 +1,26 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
-from django.contrib.auth import login
-from Reception.models import RoomReservation, Client, Room
+from Reception.models import RoomReservation, Client, Room, Worker
 
 
 class CheckInViewTest(TestCase):
 
     def setUp(self):
-        self.client_obj = Client.objects.create(
+        self.worker = Worker.objects.create_user(
+            username='john_worker',
+            email='worker@example.com',
+            password='testpassword123',
+            type='receptionist'
+        )
+
+        self.client_user = Client.objects.create_user(
             username='john_doe',
-            password='john_doe123',
+            email='client@example.com',
+            password='clientpassword',
             id_number='12345678A',
             first_name='John',
             last_name='Doe',
-            email='client@gmail.com',
             phone_number='123456789',
             is_hosted=False
         )
@@ -28,13 +34,14 @@ class CheckInViewTest(TestCase):
         )
 
         self.reservation = RoomReservation.objects.create(
-            client=self.client_obj,
+            client=self.client_user,
             room=self.room,
             entry=timezone.now().date(),
             exit=(timezone.now() + timezone.timedelta(days=1)).date(),
+            pension_type='Sense pensió',
             num_guests=2
         )
-        self.client.force_login(self.client_obj)
+        self.client.force_login(self.worker)
 
     def test_check_in_view_status_code(self):
         url = reverse('check_in')
@@ -48,5 +55,5 @@ class CheckInViewTest(TestCase):
 
     def test_check_in_view_redirect_with_dni(self):
         url = reverse('check_in')
-        response = self.client.post(url, {'dni': self.client_obj.id_number})
+        response = self.client.post(url, {'dni': self.client_user.id_number})
         self.assertTemplateUsed(response, 'worker/receptionist/check-in/check_in_2.html')
