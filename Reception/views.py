@@ -28,19 +28,17 @@ def add_client_admin(request):
 
 
 @login_required
-def room_reservation(request):
-    """Reserve a room for a client."""
+def add_room_admin(request):
+    """Add a new room to the database."""
     if request.method == 'POST':
-        form = RoomReservationForm(request.POST)
+        form = RoomForm(request.POST)
         if form.is_valid():
-            room_rsv = form.save(commit=False)
-            room_rsv.save()
-            return redirect('reservation_summary', room_rsv.id)
-        else:
-            print("Form is not valid. Errors: ", form.errors)
+            chosen_room = form.cleaned_data['room']
+            Room.objects.get(id=chosen_room.id)
+            form.save()
     else:
-        form = RoomReservationForm()
-    return render(request, NEW_RESERVATION_1_PATH, {'form': form})
+        form = RoomForm()
+    return render(request, 'admin-tests/add_room.html', {'form': form})
 
 
 # New reservation views
@@ -52,21 +50,23 @@ NEW_RESERVATION_4_PATH = 'worker/receptionist/reservation/new_reservation/new_re
 
 
 @login_required
-def add_room(request):
-    """Add a new room to the database."""
+def new_reservation_1(request):
+    """Reserve a room for a client."""
     if request.method == 'POST':
-        form = RoomForm(request.POST)
+        form = RoomReservationForm(request.POST)
         if form.is_valid():
-            chosen_room = form.cleaned_data['room']
-            Room.objects.get(id=chosen_room.id)
-            form.save()
+            room_rsv = form.save(commit=False)
+            room_rsv.save()
+            return redirect('new_reservation_4', room_rsv.id)
+        else:
+            form.add_error(None, "Error en el formulari")
     else:
-        form = RoomForm()
-    return render(request, NEW_RESERVATION_2_PATH, {'form': form})
+        form = RoomReservationForm()
+    return render(request, NEW_RESERVATION_1_PATH, {'form': form})
 
 
 @login_required
-def add_client(request):
+def new_reservation_3(request):
     """Add a new client to the database."""
     if request.method == 'POST':
         form = AddClientForm(request.POST)
@@ -74,14 +74,14 @@ def add_client(request):
             client = form.save(commit=False)
             client.username = f"{client.first_name}_{client.last_name}"
             client.save()
-            return redirect('room_reservation')
+            return redirect('new_reservation_1')
     else:
         form = AddClientForm()
     return render(request, NEW_RESERVATION_3_PATH, {'form': form})
 
 
 @login_required
-def reservation_summary(request, pk):
+def new_reservation_4(request, pk):
     try:
         reservation = RoomReservation.objects.get(pk=pk)
     except RoomReservation.DoesNotExist:

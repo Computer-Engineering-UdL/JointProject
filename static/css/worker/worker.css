@@ -1,78 +1,85 @@
-header{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #ffffff;
-    color: white;
-    height: 65px;
+header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background-color: #ffffff;
+	color: white;
+	height: 8vh;
 }
 
-.menu{
-    order: 1;
-    display: flex;
-    list-style-type: none;
-    background-color: #ffffff;
-    color: black;
-    justify-content: flex-start;
-    padding: 0 5px;
-    margin: 0;
-    gap: 5px;
+.menu {
+	order: 1;
+	display: flex;
+	list-style-type: none;
+	background-color: #ffffff;
+	color: black;
+	justify-content: flex-start;
+	padding: 0 5px;
+	margin: 0;
+	gap: 5px;
 }
 
 nav {
-    width: 75%;
+	width: 75%;
 }
 
 .menu li {
-    width: 25%;
-    align-self: center;
+	width: 25%;
+	align-self: center;
 }
 
 .menu button {
-    font-size: 16px;
-    background-color: transparent;
-    width: 100%;
-    height: 55px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    border: none;
+	font-size: 16px;
+	background-color: transparent;
+	width: 100%;
+	height: 55px;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	border: none;
 }
+
 .menu button:hover {
-    background-color: rgba(183, 197, 251, 0.47);
+	background-color: rgba(183, 197, 251, 0.47);
 }
+
 .menu button:active {
-    background-color: #6581f5;
-    color: white;
+	background-color: #6581f5;
+	color: white;
 }
 
 #current-page {
-    font-weight: bold;
-    background-color: rgb(213, 218, 224);
-    border-bottom: solid 2px black;
-}
-#current-page:hover {
-    background-color: rgb(183 197 251 / 47%);
-}
-#current-page:active {
-    background-color: #6581f5;
+	font-weight: bold;
+	background-color: rgb(213, 218, 224);
+	border-bottom: solid 2px black;
 }
 
-#right-header{
-    display: flex;
-    align-items: center;
-    gap: 15px;
+#current-page:hover {
+	background-color: rgb(183 197 251 / 47%);
 }
-#language{
-    color: #000000;
-    font-weight: bold;
+
+#current-page:active {
+	background-color: #6581f5;
 }
-#separator{
-    width: 1px;
-    background-color: #3d3d3d;
-    border: 1px solid #3d3d3d;
-    border-radius: 50px;
-    height: 40px;
+
+#right-header {
+	display: flex;
+	align-items: center;
+	gap: 15px;
 }
-#user{
-    width: 50px;
+
+#language {
+	color: #000000;
+	font-weight: bold;
+}
+
+#separator {
+	width: 1px;
+	background-color: #3d3d3d;
+	border: 1px solid #3d3d3d;
+	border-radius: 50px;
+	height: 40px;
+}
+
+#user {
+	width: 50px;
 }
