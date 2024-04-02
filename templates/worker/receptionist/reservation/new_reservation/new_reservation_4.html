@@ -1,2 +1,5 @@
-{% extends "worker/base_worker.html" %}
+{% extends "worker/receptionist/base_receptionist.html" %}
 <!-- This template shows the receptionist the summary of the reservation -->
+
+<!-- This block must appear in every reservation template as it is -->
+{% block id_reservation %} id="current-page" {% endblock id_reservation %}

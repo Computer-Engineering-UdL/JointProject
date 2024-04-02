@@ -1,9 +1,12 @@
-{% extends "worker/base_worker.html" %}
+{% extends "worker/receptionist/base_receptionist.html" %}
 <!-- This template allows to enter an id to search for a client reservation -->
+
+<!-- This block must appear in every reservation template as it is -->
+{% block id_reservation %} id="current-page" {% endblock id_reservation %}
 
 {% block content %}
   <div class="container">
-    <h2>Buscar reserva</h2>
+    <h2>Cercar reserva</h2>
     <form method="get">
       {% csrf_token %}
       <div class="form-group">
