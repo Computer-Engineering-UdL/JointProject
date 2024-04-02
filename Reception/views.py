@@ -66,7 +66,7 @@ NEW_RESERVATION_4_PATH = 'worker/receptionist/reservation/new_reservation/new_re
 
 
 @login_required
-def add_client(request):
+def new_reservation_3(request):
     """Add a new client to the database."""
     if request.method == 'POST':
         form = AddClientForm(request.POST)
