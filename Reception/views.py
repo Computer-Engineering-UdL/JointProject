@@ -1,9 +1,11 @@
-from django.http import JsonResponse
+from io import BytesIO
+from django.http import JsonResponse, FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from reportlab.pdfgen import canvas
 from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, SearchReservationForm
-from Reception.models import Room, RoomReservation, Client
+from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn
 
 
 @login_required
@@ -101,31 +103,85 @@ def check_in_1(request):
     if request.method == 'POST':
         form = InfoClientForm(request.POST)
         if form.is_valid():
-            form.save()
             num_reservation = form.cleaned_data['num_reservation']
             dni = form.cleaned_data['dni']
             client = None
             reservation = None
+
             if num_reservation:
                 try:
                     reservation = RoomReservation.objects.get(id=num_reservation)
-                    # client = reservation.client
+                    client_id = reservation.client_id
+                    client = HotelUser.objects.get(id=client_id)
+
                 except RoomReservation.DoesNotExist:
                     pass
             if dni and not client:
                 try:
-                    client = Client.objects.get(id_number=dni)
-                    # reservation = RoomReservation.objects.get(client=client)
-                except Client.DoesNotExist:
+                    client = HotelUser.objects.get(id_number=dni)
+                    reservation = RoomReservation.objects.get(client_id=client.id)
+
+                except HotelUser.DoesNotExist:
                     pass
-            if client or reservation:
+                except RoomReservation.DoesNotExist:
+                    pass
+
+            if client and reservation and not CheckIn.objects.filter(num_reservation=reservation.id).exists():
+                check_in = CheckIn.objects.create(num_reservation=reservation.id, dni=client.id)
+                check_in.save()
+
+                request.session['reservation_id'] = reservation.id
+                request.session['client_id'] = client.id
                 return render(request, 'worker/receptionist/check-in/check_in_2.html',
                               {'client': client, 'reservation': reservation})
             else:
-                form.add_error(None, "No existeix cap reserva amb aquestes dades.")
+
+                if client is None or reservation is None:
+                    form.add_error(None, "No existeix cap reserva amb aquestes dades.")
+                elif CheckIn.objects.filter(num_reservation=reservation.id).exists():
+                    form.add_error(None, "Ja s'ha fet el check-in d'aquesta reserva.")
+
     else:
         form = InfoClientForm()
     return render(request, 'worker/receptionist/check-in/check_in_1.html', {'form': form})
+
+
+def check_in_summary(request):
+    reservation_id = request.session.get('reservation_id')
+    client_id = request.session.get('client_id')
+    reservation = RoomReservation.objects.get(id=reservation_id)
+    client = HotelUser.objects.get(id=client_id)
+
+    return render(request, 'worker/receptionist/check-in/check_in_4.html',
+                  {'client': client, 'reservation': reservation})
+
+
+def print_receipt(request, client_id, reservation_id):
+    client = HotelUser.objects.get(id=client_id)
+    reservation = RoomReservation.objects.get(id=reservation_id)
+
+    buffer = BytesIO()
+    pdf = canvas.Canvas(buffer)
+
+    pdf.drawString(100, 750, "Comprovant de reserva")
+    pdf.drawString(100, 735, f"Número de reserva: {reservation.id}")
+    pdf.drawString(100, 720, f"Data de entrada: {reservation.entry}")
+    pdf.drawString(100, 705, f"Data de sortida: {reservation.exit}")
+    pdf.drawString(100, 690, f"Número de hostes: {reservation.num_guests}")
+    pdf.drawString(100, 675, f"Tipus de pensió: {reservation.pension_type}")
+    pdf.drawString(100, 660, f"Tipus de habitació: {reservation.room.room_type}")
+    pdf.drawString(100, 645, f"Número de habitació: {reservation.room.room_num}")
+
+    pdf.drawString(100, 630, f"Nom del client: {client.first_name} {client.last_name}")
+    pdf.drawString(100, 615, f"Document identificatiu: {client.id_number}")
+    pdf.drawString(100, 600, f"Email: {client.email}")
+    pdf.drawString(100, 585, f"Telèfon: {client.phone_number}")
+
+    pdf.showPage()
+    pdf.save()
+    buffer.seek(0)
+
+    return FileResponse(buffer, as_attachment=True, filename='receipt.pdf')
 
 
 @login_required
