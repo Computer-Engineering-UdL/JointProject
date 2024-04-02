@@ -150,6 +150,7 @@ def check_in_1(request):
         form = InfoClientForm()
     return render(request, 'worker/receptionist/check-in/check_in_1.html', {'form': form})
 
+
 @worker_required('receptionist')
 def check_in_summary(request):
     reservation_id = request.session.get('reservation_id')
@@ -159,6 +160,7 @@ def check_in_summary(request):
 
     return render(request, 'worker/receptionist/check-in/check_in_4.html',
                   {'client': client, 'reservation': reservation})
+
 
 @worker_required('receptionist')
 def print_receipt(request, client_id, reservation_id):
