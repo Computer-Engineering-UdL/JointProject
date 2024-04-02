@@ -18,6 +18,11 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Create">
+        <input type="submit" value="Crear Reserva">
+    </form>
+
+    <form action="{% url 'add_client' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" onclick="return confirm('Client no està a la llista? Afegeix-lo');">Afegir Client</button>
     </form>
 {% endblock content %}

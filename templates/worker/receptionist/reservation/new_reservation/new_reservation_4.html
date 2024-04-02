@@ -3,3 +3,27 @@
 
 <!-- This block must appear in every reservation template as it is -->
 {% block id_reservation %} id="current-page" {% endblock id_reservation %}
+
+{% block content %}
+    <div>
+        <div>
+            <div>
+                <h1>Reserva {{ reservation.id }}</h1>
+            </div>
+            <div>
+                <p>Hoste: {{ reservation.client }}</p>
+                <p>Habitació: {{ reservation.room }}</p>
+                <p>Data entrada: {{ reservation.entry }}</p>
+                <p>Data sortida: {{ reservation.exit }}</p>
+                <p>Tipus de pensió: {{ reservation.pension_type }}</p>
+                <p>Número d'hostes: {{ reservation.num_guests }}</p>
+            </div>
+
+            <form action="{% url 'submit_reservation' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" onclick="return confirm('Vols finalitzar la reserva?');">Finalitzar Reserva</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
