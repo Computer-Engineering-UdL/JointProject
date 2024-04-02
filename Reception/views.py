@@ -9,9 +9,9 @@ from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn
 from User.decorators import worker_required, admin_required
 
 
-@worker_required('worker')
-def worker_home(request):
-    return render(request, 'worker/base_worker.html')
+@worker_required('receptionist')
+def receptionist_home(request):
+    return render(request, 'worker/receptionist/receptionist_home.html')
 
 
 @admin_required

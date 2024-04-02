@@ -3,9 +3,7 @@ from django.views.generic import TemplateView
 from Reception import views as v
 
 urlpatterns = [
-    path("", v.worker_home, name="worker_home"),
-    path("home/", TemplateView.as_view(template_name="worker/receptionist/receptionist_home.html"),
-         name="receptionist_home"),
+    path("", v.receptionist_home, name="receptionist_home"),
     path('add-room-admin/', v.add_room_admin, name='add_room'),
     path('add-client-admin/', v.add_client_admin, name='add_client'),
     path('new-reservation-1/', v.new_reservation_1, name='new_reservation_1'),
