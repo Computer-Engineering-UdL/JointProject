@@ -9,9 +9,9 @@ from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn
 from User.decorators import worker_required, admin_required
 
 
-@worker_required('worker')
-def worker_home(request):
-    return render(request, 'worker/base_worker.html')
+@worker_required('receptionist')
+def receptionist_home(request):
+    return render(request, 'worker/receptionist/receptionist_home.html')
 
 
 @admin_required
@@ -99,6 +99,12 @@ def submit_reservation(request):
 
 
 # Check-in views
+
+CHECK_IN_1_PATH = 'worker/receptionist/check-in/check_in_1.html'
+CHECK_IN_2_PATH = 'worker/receptionist/check-in/check_in_2.html'
+CHECK_IN_4_PATH = 'worker/receptionist/check-in/check_in_4.html'
+
+
 @worker_required('receptionist')
 def check_in_1(request):
     """Check-in a client."""
@@ -134,7 +140,7 @@ def check_in_1(request):
 
                 request.session['reservation_id'] = reservation.id
                 request.session['client_id'] = client.id
-                return render(request, 'worker/receptionist/check-in/check_in_2.html',
+                return render(request, CHECK_IN_2_PATH,
                               {'client': client, 'reservation': reservation})
             else:
 
@@ -145,7 +151,7 @@ def check_in_1(request):
 
     else:
         form = InfoClientForm()
-    return render(request, 'worker/receptionist/check-in/check_in_1.html', {'form': form})
+    return render(request, CHECK_IN_1_PATH, {'form': form})
 
 
 @worker_required('receptionist')
@@ -155,8 +161,7 @@ def check_in_summary(request):
     reservation = RoomReservation.objects.get(id=reservation_id)
     client = HotelUser.objects.get(id=client_id)
 
-    return render(request, 'worker/receptionist/check-in/check_in_4.html',
-                  {'client': client, 'reservation': reservation})
+    return render(request, CHECK_IN_4_PATH, {'client': client, 'reservation': reservation})
 
 
 @worker_required('receptionist')
@@ -198,7 +203,7 @@ def fetch_rooms(request):
 
 @worker_required('receptionist')
 def check_in_2(request):
-    return render(request, 'worker/receptionist/check-in/check_in_2.html', {})
+    return render(request, CHECK_IN_2_PATH, {})
 
 
 # Cancel reservation views
