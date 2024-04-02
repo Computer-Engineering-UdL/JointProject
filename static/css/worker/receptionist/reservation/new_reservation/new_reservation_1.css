@@ -19,7 +19,7 @@ main{
     display: flex;
     flex-direction: row;
     gap: 50px;
-    background-color: rgba(165, 157, 190, 0.5);
+    /*background-color: rgba(165, 157, 190, 0.5);*/
     /*outline: 1px solid #000000;*/
     justify-content: center;
     border-radius: 8px;

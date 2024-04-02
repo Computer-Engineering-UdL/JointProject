@@ -1,10 +1,11 @@
 header {
 	display: flex;
-	align-items: center;
+	align-items: stretch;
 	justify-content: space-between;
 	background-color: #ffffff;
 	color: white;
 	height: 8vh;
+	min-height: 60px;
 }
 
 nav {
@@ -72,6 +73,7 @@ nav {
 	display: flex;
 	align-items: center;
 	gap: 15px;
+	padding-right: 10px;
 }
 
 #language {
@@ -84,7 +86,7 @@ nav {
 	background-color: #3d3d3d;
 	border: 1px solid #3d3d3d;
 	border-radius: 50px;
-	height: 40px;
+	height: 65%;
 }
 
 #user {
