@@ -1,11 +1,9 @@
 from io import BytesIO
-
 from django.http import JsonResponse, FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from reportlab.pdfgen import canvas
-
 from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, SearchReservationForm
 from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn
 
