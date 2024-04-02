@@ -110,4 +110,3 @@ def fetch_rooms(request):
 
 def check_in_2(request):
     return render(request, 'worker/receptionist/check-in/check_in_2.html', {})
-
