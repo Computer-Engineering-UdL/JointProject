@@ -18,7 +18,7 @@ def add_client_admin(request):
         form = AddClientForm(request.POST)
         if form.is_valid():
             client = form.save(commit=False)
-            client.username = 'default'
+            client.username = f"{client.first_name}_{client.last_name}"
             client.save()
     else:
         form = AddClientForm()
@@ -31,12 +31,22 @@ def room_reservation(request):
     if request.method == 'POST':
         form = RoomReservationForm(request.POST)
         if form.is_valid():
-            form.save()
+            room_rsv = form.save(commit=False)
+            room_rsv.save()
+            return redirect('reservation_summary', room_rsv.id)
         else:
             print("Form is not valid. Errors: ", form.errors)
     else:
         form = RoomReservationForm()
-    return render(request, 'worker/receptionist/reservation/new_reservation/new_reservation_1.html', {'form': form})
+    return render(request, NEW_RESERVATION_1_PATH, {'form': form})
+
+
+# New reservation views
+
+NEW_RESERVATION_1_PATH = 'worker/receptionist/reservation/new_reservation/new_reservation_1.html'
+NEW_RESERVATION_2_PATH = 'worker/receptionist/reservation/new_reservation/new_reservation_2.html'
+NEW_RESERVATION_3_PATH = 'worker/receptionist/reservation/new_reservation/new_reservation_3.html'
+NEW_RESERVATION_4_PATH = 'worker/receptionist/reservation/new_reservation/new_reservation_4.html'
 
 
 @login_required
@@ -50,7 +60,7 @@ def add_room(request):
             form.save()
     else:
         form = RoomForm()
-    return render(request, 'worker/receptionist/reservation/new_reservation/new_reservation_2.html', {'form': form})
+    return render(request, NEW_RESERVATION_2_PATH, {'form': form})
 
 
 @login_required
@@ -59,10 +69,29 @@ def add_client(request):
     if request.method == 'POST':
         form = AddClientForm(request.POST)
         if form.is_valid():
-            form.save()
+            client = form.save(commit=False)
+            client.username = f"{client.first_name}_{client.last_name}"
+            client.save()
+            return redirect('room_reservation')
     else:
         form = AddClientForm()
-    return render(request, 'worker/receptionist/reservation/new_reservation/new_reservation_3.html', {'form': form})
+    return render(request, NEW_RESERVATION_3_PATH, {'form': form})
+
+
+@login_required
+def reservation_summary(request, pk):
+    try:
+        reservation = RoomReservation.objects.get(pk=pk)
+    except RoomReservation.DoesNotExist:
+        messages.error(request, "No s'ha trobat la reserva.")
+        return redirect('search_reservation')
+
+    return render(request, NEW_RESERVATION_4_PATH, {'reservation': reservation})
+
+
+@login_required
+def submit_reservation(request):
+    return redirect('worker_home')
 
 
 # Check-in views
