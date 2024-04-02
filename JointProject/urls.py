@@ -27,5 +27,5 @@ urlpatterns = [
     path('logout/', v.user_logout, name='logout'),
     path('receptionist/', include('Reception.urls')),
     path('worker/', v.worker_home, name='worker_home'),
-    path("", TemplateView.as_view(template_name="base.html"), name="base"),
+    path("", v.home, name="base"),
 ]

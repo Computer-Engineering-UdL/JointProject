@@ -15,7 +15,7 @@ def signup(request):
             user = form.save()
             login(request, user)  # Log in the User after signing up
             messages.success(request, 'Account created successfully!')
-            return redirect('login')
+            return redirect('base')
         else:
             messages.error(request, 'Please correct the error below.')
     else:
@@ -32,3 +32,7 @@ def user_logout(request):
 @worker_required('worker')
 def worker_home(request):
     return render(request, 'worker/base_worker.html')
+
+
+def home(request):
+    return render(request, 'base.html')
