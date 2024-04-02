@@ -41,6 +41,14 @@ def add_room_admin(request):
     return render(request, 'admin-tests/add_room.html', {'form': form})
 
 
+# New reservation views
+
+NEW_RESERVATION_1_PATH = 'worker/receptionist/reservation/new_reservation/new_reservation_1.html'
+NEW_RESERVATION_2_PATH = 'worker/receptionist/reservation/new_reservation/new_reservation_2.html'
+NEW_RESERVATION_3_PATH = 'worker/receptionist/reservation/new_reservation/new_reservation_3.html'
+NEW_RESERVATION_4_PATH = 'worker/receptionist/reservation/new_reservation/new_reservation_4.html'
+
+
 @login_required
 def new_reservation_1(request):
     """Reserve a room for a client."""
@@ -49,20 +57,12 @@ def new_reservation_1(request):
         if form.is_valid():
             room_rsv = form.save(commit=False)
             room_rsv.save()
-            return redirect('reservation_summary', room_rsv.id)
+            return redirect('new_reservation_4', room_rsv.id)
         else:
-            print("Form is not valid. Errors: ", form.errors)
+            form.add_error(None, "Error en el formulari")
     else:
         form = RoomReservationForm()
     return render(request, NEW_RESERVATION_1_PATH, {'form': form})
-
-
-# New reservation views
-
-NEW_RESERVATION_1_PATH = 'worker/receptionist/reservation/new_reservation/new_reservation_1.html'
-NEW_RESERVATION_2_PATH = 'worker/receptionist/reservation/new_reservation/new_reservation_2.html'
-NEW_RESERVATION_3_PATH = 'worker/receptionist/reservation/new_reservation/new_reservation_3.html'
-NEW_RESERVATION_4_PATH = 'worker/receptionist/reservation/new_reservation/new_reservation_4.html'
 
 
 @login_required
@@ -81,7 +81,7 @@ def new_reservation_3(request):
 
 
 @login_required
-def reservation_summary(request, pk):
+def new_reservation_4(request, pk):
     try:
         reservation = RoomReservation.objects.get(pk=pk)
     except RoomReservation.DoesNotExist:
