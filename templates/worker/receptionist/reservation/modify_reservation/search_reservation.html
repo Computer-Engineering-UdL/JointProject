@@ -23,7 +23,7 @@
       </div>
       <button type="submit">Filtrar</button>
     </form>
-  
+
     <form method="post">
       {% csrf_token %}
       <div id="notifications">
@@ -36,15 +36,15 @@
     </form>
   </div>
 
-    <h3>Llista de Reserves</h3>
-    <div>
-      <ul>
-        {% for reservation in reservations %}
-          <li>
-            Reserva {{ reservation.id }}:
-            <a href="{% url 'reservation_details' pk=reservation.pk %}">Veure Detalls</a>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
+  <h3>Llista de Reserves</h3>
+  <div>
+    <ul>
+      {% for reservation in reservations %}
+        <li>
+          Reserva {{ reservation.id }}:
+          <a href="{% url 'reservation_details' pk=reservation.pk %}">Veure Detalls</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}
