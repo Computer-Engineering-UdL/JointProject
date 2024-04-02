@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
+from django.contrib.auth import login
 from Reception.models import RoomReservation, Client, Room
 
 
@@ -9,6 +10,7 @@ class CheckInViewTest(TestCase):
     def setUp(self):
         self.client_obj = Client.objects.create(
             username='john_doe',
+            password='john_doe123',
             id_number='12345678A',
             first_name='John',
             last_name='Doe',
@@ -32,6 +34,7 @@ class CheckInViewTest(TestCase):
             exit=(timezone.now() + timezone.timedelta(days=1)).date(),
             num_guests=2
         )
+        self.client.force_login(self.client_obj)
 
     def test_check_in_view_status_code(self):
         url = reverse('check_in')

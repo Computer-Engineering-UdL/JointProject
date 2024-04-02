@@ -1,2 +1,23 @@
-{% extends "worker/base_worker.html" %}
+{% extends "worker/receptionist/base_receptionist.html" %}
 <!-- The receptionist_home template must be the first step of the reservation process -->
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/receptionist/receptionist_home.css' %}">
+{% endblock extra_css %}
+
+<!-- This block must appear in every reservation template as it is -->
+{% block id_reservation %} id="current-page" {% endblock id_reservation %}
+
+{% block content %}
+    <h1 class="section-title">
+        RESERVES
+    </h1>
+    <p class="process-guidance">
+        Esculli el procediment que desitja realitzar:
+    </p>
+    <div class="buttons">
+        <a href="{% url 'room_reservation' %}"> <button class="access-process-button">Crear nova reserva</button></a>
+        <a href="{% url 'search_reservation' %}"><button class="access-process-button">Gestionar reserves</button> </a>
+    </div>
+{% endblock content %}

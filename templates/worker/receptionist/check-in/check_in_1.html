@@ -1,2 +1,19 @@
-{% extends "worker/base_worker.html" %}
+{% extends "worker/receptionist/base_receptionist.html" %}
 <!-- This template allows to enter an id to search for a client reservation -->
+
+{% block id_check-in %} id="current-page" {% endblock %}
+
+{% block title %}Check In {% endblock %}
+
+{% block content %}
+
+    <h1>Check In</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Continuar">
+    </form>
+
+
+{% endblock %}

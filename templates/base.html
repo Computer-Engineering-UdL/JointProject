@@ -31,19 +31,17 @@
         <main>
             {% block content %}
                 <button> <a href="{% url 'worker_home' %}">
+                    RECEPTION - Worker Home
+                </a></button>
+
+                <!-- Metode add_client depen de iniciar una nova reserva, per tant no es pot accedir individualment,
+                     si encara aixi es vol crear utilitzar metode ADMIN
+                <button> <a href=" url 'add_client' ">
                     RECEPTION - Add Client
                 </a></button>
-
-                <button> <a href="{% url 'add_client' %}">
-                    RECEPTION - Add Client
-                </a></button>
-
-                <button> <a href="{% url 'new_reservation_1' %}">
-                    RECEPTION - Room Reservation 1
-                </a></button>
-
-                <button> <a href="{% url 'new_reservation_2' %}">
-                    RECEPTION - Room Reservation 2
+                -->
+                <button> <a href="{% url 'room_reservation' %}">
+                    RECEPTION - Room Reservation
                 </a></button>
 
                 <button> <a href="{% url 'add_room' %}">
@@ -57,11 +55,16 @@
                 <button> <a href="{% url 'fetch_rooms' %}">
                     RECEPTION - Fetch Rooms
                 </a></button>
+
+                <button> <a href="{% url 'receptionist_home'%}">
+                    RECEPTION - Home
+                </a></button>
             {% endblock content %}
         </main>
 
         <footer>
             {% block footer %}
+                <p>Usuari loguejat: {{ user.username }}</p>
             {% endblock footer %}
         </footer>
     </body>
