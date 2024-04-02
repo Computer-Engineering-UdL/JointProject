@@ -21,6 +21,7 @@ def worker_required(worker_type=None):
             else:
                 if hasattr(request.user, 'worker') and request.user.worker.type == worker_type:
                     return view_func(request, *args, **kwargs)
+            return HttpResponseForbidden()
 
         return _wrapped_view
 
