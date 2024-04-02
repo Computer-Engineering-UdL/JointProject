@@ -76,7 +76,6 @@ def check_in_1(request):
     if request.method == 'POST':
         form = InfoClientForm(request.POST)
         if form.is_valid():
-
             num_reservation = form.cleaned_data['num_reservation']
             dni = form.cleaned_data['dni']
             client = None
