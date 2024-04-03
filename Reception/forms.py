@@ -68,34 +68,34 @@ class RoomReservationForm(forms.ModelForm):
 class AddClientForm(forms.ModelForm):
     first_name = forms.CharField(max_length=30)
     last_name = forms.CharField(max_length=30)
-    dni = forms.CharField(max_length=9)
+    id_number = forms.CharField(max_length=20)
     email = forms.EmailField()
     phone_number = forms.CharField(max_length=9)
     is_hosted = forms.BooleanField(required=False)
 
     class Meta:
         model = Client
-        fields = ['first_name', 'last_name', 'dni', 'email', 'phone_number', 'is_hosted']
+        fields = ['first_name', 'last_name', 'id_number', 'email', 'phone_number', 'is_hosted']
 
 
 # Check-in forms
 class InfoClientForm(forms.ModelForm):
     num_reservation = forms.CharField(label="Introdueix el número de reserva", required=False)
-    dni = forms.CharField(max_length=9, label="Introdueix el número del document identificatiu", required=False)
+    id_number = forms.CharField(max_length=20, label="Introdueix el número del document identificatiu", required=False)
 
     def clean(self):
         cleaned_data = super().clean()
         num_reservation = cleaned_data.get("num_reservation")
-        dni = cleaned_data.get("dni")
+        id_number = cleaned_data.get("id_number")
 
-        if not num_reservation and not dni:
+        if not num_reservation and not id_number:
             raise forms.ValidationError("Introdueix el número de reserva o el número del document identificatiu")
 
         return cleaned_data
 
     class Meta:
         model = CheckIn
-        fields = ['num_reservation', 'dni']
+        fields = ['num_reservation', 'id_number']
 
 
 # Cancel reservation form

@@ -1,7 +1,6 @@
 from io import BytesIO
 from django.http import JsonResponse, FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from reportlab.pdfgen import canvas
 from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, SearchReservationForm
@@ -10,6 +9,7 @@ from User.decorators import worker_required, admin_required
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
+from Reception.config import Config as c
 
 
 @worker_required('receptionist')
@@ -45,14 +45,6 @@ def add_room_admin(request):
     return render(request, 'admin-tests/add_room.html', {'form': form})
 
 
-# New reservation views
-
-NEW_RESERVATION_1_PATH = 'worker/receptionist/reservation/new_reservation/new_reservation_1.html'
-NEW_RESERVATION_2_PATH = 'worker/receptionist/reservation/new_reservation/new_reservation_2.html'
-NEW_RESERVATION_3_PATH = 'worker/receptionist/reservation/new_reservation/new_reservation_3.html'
-NEW_RESERVATION_4_PATH = 'worker/receptionist/reservation/new_reservation/new_reservation_4.html'
-
-
 @worker_required('receptionist')
 def new_reservation_1(request):
     """Reserve a room for a client."""
@@ -66,7 +58,7 @@ def new_reservation_1(request):
             form.add_error(None, "Error en el formulari")
     else:
         form = RoomReservationForm()
-    return render(request, NEW_RESERVATION_1_PATH, {'form': form})
+    return render(request, c.get_reservation_path(1), {'form': form})
 
 
 @worker_required('receptionist')
@@ -82,7 +74,7 @@ def new_reservation_3(request):
             return redirect('new_reservation_1')
     else:
         form = AddClientForm()
-    return render(request, NEW_RESERVATION_3_PATH, {'form': form})
+    return render(request, c.get_reservation_path(3), {'form': form})
 
 
 @worker_required('receptionist')
@@ -93,19 +85,12 @@ def new_reservation_4(request, pk):
         messages.error(request, "No s'ha trobat la reserva.")
         return redirect('search_reservation')
 
-    return render(request, NEW_RESERVATION_4_PATH, {'reservation': reservation})
+    return render(request, c.get_reservation_path(4), {'reservation': reservation})
 
 
 @worker_required('receptionist')
 def submit_reservation(request):
     return redirect('receptionist_home')
-
-
-# Check-in views
-
-CHECK_IN_1_PATH = 'worker/receptionist/check-in/check_in_1.html'
-CHECK_IN_2_PATH = 'worker/receptionist/check-in/check_in_2.html'
-CHECK_IN_4_PATH = 'worker/receptionist/check-in/check_in_4.html'
 
 
 @worker_required('receptionist')
@@ -115,7 +100,7 @@ def check_in_1(request):
         form = InfoClientForm(request.POST)
         if form.is_valid():
             num_reservation = form.cleaned_data['num_reservation']
-            dni = form.cleaned_data['dni']
+            id_number = form.cleaned_data['id_number']
             client = None
             reservation = None
 
@@ -127,9 +112,9 @@ def check_in_1(request):
 
                 except RoomReservation.DoesNotExist:
                     pass
-            if dni and not client:
+            if id_number and not client:
                 try:
-                    client = HotelUser.objects.get(id_number=dni)
+                    client = HotelUser.objects.get(id_number=id_number)
                     reservation = RoomReservation.objects.get(client_id=client.id)
 
                 except HotelUser.DoesNotExist:
@@ -138,15 +123,13 @@ def check_in_1(request):
                     pass
 
             if client and reservation and not CheckIn.objects.filter(num_reservation=reservation.id).exists():
-                check_in = CheckIn.objects.create(num_reservation=reservation.id, dni=client.id)
+                check_in = CheckIn.objects.create(num_reservation=reservation.id, id_number=client.id)
                 check_in.save()
 
                 request.session['reservation_id'] = reservation.id
                 request.session['client_id'] = client.id
-                return render(request, CHECK_IN_2_PATH,
-                              {'client': client, 'reservation': reservation})
+                return render(request, c.get_check_in_path(2), {'client': client, 'reservation': reservation})
             else:
-
                 if client is None or reservation is None:
                     form.add_error(None, "No existeix cap reserva amb aquestes dades.")
                 elif CheckIn.objects.filter(num_reservation=reservation.id).exists():
@@ -154,7 +137,7 @@ def check_in_1(request):
 
     else:
         form = InfoClientForm()
-    return render(request, CHECK_IN_1_PATH, {'form': form})
+    return render(request, c.get_check_in_path(1), {'form': form})
 
 
 @worker_required('receptionist')
@@ -164,7 +147,7 @@ def check_in_summary(request):
     reservation = RoomReservation.objects.get(id=reservation_id)
     client = HotelUser.objects.get(id=client_id)
 
-    return render(request, CHECK_IN_4_PATH, {'client': client, 'reservation': reservation})
+    return render(request, c.get_check_in_path(4), {'client': client, 'reservation': reservation})
 
 
 @worker_required('receptionist')
@@ -206,13 +189,7 @@ def fetch_rooms(request):
 
 @worker_required('receptionist')
 def check_in_2(request):
-    return render(request, CHECK_IN_2_PATH, {})
-
-
-# Cancel reservation views
-
-SEARCH_RESERVATION_PATH = 'worker/receptionist/reservation/manage_reservation/search_reservation.html'
-RESERVATION_DETAIL_PATH = 'worker/receptionist/reservation/manage_reservation/reservation_details.html'
+    return render(request, c.get_check_in_path(2), {})
 
 
 @worker_required('receptionist')
@@ -232,7 +209,7 @@ def search_reservation(request):
         if room_num:
             reservations = reservations.filter(room__room_num=room_num)
 
-    return render(request, SEARCH_RESERVATION_PATH, {'form': form, 'reservations': reservations})
+    return render(request, c.get_manage_reservation_path(1), {'form': form, 'reservations': reservations})
 
 
 @worker_required('receptionist')
@@ -243,7 +220,7 @@ def reservation_details(request, pk):
         messages.error(request, "No s'ha trobat la reserva.")
         return redirect('search_reservation')
 
-    return render(request, RESERVATION_DETAIL_PATH, {'reservation': reservation})
+    return render(request, c.get_manage_reservation_path(2), {'reservation': reservation})
 
 
 @worker_required('receptionist')
@@ -254,13 +231,6 @@ def delete_reservation(request, pk):
         messages.success(request, "La reserva s'ha eliminat amb èxit")
         return redirect('search_reservation')
     return redirect('reservation_details', pk=pk)
-
-
-# Check-out views
-CHECK_OUT_1_PATH = 'worker/receptionist/check-out/check_out_1.html'
-CHECK_OUT_2_PATH = 'worker/receptionist/check-out/check_out_2.html'
-CHECK_OUT_3_PATH = 'worker/receptionist/check-out/check_out_3.html'
-CHECK_OUT_4_PATH = 'worker/receptionist/check-out/check_out_4.html'
 
 
 @worker_required('receptionist')
@@ -280,7 +250,7 @@ def check_out_1(request):
         if room_num:
             reservations = reservations.filter(room__room_num=room_num)
 
-    return render(request, CHECK_OUT_1_PATH, {'form': form, 'reservations': reservations})
+    return render(request, c.get_check_out_path(1), {'form': form, 'reservations': reservations})
 
 
 @worker_required('receptionist')
@@ -296,7 +266,7 @@ def check_out_summary(request, pk):
         extra_total += extra.extra_costs_price
 
     total_price = despeses.pension_costs + despeses.room_type_costs + extra_total
-    return render(request, CHECK_OUT_2_PATH,
+    return render(request, c.get_check_out_path(2),
                   {'extra_costs': extra_costs, 'reservation': reservation, 'room': room, 'despeses': despeses,
                    'total_price': total_price, 'extra_total': extra_total})
 
@@ -312,7 +282,7 @@ def check_out_3(request, pk):
     room.save()
     # Enviar dades a les autoritats
     # return redirect('check_out_5')
-    return render(request, CHECK_OUT_4_PATH, {'reservation': reservation, 'client': client})
+    return render(request, c.get_check_out_path(3), {'reservation': reservation, 'client': client})
 
 
 @worker_required('receptionist')

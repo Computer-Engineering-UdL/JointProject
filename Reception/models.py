@@ -71,7 +71,7 @@ class RoomReservation(models.Model):
 
 class CheckIn(models.Model):
     num_reservation = models.CharField(max_length=5)
-    dni = models.CharField(max_length=9)
+    id_number = models.CharField(max_length=20, db_default='12345678A')
 
     def __str__(self):
         return self.num_reservation
@@ -85,5 +85,5 @@ class Despeses(models.Model):
 
 class ExtraCosts(models.Model):
     room_reservation = models.ForeignKey(RoomReservation, on_delete=models.CASCADE)
-    extra_costs_type = models.CharField(max_length=100, choices=Config.room_extra_costs)
+    extra_costs_type = models.CharField(max_length=100, choices=Config.get_room_extra_costs)
     extra_costs_price = models.IntegerField()
