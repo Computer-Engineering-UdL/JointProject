@@ -7,6 +7,6 @@ class Config:
         ('Minibar', 'Minibar'),
         ('Desperfectes', 'Desperfectes'),
         ('Servei habitacions', 'Servei habitacions'),
-        ('Pàrking', 'Parking'),
-        ('Pèrdua de claus', 'Pèrdua de claus'),
+        ('Parking', 'Parking'),
+        ('Perdua de claus', 'Perdua de claus'),
     ]
