@@ -10,7 +10,7 @@
     <p>Procedeix a entregar la clau de l'habitació {{ reservation.room.room_num }} a {{ client.first_name }} </p>
 
     <button onclick="downloadAndRedirect('{% url 'print_receipt' client.id reservation.id %}',
-                     '{% url 'worker_home' %}')">
+                     '{% url 'receptionist_home' %}')">
         Imprimir comprovant
     </button>
 

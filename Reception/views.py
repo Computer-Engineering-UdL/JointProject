@@ -24,6 +24,7 @@ def add_client_admin(request):
             client.save()
     else:
         form = AddClientForm()
+
     return render(request, c.get_admin_tests_path(1), {'form': form})
 
 
@@ -38,6 +39,7 @@ def add_room_admin(request):
             form.save()
     else:
         form = RoomForm()
+
     return render(request, c.get_admin_tests_path(2), {'form': form})
 
 
@@ -54,6 +56,7 @@ def new_reservation_1(request):
             form.add_error(None, "Error en el formulari")
     else:
         form = RoomReservationForm()
+
     return render(request, c.get_reservation_path(1), {'form': form})
 
 
@@ -70,6 +73,7 @@ def new_reservation_3(request):
             return redirect('new_reservation_1')
     else:
         form = AddClientForm()
+
     return render(request, c.get_reservation_path(3), {'form': form})
 
 
@@ -78,7 +82,7 @@ def new_reservation_4(request, pk):
     try:
         reservation = RoomReservation.objects.get(pk=pk)
     except RoomReservation.DoesNotExist:
-        messages.error(request, "No s'ha trobat la reserva.")
+        messages.error(request, "No s'ha trobat la reserva")
         return redirect('search_reservation')
 
     return render(request, c.get_reservation_path(4), {'reservation': reservation})
@@ -127,12 +131,12 @@ def check_in_1(request):
                 return render(request, c.get_check_in_path(2), {'client': client, 'reservation': reservation})
             else:
                 if client is None or reservation is None:
-                    form.add_error(None, "No existeix cap reserva amb aquestes dades.")
+                    form.add_error(None, "No existeix cap reserva amb aquestes dades")
                 elif CheckIn.objects.filter(num_reservation=reservation.id).exists():
-                    form.add_error(None, "Ja s'ha fet el check-in d'aquesta reserva.")
-
+                    form.add_error(None, "Ja s'ha fet el check-in d'aquesta reserva")
     else:
         form = InfoClientForm()
+
     return render(request, c.get_check_in_path(1), {'form': form})
 
 
@@ -152,6 +156,7 @@ def print_receipt(request, client_id, reservation_id):
     reservation = RoomReservation.objects.get(id=reservation_id)
 
     buffer = u.create_receipt_check_in(reservation, client)
+
     return FileResponse(buffer, as_attachment=True, filename='receipt.pdf')
 
 
@@ -160,6 +165,7 @@ def fetch_rooms(request):
     room_type = request.GET.get('room_type')
     rooms = Room.objects.filter(room_type=room_type, is_taken=False).order_by('room_num')
     data = {'rooms': list(rooms.values('id', 'room_num'))}
+
     return JsonResponse(data)
 
 
@@ -206,6 +212,7 @@ def delete_reservation(request, pk):
         reservation.delete()
         messages.success(request, "La reserva s'ha eliminat amb èxit")
         return redirect('search_reservation')
+
     return redirect('reservation_details', pk=pk)
 
 
@@ -242,6 +249,7 @@ def check_out_summary(request, pk):
         extra_total += extra.extra_costs_price
 
     total_price = despeses.pension_costs + despeses.room_type_costs + extra_total
+
     return render(request, c.get_check_out_path(2),
                   {'extra_costs': extra_costs, 'reservation': reservation, 'room': room, 'despeses': despeses,
                    'total_price': total_price, 'extra_total': extra_total})
@@ -258,6 +266,7 @@ def check_out_3(request, pk):
     room.save()
     # Enviar dades a les autoritats
     # return redirect('check_out_5')
+
     return render(request, c.get_check_out_path(3), {'reservation': reservation, 'client': client})
 
 
