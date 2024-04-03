@@ -79,5 +79,7 @@ class CheckIn(models.Model):
 
 class Despeses(models.Model):
     room_reservation = models.ForeignKey(RoomReservation, on_delete=models.CASCADE, unique=False)
-    room_type_costs = models.JSONField(default=Config.get_room_extra_costs, blank=True)
-    extra_costs = models.JSONField(default=Config.get_room_type_costs, blank=True)
+    pension_costs = models.IntegerField()
+    room_type_costs = models.IntegerField()
+    extra_costs_type = models.CharField(max_length=100, choices=Config.room_extra_costs, blank=True)
+    extra_costs_price = models.IntegerField()
