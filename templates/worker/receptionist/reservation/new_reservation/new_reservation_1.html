@@ -3,7 +3,8 @@
 
 {% load static %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/worker/receptionist/reservation/new_reservation/new_reservation_1.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'css/worker/receptionist/reservation/new_reservation/new_reservation_1.css' %}">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 {% endblock extra_css %}
 
@@ -63,4 +64,11 @@
             </div>
         </div>
     </form>
+    <div id="notifications">
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <p class="notification-err">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endblock content %}
