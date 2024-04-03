@@ -1,9 +1,26 @@
 import re
 
 
+def get_nif_word(dni):
+    """Get the NIF letter."""
+    words = {0: 'T', 1: 'R', 2: 'W', 3: 'A', 4: 'G', 5: 'M', 6: 'Y', 7: 'F', 8: 'P', 9: 'D', 10: 'X', 11: 'B',
+             12: 'N', 13: 'J', 14: 'Z', 15: 'S', 16: 'Q', 17: 'V', 18: 'H', 19: 'L', 20: 'C', 21: 'K', 22: 'E'}
+
+    rest = int(dni) % 23
+
+    return words[rest]
+
+
 def is_valid_dni(dni):
     """Check if the DNI is valid."""
-    return re.match(r"\d{8}[A-Za-z]$", dni)
+    if len(dni) != 9 or not dni[:-1].isdigit() or not dni[-1].isalpha():
+        return False
+
+    numero_dni = dni[:-1]
+    letra_correcta = get_nif_word(numero_dni)
+    letra_dada = dni[-1].upper()
+
+    return letra_correcta == letra_dada
 
 
 def is_valid_nie(nie):

@@ -1,18 +1,14 @@
-.section-title {
+#section-title {
     font-size: 50px;
-    margin-left: 12px;
-}
-
-.process-guidance {
-    margin-left: 12px;
-    margin-bottom: 70px;
+    margin: 0;
 }
 
 .buttons {
+    height: 50%;
     gap: 50px;
     display: flex;
     flex-wrap: wrap;
-    align-content: flex-end;
+    align-content: center;
     align-items: baseline;
     justify-content: space-evenly;
 }

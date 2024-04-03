@@ -1,17 +1,52 @@
+body{
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+main{
+	height: 100%;
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.main {
+	display: flex;
+	flex-direction: column;
+	height: 95%;
+	width: 95%;
+    max-height: 900px;
+    max-width: 1600px;
+    /*height: 90vh;*/
+}
+
+
 header {
 	display: flex;
-	align-items: center;
+	align-items: stretch;
 	justify-content: space-between;
-	background-color: #ffffff;
+	/* NEUTRAL PALETTE */
+	background-color: #A39E94;
 	color: white;
 	height: 8vh;
+	min-height: 60px;
+}
+
+nav {
+	display: flex;
+	width: 75%;
+	height: 100%;
+	align-items: center;
 }
 
 .menu {
+	width: 100%;
+	height: 100%;
 	order: 1;
 	display: flex;
 	list-style-type: none;
-	background-color: #ffffff;
 	color: black;
 	justify-content: flex-start;
 	padding: 0 5px;
@@ -19,52 +54,59 @@ header {
 	gap: 5px;
 }
 
-nav {
-	width: 75%;
-}
-
 .menu li {
 	width: 25%;
+	height: 100%;
 	align-self: center;
 }
 
 .menu button {
+	align-self: center;
 	font-size: 16px;
 	background-color: transparent;
 	width: 100%;
-	height: 55px;
+	height: 100%;
 	cursor: pointer;
 	transition: background-color 0.2s;
 	border: none;
 }
 
 .menu button:hover {
-	background-color: rgba(183, 197, 251, 0.47);
+	background-color: #95b0a7;
+	/*background-color: rgba(183, 197, 251, 0.47);*/
 }
 
 .menu button:active {
-	background-color: #6581f5;
-	color: white;
+	background-color: #6b7e77;
+	/*background-color: #6581f5;
+	color: white;*/
 }
 
 #current-page {
 	font-weight: bold;
-	background-color: rgb(213, 218, 224);
+	/*background-color: #A39488;*/
+	background-color: #95b0a7;
+	/*background-color: rgb(213, 218, 224);*/
 	border-bottom: solid 2px black;
 }
 
 #current-page:hover {
-	background-color: rgb(183 197 251 / 47%);
+	background-color: #6b7e77;
+	/*background-color: rgb(183 197 251 / 47%);*/
 }
 
 #current-page:active {
-	background-color: #6581f5;
+	/*background-color: #6581f5;
+	color: white;*/
+	background-color: #95B0A7FF;
+	color: #6b7e77;
 }
 
 #right-header {
 	display: flex;
 	align-items: center;
 	gap: 15px;
+	padding-right: 10px;
 }
 
 #language {
@@ -77,9 +119,71 @@ nav {
 	background-color: #3d3d3d;
 	border: 1px solid #3d3d3d;
 	border-radius: 50px;
-	height: 40px;
+	height: 65%;
 }
 
 #user {
 	width: 50px;
+}
+
+input {
+	background-color: #F8F8F2;
+}
+
+
+.procedural-buttons {
+    height: 8%;
+	width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.procedural-buttons button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    height: 100%;
+    width: 20%;
+	max-width: 160px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    padding: 15px 10px;
+}
+
+.cancel-button {
+    color: #ff0000;
+    background-color: #ffffff;
+    border: 1px solid #ff0000;
+}
+
+.cancel-button:hover {
+    color: #ffffff;
+    background-color: #ff0000;
+    border: 1px solid #ff0000;
+}
+
+.cancel-button:active {
+    opacity: 0.4;
+}
+
+.continue-button {
+    color: #14b909;
+    background-color: #ffffff;
+    border: 1px solid #14b909;
+}
+
+.continue-button:hover {
+    color: #ffffff;
+    background-color: #14b909;
+    border: 1px solid #14b909;
+}
+
+.continue-button:active {
+    opacity: 0.4;
 }
