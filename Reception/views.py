@@ -208,8 +208,8 @@ def check_in_2(request):
 
 # Cancel reservation views
 
-SEARCH_RESERVATION_PATH = 'worker/receptionist/reservation/modify_reservation/search_reservation.html'
-RESERVATION_DETAIL_PATH = 'worker/receptionist/reservation/modify_reservation/reservation_details.html'
+SEARCH_RESERVATION_PATH = 'worker/receptionist/reservation/manage_reservation/search_reservation.html'
+RESERVATION_DETAIL_PATH = 'worker/receptionist/reservation/manage_reservation/reservation_details.html'
 
 
 @worker_required('receptionist')
