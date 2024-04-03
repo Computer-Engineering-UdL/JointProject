@@ -8,7 +8,7 @@
 
 {% block id_check-in %} id="current-page" {% endblock %}
 
-{% block title %}Check In {% endblock %}
+{% block title %}Check In{% endblock %}
 
 {% block content %}
 
@@ -22,11 +22,11 @@
         {% csrf_token %}
         <div class="screen-elems">
             <div class="entry-fields">
-                <div class="reservation-entry">
+                <div class="form-group">
                     <p>Número de reserva</p>
                     {{ form.num_reservation }}
                 </div>
-                <div class="id-entry">
+                <div class="form-group">
                     <p>Document identificatiu</p>
                     {{ form.dni }}
                 </div>

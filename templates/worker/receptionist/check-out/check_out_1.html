@@ -1,27 +1,40 @@
 {% extends "worker/receptionist/base_receptionist.html" %}
 <!-- This template allows to enter an id to search for a client reservation -->
 
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/receptionist/check-out/check-out_home.css' %}">
+{% endblock extra_css %}
+
 <!-- This block must appear in every reservation template as it is -->
 {% block id_check-out %} id="current-page" {% endblock id_check-out %}
 
+{% block title %}Check Out{% endblock title %}
+
 {% block content %}
+  <h1 class="section-title">CHECK-OUT</h1>
+    
   <div class="container">
-    <h2>Cercar reserva</h2>
+    <p class="process-guidance">
+        Per iniciar el procés de "Check-Out" introdueixi una de les següents dades sol·licitades:
+    </p>
     <form method="get">
       {% csrf_token %}
-      <div class="form-group">
-        {{ form.num_reservation.label_tag }}
-        {{ form.num_reservation }}
-      </div>
-      <div class="form-group">
-        {{ form.id_number.label_tag }}
-        {{ form.id_number }}
-      </div>
-      <div class="form-group">
-        {{ form.room_num.label_tag }}
-        {{ form.room_num }}
-      </div>
-      <button type="submit">Filtrar</button>
+        <div class="entry-fields">
+          <div class="form-group">
+              <p>Número de reserva</p>
+            {{ form.num_reservation }}
+          </div>
+          <div class="form-group">
+            <p>Document identificatiu</p>
+            {{ form.id_number }}
+          </div>
+          <div class="form-group">
+              <p>Número d'habitació</p>
+            {{ form.room_num }}
+          </div>
+        </div>
+      <button class="submit-button" type="submit">Filtrar</button>
     </form>
 
     <form method="post">

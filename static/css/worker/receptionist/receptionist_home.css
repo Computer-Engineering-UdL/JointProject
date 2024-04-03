@@ -1,6 +1,12 @@
 #section-title {
     font-size: 50px;
-    margin: 0;
+    display: flex;
+	justify-content: center;
+}
+
+#process-guidance {
+    display: flex;
+	justify-content: center;
 }
 
 .buttons {
@@ -14,10 +20,12 @@
 }
 .access-process-button {
     font-size: 20px;
-    padding: 15px 50px;
+    padding: 30px 75px;
     transition: background-color 0.2s, border-radius 0.2s
 }
 .access-process-button:hover {
+    font-weight: bold;
+    padding: 29px 70px;
     background-color: #B7C5FB;
     box-shadow: 0 0 10px grey;
     border-radius: 10px;
