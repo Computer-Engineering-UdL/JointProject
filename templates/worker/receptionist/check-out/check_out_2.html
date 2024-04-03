@@ -12,19 +12,31 @@
             <div>
                 <p>Hoste: {{ reservation.client }}</p>
                 <p>Habitació: {{ reservation.room }}</p>
+                <p>Tipus d'habitació: {{ room.room_type }}</p>
                 <p>Data entrada: {{ reservation.entry }}</p>
                 <p>Data sortida: {{ reservation.exit }}</p>
-                <p>Tipus de pensió: {{ reservation.pension_type }}</p>
                 <p>Número d'hostes: {{ reservation.num_guests }}</p>
+                <p>Tipus de pensió: {{ reservation.pension_type }}</p>
+            </div>
+            <div>
+                <h1>Factura</h1>
+                <p>Preu habitació: {{ despeses.room_type_costs }}€</p>
+                <p>Preu pensió: {{ despeses.pension_costs }}</p>
+                <p>Serveis Extra:</p>
+                {% for extra in extra_costs %}
+                    <p>Tipus: {{ extra.extra_costs_type }}</p>
+                    <p>Preu: {{ extra.extra_costs_price }}</p>
+                {% endfor %}
+                <p>Total serveis extra: {{ extra_total }}€</p>
+                <p>Total: {{ total_price }}€</p>
             </div>
 
-            <form action="{% url 'delete_reservation' reservation.id %}" method="post">
+            <form action="{% url 'check_out_3' reservation.id %}" method="post">
                 {% csrf_token %}
-                <button type="submit" onclick="return confirm('Estàs segur que vols eliminar aquesta reserva?');">Eliminar Reserva</button>
+                <button type="submit" onclick="return confirm('Estàs segur que vols finalitzar el procés de check-out?');">Finalitzar Reserva</button>
             </form>
 
             <a href="{% url 'receptionist_home' %}">Torna a Inici</a>
-            <a href="{% url 'search_reservation' %}">Torna a Cerca Reserva</a>
         </div>
     </div>
 {% endblock %}

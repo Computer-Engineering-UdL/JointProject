@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from reportlab.pdfgen import canvas
 from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, SearchReservationForm
-from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn, Despeses
+from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn, Despeses, ExtraCosts
 from User.decorators import worker_required, admin_required
 
 
@@ -282,6 +282,30 @@ def check_out_1(request):
 
 @worker_required('receptionist')
 def check_out_summary(request, pk):
+    """ Check-out step 2 """
     reservation = get_object_or_404(RoomReservation, pk=pk)
-    despeses = get_object_or_404(Despeses, room_reservation=reservation)
-    return render(request, CHECK_OUT_2_PATH, {})
+    room = get_object_or_404(Room, pk=reservation.room_id)
+    despeses = get_object_or_404(Despeses, room_reservation_id=pk)
+    extra_costs = ExtraCosts.objects.filter(room_reservation=reservation.id)
+
+    extra_total = 0
+    for extra in extra_costs:
+        extra_total += extra.extra_costs_price
+
+    total_price = despeses.pension_costs + despeses.room_type_costs + extra_total
+    return render(request, CHECK_OUT_2_PATH,
+                  {'extra_costs': extra_costs, 'reservation': reservation, 'room': room, 'despeses': despeses,
+                   'total_price': total_price, 'extra_total': extra_total})
+
+
+@worker_required('receptionist')
+def check_out_3(request, pk):
+    """ Check-out step 3 """
+    reservation = get_object_or_404(RoomReservation, pk=pk)
+    room = get_object_or_404(Room, pk=reservation.room_id)
+    room.is_clean = False
+    room.is_taken = False
+    room.save()
+    # Enviar dades a les autoritats
+    # return redirect('check_out_5')
+    return render(request, CHECK_OUT_3_PATH, {'reservation': reservation, 'room': room})
