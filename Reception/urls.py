@@ -17,4 +17,6 @@ urlpatterns = [
     path('reservation_details/<int:pk>/', v.reservation_details, name='reservation_details'),
     path('reservation/delete/<int:pk>/', v.delete_reservation, name='delete_reservation'),
     path('submit_reservation/', v.submit_reservation, name='submit_reservation'),
+    path('check_out', v.check_out_1, name='check_out'),
+    path('check_out_summary/<int:pk>', v.check_out_summary, name='check_out_summary'),
 ]

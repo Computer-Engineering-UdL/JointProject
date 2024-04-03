@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from reportlab.pdfgen import canvas
 from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, SearchReservationForm
-from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn
+from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn, Despeses
 from User.decorators import worker_required, admin_required
 
 
@@ -251,3 +251,37 @@ def delete_reservation(request, pk):
         messages.success(request, "La reserva s'ha eliminat amb èxit")
         return redirect('search_reservation')
     return redirect('reservation_details', pk=pk)
+
+
+# Check-out views
+CHECK_OUT_1_PATH = 'worker/receptionist/check-out/check_out_1.html'
+CHECK_OUT_2_PATH = 'worker/receptionist/check-out/check_out_2.html'
+CHECK_OUT_3_PATH = 'worker/receptionist/check-out/check_out_3.html'
+CHECK_OUT_4_PATH = 'worker/receptionist/check-out/check_out_4.html'
+
+
+@worker_required('receptionist')
+def check_out_1(request):
+    form = SearchReservationForm(request.GET or None)
+    reservations = RoomReservation.objects.all()
+
+    if form.is_valid():
+        num_reservation = form.cleaned_data.get('num_reservation')
+        id_number = form.cleaned_data.get('id_number')
+        room_num = form.cleaned_data.get('room_num')
+
+        if num_reservation:
+            reservations = reservations.filter(id=num_reservation)
+        if id_number:
+            reservations = reservations.filter(client__id_number=id_number)
+        if room_num:
+            reservations = reservations.filter(room__room_num=room_num)
+
+    return render(request, CHECK_OUT_1_PATH, {'form': form, 'reservations': reservations})
+
+
+@worker_required('receptionist')
+def check_out_summary(request, pk):
+    reservation = get_object_or_404(RoomReservation, pk=pk)
+    despeses = get_object_or_404(Despeses, room_reservation=reservation)
+    return render(request, CHECK_OUT_2_PATH, {})
