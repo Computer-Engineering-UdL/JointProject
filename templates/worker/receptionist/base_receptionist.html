@@ -11,5 +11,5 @@
 {% block menu %}
     <li><a href="{% url 'receptionist_home' %}"><button {% block id_reservation %}{% endblock %}>Reserves</button></a></li>
     <li><a href="{% url 'check_in' %}"><button {% block id_check-in %}{% endblock %}>Check-in</button></a></li>
-    <li><button {% block id_check-out %}{% endblock %}>Check-out</button></li>
+    <li><a href="{% url 'check_out' %}"><button {% block id_check-out %}{% endblock %}>Check-out</button></a></li>
 {% endblock menu %}
