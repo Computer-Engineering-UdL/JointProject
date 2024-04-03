@@ -1,7 +1,8 @@
 {% extends "worker/receptionist/base_receptionist.html" %}
 <!-- This template allows to enter an id to search for a client reservation -->
 
-{% block id_reservation %} id="current-page" {% endblock id_reservation %}
+<!-- This block must appear in every reservation template as it is -->
+{% block id_check-out %} id="current-page" {% endblock id_check-out %}
 
 {% block content %}
   <div class="container">
