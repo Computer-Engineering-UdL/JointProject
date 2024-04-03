@@ -67,8 +67,8 @@
         </div>
     </div>
     <div id="notifications">
-        {% if form.non_field_errors %}
-            {% for error in form.non_field_errors %}
+        {% if form.errors %}
+            {% for error in form.errors %}
                 <p class="notification-err">{{ error }}</p>
             {% endfor %}
         {% endif %}

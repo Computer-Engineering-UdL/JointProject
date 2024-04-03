@@ -42,15 +42,26 @@
             </form>
         </div>
 
-        <ul class="reservation-list">
-            {% for reservation in reservations %}
-                <li>
-                    <div>Reserva {{ reservation.id }}</div>
-                    <div>{{ reservation.entry }} - {{ reservation.exit }}</div>
-                    <div>Pensió: {{ reservation.pension_type }}</div>
-                    <div>Nº hostes: {{ reservation.num_guests }}</div>
-                </li>
-            {% endfor %}
-        </ul>
+        <h2>Reserves</h2>
+        <div id="list">
+            <ul class="list-index">
+                <li class="short-li">Reserva</li>
+                <li class="long-li">Entrada - Sortida</li>
+                <li class="long-li">Client</li>
+                <li class="middle-li">Pensió</li>
+                <li class="short-li">Nº hostes</li>
+            </ul>
+            <ul class="reservation-list">
+                {% for reservation in reservations %}
+                    <li>
+                        <div class="short-li">{{ reservation.id }}</div>
+                        <div class="long-li">{{ reservation.entry }} - {{ reservation.exit }}</div>
+                        <div class="long-li">{{ reservation.client.first_name}}</div>
+                        <div class="middle-li">{{ reservation.pension_type }}</div>
+                        <div class="short-li">{{ reservation.num_guests }}</div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 {% endblock %}
