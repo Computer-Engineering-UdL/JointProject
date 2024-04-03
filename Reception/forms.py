@@ -2,6 +2,7 @@ from django import forms
 from django.core.validators import MinValueValidator, MaxValueValidator
 from User.validators import is_valid_id_number
 from .models import RoomReservation, Client, Room, CheckIn, HotelUser
+from Reception.config import Config as c
 
 
 class RoomForm(forms.ModelForm):
@@ -9,7 +10,7 @@ class RoomForm(forms.ModelForm):
     is_taken = forms.BooleanField(required=False)
     room_num = forms.IntegerField(validators=[MinValueValidator(200), MaxValueValidator(499)])
     room_price = forms.IntegerField(validators=[MinValueValidator(20), MaxValueValidator(1000)])
-    room_type = forms.ChoiceField(choices=Room.ROOM_TYPES)
+    room_type = forms.ChoiceField(choices=c.get_room_types)
 
     class Meta:
         model = Room
@@ -19,9 +20,9 @@ class RoomForm(forms.ModelForm):
 class RoomReservationForm(forms.ModelForm):
     entry = forms.DateField(input_formats=['%d/%m/%Y'])
     exit = forms.DateField(input_formats=['%d/%m/%Y'])
-    pension_type = forms.ChoiceField(choices=RoomReservation.PENSION_TYPES)
+    pension_type = forms.ChoiceField(choices=c.get_pension_types)
     num_guests = forms.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(4)])
-    room_type = forms.ChoiceField(choices=Room.ROOM_TYPES)
+    room_type = forms.ChoiceField(choices=c.get_room_types)
     room = forms.ChoiceField()
     client = forms.ModelChoiceField(queryset=Client.objects.all(), empty_label="Select a client")
 

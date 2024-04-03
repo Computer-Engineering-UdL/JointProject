@@ -28,7 +28,7 @@ def add_client_admin(request):
             client.save()
     else:
         form = AddClientForm()
-    return render(request, 'admin-tests/add_client.html', {'form': form})
+    return render(request, c.get_admin_tests_path(1), {'form': form})
 
 
 @admin_required
@@ -42,7 +42,7 @@ def add_room_admin(request):
             form.save()
     else:
         form = RoomForm()
-    return render(request, 'admin-tests/add_room.html', {'form': form})
+    return render(request, c.get_admin_tests_path(2), {'form': form})
 
 
 @worker_required('receptionist')

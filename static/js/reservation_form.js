@@ -2,7 +2,7 @@ $(document).ready(function() {
     $('#id_room_type').change(function() {
         var roomType = $(this).val();
         $.ajax({
-            url: '/receptionist/fetch_rooms/',
+            url: '/receptionist/fetch-rooms/',
             data: {
                 'room_type': roomType
             },
