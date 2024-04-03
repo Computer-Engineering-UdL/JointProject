@@ -10,14 +10,16 @@
 {% block id_reservation %} id="current-page" {% endblock id_reservation %}
 
 {% block content %}
-    <h1 class="section-title">
-        RESERVES
-    </h1>
-    <p class="process-guidance">
-        Esculli el procediment que desitja realitzar:
-    </p>
-    <div class="buttons">
-        <a href="{% url 'new_reservation_1' %}"> <button class="access-process-button">Crear nova reserva</button></a>
-        <a href="{% url 'search_reservation' %}"><button class="access-process-button">Gestionar reserves</button> </a>
+    <div class="main">
+        <h1 id="section-title">
+            RESERVES
+        </h1>
+        <p id="process-guidance">
+            Esculli el procediment que desitja realitzar:
+        </p>
+        <div class="buttons">
+            <a href="{% url 'new_reservation_1' %}"> <button class="access-process-button">Crear nova reserva</button></a>
+            <a href="{% url 'search_reservation' %}"><button class="access-process-button">Gestionar reserves</button> </a>
+        </div>
     </div>
 {% endblock content %}

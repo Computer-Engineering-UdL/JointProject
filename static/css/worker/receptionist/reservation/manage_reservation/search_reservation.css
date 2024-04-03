@@ -1,0 +1,28 @@
+.main{
+    gap: 20px;
+}
+
+
+
+.reservation-list{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 0;
+}
+.reservation-list li{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: solid 1px black;
+    border-radius: 3px;
+}
+.reservation-list li div{
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-right: solid 1px black;
+}
+.reservation-list li div:last-child{
+    border-right: none;
+}

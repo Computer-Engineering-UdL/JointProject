@@ -1,0 +1,56 @@
+{% extends "worker/receptionist/base_receptionist.html" %}
+<!-- This template allows to enter an id to search for a client reservation -->
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/receptionist/reservation/manage_reservation/search_reservation.css' %}">
+{% endblock extra_css %}
+
+<!-- This block must appear in every reservation template as it is -->
+{% block id_reservation %} id="current-page" {% endblock id_reservation %}
+
+{% block content %}
+    <div class="main">
+        <div class="reservation-search">
+            <h2>Cercar reserva</h2>
+            <form method="get">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.num_reservation.label_tag }}
+                    {{ form.num_reservation }}
+                </div>
+                <div class="form-group">
+                    {{ form.id_number.label_tag }}
+                    {{ form.id_number }}
+                </div>
+                <div class="form-group">
+                    {{ form.room_num.label_tag }}
+                    {{ form.room_num }}
+                </div>
+                <button type="submit">Filtrar</button>
+            </form>
+
+            <form method="post">
+                {% csrf_token %}
+                <div id="notifications">
+                    {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                            <p class="notification-err">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+
+        <ul class="reservation-list">
+            {% for reservation in reservations %}
+                <li>
+                    <div>Reserva {{ reservation.id }}</div>
+                    <div>{{ reservation.entry }} - {{ reservation.exit }}</div>
+                    <div>Pensió: {{ reservation.pension_type }}</div>
+                    <div>Nº hostes: {{ reservation.num_guests }}</div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
