@@ -65,7 +65,9 @@
                             <div id="num-guests">{{ reservation.num_guests }}</div>
                         </li>
                         <div class="icons">
-                            <div class="icon"><img src="{% static 'img/icons/edit-icon.png' %}" alt="edit"></div>
+                            <div class="icon"><a href="{% url 'reservation_details' pk=reservation.id %}">
+                                <img src="{% static 'img/icons/edit-icon.png' %}" alt="edit"></a>
+                            </div>
                             <div class="icon">
                                 <form action="{% url 'delete_reservation' reservation.id %}" method="post">
                                     {% csrf_token %}
