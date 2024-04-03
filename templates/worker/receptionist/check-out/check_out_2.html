@@ -1,7 +1,7 @@
 {% extends "worker/receptionist/base_receptionist.html" %}
 <!-- This template shows all the info of the client reservation -->
 
-{% block id_reservation %} id="current-page" {% endblock id_reservation %}
+{% block id_check-out %} id="current-page" {% endblock id_check-out %}
 
 {% block content %}
     <div>
@@ -33,7 +33,7 @@
 
             <form action="{% url 'check_out_3' reservation.id %}" method="post">
                 {% csrf_token %}
-                <button type="submit" onclick="return confirm('Estàs segur que vols finalitzar el procés de check-out?');">Finalitzar Reserva</button>
+                <button type="submit" onclick="return confirm('Estàs segur que vols finalitzar el procés de check-out?');">Finalitzar check-out</button>
             </form>
 
             <a href="{% url 'receptionist_home' %}">Torna a Inici</a>
