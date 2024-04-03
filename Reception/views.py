@@ -157,7 +157,7 @@ def print_receipt(request, client_id, reservation_id):
 
     buffer = u.create_receipt_check_in(reservation, client)
 
-    return FileResponse(buffer, as_attachment=True, filename='receipt.pdf')
+    return FileResponse(buffer, as_attachment=True, filename=c.RECEIPT_CHECKIN_FILENAME)
 
 
 @worker_required('receptionist')
@@ -279,4 +279,4 @@ def print_receipt_check_out(request, reservation_id, client_id):
 
     buffer = u.create_receipt_check_out(reservation, client, despeses, extra_costs)
 
-    return FileResponse(buffer, as_attachment=True, filename='receipt.pdf')
+    return FileResponse(buffer, as_attachment=True, filename=c.RECEIPT_CHECKOUT_FILENAME)

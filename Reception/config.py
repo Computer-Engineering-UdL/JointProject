@@ -6,6 +6,8 @@ class Config:
     DROPDOWN_MAX_LENGTH = 15
     TEXT_SIZE = 120
     PHONE_NUMBER_LENGTH = 9
+    RECEIPT_CHECKIN_FILENAME = 'receipt_checkin.pdf'
+    RECEIPT_CHECKOUT_FILENAME = 'receipt_checkout.pdf'
 
     @staticmethod
     def get_room_extra_costs():
