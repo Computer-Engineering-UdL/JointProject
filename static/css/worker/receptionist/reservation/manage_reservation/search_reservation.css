@@ -25,15 +25,27 @@
     /*border-right: solid 1px black;*/
     padding: 0 5px;
 }
-.short-li{
-    width: 12%;
+
+/*********** table column sizes **********/
+#reservation-id{
+    width: 8%;
 }
-.middle-li{
-    width: 20%;
+#entry{
+    width: 16%;
 }
-.long-li{
-    width: 28%;
+#exit{
+    width: 16%;
 }
+#name{
+    width: 34%;
+}
+#pension{
+    width: 16%;
+}
+#num-guests{
+    width: 10%;
+}
+/*****************************************/
 
 .reservation-list{
     display: flex;
