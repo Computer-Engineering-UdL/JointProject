@@ -10,6 +10,7 @@ urlpatterns = [
     path('new-reservation-3/', v.new_reservation_3, name='new_reservation_3'),
     path('new_reservation-4/<int:pk>/', v.new_reservation_4, name='new_reservation_4'),
     path('check-in/', v.check_in_1, name='check_in'),
+    path('check-in/<int:pk>/', v.check_in_2, name='check_in_2'),
     path('check-in/summary/', v.check_in_summary, name='check_in_summary'),
     path('print_receipt/<int:client_id>/<int:reservation_id>/', v.print_receipt, name='print_receipt'),
     path('fetch_rooms/', v.fetch_rooms, name='fetch_rooms'),
