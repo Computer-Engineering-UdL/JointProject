@@ -7,6 +7,9 @@ from reportlab.pdfgen import canvas
 from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, SearchReservationForm
 from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn, Despeses, ExtraCosts
 from User.decorators import worker_required, admin_required
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet
 
 
 @worker_required('receptionist')
@@ -303,9 +306,63 @@ def check_out_3(request, pk):
     """ Check-out step 3 """
     reservation = get_object_or_404(RoomReservation, pk=pk)
     room = get_object_or_404(Room, pk=reservation.room_id)
+    client = get_object_or_404(HotelUser, id=reservation.client_id)
     room.is_clean = False
     room.is_taken = False
     room.save()
     # Enviar dades a les autoritats
     # return redirect('check_out_5')
-    return render(request, CHECK_OUT_3_PATH, {'reservation': reservation, 'room': room})
+    return render(request, CHECK_OUT_4_PATH, {'reservation': reservation, 'client': client})
+
+
+@worker_required('receptionist')
+def print_receipt_check_out(request, reservation_id, client_id):
+    client = HotelUser.objects.get(id=client_id)
+    reservation = RoomReservation.objects.get(id=reservation_id)
+    despeses = Despeses.objects.get(room_reservation_id=reservation_id)
+    extra_costs = ExtraCosts.objects.filter(room_reservation=reservation.id)
+
+    buffer = BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=letter,
+                            rightMargin=72, leftMargin=72,
+                            topMargin=72, bottomMargin=18)
+    Story = []
+    styles = getSampleStyleSheet()
+
+    Story.append(Paragraph("Comprovant de Check-Out", styles['Title']))
+
+    # Informació de la reserva
+    Story.append(Paragraph(f"Número de reserva: {reservation.id}", styles['Normal']))
+    Story.append(Paragraph(f"Data d'entrada: {reservation.entry}", styles['Normal']))
+    Story.append(Paragraph(f"Data de sortida: {reservation.exit}", styles['Normal']))
+    Story.append(Paragraph(f"Número d'hostes: {reservation.num_guests}", styles['Normal']))
+    Story.append(Paragraph(f"Tipus de pensió: {reservation.pension_type}", styles['Normal']))
+    Story.append(Paragraph(f"Tipus d'habitació: {reservation.room.room_type}", styles['Normal']))
+    Story.append(Paragraph(f"Número d'habitació: {reservation.room.room_num}", styles['Normal']))
+    Story.append(Spacer(1, 12))
+
+    # Informació de despeses
+    Story.append(Paragraph(f"Costs de pensió: {despeses.pension_costs}", styles['Normal']))
+    Story.append(Paragraph(f"Costs de tipus d'habitació: {despeses.room_type_costs}", styles['Normal']))
+    Story.append(Spacer(1, 12))
+
+    # Informació de costos extra
+    for extra in extra_costs:
+        Story.append(Paragraph(f"Tipus de cost extra: {extra.extra_costs_type}", styles['Normal']))
+        Story.append(Paragraph(f"Preu del cost extra: {extra.extra_costs_price}", styles['Normal']))
+    Story.append(Spacer(1, 12))
+
+    # Informació del client
+    Story.append(Paragraph(f"Nom del client: {client.first_name} {client.last_name}", styles['Normal']))
+    Story.append(Paragraph(f"Document d'identitat: {client.id_number}", styles['Normal']))
+    Story.append(Paragraph(f"Correu electrònic: {client.email}", styles['Normal']))
+    Story.append(Paragraph(f"Telèfon: {client.phone_number}", styles['Normal']))
+    Story.append(Spacer(1, 12))
+
+    # Final del document
+    Story.append(Paragraph("Gràcies per la seva estada!", styles['Normal']))
+
+    doc.build(Story)
+    buffer.seek(0)
+
+    return FileResponse(buffer, as_attachment=True, filename='receipt.pdf')
