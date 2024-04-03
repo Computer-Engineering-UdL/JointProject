@@ -1,15 +1,10 @@
 #section-title {
     font-size: 50px;
-    margin: 20px;
-}
-
-#process-guidance {
-    margin: 20px;
+    margin: 0;
 }
 
 .buttons {
     height: 50%;
-    margin: 20px;
     gap: 50px;
     display: flex;
     flex-wrap: wrap;
