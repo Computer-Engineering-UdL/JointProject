@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 from Reception.models import RoomReservation, Client, Room, Worker
+from Reception.config import Config as c
 
 
 class CheckInViewTest(TestCase):
@@ -51,9 +52,9 @@ class CheckInViewTest(TestCase):
     def test_check_in_view_redirect_with_reservation(self):
         url = reverse('check_in')
         response = self.client.post(url, {'num_reservation': self.reservation.id})
-        self.assertTemplateUsed(response, 'worker/receptionist/check-in/check_in_2.html')
+        self.assertTemplateUsed(response, c.get_check_in_path(2))
 
-    def test_check_in_view_redirect_with_dni(self):
+    def test_check_in_view_redirect_with_id_number(self):
         url = reverse('check_in')
-        response = self.client.post(url, {'dni': self.client_user.id_number})
-        self.assertTemplateUsed(response, 'worker/receptionist/check-in/check_in_2.html')
+        response = self.client.post(url, {'id_number': self.client_user.id_number})
+        self.assertTemplateUsed(response, c.get_check_in_path(2))
