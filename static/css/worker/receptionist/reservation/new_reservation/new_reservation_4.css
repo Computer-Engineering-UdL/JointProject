@@ -1,9 +1,4 @@
-#text-reserva{
-    margin: 20px;
-}
-
 #big-container{
-    margin: 20px;
     display: flex;
     justify-content: center;
     gap: 10px;
@@ -25,10 +20,6 @@
     flex-direction: column;
     margin: 10px;
     gap: 10px;
-}
-
-#preu-total{
-    margin: 20px;
 }
 
 form{

@@ -12,7 +12,7 @@
     <div class="main">
     <form action="{% url 'submit_reservation' %}" method="post">
         {% csrf_token %}
-        <h1 id="text-reserva">Reserva {{ reservation.id }}</h1>
+        <h1>Reserva {{ reservation.id }}</h1>
         <div id="big-container">
             <div class="data-container">
                 <div class="inner-container">
@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <h3 id="preu-total">Preu total: {{ reservation.total_price }}€</h3>
+        <h3>Preu total: {{ reservation.total_price }}€</h3>
         <div class="procedural-buttons">
             <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
             <button class="continue-button" type="submit" onclick="return confirm('Vols finalitzar la reserva?');">Finalitzar Reserva &#10093;</button>
