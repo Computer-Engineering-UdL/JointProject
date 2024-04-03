@@ -35,6 +35,13 @@
                 <input class="submit-button" type="submit" value="Continua">
             </div>
         </div>
+        <div id="notifications">
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <p class="notification-err">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
     </form>
 
 
