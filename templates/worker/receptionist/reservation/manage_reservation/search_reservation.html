@@ -46,10 +46,9 @@
             {% for reservation in reservations %}
                 <li>
                     <div>Reserva {{ reservation.id }}</div>
-                    <div>{{ reservation.id }}</div>
-                    <div>{{ reservation.id }}</div>
-                    <div>{{ reservation.id }}</div>
-                    <div>{{ reservation.id }}</div>
+                    <div>{{ reservation.entry }} - {{ reservation.exit }}</div>
+                    <div>Pensió: {{ reservation.pension_type }}</div>
+                    <div>Nº hostes: {{ reservation.num_guests }}</div>
                 </li>
             {% endfor %}
         </ul>
