@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.contrib.auth.models import User, AbstractUser
 
+from Reception.config import Config
+
 
 class HotelUser(AbstractUser):
     email = models.EmailField()
@@ -73,3 +75,15 @@ class CheckIn(models.Model):
 
     def __str__(self):
         return self.num_reservation
+
+
+class Despeses(models.Model):
+    room_reservation = models.OneToOneField(RoomReservation, on_delete=models.CASCADE)
+    pension_costs = models.IntegerField()
+    room_type_costs = models.IntegerField()
+
+
+class ExtraCosts(models.Model):
+    room_reservation = models.ForeignKey(RoomReservation, on_delete=models.CASCADE)
+    extra_costs_type = models.CharField(max_length=100, choices=Config.room_extra_costs)
+    extra_costs_price = models.IntegerField()
