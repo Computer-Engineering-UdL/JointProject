@@ -3,7 +3,8 @@
 
 {% load static %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/worker/receptionist/reservation/manage_reservation/search_reservation.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'css/worker/receptionist/reservation/manage_reservation/search_reservation.css' %}">
 {% endblock extra_css %}
 
 <!-- This block must appear in every reservation template as it is -->
@@ -54,14 +55,27 @@
             </ul>
             <ul class="reservation-list">
                 {% for reservation in reservations %}
-                    <li>
-                        <div id="reservation-id">{{ reservation.id }}</div>
-                        <div id="entry">{{ reservation.entry }}</div>
-                        <div id="exit">{{ reservation.exit }}</div>
-                        <div id="name">{{ reservation.client.first_name}}</div>
-                        <div id="pension">{{ reservation.pension_type }}</div>
-                        <div id="num-guests">{{ reservation.num_guests }}</div>
-                    </li>
+                    <div class="list-div">
+                        <li>
+                            <div id="reservation-id">{{ reservation.id }}</div>
+                            <div id="entry">{{ reservation.entry }}</div>
+                            <div id="exit">{{ reservation.exit }}</div>
+                            <div id="name">{{ reservation.client.first_name }}</div>
+                            <div id="pension">{{ reservation.pension_type }}</div>
+                            <div id="num-guests">{{ reservation.num_guests }}</div>
+                        </li>
+                        <div class="icons">
+                            <div class="icon"><img src="{% static 'img/icons/edit-icon.png' %}" alt="edit"></div>
+                            <div class="icon">
+                                <form action="{% url 'delete_reservation' reservation.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit"
+                                            onclick="return confirm('Estàs segur que vols eliminar aquesta reserva?');">
+                                        <img src="{% static 'img/icons/delete-icon.png' %}" alt="delete"></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
             </ul>
         </div>
