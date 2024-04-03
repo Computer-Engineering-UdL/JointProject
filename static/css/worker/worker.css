@@ -1,3 +1,29 @@
+body{
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+main{
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.main {
+	display: flex;
+	flex-direction: column;
+    aspect-ratio: 16 / 9;
+	height: 100%;
+	width: 100%;
+    max-height: 900px;
+    max-width: 1600px;
+    /*height: 90vh;*/
+}
+
+
 header {
 	display: flex;
 	align-items: stretch;
@@ -103,4 +129,63 @@ nav {
 
 input {
 	background-color: #F8F8F2;
+}
+
+
+.procedural-buttons {
+    height: 8%;
+	width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+	margin: 20px;
+}
+
+.procedural-buttons button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+    height: 100%;
+    width: 20%;
+	max-width: 160px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    padding: 15px 10px;
+}
+
+.cancel-button {
+    color: #ff0000;
+    background-color: #ffffff;
+    border: 1px solid #ff0000;
+}
+
+.cancel-button:hover {
+    color: #ffffff;
+    background-color: #ff0000;
+    border: 1px solid #ff0000;
+}
+
+.cancel-button:active {
+    opacity: 0.4;
+}
+
+.continue-button {
+    color: #14b909;
+    background-color: #ffffff;
+    border: 1px solid #14b909;
+}
+
+.continue-button:hover {
+    color: #ffffff;
+    background-color: #14b909;
+    border: 1px solid #14b909;
+}
+
+.continue-button:active {
+    opacity: 0.4;
 }

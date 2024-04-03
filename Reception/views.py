@@ -95,7 +95,7 @@ def new_reservation_4(request, pk):
 
 @worker_required('receptionist')
 def submit_reservation(request):
-    return redirect('worker_home')
+    return redirect('receptionist_home')
 
 
 # Check-in views

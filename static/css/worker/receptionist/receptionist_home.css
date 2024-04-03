@@ -1,18 +1,19 @@
-.section-title {
+#section-title {
     font-size: 50px;
-    margin-left: 12px;
+    margin: 20px;
 }
 
-.process-guidance {
-    margin-left: 12px;
-    margin-bottom: 70px;
+#process-guidance {
+    margin: 20px;
 }
 
 .buttons {
+    height: 50%;
+    margin: 20px;
     gap: 50px;
     display: flex;
     flex-wrap: wrap;
-    align-content: flex-end;
+    align-content: center;
     align-items: baseline;
     justify-content: space-evenly;
 }

@@ -3,27 +3,16 @@ p {
     font-size: 1.2em;
 }
 
-main {
-    display: flex;
-    height: 90vh;
-    align-items: center;
-    justify-content: center;
-}
-
 .add-reservation-form {
-    aspect-ratio: 16 / 9;
-    max-height: 900px;
-    max-width: 1600px;
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: row;
-    gap: 50px;
     /*background-color: rgba(165, 157, 190, 0.5);*/
     /*outline: 1px solid #000000;*/
-    justify-content: center;
+    justify-content: space-between;
     border-radius: 8px;
-    margin: 10px;
+    margin: 20px;
 }
 
 .date {
@@ -32,7 +21,6 @@ main {
     align-items: stretch;
     justify-content: flex-start;
     gap: 10px;
-    margin: 10px;
     width: 50%;
 }
 
@@ -86,7 +74,6 @@ main {
     align-items: stretch;
     justify-content: space-evenly;
     gap: 10px;
-    margin: 10px;
     width: 30%;
 }
 
@@ -160,57 +147,4 @@ main {
 
 #pension-type p {
     text-align: center;
-}
-
-.buttons {
-    height: 12%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 10px;
-}
-
-main button {
-    height: 100%;
-    width: 48%;
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: 15px;
-    font-weight: bold;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: opacity 0.2s;
-    padding: 15px 25px;
-}
-
-.cancel-button {
-    color: #ff0000;
-    background-color: #ffffff;
-    border: 1px solid #ff0000;
-}
-
-.cancel-button:hover {
-    color: #ffffff;
-    background-color: #ff0000;
-    border: 1px solid #ff0000;
-}
-
-.cancel-button:active {
-    opacity: 0.4;
-}
-
-.add-form-button {
-    color: #14b909;
-    background-color: #ffffff;
-    border: 1px solid #14b909;
-}
-
-.add-form-button:hover {
-    color: #ffffff;
-    background-color: #14b909;
-    border: 1px solid #14b909;
-}
-
-.add-form-button:active {
-    opacity: 0.4;
 }
