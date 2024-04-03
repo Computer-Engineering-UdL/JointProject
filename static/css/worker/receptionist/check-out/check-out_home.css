@@ -36,8 +36,8 @@
 .buttons {
     display: flex;
     justify-content: flex-end;
-    padding-top: 10%;
-    padding-right: 15%;
+    padding-top: 5%;
+    padding-right: 5%;
 }
 .submit-button {
     padding: 20px 40px;
@@ -52,4 +52,13 @@
 }
 .submit-button:active {
     opacity: 0.5;
+}
+
+.list-title {
+    font-size: 35px;
+}
+.list-items {
+    font-size: 20px;
+    display: flex;
+    justify-content: flex-start;
 }
