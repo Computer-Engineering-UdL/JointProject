@@ -3,7 +3,8 @@
 
 {% load static %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/worker/receptionist/reservation/manage_reservation/search_reservation.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'css/worker/receptionist/reservation/manage_reservation/search_reservation.css' %}">
 {% endblock extra_css %}
 
 <!-- This block must appear in every reservation template as it is -->
@@ -42,15 +43,43 @@
             </form>
         </div>
 
-        <ul class="reservation-list">
-            {% for reservation in reservations %}
-                <li>
-                    <div>Reserva {{ reservation.id }}</div>
-                    <div>{{ reservation.entry }} - {{ reservation.exit }}</div>
-                    <div>Pensió: {{ reservation.pension_type }}</div>
-                    <div>Nº hostes: {{ reservation.num_guests }}</div>
-                </li>
-            {% endfor %}
-        </ul>
+        <h2>Reserves</h2>
+        <div id="list">
+            <ul class="list-index">
+                <li id="reservation-id">Reserva</li>
+                <li id="entry">Entrada</li>
+                <li id="exit">Sortida</li>
+                <li id="name">Client</li>
+                <li id="pension">Pensió</li>
+                <li id="num-guests">Nº hostes</li>
+            </ul>
+            <ul class="reservation-list">
+                {% for reservation in reservations %}
+                    <div class="list-div">
+                        <li>
+                            <div id="reservation-id">{{ reservation.id }}</div>
+                            <div id="entry">{{ reservation.entry }}</div>
+                            <div id="exit">{{ reservation.exit }}</div>
+                            <div id="name">{{ reservation.client.first_name }}</div>
+                            <div id="pension">{{ reservation.pension_type }}</div>
+                            <div id="num-guests">{{ reservation.num_guests }}</div>
+                        </li>
+                        <div class="icons">
+                            <div class="icon"><a href="{% url 'reservation_details' pk=reservation.id %}">
+                                <img src="{% static 'img/icons/edit-icon.png' %}" alt="edit"></a>
+                            </div>
+                            <div class="icon">
+                                <form action="{% url 'delete_reservation' reservation.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit"
+                                            onclick="return confirm('Estàs segur que vols eliminar aquesta reserva?');">
+                                        <img src="{% static 'img/icons/delete-icon.png' %}" alt="delete"></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 {% endblock %}

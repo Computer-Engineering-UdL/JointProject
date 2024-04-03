@@ -6,6 +6,8 @@
     <link rel="stylesheet"
           href="{% static 'css/worker/receptionist/reservation/new_reservation/new_reservation_1.css' %}">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="{% static 'js/reservation_form.js' %}"></script>
+    <script src="{% static 'js/date_picker.js' %}"></script>
 {% endblock extra_css %}
 
 <!-- This block must appear in every reservation template as it is -->
@@ -15,60 +17,60 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script src="{% static 'js/reservation_form.js' %}"></script>
-    <script src="{% static 'js/date_picker.js' %}"></script>
     <title>{% block title %}Reserva habitació{% endblock %}</title>
 {% endblock extra_meta_tags %}
 
 {% block content %}
     <div class="main">
-        <form class="add-reservation-form" method="post">
-            {% csrf_token %}
-            <div class="date">
-                <h2>Introdueixi la data i el tipus d'habitació desitjada:</h2>
-                <div class="date-form">
-                    <div class="date-input">
-                        <p class="title-input">Data d'entrada</p>
-                        {{ form.entry }}
+        <form method="post">
+            <div class="add-reservation-form">
+                {% csrf_token %}
+                <div class="date">
+                    <h2>Introdueixi la data i el tipus d'habitació desitjada:</h2>
+                    <div class="date-form">
+                        <div class="date-input">
+                            <p class="title-input">Data d'entrada</p>
+                            {{ form.entry }}
+                        </div>
+                        <div class="date-input">
+                            <p class="title-input">Data de sortida</p>
+                            {{ form.exit }}
+                        </div>
                     </div>
-                    <div class="date-input">
-                        <p class="title-input">Data de sortida</p>
-                        {{ form.exit }}
+                    <div>
+                        <div>
+                            {{ form.room }}
+                        </div>
+                        <div>
+                            {{ form.client }}
+                            <a href="{% url 'new_reservation_3' %}">Crear client</a>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        {{ form.room }}
+                <div class="reservation-info-form">
+                    <div class="form-button" id="guests-number">
+                        <p class="title-input">Nombre d'hostes</p>
+                        {{ form.num_guests }}
                     </div>
-                    <div>
-                        {{ form.client }}
-                        <a href="{% url 'new_reservation_3' %}">Crear client</a>
+                    <div class="form-button" id="room-type">
+                        <p class="title-input">Tipus d'habitació</p>
+                        {{ form.room_type }}
+                    </div>
+                    <div class="form-button" id="pension-type">
+                        <p class="title-input">Tipus de pensió</p>
+                        {{ form.pension_type }}
                     </div>
                 </div>
             </div>
-            <div class="reservation-info-form">
-                <div class="form-button" id="guests-number">
-                    <p class="title-input">Nombre d'hostes</p>
-                    {{ form.num_guests }}
-                </div>
-                <div class="form-button" id="room-type">
-                    <p class="title-input">Tipus d'habitació</p>
-                    {{ form.room_type }}
-                </div>
-                <div class="form-button" id="pension-type">
-                    <p class="title-input">Tipus de pensió</p>
-                    {{ form.pension_type }}
-                </div>
+            <div class="procedural-buttons">
+                <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
+                <button class="continue-button" type="submit">Create &#10093;</button>
             </div>
         </form>
-        <div class="procedural-buttons">
-            <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
-            <button class="continue-button" type="submit">Create &#10093;</button>
-        </div>
     </div>
     <div id="notifications">
-        {% if form.non_field_errors %}
-            {% for error in form.non_field_errors %}
+        {% if form.errors %}
+            {% for error in form.errors %}
                 <p class="notification-err">{{ error }}</p>
             {% endfor %}
         {% endif %}
