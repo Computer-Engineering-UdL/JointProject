@@ -9,24 +9,21 @@
 | Check-in         | System to check-in an guest with a given room reservation.                     | Yes       |
 | Check-out        | System to check-out a gues with a given room reservation with check-in enabled | Yes       |
 
-
 ## Burn-down Graph
 
-_Here we need an image reflecting the advances in the Burn-down graph. Complementing the image, we need a small
-paragraph describing the Scrum Master opinion about the advances._
+![burn_down_chart_sprint1.png](burn_down_chart_sprint1.png)
 
-![scatter diagram](./scatter_diagram_issues.png)
-
-[DESCRIPTION GOES HERE]
+The sprint started with a lot of issues, but the team was able to solve them and deliver the project on time. But there
+have been bugs that had to be solved last time. In general the team has started working well but a bit late so the last
+days of the sprint had to be worked hard to deliver the project on time.
 
 ## Brun-up (Velocity) Graph
 
-_Here we need an image reflecting the advances in the Burn-up graph. Complementing the image, we need a small paragraph
-describing the Scrum Master opinion about the advances._
+![burn_up_chart_sprint1.png](burn_up_chart_sprint1.png)
 
-[IMAGE GOES HERE]
-
-[DESCRIPTION GOES HERE]
+The team has started the sprint with a lot of issues and the velocity was low. But the team has worked hard to solve the
+issues and deliver the project on time. For the next sprint this should be improved in order to make the line more
+linear.
 
 ## Client Improvements
 
