@@ -3,6 +3,7 @@
 
 {% load static %}
 {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/receptionist/check-out/check-out_home.css' %}">
     <link rel="stylesheet"
           href="{% static 'css/worker/receptionist/reservation/manage_reservation/search_reservation.css' %}">
 {% endblock extra_css %}
@@ -14,21 +15,26 @@
     <div class="main">
         <div class="reservation-search">
             <h2>Cercar reserva</h2>
+
             <form method="get">
                 {% csrf_token %}
-                <div class="form-group">
-                    {{ form.num_reservation.label_tag }}
-                    {{ form.num_reservation }}
+                <div class="entry-fields">
+                    <div class="form-group">
+                        <p>Número de reserva</p>
+                        {{ form.num_reservation }}
+                    </div>
+                    <div class="form-group">
+                        <p>Document identificatiu</p>
+                        {{ form.id_number }}
+                    </div>
+                    <div class="form-group">
+                        <p>Número d'habitació</p>
+                        {{ form.room_num }}
+                    </div>
                 </div>
-                <div class="form-group">
-                    {{ form.id_number.label_tag }}
-                    {{ form.id_number }}
+                <div class="buttons">
+                    <button class="submit-button" type="submit">Filtrar</button>
                 </div>
-                <div class="form-group">
-                    {{ form.room_num.label_tag }}
-                    {{ form.room_num }}
-                </div>
-                <button type="submit">Filtrar</button>
             </form>
 
             <form method="post">
