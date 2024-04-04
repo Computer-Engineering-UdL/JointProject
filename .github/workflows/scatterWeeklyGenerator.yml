@@ -1,4 +1,4 @@
-name: Weekly Report - Scatter Diagram of Commits (lines added and files modified)
+name: Weekly Report - Scatter Diagram of Issues (all closed issues)
 
 on:
   schedule:
@@ -19,12 +19,12 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install PyGithub matplotlib
-      - name: Generate Scatter Diagram commits
+      - name: Generate Scatter Diagram Issues
         run: python Ichicawa_tools_generators/generateWeeklyScatterDiagram.py
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-      - name: Upload Scatter Diagram commits
+      - name: Upload Scatter Diagram issues
         uses: actions/upload-artifact@v2
         with:
-          name: scatter_diagram_commits_weekly
-          path: scatter_diagram_commits_weekly.png
+          name: scatter_diagram_issues_weekly
+          path: scatter_diagram_issues_weekly.png
