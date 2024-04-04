@@ -15,7 +15,7 @@
 _Here we need an image reflecting the advances in the Burn-down graph. Complementing the image, we need a small
 paragraph describing the Scrum Master opinion about the advances._
 
-[IMAGE GOES HERE]
+![scatter diagram](./scatter_diagram_issues.png)
 
 [DESCRIPTION GOES HERE]
 
