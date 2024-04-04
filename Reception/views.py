@@ -50,7 +50,10 @@ def new_reservation_1(request):
         form = RoomReservationForm(request.POST)
         if form.is_valid():
             room_rsv = form.save(commit=False)
+            room = get_object_or_404(Room, pk=room_rsv.room_id)
+            room.is_taken = True
             room_rsv.save()
+            room.save()
             create_despesa(room_rsv, 0, 0)
             return redirect('new_reservation_4', room_rsv.id)
         else:
