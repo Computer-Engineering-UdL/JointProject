@@ -13,74 +13,74 @@
 {% block title %}Check Out{% endblock title %}
 
 {% block content %}
-  <h1 class="section-title">CHECK-OUT</h1>
-    
-  <div class="container">
-    <p class="process-guidance">
-        Per iniciar el procés de "Check-Out" introdueixi una de les següents dades sol·licitades:
-    </p>
-    <form method="get">
-      {% csrf_token %}
-        <div class="entry-fields">
-          <div class="form-group">
-              <p>Número de reserva</p>
-            {{ form.num_reservation }}
-          </div>
-          <div class="form-group">
-            <p>Document identificatiu</p>
-            {{ form.id_number }}
-          </div>
-          <div class="form-group">
-              <p>Número d'habitació</p>
-            {{ form.room_num }}
-          </div>
-        </div>
-        <div class="buttons">
-            <button class="submit-button" type="submit">Filtrar</button>
-        </div>
-      
-    </form>
+    <h1 class="section-title">CHECK-OUT</h1>
 
-    <form method="post">
-      {% csrf_token %}
-      <div id="notifications">
-        {% if form.non_field_errors %}
-          {% for error in form.non_field_errors %}
-            <p class="notification-err">{{ error }}</p>
-          {% endfor %}
-        {% endif %}
-      </div>
-    </form>
-  </div>
+    <div class="container">
+        <p class="process-guidance">
+            Per iniciar el procés de "Check-Out" introdueixi una de les següents dades sol·licitades:
+        </p>
+        <form method="get">
+            {% csrf_token %}
+            <div class="entry-fields">
+                <div class="form-group">
+                    <p>Número de reserva</p>
+                    {{ form.num_reservation }}
+                </div>
+                <div class="form-group">
+                    <p>Document identificatiu</p>
+                    {{ form.id_number }}
+                </div>
+                <div class="form-group">
+                    <p>Número d'habitació</p>
+                    {{ form.room_num }}
+                </div>
+            </div>
+            <div class="buttons">
+                <button class="submit-button" type="submit">Filtrar</button>
+            </div>
 
-  <h3 class="list-title">Llista de Reserves Actives</h3>
-        <div id="list">
-            <ul class="list-index">
-                <li id="reservation-id">Reserva</li>
-                <li id="entry">Entrada</li>
-                <li id="exit">Sortida</li>
-                <li id="name">Client</li>
-                <li id="pension">Pensió</li>
-                <li id="num-guests">Nº hostes</li>
-            </ul>
-            <ul class="reservation-list">
-                {% for reservation in reservations %}
-                    <div class="list-div">
-                        <li>
-                            <div id="reservation-id">{{ reservation.id }}</div>
-                            <div id="entry">{{ reservation.entry }}</div>
-                            <div id="exit">{{ reservation.exit }}</div>
-                            <div id="name">{{ reservation.client.first_name }}</div>
-                            <div id="pension">{{ reservation.pension_type }}</div>
-                            <div id="num-guests">{{ reservation.num_guests }}</div>
-                        </li>
-                        <div class="icons">
-                            <div class="icon"><a href="{% url 'check_out_summary' pk=reservation.id %}">
-                                <img src="{% static 'img/icons/info-icon.png' %}" alt="edit"></a>
-                            </div>
+        </form>
+
+        <form method="post">
+            {% csrf_token %}
+            <div id="notifications">
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <p class="notification-err">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+    <h3 class="list-title">Llista de Reserves Actives</h3>
+    <div id="list">
+        <ul class="list-index">
+            <li id="reservation-id">Reserva</li>
+            <li id="entry">Entrada</li>
+            <li id="exit">Sortida</li>
+            <li id="name">Client</li>
+            <li id="pension">Pensió</li>
+            <li id="num-guests">Nº hostes</li>
+        </ul>
+        <ul class="reservation-list">
+            {% for reservation in reservations %}
+                <div class="list-div">
+                    <li>
+                        <div id="reservation-id">{{ reservation.id }}</div>
+                        <div id="entry">{{ reservation.entry }}</div>
+                        <div id="exit">{{ reservation.exit }}</div>
+                        <div id="name">{{ reservation.client.first_name }}</div>
+                        <div id="pension">{{ reservation.pension_type }}</div>
+                        <div id="num-guests">{{ reservation.num_guests }}</div>
+                    </li>
+                    <div class="icons">
+                        <div class="icon"><a href="{% url 'check_out_summary' pk=reservation.id %}">
+                            <img src="{% static 'img/icons/info-icon.png' %}" alt="edit"></a>
                         </div>
                     </div>
-                {% endfor %}
-            </ul>
-        </div>
+                </div>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

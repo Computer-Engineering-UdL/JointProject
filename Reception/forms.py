@@ -83,12 +83,11 @@ class AddClientForm(forms.ModelForm):
 class InfoClientForm(forms.ModelForm):
     num_reservation = forms.CharField(label="Número de reserva", required=False)
     id_number = forms.CharField(max_length=20, label="Document identificatiu", required=False)
-    
+
     def clean(self):
         cleaned_data = super().clean()
         num_reservation = cleaned_data.get("num_reservation")
         id_number = cleaned_data.get("id_number")
-
 
         if not num_reservation and not id_number:
             raise forms.ValidationError("Siusplau, introdueixi el número de la reserva o del document identificatiu.")
