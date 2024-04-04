@@ -1,0 +1,48 @@
+{% extends "worker/receptionist/base_receptionist.html" %}
+<!-- This template shows all the info of the client reservation -->
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/receptionist/check-out/check-out_2.css' %}">
+{% endblock extra_css %}
+
+{% block id_check-out %} id="current-page" {% endblock id_check-out %}
+
+{% block content %}
+    <div>
+        <div>
+            <div class="section-title">
+                <h3>Reserva {{ reservation.id }}</h3><h3>Factura</h3>
+            </div>
+            <div class="reservation-data">
+                <div class="reservation-data-field">
+                    <div><p>Hoste:</p> <span class="entry-data">{{ reservation.client }}</span></div>
+                    <div><p>Habitació:</p> <span class="entry-data">{{ reservation.room }}</span></div>
+                    <div><p>Tipus d'habitació:</p> <span class="entry-data">{{ room.room_type }}</span></div>
+                    <div><p>Data entrada:</p> <span class="entry-data"> {{ reservation.entry }}</span></div>
+                    <div><p>Data sortida:</p> <span class="entry-data">{{ reservation.exit }}</span></div>
+                    <div><p>Número d'hostes:</p> <span class="entry-data">{{ reservation.num_guests }}</span></div>
+                    <div><p>Tipus de pensió:</p> <span class="entry-data">{{ reservation.pension_type }}</span></div>
+                </div>
+
+                <div class="reservation-data-field">
+                    <div><p>Preu habitació:</p> <span class="entry-data">{{ despeses.room_type_costs }}€</span></div>
+                    <div><p>Preu pensió:</p> <span class="entry-data">{{ despeses.pension_costs }}</span></div>
+                    <div><p>Serveis Extra:</p></div>
+                    {% for extra in extra_costs %}
+                        <div><p>Tipus:</p> <span class="entry-data">{{ extra.extra_costs_type }}</span></div>
+                        <div><p>Preu:</p> <span class="entry-data">{{ extra.extra_costs_price }}</span></div>
+                    {% endfor %}
+                    <div><p>Total serveis extra:</p> <span class="entry-data">{{ extra_total }}€</span></div>
+                    <div><p>Total:</p> <span class="entry-data">{{ total_price }}€</span></div>
+                </div>
+            </div>
+            <form action="{% url 'check_out_3' reservation.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" onclick="return confirm('Estàs segur que vols finalitzar el procés de check-out?');">Finalitzar check-out</button>
+            </form>
+
+            <a href="{% url 'receptionist_home' %}">Torna a Inici</a>
+        </div>
+    </div>
+{% endblock %}

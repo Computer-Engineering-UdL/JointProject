@@ -1,0 +1,8 @@
+.first_block {
+    border: solid 1px black;
+}
+
+.entry-data {
+    margin-left: 5px;
+    font-weight: bold;
+}

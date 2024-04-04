@@ -1,0 +1,37 @@
+name: Checklist weekly report generator
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 22 * * 0'
+  
+env:
+    GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+    USER: ADMIN_USER
+    PROJECT: PROJECT_NAME
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: pip install PyGithub pandas matplotlib -q
+
+    - name: Run script
+      run: |
+        python Ichicawa_tools_generators/generate_report.py
+        
+    - name: Upload generated report
+      uses: actions/upload-artifact@v2
+      with:
+        name: weekly_table
+        path: weekly_table.png

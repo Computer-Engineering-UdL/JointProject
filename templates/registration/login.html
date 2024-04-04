@@ -1,8 +1,40 @@
+{% extends "base.html" %}
+<title>{% block title %}Log In{% endblock %}</title>
+{% load static %}
 {% block content %}
-<h2>Log In</h2>
 
-<form method="post">
-  {% csrf_token %} {{ form.as_p }}
-  <button type="submit">Login</button>
-</form>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/auth.css' %}" />
+
+  <div id="notifications">
+    {% if form.non_field_errors %}
+      {% for error in form.non_field_errors %}
+        <p class="notification-err">{{ error }}</p>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <div class="login-box">
+    <h2>Log In</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.non_field_errors.as_p }}
+      <div class="user-box">
+        {{ form.username }}
+        <label for="{{ form.username.id_for_label }}">Username</label>
+      </div>
+      <div class="user-box">
+        {{ form.password }}
+        <label for="{{ form.password.id_for_label }}">Password</label>
+      </div>
+      <p>Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
+
+      <button type="submit" class="submit-button">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Submit
+      </button>
+    </form>
+  </div>
 {% endblock %}

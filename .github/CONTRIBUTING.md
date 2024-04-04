@@ -45,23 +45,16 @@ To ignore any file or directory use the `--exclude` flag, for example:
 flake8 . --exclude=venv,migrations
 ```
 
-### 3. Prettier
+### 3. DJHTML
 
-This project also uses the [Prettier](https://prettier.io/) linter to check the code style. This means that
-every pull request should pass the Prettier checks in order to be merged.
-
-In order to check the code style, run the following command:
+This project uses the [DJHTML](https://github.com/rtts/djhtml) linter to check the Django HTML files. This means that
+all code should be formatted with DJHTML. To do this, run the following command:
 
 ```bash
-prettier --check .
+djhtml .
 ```
 
-Or if you want to format the code:
+### 4. Pull requests
 
-```bash
-prettier --write .
-```
-
-### 3. Pull requests
-
-Finally, it is strongly recommended to create a pull request using the [Conventional Comments](https://conventionalcomments.org/) specification.
+Finally, it is strongly recommended to create a pull request using
+the [Conventional Comments](https://conventionalcomments.org/) specification.

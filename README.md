@@ -6,7 +6,7 @@
 [![Django](https://img.shields.io/badge/django-5.0.3-green.svg?style=plastic)](https://djangoproject.com)
 [![Flake8](https://img.shields.io/badge/flake8-7.0.0-blueviolet?style=plastic)](https://flake8.pycqa.org/en/latest/)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
-![Contributors](https://img.shields.io/badge/contributors-5-g?style=plastic)
+[![Contributors](https://img.shields.io/badge/contributors-5-g?style=plastic)](https://github.com/orgs/Computer-Engineering-UdL/teams/joint-project)
 
 <!--[![Licence](https://img.shields.io/github/license/Computer-Engineering-UdL/JointProject?style=plastic&color=red)](./LICENSE)-->
 <!---![Contributors](https://img.shields.io/github/Computer-Engineering-UdL/JointProject?style=plastic&color=blue)-->
@@ -62,13 +62,13 @@ Then, open your browser and go to the [localhost](http://localhost:8000/) url.
 In order to organize the work, we have divided the project into different sectors and assigned people to each of them.
 
 | **Sector**            | **Head of the sector** | **People involved**          |
-| --------------------- | ---------------------- | ---------------------------- |
-| Frontend              | Abel                   | Abdellah, Júlia              |
+|-----------------------|------------------------|------------------------------|
+| Frontend              | Abel                   | Júlia                        |
 | Backend               | Sergi                  | Abdellah, Aniol              |
 | Testing               | Abdellah               | Aniol, Júlia, Abel           |
 | Database              | Aniol                  | Sergi                        |
 | Product Documentation | Aniol                  | Abel, Abdellah, Júlia, Sergi |
-| Project Management    | Júlia                  | Aniol                        |
+| Project Management    | Aniol                  | Aniol                        |
 
 To check the work done by each sprint, check the documentation in the [documentation](./documentation) folder.
 

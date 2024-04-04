@@ -1,0 +1,28 @@
+{% extends "worker/receptionist/base_receptionist.html" %}
+<!-- This template allows to select method of payment for the client reservation -->
+
+{% block title %} Check In {% endblock %}
+
+{% block content %}
+
+    <h4>El check in s'ha realitzat correctament</h4>
+
+    <p>Procedeix a entregar la clau de l'habitació {{ reservation.room.room_num }} a {{ client.first_name }} </p>
+
+    <button onclick="downloadAndRedirect('{% url 'print_receipt' client.id reservation.id %}',
+                     '{% url 'receptionist_home' %}')">
+        Imprimir comprovant
+    </button>
+
+
+    <script>
+        function downloadAndRedirect(pdfUrl, redirectUrl) {
+
+            window.location.href = pdfUrl;
+            setTimeout(function() {
+                window.location.href = redirectUrl;
+            }, 2000);
+        }
+    </script>
+
+{% endblock %}
