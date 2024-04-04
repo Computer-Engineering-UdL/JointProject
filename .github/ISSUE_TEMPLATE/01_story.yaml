@@ -1,5 +1,5 @@
 name: User Story
-description: A user story for the JointProject to outline new features or improvements from the user's perspective.
+description: A User story for the JointProject to outline new features or improvements from the User's perspective.
 body:
   - type: markdown
     attributes:
@@ -10,7 +10,7 @@ body:
     id: user_story_title
     attributes:
       label: User Story Title
-      description: Brief title summarizing the user story.
+      description: Brief title summarizing the User story.
       placeholder: "As a [role], I want [feature], so that [benefit]."
     validations:
       required: true
@@ -19,7 +19,7 @@ body:
     id: user_story_description
     attributes:
       label: Detailed Description
-      description: Detailed description of the user story, including acceptance criteria.
+      description: Detailed description of the User story, including acceptance criteria.
       placeholder: "Provide a detailed description, including any acceptance criteria or specific requirements."
     validations:
       required: true

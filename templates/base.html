@@ -1,12 +1,87 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Hotel las Palmeras {% block title %}{% endblock %}</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static '/style.css' %}" />
-  </head>
-  <body>
-    {% block content %} {% endblock %}
-  </body>
+    <head>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'css/notifications.css' %}" />
+        {% block css %}{% endblock css %}
+
+        <meta charset="UTF-8">
+        <meta name="robots" content="index, follow">
+        <meta name="description" content="Join Project">
+        <meta name="keywords" content="Hotel las palmeras">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- OPENGRAPH -->
+        <meta property="og:title" content="Join Project">
+        <meta property="og:description" content="Join Project website">
+        <!--<meta property="og:image" content="https://www.example.com/image.jpg">
+				<meta property="og:url" content="https://www.example.com"> -->
+        <meta property="og:type" content="website">
+
+        <title>Hotel Las Palmeras · {% block title %}Home{% endblock title %}</title>
+
+        {% block extra_meta_tags %}{% endblock extra_meta_tags %}
+    </head>
+
+    <body>
+        <header>
+            {% block header %}{% endblock header %}
+        </header>
+
+        <main>
+            {% block content %}
+                <!--
+                <button> <a href="{% url 'worker_home' %}">
+                    RECEPTION - Worker Home
+                </a></button>
+                -->
+
+                <!-- Metode add_client depen de iniciar una nova reserva, per tant no es pot accedir individualment,
+                     si encara aixi es vol crear utilitzar metode ADMIN
+                <button> <a href=" url 'add_client' ">
+                    RECEPTION - Add Client
+                </a></button>
+                -->
+                <!--
+                    <button> <a href="{% url 'new_reservation_1' %}">
+                        RECEPTION - Room Reservation
+                    </a></button>
+
+                <button> <a href="{% url 'add_room' %}">
+                    RECEPTION - Add Room
+                </a></button>
+
+                <button> <a href="{% url 'check_in' %}">
+                    RECEPTION - Check-in
+                </a></button>
+
+                <button> <a href="{% url 'fetch_rooms' %}">
+                    RECEPTION - Fetch Rooms
+                </a></button>
+                -->
+                <button> <a href="{% url 'receptionist_home'%}">
+                    RECEPTION - Home
+                </a></button>
+                {% if not user.is_authenticated %}
+                <button> <a href="{% url 'login'%}">
+                    Log-in
+                </a></button>
+                <button> <a href="{% url 'signup'%}">
+                    Sign-up
+                </a></button>
+                {% else %}
+                <button> <a href="{% url 'logout'%}">
+                    Log-out
+                </a></button>
+                {% endif %}
+            {% endblock content %}
+        </main>
+
+        <footer>
+            {% block footer %}
+                <p>Usuari: {{ user.username }}</p>
+            {% endblock footer %}
+        </footer>
+    </body>
 </html>

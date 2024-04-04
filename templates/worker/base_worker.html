@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/worker/worker.css' %}">
+    <link rel="stylesheet" href="{% static 'js/utils.js' %}">
+    {% block extra_css %}{% endblock extra_css %}
+{% endblock css %}
+
+{% block title %}Worker{% endblock title %}
+{% block extra_meta_tags %}
+{% endblock extra_meta_tags %}
+
+{% block header %}
+    <nav>
+        <ul class="menu">
+            {% block menu %}{% endblock menu %}
+        </ul>
+    </nav>
+    <div id="right-header">
+        <p id="language">CAT</p>
+        <div id="separator"></div>
+        <!-- <img id="user-img" src="{ user.profile.image.url }}" alt="User"> -->
+        <img id="user" src="{% static 'img/icons/user-icon.png' %}" alt="User">
+    </div>
+{% endblock header %}
+
+{% block content %}
+    <p>worker</p>
+{% endblock content %}
+
+{% block footer %}
+{% endblock footer %}

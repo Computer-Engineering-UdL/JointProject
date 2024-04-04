@@ -1,0 +1,125 @@
+.main{
+    gap: 20px;
+}
+
+
+#list{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 3px;
+    width: 95%;
+}
+
+.list-index{
+    width: 92%;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0;
+}
+.list-index li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    /*text-decoration: underline;*/
+    list-style-type: none;
+    padding: 0;
+}
+
+.list-index img{
+    display: none;
+}
+
+/*********** table column sizes **********/
+#reservation-id{
+    width: 8%;
+}
+#entry{
+    width: 16%;
+}
+#exit{
+    width: 16%;
+}
+#name{
+    width: 32%;
+}
+#pension{
+    width: 18%;
+}
+#num-guests{
+    width: 10%;
+}
+/*****************************************/
+
+.icons{
+    width: 8%;
+    padding-left: 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.icon{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 30px;
+    border: none;
+}
+.icon a{
+    display: flex;
+    align-items: center;
+}
+.icon img{
+    width: 30px;
+    height: 30px;
+}
+
+.reservation-list{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+}
+.list-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+.reservation-list li{
+    width: 92%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: solid 2px black;
+    border-radius: 2px;
+}
+.reservation-list li div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    /*padding: 10px 15px;*/
+    border-right: solid 2px black;
+}
+.reservation-list li div:last-child{
+    border-right: none;
+}
+
+.icon form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
