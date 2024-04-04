@@ -46,12 +46,9 @@ def generate_burn_up_chart(milestone):
         closed_issues_accumulated[i] = closed_issues_accumulated[i - 1] + closed_issues_count_by_day.get(day_as_date, 0)
 
     sprint_days_np = np.array(sprint_days)
-    ideal_line = np.linspace(total_issues, 0, num_days)
 
     plt.figure(figsize=(10, 6))
     plt.plot(sprint_days_np.astype('datetime64[D]').astype(datetime), closed_issues_accumulated, label='Completed Work', marker='o', color='green')
-    plt.plot(sprint_days_np.astype('datetime64[D]').astype(datetime), ideal_line, label='Ideal', linestyle='--',
-             color='blue')
     plt.hlines(total_issues, sprint_days[0].astype(datetime), sprint_days[-1].astype(datetime), colors='blue', linestyles='dashed', label='Total Planned Work')
     plt.title('Burn-up Chart')
     plt.xlabel('Date')
