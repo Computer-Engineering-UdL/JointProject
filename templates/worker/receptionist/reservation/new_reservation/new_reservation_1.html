@@ -38,8 +38,16 @@
                         </div>
                     </div>
                     <div>
-                        <div>
+                        <div id="tomalo">
+                            <p>Número habitació: </p>
                             {{ form.room }}
+                            <style>
+                                #tomalo{
+                                    display: flex;
+                                    flex-direction: row;
+                                    margin-bottom: 5px;
+                                }
+                            </style>
                         </div>
                         <div>
                             {{ form.client }}
