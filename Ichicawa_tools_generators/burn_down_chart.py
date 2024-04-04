@@ -44,10 +44,12 @@ def generate_burn_down_chart(milestone):
         day_as_date = day.astype('datetime64[D]').astype(datetime)
         closed_issues_accumulated[i] = closed_issues_accumulated[i - 1] + closed_issues_count_by_day.get(day_as_date, 0)
 
+    sprint_days_np = np.array(sprint_days)
     remaining_work = total_issues - closed_issues_accumulated
 
     plt.figure(figsize=(10, 6))
-    plt.plot(sprint_days.astype(datetime), remaining_work, label='Actual', marker='o', color='red')
+    plt.plot(sprint_days_np.astype('datetime64[D]').astype(datetime), remaining_work, label='Actual', marker='o',
+             color='red')
     plt.title('Burn-down Chart')
     plt.xlabel('Date')
     plt.ylabel('Remaining Issues')
