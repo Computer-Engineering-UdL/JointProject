@@ -28,8 +28,10 @@
                 <div class="data-container">
                     <div class="inner-container">
                         <p>Nº reserva: {{ reservation.id }}</p>
-                        <p>Hoste: {{ reservation.client.first_name }}</p>
                         <p>Id: {{ client.id_number }}</p>
+                        <p>Nom: {{ client.first_name }}</p>
+                        <p>Cognoms: {{ client.last_name }}</p>
+                        <p>Correu electrònic: {{ client.email }}</p>
                         <p>Telèfon: {{ reservation.client.phone_number }}</p>
                     </div>
                 </div>
