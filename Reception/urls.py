@@ -17,7 +17,7 @@ urlpatterns = [
     path('reservation-details/<int:pk>/', v.reservation_details, name='reservation_details'),
     path('reservation/delete/<int:pk>/', v.delete_reservation, name='delete_reservation'),
     path('submit-reservation/', v.submit_reservation, name='submit_reservation'),
-    path('check-out', v.check_out_1, name='check_out'),
+    path('check-out/', v.check_out_1, name='check_out'),
     path('check-out-summary/<int:pk>', v.check_out_summary, name='check_out_summary'),
     path('check-out-3/<int:pk>', v.check_out_3, name='check_out_3'),
     path('print-receipt/<int:client_id>/<int:reservation_id>/', v.print_receipt_check_out,
