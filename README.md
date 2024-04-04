@@ -63,7 +63,7 @@ In order to organize the work, we have divided the project into different sector
 
 | **Sector**            | **Head of the sector** | **People involved**          |
 |-----------------------|------------------------|------------------------------|
-| Frontend              | Abel                   | Abdellah, Júlia              |
+| Frontend              | Abel                   | Júlia                        |
 | Backend               | Sergi                  | Abdellah, Aniol              |
 | Testing               | Abdellah               | Aniol, Júlia, Abel           |
 | Database              | Aniol                  | Sergi                        |
