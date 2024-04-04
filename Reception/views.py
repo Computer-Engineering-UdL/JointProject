@@ -2,7 +2,7 @@ from django.http import JsonResponse, FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, SearchReservationForm
-from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn, Despeses, ExtraCosts
+from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn, Despeses, ExtraCosts, create_despesa
 from User.decorators import worker_required, admin_required
 from Reception.config import Config as c
 from Reception import utils as u
@@ -50,7 +50,11 @@ def new_reservation_1(request):
         form = RoomReservationForm(request.POST)
         if form.is_valid():
             room_rsv = form.save(commit=False)
+            room = get_object_or_404(Room, pk=room_rsv.room_id)
+            room.is_taken = True
             room_rsv.save()
+            room.save()
+            create_despesa(room_rsv, 0, 0)
             return redirect('new_reservation_4', room_rsv.id)
         else:
             form.add_error(None, "Error en el formulari")
@@ -220,19 +224,21 @@ def delete_reservation(request, pk):
 @worker_required('receptionist')
 def check_out_1(request):
     form = SearchReservationForm(request.GET or None)
-    reservations = RoomReservation.objects.all()
+    reservations = RoomReservation.objects.none()  # If u want to show all reservations, change to all()
 
     if form.is_valid():
         num_reservation = form.cleaned_data.get('num_reservation')
         id_number = form.cleaned_data.get('id_number')
         room_num = form.cleaned_data.get('room_num')
 
+        reservations = RoomReservation.objects.all()
+
         if num_reservation:
-            reservations = reservations.filter(id=num_reservation)
+            reservations = reservations.filter(id=num_reservation, room__is_taken=True)
         if id_number:
-            reservations = reservations.filter(client__id_number=id_number)
+            reservations = reservations.filter(client__id_number=id_number, room__is_taken=True)
         if room_num:
-            reservations = reservations.filter(room__room_num=room_num)
+            reservations = reservations.filter(room__room_num=room_num, room__is_taken=True)
 
     return render(request, c.get_check_out_path(1), {'form': form, 'reservations': reservations})
 
