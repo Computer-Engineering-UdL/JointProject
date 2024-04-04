@@ -81,11 +81,12 @@ def new_reservation_3(request):
 def new_reservation_4(request, pk):
     try:
         reservation = RoomReservation.objects.get(pk=pk)
+        client = HotelUser.objects.get(id=reservation.client_id)
     except RoomReservation.DoesNotExist:
         messages.error(request, "No s'ha trobat la reserva")
         return redirect('search_reservation')
 
-    return render(request, c.get_reservation_path(4), {'reservation': reservation})
+    return render(request, c.get_reservation_path(4), {'reservation': reservation, 'client': client})
 
 
 @worker_required('receptionist')
