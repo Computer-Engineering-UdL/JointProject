@@ -63,10 +63,15 @@ class CheckIn(models.Model):
         return self.num_reservation
 
 
+def create_despesa(room_reservation, pension_costs, room_type_costs):
+    despesa = Despeses(room_reservation=room_reservation, pension_costs=pension_costs, room_type_costs=room_type_costs)
+    despesa.save()
+
+
 class Despeses(models.Model):
     room_reservation = models.OneToOneField(RoomReservation, on_delete=models.CASCADE)
-    pension_costs = models.IntegerField()
-    room_type_costs = models.IntegerField()
+    pension_costs = models.IntegerField(default=0)
+    room_type_costs = models.IntegerField(default=0)
 
 
 class ExtraCosts(models.Model):
