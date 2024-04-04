@@ -1,27 +1,35 @@
 {% extends "worker/receptionist/base_receptionist.html" %}
 <!-- This template shows all the info of the client reservation -->
 
+{% load static %}
+{% block extra_css %}
+    
+    <link rel="stylesheet" href="{% static 'css/worker/receptionist/check-out/check-out_2.css' %}">
+{% endblock extra_css %}
+
 {% block title %}Check in{% endblock %}
 
 {% block content %}
 
     <h4>Resum de la reserva:</h4>
-    <div class="first_block">
-        <p>Fecha de entrada: <span class="entry-data">{{ reservation.entry }}</span></p>
-        <p>Fecha de salida: <span class="entry-data">{{ reservation.exit }}</span></p>
-        <p>Número de húespedes: <span class="entry-data">{{ reservation.num_guests }}</span></p>
-        <p>Tipo de habitación: <span class="entry-data">{{ reservation.room.room_type }}</span></p>
-        <p>Pensión: <span class="entry-data">{{ reservation.pension_type }}</span></p>
-        <p>Número de habitación: <span class="entry-data">{{ reservation.room.room_num }}</span></p>
+    <div class="reservation-data">
+    <div class="reservation-data-field">
+        <div><p>Fecha de entrada:</p> <span class="entry-data">{{ reservation.entry }}</span></div>
+        <div><p>Fecha de salida:</p> <span class="entry-data">{{ reservation.exit }}</span></div>
+        <div><p>Número de húespedes:</p> <span class="entry-data">{{ reservation.num_guests }}</span></div>
+        <div><p>Tipo de habitación:</p> <span class="entry-data">{{ reservation.room.room_type }}</span></div>
+        <div><p>Pensión:</p> <span class="entry-data">{{ reservation.pension_type }}</span></div>
+        <div><p>Número de habitación:</p> <span class="entry-data">{{ reservation.room.room_num }}</span></div>
     </div>
 
-    <div class="second_block">
-        <p>Número de reserva: <span class="entry-data">{{ reservation.id }}</span></p>
-        <p>DNI: <span class="entry-data">{{ client.id_number }}</span></p>
-        <p>Nombre: <span class="entry-data">{{ client.first_name }}</span></p>
-        <p>Apellido: <span class="entry-data">{{ client.last_name }}</span></p>
-        <p>Correo electrónico: <span class="entry-data">{{ client.email }}</span></p>
-        <p>Teléfono: <span class="entry-data">{{ client.phone_number }}</span></p>
+    <div class="reservation-data-field">
+        <div><p>Número de reserva:</p> <span class="entry-data">{{ reservation.id }}</span></div>
+        <div><p>DNI:</p> <span class="entry-data">{{ client.id_number }}</span></div>
+        <div><p>Nombre:</p> <span class="entry-data">{{ client.first_name }}</span></div>
+        <div><p>Apellido:</p> <span class="entry-data">{{ client.last_name }}</span></div>
+        <div><p>Correo electrónico:</p> <span class="entry-data">{{ client.email }}</span></div>
+        <div><p>Teléfono:</p> <span class="entry-data">{{ client.phone_number }}</span></div>
+    </div>
     </div>
 
     <button onclick="window.location.href='summary'">Continuar</button>
