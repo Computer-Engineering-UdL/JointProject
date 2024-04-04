@@ -4,7 +4,6 @@ from github import Github
 import os
 from datetime import datetime
 
-
 token = os.getenv('GITHUB_TOKEN')
 repo_name = "Computer-Engineering-UdL/JointProject"
 sprint_milestone_title = "Sprint 1"
@@ -35,19 +34,20 @@ def generate_burn_down_chart(milestone):
     total_issues = milestone.open_issues + milestone.closed_issues
     closed_issues_count_by_day = count_closed_issues(milestone)
 
-    start_date = milestone.created_at.date()
-    end_date = milestone.due_on.date()
-    num_days = (end_date - start_date).days + 1
+    start_date = np.datetime64(milestone.created_at.date())
+    end_date = np.datetime64(milestone.due_on.date())
+    num_days = (end_date - start_date).astype('timedelta64[D]').astype(int) + 1
     sprint_days = [start_date + np.timedelta64(i, 'D') for i in range(num_days)]
 
     closed_issues_accumulated = np.zeros(num_days)
     for i, day in enumerate(sprint_days):
-        closed_issues_accumulated[i] = closed_issues_accumulated[i - 1] + closed_issues_count_by_day.get(day, 0)
+        day_as_date = day.astype('datetime64[D]').astype(datetime)
+        closed_issues_accumulated[i] = closed_issues_accumulated[i - 1] + closed_issues_count_by_day.get(day_as_date, 0)
 
     remaining_work = total_issues - closed_issues_accumulated
 
     plt.figure(figsize=(10, 6))
-    plt.plot(sprint_days, remaining_work, label='Actual', marker='o', color='red')
+    plt.plot(sprint_days.astype(datetime), remaining_work, label='Actual', marker='o', color='red')
     plt.title('Burn-down Chart')
     plt.xlabel('Date')
     plt.ylabel('Remaining Issues')
