@@ -229,11 +229,11 @@ def check_out_1(request):
         room_num = form.cleaned_data.get('room_num')
 
         if num_reservation:
-            reservations = reservations.filter(id=num_reservation)
+            reservations = reservations.filter(id=num_reservation, room__is_taken=True)
         if id_number:
-            reservations = reservations.filter(client__id_number=id_number)
+            reservations = reservations.filter(client__id_number=id_number, room__is_taken=True)
         if room_num:
-            reservations = reservations.filter(room__room_num=room_num)
+            reservations = reservations.filter(room__room_num=room_num, room__is_taken=True)
 
     return render(request, c.get_check_out_path(1), {'form': form, 'reservations': reservations})
 
