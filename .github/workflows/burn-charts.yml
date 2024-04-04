@@ -25,4 +25,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: burn_down_chart
-          path: /mnt/data/burn_down_chart.png
+          path: burn_down_chart.png

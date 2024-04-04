@@ -39,7 +39,7 @@ def generate_burn_down_chart(done_issues_count: int) -> None:
     plt.ylabel('Remaining Work (issues)')
     plt.legend()
     plt.grid(True)
-    plt.savefig("/mnt/data/burn_down_chart.png", format='png')
+    plt.savefig("burn_down_chart.png", format='png')
 
 
 if __name__ == '__main__':
