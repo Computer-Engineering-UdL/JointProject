@@ -1,4 +1,4 @@
-name: General Report - Burn Down Chart
+name: General Report - Burn Up and Down Charts
 
 on:
   workflow_dispatch:
@@ -26,3 +26,12 @@ jobs:
         with:
           name: burn_down_chart
           path: burn_down_chart.png
+      - name: Generate Burn Up Chart
+        run: python Ichicawa_tools_generators/burn_up_chart.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+      - name: Upload Burn Up Chart
+        uses: actions/upload-artifact@v2
+        with:
+          name: burn_up_chart
+          path: burn_up_chart.png
