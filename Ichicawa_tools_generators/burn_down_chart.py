@@ -54,7 +54,7 @@ def generate_burn_down_chart(milestone):
     plt.xticks(rotation=45)
     plt.tight_layout()
     plt.grid(True)
-    plt.savefig("burn_down_chart_sprint1.png", format='png')
+    plt.savefig("burn_down_chart.png", format='png')
 
 
 if __name__ == '__main__':
