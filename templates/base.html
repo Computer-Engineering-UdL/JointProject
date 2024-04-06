@@ -64,16 +64,16 @@
                     RECEPTION - Home
                 </a></button>
                 {% if not user.is_authenticated %}
-                <button> <a href="{% url 'login'%}">
-                    Log-in
-                </a></button>
-                <button> <a href="{% url 'signup'%}">
-                    Sign-up
-                </a></button>
+                    <button> <a href="{% url 'login'%}">
+                        Log-in
+                    </a></button>
+                    <button> <a href="{% url 'signup'%}">
+                        Sign-up
+                    </a></button>
                 {% else %}
-                <button> <a href="{% url 'logout'%}">
-                    Log-out
-                </a></button>
+                    <button> <a href="{% url 'logout'%}">
+                        Log-out
+                    </a></button>
                 {% endif %}
             {% endblock content %}
         </main>

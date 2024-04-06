@@ -89,6 +89,8 @@ class InfoClientForm(forms.ModelForm):
         num_reservation = cleaned_data.get("num_reservation")
         id_number = cleaned_data.get("id_number")
 
+        fv.verify_search_reservation_form(num_reservation, id_number, None)
+
         if not num_reservation and not id_number:
             raise forms.ValidationError("Introdueix el número de la reserva o del document identificatiu")
 
