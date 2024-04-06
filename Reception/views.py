@@ -224,7 +224,7 @@ def delete_reservation(request, pk):
 @worker_required('receptionist')
 def check_out_1(request):
     form = SearchReservationForm(request.GET or None)
-    reservations = RoomReservation.objects.none()  # If u want to show all reservations, change to all()
+    reservations = RoomReservation.objects.all()
 
     if form.is_valid():
         num_reservation = form.cleaned_data.get('num_reservation')
