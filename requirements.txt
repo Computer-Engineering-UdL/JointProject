@@ -8,7 +8,7 @@ mccabe==0.7.0
 npx==0.1.2
 numpy==1.26.4
 optional-django==0.1.0
-pillow==10.2.0
+pillow==10.3.0
 pycodestyle==2.11.1
 pyflakes==3.2.0
 python-dotenv==1.0.1
