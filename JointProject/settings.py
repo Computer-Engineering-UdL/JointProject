@@ -28,7 +28,9 @@ SECRET_KEY = ('django-insecure-m(n!9!^r$tzpo4i-9)kmn=l7u@!2sxix!wuz+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+APP_NAME = os.environ.get("FLY_APP_NAME")
+ALLOWED_HOSTS = [f"{APP_NAME}.fly.dev"]
+
 AUTH_USER_MODEL = 'Reception.HotelUser'
 
 # Application definition
