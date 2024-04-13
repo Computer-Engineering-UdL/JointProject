@@ -1,43 +1,46 @@
 #section-title {
-    font-size: 50px;
-    display: flex;
+	font-size: 50px;
+	display: flex;
 	justify-content: center;
 }
 
 #process-guidance {
-    display: flex;
+	display: flex;
 	justify-content: center;
 }
 
 .buttons {
-    height: 50%;
-    gap: 50px;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    align-items: baseline;
-    justify-content: space-evenly;
+	height: 50%;
+	gap: 50px;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+	align-items: baseline;
+	justify-content: space-evenly;
 }
+
 .access-process-button {
-    font-size: 20px;
-    padding: 30px 75px;
-    transition: background-color 0.2s, border-radius 0.2s
+	font-size: 20px;
+	padding: 30px 75px;
+	transition: background-color 0.2s, border-radius 0.2s
 }
+
 .access-process-button:hover {
-    font-weight: bold;
-    padding: 29px 70px;
-    background-color: #B7C5FB;
-    box-shadow: 0 0 10px grey;
-    border-radius: 10px;
-    border: solid 2px black;
-    cursor: pointer;
+	font-weight: bold;
+	padding: 29px 70px;
+	background-color: #B7C5FB;
+	box-shadow: 0 0 10px grey;
+	border-radius: 10px;
+	border: solid 2px black;
+	cursor: pointer;
 }
+
 .access-process-button:active {
-    opacity: 0.8;
-    border-radius: 15px;
+	opacity: 0.8;
+	border-radius: 15px;
 }
 
 a {
-    color: black;
-    text-decoration: none;
+	color: black;
+	text-decoration: none;
 }

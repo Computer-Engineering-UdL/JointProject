@@ -1,155 +1,157 @@
 p {
-    margin: 0;
-    font-size: 1.2em;
+	margin: 0;
+	font-size: 1.2em;
 }
 
 .add-reservation-form {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    /*background-color: rgba(165, 157, 190, 0.5);*/
-    /*outline: 1px solid #000000;*/
-    justify-content: space-between;
-    border-radius: 8px;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	/*background-color: rgba(165, 157, 190, 0.5);*/
+	/*outline: 1px solid #000000;*/
+	justify-content: space-between;
+	border-radius: 8px;
 }
-form{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+
+form {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
 .date {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: 10px;
-    width: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	gap: 10px;
+	width: 50%;
 }
 
 .date h2 {
-    display: flex;
-    height: 10%;
-    align-items: center;
-    margin: 0;
-    font-size: 1.3em;
+	display: flex;
+	height: 10%;
+	align-items: center;
+	margin: 0;
+	font-size: 1.3em;
 }
 
 .date-form {
-    margin-left: 15px;
-    width: 100%;
-    height: 28%;
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
+	margin-left: 15px;
+	width: 100%;
+	height: 28%;
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
 }
 
 .date-input {
-    width: 48%;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: space-between;
-    outline: solid 1px #000;
-    background-color: #d5d5d5;
-    border-radius: 8px;
+	width: 48%;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: space-between;
+	outline: solid 1px #000;
+	background-color: #d5d5d5;
+	border-radius: 8px;
 }
 
 .title-input {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 50%;
 }
 
 .date-input input[type="text"] {
-    height: 50%;
-    border: transparent;
-    text-align: center;
-    border-radius: 8px;
-    font-size: 1em;
+	height: 50%;
+	border: transparent;
+	text-align: center;
+	border-radius: 8px;
+	font-size: 1em;
 }
 
 
 .reservation-info-form {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: space-evenly;
-    gap: 10px;
-    width: 30%;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: space-evenly;
+	gap: 10px;
+	width: 30%;
 }
 
 .form-button {
-    background-color: #d5d5d5;
+	background-color: #d5d5d5;
 }
 
 #guests-number {
-    height: 14%;
-    outline: solid 1px #000000;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-    justify-content: space-between;
+	height: 14%;
+	outline: solid 1px #000000;
+	border-radius: 8px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 10px;
+	justify-content: space-between;
 }
 
 #guests-number input[type="number"] {
-    aspect-ratio: 1 / 1;
-    height: 100%;
-    text-align: center;
-    border: transparent;
-    border-radius: 8px;
-    font-size: 1em;
+	aspect-ratio: 1 / 1;
+	height: 100%;
+	text-align: center;
+	border: transparent;
+	border-radius: 8px;
+	font-size: 1em;
+	background-color: white;
 }
 
 #guests-number p {
-    padding-left: 5%;
+	padding-left: 5%;
 }
 
 #room-type {
-    height: 28%;
-    outline: solid 1px #000;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
+	height: 28%;
+	outline: solid 1px #000;
+	border-radius: 8px;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
 }
 
 #room-type select {
-    width: 100%;
-    height: 50%;
-    border: transparent;
-    border-radius: 8px;
-    font-size: 1em;
-    text-align: center;
+	width: 100%;
+	height: 50%;
+	border: transparent;
+	border-radius: 8px;
+	font-size: 1em;
+	text-align: center;
 }
 
 #room-type p {
-    text-align: center;
+	text-align: center;
 }
 
 #pension-type {
-    height: 28%;
-    outline: solid 1px #000;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
+	height: 28%;
+	outline: solid 1px #000;
+	border-radius: 8px;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
 }
 
 #pension-type select {
-    width: 100%;
-    height: 50%;
-    border: transparent;
-    border-radius: 8px;
-    font-size: 1em;
-    text-align: center;
+	width: 100%;
+	height: 50%;
+	border: transparent;
+	border-radius: 8px;
+	font-size: 1em;
+	text-align: center;
 }
 
 #pension-type p {
-    text-align: center;
+	text-align: center;
 }

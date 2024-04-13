@@ -1,28 +1,28 @@
 .section-title {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
 }
 
 .reservation-data {
-    display: flex;
-    gap: 100px;
+	display: flex;
+	gap: 100px;
 }
 
 .reservation-data-field {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    width: 250px;
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: column;
+	width: 250px;
 }
 
 .entry-data {
-    font-weight: bold;
-    align-content: center;
+	font-weight: bold;
+	align-content: center;
 }
 
 .reservation-data-field div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }
