@@ -17,7 +17,7 @@ from django.contrib import staticfiles
 
 env = environ.Env(  # <-- Updated!
     # set casting, default value
-    DEBUG=(bool, False),
+    DEBUG=(bool, True),
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,6 +37,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 APP_NAME = os.environ.get("FLY_APP_NAME")
 ALLOWED_HOSTS = [f"{APP_NAME}.fly.dev", "localhost"]
+CSRF_TRUSTED_ORIGINS = ["https://*.fly.dev"]
 
 AUTH_USER_MODEL = 'Reception.HotelUser'
 

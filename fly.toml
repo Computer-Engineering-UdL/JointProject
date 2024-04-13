@@ -1,16 +1,22 @@
-# fly.toml app configuration file generated for jointproject on 2024-04-13T23:17:49+02:00
+# fly.toml app configuration file generated for jointproject-rough-smoke-481 on 2024-04-13T23:51:39+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'jointproject'
+app = 'jointproject-rough-smoke-481'
 primary_region = 'mad'
+console_command = '/code/manage.py shell'
 
 [build]
-  image = 'flyio/hellofly:latest'
+
+[deploy]
+  release_command = 'python manage.py migrate --noinput'
+
+[env]
+  PORT = '8000'
 
 [http_service]
-  internal_port = 8080
+  internal_port = 8000
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
@@ -18,6 +24,10 @@ primary_region = 'mad'
   processes = ['app']
 
 [[vm]]
-  memory = '512mb'
+  memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
+
+[[statics]]
+  guest_path = '/code/static'
+  url_prefix = '/static/'
