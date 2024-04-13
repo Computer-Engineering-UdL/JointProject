@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for jointproject-rough-smoke-481 on 2024-04-13T23:51:39+02:00
+# fly.toml app configuration file generated for jointproject on 2024-04-14T00:26:19+02:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'jointproject-rough-smoke-481'
+app = 'jointproject'
 primary_region = 'mad'
 console_command = '/code/manage.py shell'
 

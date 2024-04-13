@@ -22,7 +22,7 @@ RUN set -ex && \
     rm -rf /root/.cache/
 COPY . /code
 
-ENV SECRET_KEY "qA2UqqCqGydaLBTk8LiruG23vQSprxKzP7sgPO2VE5vGo92i03"
+ENV SECRET_KEY "jPPWANxKYWxgPPITczsFNlQfJEBZ7Y6zjXMeRDzMhMApSnAjat"
 ENV DATABASE_URL "sqlite:///db.sqlite3"
 RUN python manage.py collectstatic --noinput
 
