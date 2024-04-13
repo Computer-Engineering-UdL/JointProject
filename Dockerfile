@@ -23,6 +23,7 @@ RUN set -ex && \
 COPY . /code
 
 ENV SECRET_KEY "qA2UqqCqGydaLBTk8LiruG23vQSprxKzP7sgPO2VE5vGo92i03"
+ENV DATABASE_URL "sqlite:///db.sqlite3"
 RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
