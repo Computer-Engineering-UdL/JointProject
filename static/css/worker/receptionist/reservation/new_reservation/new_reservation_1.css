@@ -105,6 +105,7 @@ form {
 	border: transparent;
 	border-radius: 8px;
 	font-size: 1em;
+	background-color: white;
 }
 
 #guests-number p {
