@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 import environ
 from django.contrib import staticfiles
 
@@ -88,7 +89,9 @@ WSGI_APPLICATION = 'JointProject.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db()
+    'default': dj_database_url.config(
+        default='sqlite:///db.sqlite3',
+    )
 }
 
 # Password validation
