@@ -24,7 +24,9 @@ COPY . /code
 
 ENV SECRET_KEY "jPPWANxKYWxgPPITczsFNlQfJEBZ7Y6zjXMeRDzMhMApSnAjat"
 RUN python manage.py collectstatic --noinput
+RUN chmod +x startup.sh
 
 EXPOSE 8000
+ENTRYPOINT ["./startup.sh"]
 
 CMD ["gunicorn", "--bind", ":8000", "--workers", "2", "JointProject.wsgi"]
