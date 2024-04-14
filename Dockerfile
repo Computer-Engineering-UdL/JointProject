@@ -5,13 +5,13 @@ FROM python:${PYTHON_VERSION}
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# install psycopg2 dependencies.
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     gcc \
+    sqlite3 \
     && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /code
+RUN mkdir -p /code /data
 
 WORKDIR /code
 
@@ -24,9 +24,11 @@ COPY . /code
 
 ENV SECRET_KEY "jPPWANxKYWxgPPITczsFNlQfJEBZ7Y6zjXMeRDzMhMApSnAjat"
 RUN python manage.py collectstatic --noinput
-RUN chmod +x startup.sh
 
 EXPOSE 8000
-ENTRYPOINT ["./startup.sh"]
+ENV SQLITE_DATABASE "/data/db.sqlite3"
 
-CMD ["gunicorn", "--bind", ":8000", "--workers", "2", "JointProject.wsgi"]
+CMD python manage.py migrate && \
+    sqlite3 $SQLITE_DATABASE "PRAGMA journal_mode=WAL;" && \
+    sqlite3 $SQLITE_DATABASE "PRAGMA synchronous=1;" && \
+    gunicorn --bind :8000 --workers 2 JointProject.wsgi
