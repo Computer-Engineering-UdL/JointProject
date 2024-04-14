@@ -16,9 +16,9 @@ import dj_database_url
 import environ
 from django.contrib import staticfiles
 
-env = environ.Env(  # <-- Updated!
+env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, True),
+    DEBUG=(bool, False),
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
