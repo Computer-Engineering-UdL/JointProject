@@ -1,0 +1,48 @@
+name: Deploy to Fly.io
+
+on:
+  push:
+    branches:
+      - production
+  pull_request:
+    branches:
+      - production
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Login to Fly.io
+        run: flyctl auth login --token ${{ secrets.FLY_API_TOKEN }}
+
+      - name: Import secrets to Fly.io
+        run: flyctl secrets import -a jointproject < .env
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      - name: Deploy to Fly.io
+        run: flyctl deploy -a jointproject
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      - name: Dump and load database
+        run: |
+          python manage.py dumpdata > datadump.json
+          flyctl ssh console -C "python manage.py loaddata datadump.json" -a jointproject
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
