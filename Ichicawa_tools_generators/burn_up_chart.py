@@ -48,8 +48,10 @@ def generate_burn_up_chart(milestone):
     sprint_days_np = np.array(sprint_days)
 
     plt.figure(figsize=(10, 6))
-    plt.plot(sprint_days_np.astype('datetime64[D]').astype(datetime), closed_issues_accumulated, label='Completed Work', marker='o', color='green')
-    plt.hlines(total_issues, sprint_days[0].astype(datetime), sprint_days[-1].astype(datetime), colors='blue', linestyles='dashed', label='Total Planned Work')
+    plt.plot(sprint_days_np.astype('datetime64[D]').astype(datetime), closed_issues_accumulated, label='Completed Work',
+             marker='o', color='green')
+    plt.hlines(total_issues, sprint_days[0].astype(datetime), sprint_days[-1].astype(datetime), colors='blue',
+               linestyles='dashed', label='Total Planned Work')
     plt.title('Burn-up Chart')
     plt.xlabel('Date')
     plt.ylabel('Completed Issues')

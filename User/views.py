@@ -63,10 +63,5 @@ def user_logout(request):
     return redirect(LOGOUT_REDIRECT_URL)
 
 
-@worker_required('worker')
-def worker_home(request):
-    return render(request, 'worker/base_worker.html')
-
-
 def home(request):
     return render(request, 'base.html')

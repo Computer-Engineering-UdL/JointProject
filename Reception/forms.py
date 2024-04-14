@@ -1,8 +1,8 @@
 from django import forms
 from django.core.validators import MinValueValidator, MaxValueValidator
-from User.validators import is_valid_id_number
 from .models import RoomReservation, Client, Room, CheckIn, HotelUser
 from Reception.config import Config as c
+from Reception import forms_verify as fv
 
 
 class RoomForm(forms.ModelForm):
@@ -37,11 +37,11 @@ class RoomReservationForm(forms.ModelForm):
         try:
             room_id = int(room_id)
         except ValueError:
-            raise forms.ValidationError("Invalid room id.")
+            raise forms.ValidationError("L'habitació seleccionada no és vàlida")
         try:
             room = Room.objects.get(id=room_id)
         except Room.DoesNotExist:
-            raise forms.ValidationError("Room with given id does not exist.")
+            raise forms.ValidationError("L'habitació seleccionada no existeix")
         return room
 
     def clean(self):
@@ -57,7 +57,7 @@ class RoomReservationForm(forms.ModelForm):
                 exit__gt=entry
             )
             if overlapping_reservations.exists():
-                raise forms.ValidationError("The selected room is not available for the chosen dates.")
+                raise forms.ValidationError("L'habitació ja està reservada en aquestes dates")
 
         return cleaned_data
 
@@ -89,8 +89,10 @@ class InfoClientForm(forms.ModelForm):
         num_reservation = cleaned_data.get("num_reservation")
         id_number = cleaned_data.get("id_number")
 
+        fv.verify_search_reservation_form(num_reservation, id_number, None)
+
         if not num_reservation and not id_number:
-            raise forms.ValidationError("Siusplau, introdueixi el número de la reserva o del document identificatiu.")
+            raise forms.ValidationError("Introdueix el número de la reserva o del document identificatiu")
 
         return cleaned_data
 
@@ -102,9 +104,9 @@ class InfoClientForm(forms.ModelForm):
 # Cancel reservation form
 
 class SearchReservationForm(forms.ModelForm):
-    num_reservation = forms.CharField(label="Introdueix el número de reserva", required=False)
-    id_number = forms.CharField(label="Introdueix el número d'identificació", required=False)
-    room_num = forms.IntegerField(label="Introdueix el número d'habitació", required=False,
+    num_reservation = forms.CharField(label="Número de reserva", required=False)
+    id_number = forms.CharField(label="Document identificatiu", required=False)
+    room_num = forms.IntegerField(label="Número d'habitació", required=False,
                                   validators=[MinValueValidator(1)])
 
     def clean(self):
@@ -113,25 +115,7 @@ class SearchReservationForm(forms.ModelForm):
         id_number = cleaned_data.get("id_number")
         room_num = cleaned_data.get("room_num")
 
-        if num_reservation and not num_reservation.isdigit():
-            raise forms.ValidationError("Introdueix un número de reserva vàlid")
-
-        if id_number and not is_valid_id_number(id_number):
-            raise forms.ValidationError("Introdueix un número d'identificació vàlid")
-
-        # Room num is not required to be validated since it is an integer field
-
-        if room_num and not Room.objects.filter(room_num=room_num).exists():
-            raise forms.ValidationError("No existeix cap habitació amb aquest número")
-
-        if room_num and not RoomReservation.objects.filter(room__room_num=room_num).exists():
-            raise forms.ValidationError("No existeix cap reserva per aquesta habitació")
-
-        if num_reservation and not RoomReservation.objects.filter(id=num_reservation).exists():
-            raise forms.ValidationError("No existeix cap reserva amb aquest número")
-
-        if id_number and not HotelUser.objects.filter(id_number=id_number).exists():
-            raise forms.ValidationError("No existeix cap client amb aquest número d'identificació")
+        fv.verify_search_reservation_form(num_reservation, id_number, room_num)
 
         return cleaned_data
 

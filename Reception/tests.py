@@ -58,3 +58,13 @@ class CheckInViewTest(TestCase):
         url = reverse('check_in')
         response = self.client.post(url, {'id_number': self.client_user.id_number})
         self.assertTemplateUsed(response, c.get_check_in_path(2))
+
+    def test_room_reservation(self):
+        url = reverse('new_reservation_1')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_check_out(self):
+        url = reverse('check_out')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
