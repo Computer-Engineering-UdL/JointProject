@@ -83,6 +83,8 @@ class AddClientForm(forms.ModelForm):
 class InfoClientForm(forms.ModelForm):
     num_reservation = forms.CharField(label="Número de reserva", required=False)
     id_number = forms.CharField(max_length=20, label="Document identificatiu", required=False)
+    room_num = forms.IntegerField(label="Número d'habitació", required=False,
+                                  validators=[MinValueValidator(1)])
 
     def clean(self):
         cleaned_data = super().clean()
