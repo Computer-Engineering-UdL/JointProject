@@ -8,6 +8,7 @@ p {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
 	/*background-color: rgba(165, 157, 190, 0.5);*/
 	/*outline: 1px solid #000000;*/
 	justify-content: space-between;
@@ -24,6 +25,7 @@ p {
 .date {
 	display: flex;
 	flex-direction: column;
+	flex-wrap: wrap;
 	align-items: stretch;
 	justify-content: flex-start;
 	gap: 10px;
