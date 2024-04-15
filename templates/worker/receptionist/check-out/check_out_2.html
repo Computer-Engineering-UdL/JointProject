@@ -16,8 +16,8 @@
             <div class="section-title">
                 <h2>Resum de les dades de la reserva</h2>
             </div>
-            <div class="reservation-data">
-                <div class="reservation-data-field">
+            <div class="reservation-briefing">
+                <div class="reservation-briefing-data">
                     <div><p>Reserva:</p> <span class="entry-data">{{ reservation.id }}</span></div>
                     <div><p>Data entrada:</p> <span class="entry-data"> {{ reservation.entry }}</span></div>
                     <div><p>Data sortida:</p> <span class="entry-data">{{ reservation.exit }}</span></div>
@@ -27,7 +27,7 @@
                     <div><p>Número d'habitació:</p> <span class="entry-data">{{ reservation.room }}</span></div>
                 </div>
 
-                <div class="reservation-data-field">
+                <div class="reservation-briefing-data">
                     <div><p>Hoste:</p> <span class="entry-data">{{ reservation.client }}</span></div>
                     <div><p>Preu habitació:</p> <span class="entry-data">{{ despeses.room_type_costs }}€</span></div>
                     <div><p>Preu pensió:</p> <span class="entry-data">{{ despeses.pension_costs }}</span></div>

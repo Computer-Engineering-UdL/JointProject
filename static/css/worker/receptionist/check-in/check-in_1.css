@@ -38,6 +38,7 @@
 .form-group {
 	display: flex;
 	flex-direction: column;
+	gap: 10px;
 	width: 32%;
 	min-width: 270px;
 }
