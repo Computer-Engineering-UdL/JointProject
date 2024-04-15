@@ -236,7 +236,7 @@ def check_out_1(request):
         id_number = form.cleaned_data.get('id_number')
         room_num = form.cleaned_data.get('room_num')
 
-        reservations = RoomReservation.objects.all()
+        reservations = RoomReservation.objects.filter(is_active=True, check_in_active=True, check_out_active=False)
 
         if num_reservation:
             reservations = reservations.filter(id=num_reservation, room__is_taken=True)
