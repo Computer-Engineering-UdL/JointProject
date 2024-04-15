@@ -83,16 +83,16 @@ class AddClientForm(forms.ModelForm):
 class InfoClientForm(forms.ModelForm):
     num_reservation = forms.CharField(label="Número de reserva", required=False)
     id_number = forms.CharField(max_length=20, label="Document identificatiu", required=False)
+    room_num = forms.IntegerField(label="Número d'habitació", required=False,
+                                  validators=[MinValueValidator(1)])
 
     def clean(self):
         cleaned_data = super().clean()
         num_reservation = cleaned_data.get("num_reservation")
         id_number = cleaned_data.get("id_number")
+        room_num = cleaned_data.get("room_num")
 
-        fv.verify_search_reservation_form(num_reservation, id_number, None)
-
-        if not num_reservation and not id_number:
-            raise forms.ValidationError("Introdueix el número de la reserva o del document identificatiu")
+        fv.verify_search_reservation_form(num_reservation, id_number, room_num)
 
         return cleaned_data
 
