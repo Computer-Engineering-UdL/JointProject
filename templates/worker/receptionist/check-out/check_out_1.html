@@ -21,7 +21,7 @@
         </p>
         <form method="get">
             {% csrf_token %}
-            <div class="entry-fields">
+            <div class="filter-field">
                 <div class="form-group">
                     <p>{{ form.num_reservation.label }}</p>
                     {{ form.num_reservation }}
@@ -35,7 +35,7 @@
                     {{ form.room_num }}
                 </div>
             </div>
-            <div class="buttons">
+            <div class="choice-buttons">
                 <button class="submit-button" type="submit">Filtrar</button>
             </div>
         </form>

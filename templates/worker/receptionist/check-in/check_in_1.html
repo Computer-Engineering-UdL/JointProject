@@ -19,7 +19,7 @@
 
         <form method="post" class="general-form">
             {% csrf_token %}
-                <div class="entry-fields">
+                <div class="filter-field">
                     <div class="form-group">
                         <h5>{{ form.num_reservation.label }}</h5>
                         {{ form.num_reservation }}
@@ -28,10 +28,13 @@
                         <h5>{{ form.id_number.label }}</h5>
                         {{ form.id_number }}
                     </div>
-                </div>
-                <div class="procedural-buttons">
-                    <button class="continue-button" type="submit">Create &#10093;</button>
-                    <div class="invisible-element"></div>
+                    <!-- <div class="form-group">
+                        <h5>{{ form.room_num.label }}</h5>
+                        {{ form.room_num }}
+                    </div> -->
+                    <div class="procedural-buttons">
+                        <button class="filter-button" type="submit">Filtrar</button>
+                    </div>
                 </div>
         </form>
 
@@ -45,5 +48,44 @@
                 {% endif %}
             </div>
         </form>
+
+        <h2>Reserves</h2>
+        <div class="list">
+            <ul class="list-index">
+                <li id="reservation-id">Reserva</li>
+                <li id="entry">Entrada</li>
+                <li id="exit">Sortida</li>
+                <li id="name">Client</li>
+                <li id="pension">Pensió</li>
+                <li id="num-guests">Nº hostes</li>
+            </ul>
+            <ul class="reservation-list">
+                {% for reservation in reservations %}
+                    <div class="list-div">
+                        <li>
+                            <div id="reservation-id">{{ reservation.id }}</div>
+                            <div id="entry">{{ reservation.entry }}</div>
+                            <div id="exit">{{ reservation.exit }}</div>
+                            <div id="name">{{ reservation.client.first_name }}</div>
+                            <div id="pension">{{ reservation.pension_type }}</div>
+                            <div id="num-guests">{{ reservation.num_guests }}</div>
+                        </li>
+                        <div class="icons">
+                            <div class="icon"><a href="{% url 'reservation_details' pk=reservation.id %}">
+                                <img src="{% static 'img/icons/edit-icon.png' %}" alt="edit"></a>
+                            </div>
+                            <div class="icon">
+                                <form action="{% url 'delete_reservation' reservation.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit"
+                                            onclick="return confirm('Estàs segur que vols eliminar aquesta reserva?');">
+                                        <img src="{% static 'img/icons/delete-icon.png' %}" alt="delete"></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 {% endblock %}

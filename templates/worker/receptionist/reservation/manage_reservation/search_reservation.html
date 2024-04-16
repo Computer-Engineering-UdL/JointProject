@@ -3,7 +3,6 @@
 
 {% load static %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/worker/receptionist/check-out/check-out_home.css' %}">
     <link rel="stylesheet"
           href="{% static 'css/worker/receptionist/reservation/manage_reservation/search_reservation.css' %}">
 {% endblock extra_css %}
@@ -13,44 +12,42 @@
 
 {% block content %}
     <div class="main">
-        <div class="reservation-search">
-            <h2>Cercar reserva</h2>
+        <h2 class="subsection-title">Cercar reserva</h2>
 
-            <form method="get">
-                {% csrf_token %}
-                <div class="entry-fields">
-                    <div class="form-group">
-                        <p>{{ form.num_reservation.label }}</p>
-                        {{ form.num_reservation }}
-                    </div>
-                    <div class="form-group">
-                        <p>{{ form.id_number.label }}</p>
-                        {{ form.id_number }}
-                    </div>
-                    <div class="form-group">
-                        <p>{{ form.room_num.label }}</p>
-                        {{ form.room_num }}
-                    </div>
+        <form method="get">
+            {% csrf_token %}
+            <div class="filter-field">
+                <div class="form-group">
+                    <p>{{ form.num_reservation.label }}</p>
+                    {{ form.num_reservation }}
                 </div>
-                <div class="buttons">
-                    <button class="submit-button" type="submit">Filtrar</button>
+                <div class="form-group">
+                    <p>{{ form.id_number.label }}</p>
+                    {{ form.id_number }}
                 </div>
-            </form>
+                <div class="form-group">
+                    <p>{{ form.room_num.label }}</p>
+                    {{ form.room_num }}
+                </div>
+                <div class="procedural-buttons">
+                    <button class="filter-button" type="submit">Filtrar</button>
+                </div>
+            </div>
+        </form>
 
-            <form method="post">
-                {% csrf_token %}
-                <div id="notifications">
-                    {% if form.non_field_errors %}
-                        {% for error in form.non_field_errors %}
-                            <p class="notification-err">{{ error }}</p>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-            </form>
-        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div id="notifications">
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <p class="notification-err">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </form>
 
         <h2>Reserves</h2>
-        <div id="list">
+        <div class="list">
             <ul class="list-index">
                 <li id="reservation-id">Reserva</li>
                 <li id="entry">Entrada</li>

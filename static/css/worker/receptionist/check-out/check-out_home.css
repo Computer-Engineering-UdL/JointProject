@@ -4,7 +4,7 @@
 	justify-content: center;
 }
 
-.entry-fields {
+.filter-field {
 	font-weight: bold;
 	font-size: 20px;
 	display: flex;
@@ -13,7 +13,7 @@
 	flex-wrap: wrap;
 }
 
-.entry-fields input[type="text"] {
+.filter-field input[type="text"] {
 	height: 100%;
 	border-radius: 5px;
 	text-align: center;
@@ -21,7 +21,7 @@
 	padding: 10px;
 }
 
-.entry-fields input[type="number"] {
+.filter-field input[type="number"] {
 	height: 100%;
 	border-radius: 5px;
 	text-align: center;
@@ -35,7 +35,7 @@
 	margin: 10px;
 }
 
-.buttons {
+.choice-buttons {
 	display: flex;
 	justify-content: flex-end;
 	padding-top: 5%;
