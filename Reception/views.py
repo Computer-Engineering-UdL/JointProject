@@ -229,21 +229,21 @@ def delete_reservation(request, pk):
 @worker_required('receptionist')
 def check_out_1(request):
     form = SearchReservationForm(request.GET or None)
-    reservations = RoomReservation.objects.all()
+    reservations = RoomReservation.objects.filter(is_active=True, check_in_active=True, check_out_active=False)
 
     if form.is_valid():
         num_reservation = form.cleaned_data.get('num_reservation')
         id_number = form.cleaned_data.get('id_number')
         room_num = form.cleaned_data.get('room_num')
 
-        reservations = RoomReservation.objects.filter(is_active=True, check_in_active=True, check_out_active=False)
+        filtered_reservations = reservations.filter(is_active=True, check_in_active=True, check_out_active=False)
 
         if num_reservation:
-            reservations = reservations.filter(id=num_reservation, room__is_taken=True)
+            reservations = filtered_reservations.filter(id=num_reservation)
         if id_number:
-            reservations = reservations.filter(client__id_number=id_number, room__is_taken=True)
+            reservations = filtered_reservations.filter(client__id_number=id_number)
         if room_num:
-            reservations = reservations.filter(room__room_num=room_num, room__is_taken=True)
+            reservations = filtered_reservations.filter(room__room_num=room_num)
 
     return render(request, c.get_check_out_path(1), {'form': form, 'reservations': reservations})
 
