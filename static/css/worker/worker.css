@@ -65,6 +65,7 @@ header {
     min-height: 60px;
 }
 
+/************** Menu **************/
 nav {
     display: flex;
     width: 75%;
@@ -159,6 +160,7 @@ nav {
 
 input {
     background-color: white;
+    border: 1px solid black;
 }
 
 /************** Reservation briefing **************/
@@ -287,7 +289,7 @@ input {
 .filter-button {
     color: #6b7e77;
     background-color: white;
-    border: 2px solid #6b7e77;
+    border: 1px solid #6b7e77;
 }
 
 .filter-button:hover {
@@ -327,7 +329,7 @@ input {
 .form-group {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 2px;
 	width: 25%;
 	min-width: 270px;
 }
