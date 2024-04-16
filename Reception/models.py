@@ -47,6 +47,9 @@ class RoomReservation(models.Model):
         default='Sense pensió'
     )
     num_guests = models.IntegerField()
+    is_active = models.BooleanField(default=True)
+    check_in_active = models.BooleanField(default=False)
+    check_out_active = models.BooleanField(default=False)
 
     class Meta:
         unique_together = ('room', 'entry', 'exit')
