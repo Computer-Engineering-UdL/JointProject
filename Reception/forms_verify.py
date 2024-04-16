@@ -4,6 +4,9 @@ from Reception.models import RoomReservation, Client, Room, CheckIn, HotelUser
 
 
 def verify_search_reservation_form(num_reservation, id_number, room_num):
+    if not any([num_reservation, id_number, room_num]):
+        raise forms.ValidationError("Introdueix informació en algun dels camps per a la cerca")
+
     if num_reservation and not num_reservation.isdigit():
         raise forms.ValidationError("Introdueix un número de reserva vàlid")
 
