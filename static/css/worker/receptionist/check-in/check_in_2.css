@@ -1,3 +1,9 @@
-.main {
-	max-width: 1230px;
+form {
+	width: 100%;
+	max-width: 1200px;
+}
+
+/******** Overwrite ********/
+.procedural-buttons {
+	height: 100%;
 }

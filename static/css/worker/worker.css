@@ -13,25 +13,6 @@ main {
     align-items: center;
 }
 
-/************** Text standards **************/
-p {
-    margin: 0;
-    font-size: 1em;
-}
-
-h5 {
-    margin: 0;
-    font-size: 1.1em;
-    font-weight: bold;
-}
-
-h6 {
-    margin: 0;
-    font-size: 1.3em;
-    font-weight: bold;
-}
-
-
 .main {
     display: flex;
     flex-direction: column;
@@ -40,13 +21,52 @@ h6 {
     width: 95%;
     max-height: 900px;
     max-width: 1600px;
+    gap: 10px;
     /*height: 90vh;*/
 }
 
+.general-form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+    unicode-bidi: isolate;
+}
+
+/************** Text standards **************/
+p {
+    margin: 0;
+    font-size: 1em;
+}
+
 .section-title {
+    margin-bottom: 20px;
     font-size: 50px;
     display: flex;
     justify-content: center;
+}
+
+.subsection-title {
+    margin-bottom: 15px;
+    font-size: 40px;
+}
+
+h2 {
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+h5 {
+    margin: 0;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+h6 {
+    margin: 0;
+    font-size: 1.3em;
+    font-weight: bold;
 }
 
 .process-guidance {
@@ -169,6 +189,7 @@ input {
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+    max-width: 1200px;
     gap: 30px;
 }
 
@@ -181,6 +202,17 @@ input {
     border-radius: 2px;
     padding: 10px;
     gap: 25px;
+}
+
+.reservation-briefing-data div {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.entry-data {
+	font-weight: bold;
+	align-content: center;
 }
 
 .reservation-briefing-data li {
@@ -304,7 +336,7 @@ input {
 
 /************** Filter-field **************/
 .filter-field {
-	height: 100%;
+    width: 100%;
 	font-weight: bold;
 	font-size: 20px;
 	display: flex;
@@ -329,7 +361,7 @@ input {
 .form-group {
 	display: flex;
 	flex-direction: column;
-	gap: 2px;
+	gap: 1px;
 	width: 25%;
 	min-width: 270px;
 }

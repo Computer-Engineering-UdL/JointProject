@@ -3,14 +3,3 @@
 	flex-direction: row;
 	justify-content: space-around;
 }
-
-.entry-data {
-	font-weight: bold;
-	align-content: center;
-}
-
-.reservation-briefing-data div {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-}

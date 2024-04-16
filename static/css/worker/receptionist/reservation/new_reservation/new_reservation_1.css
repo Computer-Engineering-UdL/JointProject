@@ -103,6 +103,7 @@ p {
 #guests-number input[type="number"] {
 	aspect-ratio: 1 / 1;
 	height: 100%;
+	padding: 0;
 	text-align: center;
 	border: transparent;
 	border-radius: 8px;

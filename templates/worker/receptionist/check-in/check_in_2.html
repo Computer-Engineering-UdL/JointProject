@@ -12,29 +12,33 @@
 
 {% block content %}
     <div class="main">
-        <h2>Resum de la reserva:</h2>
-        <div class="reservation-briefing">
-            <ul class="reservation-briefing-data">
-                <li><h5>Data d'entrada:</h5> <p>{{ reservation.entry }}</p></li>
-                <li><h5>Data de sortida:</h5> <p>{{ reservation.exit }}</p></li>
-                <li><h5>Nº d'hostes:</h5> <p>{{ reservation.num_guests }}</p></li>
-                <li><h5>Tipus d'habitació:</h5> <p>{{ reservation.room.room_type }}</p></li>
-                <li><h5>Pensió:</h5> <p>{{ reservation.pension_type }}</p></li>
-                <li><h5>Número d'habitació:</h5> <p>{{ reservation.room.room_num }}</p></li>
-            </ul>
-            <ul class="reservation-briefing-data">
-                <li><h5>Nº de reserva:</h5> <p>{{ reservation.id }}</p></li>
-                <li><h5>Número d'identificació:</h5> <p>{{ client.id_number }}</p></li>
-                <li><h5>Nom:</h5> <p>{{ client.first_name }}</p></li>
-                <li><h5>Cognoms:</h5> <p>{{ client.last_name }}</p></li>
-                <li><h5>Correu electrònic:</h5> <p>{{ client.email }}</p></li>
-                <li><h5>Telèfon:</h5> <p>{{ client.phone_number }}</p></li>
-            </ul>
-        </div>
-        <div class="procedural-buttons">
-            <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
-            <button class="continue-button" type="submit">Create &#10093;</button>
-        </div>
+            <h2>Resum de la reserva</h2>
+            <div class="reservation-briefing">
+                <ul class="reservation-briefing-data">
+                    <li><h5>Data d'entrada:</h5> <p>{{ reservation.entry }}</p></li>
+                    <li><h5>Data de sortida:</h5> <p>{{ reservation.exit }}</p></li>
+                    <li><h5>Nº d'hostes:</h5> <p>{{ reservation.num_guests }}</p></li>
+                    <li><h5>Tipus d'habitació:</h5> <p>{{ reservation.room.room_type }}</p></li>
+                    <li><h5>Pensió:</h5> <p>{{ reservation.pension_type }}</p></li>
+                    <li><h5>Número d'habitació:</h5> <p>{{ reservation.room.room_num }}</p></li>
+                </ul>
+                <ul class="reservation-briefing-data">
+                    <li><h5>Nº de reserva:</h5> <p>{{ reservation.id }}</p></li>
+                    <li><h5>Número d'identificació:</h5> <p>{{ client.id_number }}</p></li>
+                    <li><h5>Nom:</h5> <p>{{ client.first_name }}</p></li>
+                    <li><h5>Cognoms:</h5> <p>{{ client.last_name }}</p></li>
+                    <li><h5>Correu electrònic:</h5> <p>{{ client.email }}</p></li>
+                    <li><h5>Telèfon:</h5> <p>{{ client.phone_number }}</p></li>
+                </ul>
+            </div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="procedural-buttons">
+                <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
+                <button type="submit" name="action" value="print_receipt">Imprimir resguard</button>
+                <button type="submit" name="action" class="continue-button">Check-in &#10093;</button>
+            </div>
+        </form>
     </div>
 
 {% endblock %}

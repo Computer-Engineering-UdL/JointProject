@@ -275,11 +275,13 @@ def check_out_3(request, pk):
     client = get_object_or_404(HotelUser, id=reservation.client_id)
     room.is_clean = False
     room.is_taken = False
+    reservation.check_out_active = True
+    reservation.is_active = False
     room.save()
     # Enviar dades a les autoritats
     # return redirect('check_out_5')
 
-    return render(request, c.get_check_out_path(3), {'reservation': reservation, 'client': client})
+    return render(request, c.get_check_out_path(4), {'reservation': reservation, 'client': client})
 
 
 @worker_required('receptionist')

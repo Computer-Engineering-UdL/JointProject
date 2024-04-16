@@ -1,15 +1,8 @@
-.general-form {
-	width: 100%;
-	min-height: 100px;
-	display: flex;
-	flex-direction: column;
-}
-
 /******** Overwrite ********/
 .procedural-buttons {
 	width: 12%;
 	min-width: 80px;
-	height: 58px;
+	height: 56px;
 }
 
 .procedural-buttons button {
