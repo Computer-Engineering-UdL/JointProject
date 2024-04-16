@@ -1,4 +1,4 @@
-# Sprint 1 - Planing (12-03-2024)
+# Sprint 1 - Planning (12-03-2024)
 
 | **Assistant**          | **Role**         |
 |------------------------|------------------|
@@ -9,6 +9,6 @@
 | Abel, Júlia            | Frontend testing |
 | Aniol                  | Scrum Master     |
 
-## Spring Planing Overview
+## Spring Planning Overview
 
 The link of the project kanban board is [this](https://github.com/orgs/Computer-Engineering-UdL/projects/3).
