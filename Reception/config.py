@@ -73,7 +73,7 @@ ROOM_TYPES = [
 ]
 
 ROOM_PRICES_PER_TYPE = {
-    'No seleccionat':  0,
+    'No seleccionat': 0,
     'Individual': 50,
     'Double': 75,
     'Suite': 100,
@@ -85,4 +85,3 @@ PENSION_COST_PER_TYPE = {
     'Esmorzar Buffet': 10,
     'Completa': 20
 }
-
