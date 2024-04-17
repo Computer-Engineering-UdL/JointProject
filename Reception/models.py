@@ -67,8 +67,11 @@ class CheckIn(models.Model):
         return self.num_reservation
 
 
-def create_despesa(room_reservation, pension_costs, room_type_costs):
-    despesa = Despeses(room_reservation=room_reservation, pension_costs=pension_costs, room_type_costs=room_type_costs)
+def create_despesa(room_reservation, pension_type, room_type):
+    pension_cost = next((cost for name, cost in c.get_pension_cost_per_type() if name == pension_type), 0)
+    room_cost = next((cost for name, cost in c.get_room_prices_per_type() if name == room_type), 0)
+
+    despesa = Despeses(room_reservation=room_reservation, pension_costs=pension_cost, room_type_costs=room_cost)
     despesa.save()
 
 

@@ -53,7 +53,8 @@ def new_reservation_1(request):
             room.is_taken = True
             room_rsv.save()
             room.save()
-            create_despesa(room_rsv, 0, 0)
+            room_reservation = get_object_or_404(RoomReservation, pk=room_rsv.id)
+            create_despesa(room_rsv, room.room_type, room_reservation.pension_type)
             return redirect('new_reservation_4', room_rsv.id)
         else:
             form.add_error(None, "Error en el formulari")

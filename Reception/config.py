@@ -26,6 +26,9 @@ class Config:
         return ROOM_PRICES_PER_TYPE
 
     @staticmethod
+    def get_pension_cost_per_type():
+        return PENSION_COST_PER_TYPE
+    @staticmethod
     def get_check_in_path(n: int):
         return p.CHECK_IN_PATH[n]
 
@@ -74,4 +77,10 @@ ROOM_PRICES_PER_TYPE = [
     ('Double', 75),
     ('Suite', 100),
     ('Deluxe', 125)
+]
+
+PENSION_COST_PER_TYPE = [
+    ('Sense pensió', 0),
+    ('Esmorzar Buffet', 10),
+    ('Completa', 20)
 ]
