@@ -15,6 +15,8 @@ def redirect_user_based_on_type(user):
         worker_type_to_url = {
             'worker': 'worker_home',
             'receptionist': 'receptionist_home',
+            'cleaner': 'cleaner_home',
+            'restaurant': 'restaurant_home',
         }
         return worker_type_to_url.get(user.worker.type, 'base')
     # Not workers
@@ -62,6 +64,6 @@ def user_logout(request):
     logout(request)
     return redirect(LOGOUT_REDIRECT_URL)
 
-
+@login_required
 def home(request):
     return render(request, 'base.html')
