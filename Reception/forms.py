@@ -9,12 +9,11 @@ class RoomForm(forms.ModelForm):
     is_clean = forms.BooleanField(required=False)
     is_taken = forms.BooleanField(required=False)
     room_num = forms.IntegerField(validators=[MinValueValidator(200), MaxValueValidator(499)])
-    room_price = forms.IntegerField(validators=[MinValueValidator(20), MaxValueValidator(1000)])
     room_type = forms.ChoiceField(choices=c.get_room_types)
 
     class Meta:
         model = Room
-        fields = ['room_num', 'room_price', 'room_type', 'is_clean', 'is_taken']
+        fields = ['room_num', 'room_type', 'is_clean', 'is_taken']
 
 
 class RoomReservationForm(forms.ModelForm):

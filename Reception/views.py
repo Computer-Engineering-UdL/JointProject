@@ -34,9 +34,8 @@ def add_room_admin(request):
     if request.method == 'POST':
         form = RoomForm(request.POST)
         if form.is_valid():
-            chosen_room = form.cleaned_data['room']
-            Room.objects.get(id=chosen_room.id)
             form.save()
+            return redirect('receptionist_home')
     else:
         form = RoomForm()
 

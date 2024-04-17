@@ -22,6 +22,10 @@ class Config:
         return ROOM_TYPES
 
     @staticmethod
+    def get_room_prices_per_type():
+        return ROOM_PRICES_PER_TYPE
+
+    @staticmethod
     def get_check_in_path(n: int):
         return p.CHECK_IN_PATH[n]
 
@@ -62,4 +66,12 @@ ROOM_TYPES = [
     ('Double', 'Double'),
     ('Suite', 'Suite'),
     ('Deluxe', 'Deluxe')
+]
+
+ROOM_PRICES_PER_TYPE = [
+    ('No seleccionat', 0),
+    ('Individual', 50),
+    ('Double', 75),
+    ('Suite', 100),
+    ('Deluxe', 125)
 ]
