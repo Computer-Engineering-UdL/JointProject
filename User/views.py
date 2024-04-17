@@ -64,6 +64,7 @@ def user_logout(request):
     logout(request)
     return redirect(LOGOUT_REDIRECT_URL)
 
+
 @login_required
 def home(request):
     return render(request, 'base.html')
