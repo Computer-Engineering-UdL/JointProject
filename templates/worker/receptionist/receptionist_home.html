@@ -1,12 +1,10 @@
 {% extends "worker/receptionist/base_receptionist.html" %}
-<!-- The receptionist_home template must be the first step of the reservation process -->
+<!-- The receptionist_home template must let the worker choose between creating a new reservation and modifying one -->
 
 {% load static %}
-
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/worker/receptionist/receptionist_home.css' %}">
 {% endblock extra_css %}
-
 
 <!-- This block must appear in every reservation template as it is -->
 {% block id_reservation %} id="current-page" {% endblock id_reservation %}
