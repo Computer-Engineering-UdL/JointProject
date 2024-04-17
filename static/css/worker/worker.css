@@ -1,190 +1,505 @@
 body {
-	display: flex;
-	flex-direction: column;
-	height: 100vh;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 main {
-	height: 100%;
-	width: 100vw;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+    height: 100%;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 95%;
+    width: 95%;
+    max-height: 900px;
+    max-width: 1600px;
+    gap: 10px;
+    /*height: 90vh;*/
+}
+
+.general-form {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
-	height: 95%;
-	width: 95%;
-	max-height: 900px;
-	max-width: 1600px;
-	/*height: 90vh;*/
+    unicode-bidi: isolate;
 }
 
+/************** Text standards **************/
+p {
+    margin: 0;
+    font-size: 1em;
+}
+
+.section-title {
+    margin-bottom: 20px;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.subsection-title {
+    margin-bottom: 15px;
+    font-size: 40px;
+}
+
+h2 {
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+h5 {
+    margin: 0;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+h6 {
+    margin: 0;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.process-guidance {
+    display: flex;
+    justify-content: center;
+}
 
 header {
-	display: flex;
-	align-items: stretch;
-	justify-content: space-between;
-	/* NEUTRAL PALETTE */
-	background-color: #A39E94;
-	color: white;
-	height: 8vh;
-	min-height: 60px;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    /* NEUTRAL PALETTE */
+    background-color: #A39E94;
+    color: white;
+    height: 8vh;
+    min-height: 60px;
 }
 
+/************** Menu **************/
 nav {
-	display: flex;
-	width: 75%;
-	height: 100%;
-	align-items: center;
+    display: flex;
+    width: 75%;
+    height: 100%;
+    align-items: center;
 }
 
 .menu {
-	width: 100%;
-	height: 100%;
-	order: 1;
-	display: flex;
-	list-style-type: none;
-	color: black;
-	justify-content: flex-start;
-	padding: 0 5px;
-	margin: 0;
-	gap: 5px;
+    width: 100%;
+    height: 100%;
+    order: 1;
+    display: flex;
+    list-style-type: none;
+    color: black;
+    justify-content: flex-start;
+    padding: 0 5px;
+    margin: 0;
+    gap: 5px;
 }
 
 .menu li {
-	width: 25%;
-	height: 100%;
-	align-self: center;
+    width: 25%;
+    height: 100%;
+    align-self: center;
 }
 
 .menu button {
-	align-self: center;
-	font-size: 16px;
-	background-color: transparent;
-	width: 100%;
-	height: 100%;
-	cursor: pointer;
-	transition: background-color 0.2s;
-	border: none;
+    align-self: center;
+    font-size: 16px;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border: none;
 }
 
 .menu button:hover {
-	background-color: #95b0a7;
-	/*background-color: rgba(183, 197, 251, 0.47);*/
+    background-color: #95b0a7;
+    /*background-color: rgba(183, 197, 251, 0.47);*/
 }
 
 .menu button:active {
-	background-color: #6b7e77;
-	/*background-color: #6581f5;
-	color: white;*/
+    background-color: #6b7e77;
+    /*background-color: #6581f5;
+    color: white;*/
 }
 
 #current-page {
-	font-weight: bold;
-	/*background-color: #A39488;*/
-	background-color: #95b0a7;
-	/*background-color: rgb(213, 218, 224);*/
-	border-bottom: solid 2px black;
+    font-weight: bold;
+    /*background-color: #A39488;*/
+    background-color: #95b0a7;
+    /*background-color: rgb(213, 218, 224);*/
+    border-bottom: solid 2px black;
 }
 
 #current-page:hover {
-	background-color: #6b7e77;
-	/*background-color: rgb(183 197 251 / 47%);*/
+    background-color: #6b7e77;
+    /*background-color: rgb(183 197 251 / 47%);*/
 }
 
 #current-page:active {
-	/*background-color: #6581f5;
-	color: white;*/
-	background-color: #95B0A7FF;
-	color: #6b7e77;
+    /*background-color: #6581f5;
+    color: white;*/
+    background-color: #95B0A7FF;
+    color: #6b7e77;
 }
 
 #right-header {
-	display: flex;
-	align-items: center;
-	gap: 15px;
-	padding-right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-right: 10px;
 }
 
 #language {
-	color: #000000;
-	font-weight: bold;
+    color: #000000;
+    font-weight: bold;
 }
 
 #separator {
-	width: 1px;
-	background-color: #3d3d3d;
-	border: 1px solid #3d3d3d;
-	border-radius: 50px;
-	height: 65%;
+    width: 1px;
+    background-color: #3d3d3d;
+    border: 1px solid #3d3d3d;
+    border-radius: 50px;
+    height: 65%;
 }
 
 #user {
-	width: 50px;
+    width: 50px;
 }
 
 input {
-	background-color: white;
+    background-color: white;
+    border: 1px solid black;
 }
 
+/************** Reservation briefing **************/
+.reservation-briefing {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    gap: 30px;
+}
 
-.procedural-buttons {
-	height: 8%;
-	width: 100%;
+.reservation-briefing-data {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 48%;
+    border: solid 1px black;
+    border-radius: 2px;
+    padding: 10px;
+    gap: 25px;
+}
+
+.reservation-briefing-data div {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 }
 
-.procedural-buttons button {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
-	width: 20%;
-	max-width: 160px;
-	margin-top: 0;
-	margin-bottom: 0;
-	font-size: 15px;
+.entry-data {
 	font-weight: bold;
-	border-radius: 15px;
-	cursor: pointer;
-	transition: opacity 0.2s;
-	padding: 15px 10px;
+	align-content: center;
+}
+
+.reservation-briefing-data li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.reservation-briefing-data p {
+    align-content: center;
+}
+
+.reservation-briefing-data span {
+    align-content: center;
+}
+
+/************** Choice buttons **************/
+.access-process-button {
+    font-size: 20px;
+    padding: 30px 75px;
+    transition: background-color 0.2s, border-radius 0.2s
+}
+
+.access-process-button:hover {
+    font-weight: bold;
+    padding: 29px 70px;
+    background-color: #B7C5FB;
+    box-shadow: 0 0 10px grey;
+    border-radius: 10px;
+    border: solid 2px black;
+    cursor: pointer;
+}
+
+.access-process-button:active {
+    opacity: 0.8;
+    border-radius: 15px;
+}
+
+.access-process-button a {
+    color: black;
+    text-decoration: none;
+}
+
+/************** Procedural buttons **************/
+.procedural-buttons {
+    height: 8%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.procedural-buttons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 20%;
+    max-height: 60px;
+    max-width: 160px;
+    min-height: 40px;
+    min-width: 104px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    padding: 15px 10px;
 }
 
 .cancel-button {
-	color: #ff0000;
-	background-color: #ffffff;
-	border: 1px solid #ff0000;
+    color: #ff0000;
+    background-color: #ffffff;
+    border: 1px solid #ff0000;
 }
 
 .cancel-button:hover {
-	color: #ffffff;
-	background-color: #ff0000;
-	border: 1px solid #ff0000;
+    color: #ffffff;
+    background-color: #ff0000;
+    border: 1px solid #ff0000;
 }
 
 .cancel-button:active {
-	opacity: 0.4;
+    opacity: 0.4;
 }
 
 .continue-button {
-	color: #14b909;
-	background-color: #ffffff;
-	border: 1px solid #14b909;
+    color: #14b909;
+    background-color: white;
+    border: 1px solid #14b909;
 }
 
 .continue-button:hover {
-	color: #ffffff;
-	background-color: #14b909;
-	border: 1px solid #14b909;
+    color: white;
+    background-color: #14b909;
+    border: 1px solid #14b909;
 }
 
 .continue-button:active {
-	opacity: 0.4;
+    opacity: 0.4;
+}
+
+.filter-button {
+    color: #6b7e77;
+    background-color: white;
+    border: 1px solid #6b7e77;
+}
+
+.filter-button:hover {
+    color: white;
+    background-color: #6b7e77;
+    border: 1px solid #6b7e77;
+}
+
+.filter-button:active {
+    opacity: 0.4;
+}
+
+/************** Filter-field **************/
+.filter-field {
+    width: 100%;
+	font-weight: bold;
+	font-size: 20px;
+	display: flex;
+	justify-content: center;
+	gap: 3%;
+	align-items: flex-end;
+	flex-wrap: wrap;
+}
+
+.filter-field p {
+	margin-left: 5px;
+}
+
+.filter-field input[type="text"], input[type="number"] {
+	height: 100%;
+	border-radius: 5px;
+	text-align: center;
+	font-size: 30px;
+	padding: 10px;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+	width: 25%;
+	min-width: 270px;
+}
+
+/************** Reservations list **************/
+
+.list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 3px;
+    width: 95%;
+}
+
+.list-index {
+    width: 92%;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0;
+}
+
+.list-index li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    /*text-decoration: underline;*/
+    list-style-type: none;
+    padding: 0;
+}
+
+.list-index img {
+    display: none;
+}
+
+/***** table column sizes *****/
+#reservation-id {
+    width: 8%;
+}
+
+#entry {
+    width: 16%;
+}
+
+#exit {
+    width: 16%;
+}
+
+#name {
+    width: 32%;
+}
+
+#pension {
+    width: 18%;
+}
+
+#num-guests {
+    width: 10%;
+}
+
+/*****************************************/
+
+.icons {
+    width: 8%;
+    padding-left: 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 30px;
+    border: none;
+}
+
+.icon a {
+    display: flex;
+    align-items: center;
+}
+
+.icon img {
+    width: 30px;
+    height: 30px;
+}
+
+.reservation-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 0;
+    padding: 0;
+}
+
+.list-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.reservation-list li {
+    width: 92%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: solid 2px black;
+    border-radius: 2px;
+}
+
+.reservation-list li div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+    /*padding: 10px 15px;*/
+    border-right: solid 2px black;
+}
+
+.reservation-list li div:last-child {
+    border-right: none;
+}
+
+.icon form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
 }
