@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Reception.apps.ReceptionConfig',
     'User.apps.UserConfig',
+    "Cleaner.apps.CleanerConfig",
+    "Restaurant.apps.RestaurantConfig"
 ]
 
 MIDDLEWARE = [

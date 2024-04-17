@@ -1,74 +1,74 @@
 #notifications {
-    position: fixed;
-    top: 15%;
-    right: 5%;
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    z-index: 500;
+	position: fixed;
+	top: 15%;
+	right: 5%;
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+	z-index: 500;
 }
 
 .notification-err {
-    display: inline-block;
-    padding: 10px 20px;
-    border: 2px solid #ff0000;
-    background-color: rgba(217, 94, 94, 0.5);
-    color: #ffffff;
-    border-radius: 10px;
-    font-size: 16px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    animation: fadeOut 10s forwards;
-    width: auto;
-    max-width: 250px;
-    overflow: hidden;
+	display: inline-block;
+	padding: 10px 20px;
+	border: 2px solid #ff0000;
+	background-color: rgba(217, 94, 94, 0.5);
+	color: #ffffff;
+	border-radius: 10px;
+	font-size: 16px;
+	transition: background-color 0.3s ease, color 0.3s ease;
+	animation: fadeOut 10s forwards;
+	width: auto;
+	max-width: 250px;
+	overflow: hidden;
 }
 
 .notification-success {
-    border: 2px solid #088508;
-    background-color: rgba(107, 208, 107, 0.5);
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 10px;
-    font-size: 16px;
-    transition: background-color 0.3s ease,
-    color 0.3s ease;
-    animation: fadeOut 3s forwards;
-    position: fixed;
-    top: 10%;
-    right: 5%;
-    height: auto;
-    overflow: hidden;
+	border: 2px solid #088508;
+	background-color: rgba(107, 208, 107, 0.5);
+	display: inline-block;
+	padding: 10px 20px;
+	border-radius: 10px;
+	font-size: 16px;
+	transition: background-color 0.3s ease,
+	color 0.3s ease;
+	animation: fadeOut 3s forwards;
+	position: fixed;
+	top: 10%;
+	right: 5%;
+	height: auto;
+	overflow: hidden;
 }
 
 
 .notification-info {
-    border: 2px solid #b6a708;
-    background-color: rgba(200, 206, 91, 0.5);
-    animation: fadeOut 3s forwards;
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 10px;
-    font-size: 16px;
-    transition: background-color 0.3s ease,
-    color 0.3s ease;
-    position: fixed;
-    top: 10%;
-    right: 5%;
-    height: auto;
-    overflow: hidden;
+	border: 2px solid #b6a708;
+	background-color: rgba(200, 206, 91, 0.5);
+	animation: fadeOut 3s forwards;
+	display: inline-block;
+	padding: 10px 20px;
+	border-radius: 10px;
+	font-size: 16px;
+	transition: background-color 0.3s ease,
+	color 0.3s ease;
+	position: fixed;
+	top: 10%;
+	right: 5%;
+	height: auto;
+	overflow: hidden;
 }
 
 @keyframes fadeOut {
-    0% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    90% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    100% {
-        opacity: 0;
-        transform: translateX(100%);
-    }
+	0% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	90% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	100% {
+		opacity: 0;
+		transform: translateX(100%);
+	}
 }

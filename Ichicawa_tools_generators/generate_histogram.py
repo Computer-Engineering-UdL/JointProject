@@ -21,6 +21,7 @@ labels_count = {
     "front-end": 0,
     "tests": 0,
     "wontfix": 0,
+    "user-story": 0,
 }
 
 

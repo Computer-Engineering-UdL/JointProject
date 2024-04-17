@@ -23,15 +23,15 @@
             {% csrf_token %}
             <div class="entry-fields">
                 <div class="form-group">
-                    <p>Número de reserva</p>
+                    <p>{{ form.num_reservation.label }}</p>
                     {{ form.num_reservation }}
                 </div>
                 <div class="form-group">
-                    <p>Document identificatiu</p>
+                    <p>{{ form.id_number.label }}</p>
                     {{ form.id_number }}
                 </div>
                 <div class="form-group">
-                    <p>Número d'habitació</p>
+                    <p>{{ form.room_num.label }}</p>
                     {{ form.room_num }}
                 </div>
             </div>
