@@ -25,12 +25,16 @@ class Room(models.Model):
     is_clean = models.BooleanField()
     is_taken = models.BooleanField()
     room_num = models.IntegerField()
-    room_price = models.IntegerField()
     room_type = models.CharField(
         max_length=c.DROPDOWN_MAX_LENGTH,
         choices=c.get_room_types,
         default='Double'
     )
+    room_price = models.IntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        self.room_price = c.get_room_prices_per_type(self.room_type)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return str(self.id)
@@ -66,8 +70,11 @@ class CheckIn(models.Model):
         return self.num_reservation
 
 
-def create_despesa(room_reservation, pension_costs, room_type_costs):
-    despesa = Despeses(room_reservation=room_reservation, pension_costs=pension_costs, room_type_costs=room_type_costs)
+def create_despesa(room_reservation, pension_type, room_type):
+    pension_cost = c.get_pension_cost_per_type(pension_type)
+    room_cost = c.get_room_prices_per_type(room_type)
+
+    despesa = Despeses(room_reservation=room_reservation, pension_costs=pension_cost, room_type_costs=room_cost)
     despesa.save()
 
 
@@ -75,6 +82,11 @@ class Despeses(models.Model):
     room_reservation = models.OneToOneField(RoomReservation, on_delete=models.CASCADE)
     pension_costs = models.IntegerField(default=0)
     room_type_costs = models.IntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        if not self.room_type_costs:
+            self.room_type_costs = self.room_reservation.room.room_price
+        super().save(*args, **kwargs)
 
 
 class ExtraCosts(models.Model):
