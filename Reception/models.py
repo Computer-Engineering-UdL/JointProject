@@ -30,8 +30,11 @@ class Room(models.Model):
         choices=c.get_room_types,
         default='Double'
     )
-    room_price = models.IntegerField(choices=c.get_room_prices_per_type,
-                                     default=100)
+    room_price = models.IntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        self.room_price = c.get_room_prices_per_type(self.room_type)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return str(self.id)
@@ -68,8 +71,8 @@ class CheckIn(models.Model):
 
 
 def create_despesa(room_reservation, pension_type, room_type):
-    pension_cost = next((cost for name, cost in c.get_pension_cost_per_type() if name == pension_type), 0)
-    room_cost = next((cost for name, cost in c.get_room_prices_per_type() if name == room_type), 0)
+    pension_cost = c.get_pension_cost_per_type(pension_type)
+    room_cost = c.get_room_prices_per_type(room_type)
 
     despesa = Despeses(room_reservation=room_reservation, pension_costs=pension_cost, room_type_costs=room_cost)
     despesa.save()
