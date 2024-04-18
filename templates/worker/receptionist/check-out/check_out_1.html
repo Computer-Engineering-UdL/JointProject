@@ -49,8 +49,7 @@
             </div>
         </form>
 
-        <!-- <h2>Reserves actives</h2> -->
-        <div class="list">
+        <ul class="reservation-list">
             <ul class="list-index">
                 <li id="reservation-id">Reserva</li>
                 <li id="entry">Entrada</li>
@@ -59,25 +58,22 @@
                 <li id="pension">Pensió</li>
                 <li id="num-guests">Nº hostes</li>
             </ul>
-            <ul class="reservation-list">
-                {% for reservation in reservations %}
-                    <div class="list-div">
-                        <li>
-                            <div id="reservation-id">{{ reservation.id }}</div>
-                            <div id="entry">{{ reservation.entry }}</div>
-                            <div id="exit">{{ reservation.exit }}</div>
-                            <div id="name">{{ reservation.client.first_name }}</div>
-                            <div id="pension">{{ reservation.pension_type }}</div>
-                            <div id="num-guests">{{ reservation.num_guests }}</div>
-                        </li>
-                        <div class="icons">
-                            <div class="icon"><a href="{% url 'check_out_summary' pk=reservation.id %}">
-                                <img src="{% static 'img/icons/info-icon.png' %}" alt="edit"></a>
-                            </div>
-                        </div>
+            {% for reservation in reservations %}
+                <div class="list-div">
+                    <li>
+                        <div id="reservation-id">{{ reservation.id }}</div>
+                        <div id="entry">{{ reservation.entry }}</div>
+                        <div id="exit">{{ reservation.exit }}</div>
+                        <div id="name">{{ reservation.client.first_name }}</div>
+                        <div id="pension">{{ reservation.pension_type }}</div>
+                        <div id="num-guests">{{ reservation.num_guests }}</div>
+                    </li>
+                    <div class="list-extra">
+                        <a class="icon" href="{% url 'check_out_summary' pk=reservation.id %}"><img width="30" height="30" src="{% static 'img/icons/enter-icon.png' %}" alt="delete"></a>
+                        <!-- <a href="% url 'check_out_summary' pk=reservation.id %}"><button class="list-button">Check-out</button></a> -->
                     </div>
-                {% endfor %}
-            </ul>
-        </div>
+                </div>
+            {% endfor %}
+        </ul>
     </div>
 {% endblock %}
