@@ -121,3 +121,11 @@ class SearchReservationForm(forms.ModelForm):
     class Meta:
         model = RoomReservation
         fields = []
+
+
+class AddExtraCostsForm(forms.ModelForm):
+    extra_costs = forms.FloatField(label="Costs addicionals", validators=[MinValueValidator(0)])
+
+    class Meta:
+        model = RoomReservation
+        fields = ['extra_costs']

@@ -20,6 +20,7 @@ urlpatterns = [
     path('check-out/', v.check_out_1, name='check_out'),
     path('check-out-summary/<int:pk>', v.check_out_summary, name='check_out_summary'),
     path('check-out-3/<int:pk>', v.check_out_3, name='check_out_3'),
+    path('add-extra-costs/<int:pk>', v.add_extra_costs, name='add_extra_costs'),
     path('print-receipt/<int:client_id>/<int:reservation_id>/', v.print_receipt_check_out,
          name='print_receipt_check_out'),
 ]

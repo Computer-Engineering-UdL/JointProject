@@ -1,0 +1,24 @@
+{% extends "worker/receptionist/base_receptionist.html" %}
+<!-- This template allows to enter an id to search for a client reservation -->
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/receptionist/check-out/check-out_1.css' %}">
+{% endblock extra_css %}
+
+<!-- This block must appear in every reservation template as it is -->
+{% block id_check-out %} id="current-page" {% endblock id_check-out %}
+
+{% block title %}Check Out{% endblock title %}
+
+{% block content %}
+    <div class="main">
+        <h1 class="section-title">Afegir costos extra</h1>
+        <form action="{% url 'check_out' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="number" name="extra_costs" id="extra_costs" class="form-control" placeholder="Costos extra" required>
+            </div>
+        </form>
+    </div>
+{% endblock %}

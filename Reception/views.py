@@ -1,7 +1,8 @@
 from django.http import JsonResponse, FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, SearchReservationForm
+from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, SearchReservationForm, \
+    AddExtraCostsForm
 from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn, Despeses, ExtraCosts, create_despesa
 from User.decorators import worker_required, admin_required
 from Reception.config import Config as c
@@ -214,6 +215,27 @@ def reservation_details(request, pk):
         return redirect('search_reservation')
 
     return render(request, c.get_manage_reservation_path(2), {'reservation': reservation})
+
+
+@worker_required('receptionist')
+def add_extra_costs(request, pk):
+    reservation = get_object_or_404(RoomReservation, pk=pk)
+    room = get_object_or_404(Room, pk=reservation.room_id)
+    extra_costs = ExtraCosts.objects.filter(room_reservation=reservation.id)
+
+    if request.method == 'POST':
+        form = AddExtraCostsForm(request.POST)
+        if form.is_valid():
+            extra_cost = form.save(commit=False)
+            extra_cost.room_reservation = reservation
+            extra_cost.save()
+            messages.success(request, "Despesa afegida amb èxit")
+            return redirect('check_out_summary', pk=pk)
+    else:
+        form = AddExtraCostsForm()
+
+    return render(request, c.get_check_out_path(5),
+                  {'form': form, 'reservation': reservation, 'room': room, 'extra_costs': extra_costs})
 
 
 @worker_required('receptionist')
