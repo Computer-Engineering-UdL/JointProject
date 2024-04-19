@@ -1,34 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from github import Github
-import os
 from datetime import datetime
-
-# Configuración inicial
-token = os.getenv('GITHUB_TOKEN')
-repo_name = "Computer-Engineering-UdL/JointProject"
-sprint_milestone_title = "Sprint 1"
-
-g = Github(token)
-repo = g.get_repo(repo_name)
-
-
-def get_sprint_milestone():
-    milestones = repo.get_milestones()
-    for milestone in milestones:
-        if milestone.title == sprint_milestone_title:
-            return milestone
-    return None
-
-
-def count_closed_issues(milestone):
-    closed_issues_count_by_day = {}
-    issues = repo.get_issues(milestone=milestone, state="closed")
-    for issue in issues:
-        if issue.closed_at:
-            closed_day = issue.closed_at.date()
-            closed_issues_count_by_day[closed_day] = closed_issues_count_by_day.get(closed_day, 0) + 1
-    return closed_issues_count_by_day
+from burn_down_chart import get_sprint_milestone, count_closed_issues
 
 
 def generate_burn_up_chart(milestone):
