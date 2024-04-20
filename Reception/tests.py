@@ -115,6 +115,7 @@ class CheckOutFormsAndRedirectsTest(BaseTest):
         form = SearchReservationForm(data={'room_num': '202'})
         self.assertFalse(form.is_valid())
         self.assertTrue('No existeix cap reserva per aquesta habitació' in form.errors['__all__'])
+
     def test_check_out_search_with_non_existent_room_number(self):
         form = SearchReservationForm(data={'room_num': '20122'})
         self.assertFalse(form.is_valid())
@@ -129,8 +130,32 @@ class CheckOutFormsAndRedirectsTest(BaseTest):
         form = SearchReservationForm(data={'num_reservation': 'aer'})
         self.assertFalse(form.is_valid())
         self.assertTrue('Introdueix un número de reserva vàlid' in form.errors['__all__'])
+
     def test_check_out_incorrect_format_id_number(self):
         form = SearchReservationForm(data={'id_number': '33442244rrtes'})
         self.assertFalse(form.is_valid())
         self.assertTrue('Introdueix un número d\'identificació vàlid' in form.errors['__all__'])
 
+class CheckOutViewTest(BaseTest):
+
+    def test_check_out_view_status_code(self):
+        url = reverse('check_out')
+        response = self.client.get(url)
+        print(response)
+        self.assertEqual(response.status_code, 200)
+
+    def test_check_out_summary_view_status_code(self):
+        url = reverse('check_out_summary', args=[self.reservation.id])
+        print(url)
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_check_out_3_view_status_code(self):
+        url = reverse('check_out_3', args=[self.reservation.id])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    """def test_print_receipt_check_out_view_status_code(self):
+        url = reverse('print_receipt_check_out', args=[self.client_user.id, self.reservation.id])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)"""
