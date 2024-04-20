@@ -17,24 +17,22 @@
             Per iniciar el procés de "Check-In" introdueixi una de les següents dades sol·licitades:
         </p> -->
 
-        <form method="post" class="general-form">
+        <form method="post" class="filter-field">
             {% csrf_token %}
-            <div class="filter-field">
-                <div class="form-group">
-                    <h5>{{ form.num_reservation.label }}</h5>
-                    {{ form.num_reservation }}
-                </div>
-                <div class="form-group">
-                    <h5>{{ form.id_number.label }}</h5>
-                    {{ form.id_number }}
-                </div>
-                <div class="form-group">
-                    <h5>{{ form.room_num.label }}</h5>
-                    {{ form.room_num }}
-                </div>
-                <div class="procedural-buttons">
-                    <button class="filter-button" type="submit">Filtrar</button>
-                </div>
+            <div class="form-group">
+                <h5>{{ form.num_reservation.label }}</h5>
+                {{ form.num_reservation }}
+            </div>
+            <div class="form-group">
+                <h5>{{ form.id_number.label }}</h5>
+                {{ form.id_number }}
+            </div>
+            <div class="form-group">
+                <h5>{{ form.room_num.label }}</h5>
+                {{ form.room_num }}
+            </div>
+            <div class="procedural-buttons">
+                <button class="filter-button" type="submit">Filtrar</button>
             </div>
         </form>
 
