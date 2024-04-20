@@ -51,7 +51,6 @@ class Config:
 
 
 ROOM_EXTRA_COSTS = [
-    ('Minibar', 'Minibar'),
     ('Desperfectes', 'Desperfectes'),
     ('Servei habitacions', 'Servei habitacions'),
     ('Parking', 'Parking'),
