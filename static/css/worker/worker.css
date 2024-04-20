@@ -302,13 +302,13 @@ input {
 .filter-button {
     color: #a1b5ff;
     background-color: white;
-    border: 1px solid #a1b5ff;
+    border: 2px solid #a1b5ff;
 }
 
 .filter-button:hover {
     color: white;
     background-color: #a1b5ff;
-    border: 1px solid #a1b5ff;
+    border: 2px solid #a1b5ff;
 }
 
 .filter-button:active {
