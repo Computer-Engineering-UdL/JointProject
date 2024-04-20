@@ -31,7 +31,7 @@
                 <div><p>Serveis Extra:</p></div>
                 {% for extra in extra_costs %}
                     <div><p>Tipus:</p> <span class="entry-data">{{ extra.extra_costs_type }}</span></div>
-                    <div><p>Preu:</p> <span class="entry-data">{{ extra.extra_costs_price }}</span></div>
+                    <div><p>Preu:</p> <span class="entry-data">{{ extra.extra_costs_price }}€</span></div>
                 {% endfor %}
                 <div><p>Total serveis extra:</p> <span class="entry-data">{{ extra_total }}€</span></div>
                 <div><p>Total:</p> <span class="entry-data">{{ total_price }}€</span></div>
