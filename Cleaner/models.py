@@ -12,7 +12,6 @@ class Cleaning_Material(models.Model):
 
 class Stock(models.Model):
     material = models.ForeignKey(Cleaning_Material, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
     price = models.FloatField()
     is_available = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)
