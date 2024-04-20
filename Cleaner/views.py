@@ -7,7 +7,7 @@ from Cleaner.config import Config as c
 
 @worker_required('cleaner')
 def cleaner_home(request):
-    return render(request, 'worker/cleaner/cleaner_home.html')
+    return render(request, c.get_cleaner_home_path(1))
 
 
 @worker_required('cleaner')
