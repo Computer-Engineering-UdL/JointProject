@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from Cleaner.forms import StockForm
 from Cleaner.models import Stock
+from Reception.models import Room
 from User.decorators import worker_required
 from Cleaner.config import Config as c
 
@@ -34,3 +35,17 @@ def cleaner_stock(request):
         stock = Stock.objects.filter(is_active=True)
 
     return render(request, c.get_cleaner_stock_path(1), {'form': form, 'stock': stock})
+
+
+@worker_required('cleaner')
+def cleaner_cleaned_rooms(request):
+    occupied_rooms = Room.objects.filter(is_taken=True, roomreservation__check_out_active=False)
+    check_out_rooms = Room.objects.filter(is_taken=True, roomreservation__check_out_active=True)
+    return render(request, c.get_cleaner_rooms_path(1), {'occupied_rooms': occupied_rooms,
+                                                         'check_out_rooms': check_out_rooms})
+
+
+@worker_required('cleaner')
+def cleaner_cleaned_room_info(request, room_id):
+    room = Room.objects.get(id=room_id)
+    return render(request, c.get_cleaner_rooms_path(2), {'room': room})
