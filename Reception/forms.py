@@ -1,6 +1,6 @@
 from django import forms
 from django.core.validators import MinValueValidator, MaxValueValidator
-from .models import RoomReservation, Client, Room, CheckIn, HotelUser
+from Reception.models import RoomReservation, Client, Room, CheckIn, HotelUser, ExtraCosts
 from Reception.config import Config as c
 from Reception import forms_verify as fv
 
@@ -128,5 +128,5 @@ class AddExtraCostsForm(forms.ModelForm):
     type = forms.ChoiceField(choices=c.get_room_extra_costs)
 
     class Meta:
-        model = RoomReservation
-        fields = ['price', 'type']
+        model = ExtraCosts
+        fields = ['extra_costs_price', 'extra_costs_type']

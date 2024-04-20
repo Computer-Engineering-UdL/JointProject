@@ -14,12 +14,9 @@
 {% block content %}
     <div class="main">
         <h1 class="section-title">Afegir costos extra</h1>
-        <form action="{% url 'check_out' %}" method="post">
+        <form action="{% url 'add_extra_costs' pk=reservation.id %}" method="post">
             {% csrf_token %}
-            <div class="form-group">
-                <input type="number" name="extra_costs" id="extra_costs" class="form-control" placeholder="Costos extra" required>
-                {{ form.type }}
-            </div>
+            {{ form.as_p }}
             <div class="procedural-buttons">
                 <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
                 <button class="continue-button" type="submit">Create &#10093;</button>

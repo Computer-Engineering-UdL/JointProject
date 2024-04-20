@@ -226,16 +226,26 @@ def add_extra_costs(request, pk):
     if request.method == 'POST':
         form = AddExtraCostsForm(request.POST)
         if form.is_valid():
-            extra_cost = form.save(commit=False)
-            extra_cost.room_reservation = reservation
-            extra_cost.save()
+            extra_costs_type = form.cleaned_data.get('extra_costs_type')
+            extra_costs_price = form.cleaned_data.get('extra_costs_price')
+            new_extra_cost = ExtraCosts(
+                room_reservation=reservation,
+                extra_costs_type=extra_costs_type,
+                extra_costs_price=extra_costs_price
+            )
+            new_extra_cost.save()
+            print("S'ha afegit els costos extra a la reserva, els valors son: ", extra_costs_type, extra_costs_price)
             messages.success(request, "Despesa afegida amb èxit")
             return redirect('check_out_summary', pk=pk)
     else:
         form = AddExtraCostsForm()
 
-    return render(request, c.get_check_out_path(5),
-                  {'form': form, 'reservation': reservation, 'room': room, 'extra_costs': extra_costs})
+    return render(request, c.get_check_out_path(5), {
+        'form': form,
+        'reservation': reservation,
+        'room': room,
+        'extra_costs': extra_costs
+    })
 
 
 @worker_required('receptionist')
