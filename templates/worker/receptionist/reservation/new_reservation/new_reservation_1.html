@@ -20,50 +20,54 @@
 
 {% block content %}
     <div class="main">
+        <h2 class="subsection-title">Crear nova reserva</h2>
         <form method="post" class="general-form">
             <div class="add-reservation-form">
                 {% csrf_token %}
                 <div class="date">
-                    <h2>Introdueixi la data i el tipus d'habitació desitjada:</h2>
                     <div class="date-form">
-                        <div class="date-input">
-                            <p class="title-input">Data d'entrada</p>
+                        <div class="form-input date-input">
+                            <h5 class="title-input">Data d'entrada</h5>
                             {{ form.entry }}
                         </div>
-                        <div class="date-input">
-                            <p class="title-input">Data de sortida</p>
+                        <div class="form-input date-input">
+                            <h5 class="title-input">Data de sortida</h5>
                             {{ form.exit }}
                         </div>
                     </div>
-                    <div>
+                    <!-- Temporal div -->
+                    <div id="temporal-div">
+                        <style>
+                            #temporal-div {
+                                margin-left: 15px;
+                            }
+                        </style>
                         <div id="room-num">
-                            <p>Número habitació: </p>
-                            {{ form.room }}
-                            <style>
-                                #room-num {
-                                    display: flex;
-                                    flex-direction: row;
-                                    margin-bottom: 5px;
-                                }
-                            </style>
+                            <div class="form-input select-input">
+                                <h5 class="title-input">Número d'habitació</h5>
+                                {{ form.room }}
+                            </div>
                         </div>
                         <div>
-                            {{ form.client }}
+                            <div class="form-input select-input">
+                                <h5 class="title-input">Client</h5>
+                                {{ form.client }}
+                            </div>
                             <a href="{% url 'new_reservation_3' %}">Crear client</a>
                         </div>
                     </div>
                 </div>
                 <div class="reservation-info-form">
-                    <div class="form-button" id="guests-number">
-                        <p class="title-input">Nombre d'hostes</p>
+                    <div class="form-input number-input">
+                        <h5 class="title-input">Nombre d'hostes</h5>
                         {{ form.num_guests }}
                     </div>
-                    <div class="form-button" id="room-type">
-                        <p class="title-input">Tipus d'habitació</p>
+                    <div class="form-input select-input">
+                        <h5 class="title-input">Tipus d'habitació</h5>
                         {{ form.room_type }}
                     </div>
-                    <div class="form-button" id="pension-type">
-                        <p class="title-input">Tipus de pensió</p>
+                    <div class="form-input select-input">
+                        <h5 class="title-input">Tipus de pensió</h5>
                         {{ form.pension_type }}
                     </div>
                 </div>
