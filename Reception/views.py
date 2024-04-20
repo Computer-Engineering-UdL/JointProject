@@ -34,9 +34,8 @@ def add_room_admin(request):
     if request.method == 'POST':
         form = RoomForm(request.POST)
         if form.is_valid():
-            chosen_room = form.cleaned_data['room']
-            Room.objects.get(id=chosen_room.id)
             form.save()
+            return redirect('receptionist_home')
     else:
         form = RoomForm()
 
@@ -54,7 +53,8 @@ def new_reservation_1(request):
             room.is_taken = True
             room_rsv.save()
             room.save()
-            create_despesa(room_rsv, 0, 0)
+            room_reservation = get_object_or_404(RoomReservation, pk=room_rsv.id)
+            create_despesa(room_rsv, room_reservation.pension_type, room.room_type)
             return redirect('new_reservation_4', room_rsv.id)
         else:
             form.add_error(None, "Error en el formulari")
