@@ -1,2 +1,16 @@
-{% extends "worker/base_worker.html" %}
+{% extends "worker/restaurant/base_restaurant.html" %}
 <!-- This template allows to choose client type and introduce name and/or id -->
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/restaurant/restaurant_new_reservation/restaurant_new_reservation_2.css' %}">
+{% endblock extra_css %}
+
+<!-- This block must appear in every restaurant template as it is -->
+{% block id_restaurant_home %} id="current-page" {% endblock id_restaurant_home %}
+
+{% block content %}
+    <div class="main">
+        <!-- Test temporal code in here -->
+    </div>
+{% endblock content %}

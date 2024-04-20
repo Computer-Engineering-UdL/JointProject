@@ -1,0 +1,19 @@
+h2 {
+
+}
+
+/******** Overwrite ********/
+.procedural-buttons {
+	width: 12%;
+	min-width: 80px;
+	height: 56px;
+}
+
+.procedural-buttons button {
+	width: 100%;
+	height: 100%;
+}
+
+.icon {
+	margin-left: 3px;
+}

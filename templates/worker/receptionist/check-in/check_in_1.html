@@ -3,50 +3,80 @@
 
 {% load static %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/worker/receptionist/check-in/check-in_home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/worker/receptionist/check-in/check-in_1.css' %}">
 {% endblock extra_css %}
 
-{% block id_check-in %} id="current-page" {% endblock %}
+{% block id_check-in %} id="current-page" {% endblock id_check-in %}
 
-{% block title %}Check In{% endblock %}
+{% block title %}Check In{% endblock title %}
 
 {% block content %}
+    <div class="main">
+        <h1 class="section-title">CHECK-IN</h1>
+        <!-- <p class="process-guidance">
+            Per iniciar el procés de "Check-In" introdueixi una de les següents dades sol·licitades:
+        </p> -->
 
-    <h1 class="section-title">CHECK-IN</h1>
-
-    <p class="process-guidance">
-        Per iniciar el procés de "Check-In" introdueixi una de les següents dades sol·licitades:
-    </p>
-
-    <form method="post">
-        {% csrf_token %}
-        <div class="screen-elems">
-            <div class="entry-fields">
+        <form method="post" class="general-form">
+            {% csrf_token %}
+            <div class="filter-field">
                 <div class="form-group">
-                    <p>{{ form.num_reservation.label }}</p>
+                    <h5>{{ form.num_reservation.label }}</h5>
                     {{ form.num_reservation }}
                 </div>
                 <div class="form-group">
-                    <p>{{ form.id_number.label }}</p>
+                    <h5>{{ form.id_number.label }}</h5>
                     {{ form.id_number }}
                 </div>
+                <div class="form-group">
+                    <h5>{{ form.room_num.label }}</h5>
+                    {{ form.room_num }}
+                </div>
+                <div class="procedural-buttons">
+                    <button class="filter-button" type="submit">Filtrar</button>
+                </div>
             </div>
-            <div class="buttons">
-                <input class="submit-button" type="submit" value="Continua">
+        </form>
+
+        <form method="post">
+            {% csrf_token %}
+            <div id="notifications">
+                {% if form.non_field_errors %}
+                    {% for error in form.non_field_errors %}
+                        <p class="notification-err">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
             </div>
-        </div>
-    </form>
+        </form>
 
-    <form method="post">
-        {% csrf_token %}
-        <div id="notifications">
-            {% if form.non_field_errors %}
-                {% for error in form.non_field_errors %}
-                    <p class="notification-err">{{ error }}</p>
-                {% endfor %}
-            {% endif %}
-        </div>
-    </form>
-
-
+        <!-- <h2>Reserves no actives</h2> -->
+        <ul class="reservation-list">
+            <ul class="list-index">
+                <li id="reservation-id">Reserva</li>
+                <li id="entry">Entrada</li>
+                <li id="exit">Sortida</li>
+                <li id="name">Client</li>
+                <li id="pension">Pensió</li>
+                <li id="num-guests">Nº hostes</li>
+            </ul>
+            {% for reservation in reservations %}
+                <div class="list-div">
+                    <li>
+                        <div id="reservation-id">{{ reservation.id }}</div>
+                        <div id="entry">{{ reservation.entry }}</div>
+                        <div id="exit">{{ reservation.exit }}</div>
+                        <div id="name">{{ reservation.client.first_name }}</div>
+                        <div id="pension">{{ reservation.pension_type }}</div>
+                        <div id="num-guests">{{ reservation.num_guests }}</div>
+                    </li>
+                    <div class="list-extra">
+                        <a href="{% url 'check_in_summary' pk=reservation.id %}"><button class="list-button">Check-in</button></a>
+                        <!-- <div class="icon"><a href="% url 'check_in_summary' pk=reservation.id %}">
+                            <img src="% static 'img/icons/info-icon.png' %}" alt="edit"></a>
+                        </div> -->
+                    </div>
+                </div>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

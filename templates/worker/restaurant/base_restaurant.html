@@ -1,0 +1,13 @@
+{% extends "worker/base_worker.html" %}
+<!-- This is the base template for the restaurant, every restaurant template must extend this one -->
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/worker.css' %}">
+{% endblock extra_css %}
+
+{% block title %}Restaurant{% endblock %}
+
+{% block menu %}
+    <li><a href="{% url 'restaurant_home' %}"><button> {% block id_restaurant_home %}{% endblock %}</button></a></li>
+{% endblock menu %}

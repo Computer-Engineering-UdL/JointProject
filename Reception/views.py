@@ -125,22 +125,24 @@ def check_in_1(request):
 def check_in_summary(request, pk):
     try:
         reservation = RoomReservation.objects.get(id=pk, is_active=True, check_in_active=False)
+        client = reservation.client
 
         if request.method == 'POST':
-            client = reservation.client
-            check_in, created = CheckIn.objects.get_or_create(
-                num_reservation=str(reservation.id),
-                defaults={'id_number': client.id_number}
-            )
+            action = request.POST.get('action')
 
-            if created:
-                check_in.save()
-                reservation.check_in_active = True
-                reservation.save()
-
-            if 'print_receipt' in request.POST:
+            if action == 'print_receipt':
                 return redirect('print_receipt', reservation_id=reservation.id)
-            else:
+            elif action == 'check_in':
+                check_in, created = CheckIn.objects.get_or_create(
+                    num_reservation=str(reservation.id),
+                    defaults={'id_number': client.id_number}
+                )
+
+                if created:
+                    check_in.save()
+                    reservation.check_in_active = True
+                    reservation.save()
+
                 messages.success(request, "Check-in completat amb èxit")
                 return redirect('check_in')
 
@@ -275,11 +277,13 @@ def check_out_3(request, pk):
     client = get_object_or_404(HotelUser, id=reservation.client_id)
     room.is_clean = False
     room.is_taken = False
+    reservation.check_out_active = True
+    reservation.is_active = False
     room.save()
     # Enviar dades a les autoritats
     # return redirect('check_out_5')
 
-    return render(request, c.get_check_out_path(3), {'reservation': reservation, 'client': client})
+    return render(request, c.get_check_out_path(4), {'reservation': reservation, 'client': client})
 
 
 @worker_required('receptionist')

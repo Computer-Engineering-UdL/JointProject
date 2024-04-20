@@ -1,0 +1,28 @@
+/******** Overwrite ********/
+.procedural-buttons {
+	width: 12%;
+	min-width: 80px;
+	height: 56px;
+}
+
+.procedural-buttons button {
+	width: 100%;
+	height: 100%;
+}
+
+/*.submit-button {
+	padding: 20px 40px;
+	font-size: 20px;
+	border-radius: 15px;
+	border: solid 2px black;
+	cursor: pointer;
+}
+
+.submit-button:hover {
+	background-color: #B7C5FB;
+	box-shadow: 0 0 10px;
+}
+
+.submit-button:active {
+	opacity: 0.5;
+}*/
