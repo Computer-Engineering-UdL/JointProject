@@ -1,12 +1,13 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
+from django import forms
 from Reception.models import RoomReservation, Client, Room, Worker
 from Reception.config import Config as c
 from Reception.forms import SearchReservationForm
 
 
-class CheckInViewTest(TestCase):
+class BaseTest(TestCase):
 
     def setUp(self):
         self.worker = Worker.objects.create_user(
@@ -34,6 +35,13 @@ class CheckInViewTest(TestCase):
             room_price=50,
             room_type='Double'
         )
+        self.room1 = Room.objects.create(
+            is_clean=True,
+            is_taken=False,
+            room_num=202,
+            room_price=50,
+            room_type='Double'
+        )
 
         self.reservation = RoomReservation.objects.create(
             client=self.client_user,
@@ -45,6 +53,9 @@ class CheckInViewTest(TestCase):
         )
         self.client.force_login(self.worker)
 
+
+class CheckInViewTest(BaseTest):
+
     def test_check_in_view_status_code(self):
         url = reverse('check_in')
         response = self.client.get(url)
@@ -55,12 +66,14 @@ class CheckInViewTest(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
+
+class CheckOutFormsAndRedirectsTest(BaseTest):
     def test_check_out(self):
         url = reverse('check_out')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-    #TEST CASES FOR CHECK OUT IN PROCESS
+    # TEST CASES FOR CHECK OUT IN PROCESS
     def test_check_out_view_redirect_with_reservation(self):
         url = reverse('check_out')
         response = self.client.post(url, {'num_reservation': self.reservation.id})
@@ -83,24 +96,41 @@ class CheckInViewTest(TestCase):
     def test_check_out_incorrect_search_with_reservation(self):
         form = SearchReservationForm(data={'num_reservation': '11'})
         self.assertFalse(form.is_valid())
+        self.assertTrue('No existeix cap reserva amb aquest número' in form.errors['__all__'])
 
     def test_check_out_correct_search_with_id_number(self):
         form = SearchReservationForm(data={'id_number': self.client_user.id_number})
         self.assertTrue(form.is_valid())
 
     def test_check_out_incorrect_search_with_id_number(self):
-        #Porque al cambiar 'id_number' por cualquier otra cosa me sigue dando que es valido
         form = SearchReservationForm(data={'id_number': '12345984B'})
         self.assertFalse(form.is_valid())
+        self.assertTrue('No existeix cap client amb aquest número d\'identificació' in form.errors['__all__'])
 
     def test_check_out_correct_search_with_room_number(self):
         form = SearchReservationForm(data={'room_num': self.room.room_num})
         self.assertTrue(form.is_valid())
 
     def test_check_out_incorrect_search_with_room_number(self):
-        form = SearchReservationForm(data={'room_num': '12345984'})
+        form = SearchReservationForm(data={'room_num': '202'})
         self.assertFalse(form.is_valid())
-        self.assertIn("No existeix cap habitació amb aquest número", form.errors['room_num'])
+        self.assertTrue('No existeix cap reserva per aquesta habitació' in form.errors['__all__'])
+    def test_check_out_search_with_non_existent_room_number(self):
+        form = SearchReservationForm(data={'room_num': '20122'})
+        self.assertFalse(form.is_valid())
+        self.assertTrue('No existeix cap habitació amb aquest número' in form.errors['__all__'])
 
+    def test_check_out_with_empty_fields(self):
+        form = SearchReservationForm(data={})
+        self.assertFalse(form.is_valid())
+        self.assertTrue('Introdueix informació en algun dels camps per a la cerca' in form.errors['__all__'])
 
+    def test_check_out_incorrect_format_reservation(self):
+        form = SearchReservationForm(data={'num_reservation': 'aer'})
+        self.assertFalse(form.is_valid())
+        self.assertTrue('Introdueix un número de reserva vàlid' in form.errors['__all__'])
+    def test_check_out_incorrect_format_id_number(self):
+        form = SearchReservationForm(data={'id_number': '33442244rrtes'})
+        self.assertFalse(form.is_valid())
+        self.assertTrue('Introdueix un número d\'identificació vàlid' in form.errors['__all__'])
 
