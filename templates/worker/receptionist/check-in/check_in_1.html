@@ -59,6 +59,7 @@
                 <li id="pension">Pensió</li>
                 <li id="num-guests">Nº hostes</li>
             </ul>
+            <div id="divider"></div>
             {% for reservation in reservations %}
                 <div class="list-div">
                     <li>
@@ -70,10 +71,8 @@
                         <div id="num-guests">{{ reservation.num_guests }}</div>
                     </li>
                     <div class="list-extra">
-                        <a href="{% url 'check_in_summary' pk=reservation.id %}"><button class="list-button">Check-in</button></a>
-                        <!-- <div class="icon"><a href="% url 'check_in_summary' pk=reservation.id %}">
-                            <img src="% static 'img/icons/info-icon.png' %}" alt="edit"></a>
-                        </div> -->
+                        <a class="icon" href="{% url 'check_in_summary' pk=reservation.id %}"><img id="check" width="30" height="30" src="{% static 'img/icons/enter-icon.png' %}" alt="delete"></a>
+                        <!-- <a href="% url 'check_in_summary' pk=reservation.id %}"><button class="list-button">Check-in</button></a> -->
                     </div>
                 </div>
             {% endfor %}
