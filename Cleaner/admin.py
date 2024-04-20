@@ -1,3 +1,5 @@
 from django.contrib import admin
+from Cleaner.models import Cleaning_Material, Stock
 
-# Register your models here.
+admin.site.register(Cleaning_Material)
+admin.site.register(Stock)

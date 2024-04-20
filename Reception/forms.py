@@ -1,6 +1,6 @@
 from django import forms
 from django.core.validators import MinValueValidator, MaxValueValidator
-from .models import RoomReservation, Client, Room, CheckIn, HotelUser
+from Reception.models import RoomReservation, Client, Room, CheckIn, HotelUser
 from Reception.config import Config as c
 from Reception import forms_verify as fv
 

@@ -3,7 +3,7 @@ from django.db import models
 class Cleaning_Material(models.Model):
     material_name = models.CharField(max_length=50)
     description = models.TextField()
-    image = models.ImageField(upload_to='cleaning_materials/')
+    image = models.ImageField(upload_to='Cleaner/cleaning_materials/')
 
     def __str__(self):
         return self.material_name
