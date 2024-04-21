@@ -18,20 +18,22 @@
         <form action="{% url 'cleaner_stock' %}" method="post" id="stock-form">
             {% csrf_token %}
             {{ form.as_p }}
-            <button id="search" type="submit"><img width="30" src="{% static 'img/icons/lupa-icon.png' %}" alt="Buscar"></button>
+            <button id="search" type="submit"><img width="30" src="{% static 'img/icons/lupa-icon.png' %}" alt="Buscar">
+            </button>
         </form>
-        <form action="{% url 'cleaner_stock' %}" method="post">
+        <form action="{% url 'cleaner_stock' %}" method="post" id="stock_list_form">
             {% csrf_token %}
             <div class="stock">
                 {% for item in stock %}
-                <div>
-                    <input type="checkbox" name="stock[]" value="{{ item.id }}" id="stock_{{ item.id }}" {% if not item.is_available %} checked {% endif %}>
-                    <label for="stock_{{ item.id }}">{{ item.material.material_name }}</label>
-                    <img src="{{ item.material.image.url }}" alt="{{ item.material.material_name }} image">
-                </div>
+                    <div class="stock_element">
+                        <p for="stock_{{ item.id }}">{{ item.material.material_name }}</p>
+                        <input type="checkbox" name="stock[]" value="{{ item.id }}" id="stock_{{ item.id }}"
+                                {% if not item.is_available %} checked {% endif %}><label for="stock_{{ item.id }}"><img
+                            src="{{ item.material.image.url }}" alt="{{ item.material.material_name }} image"></label>
+                    </div>
                 {% endfor %}
             </div>
-            <button type="submit" name="update_stock">Actualitzar Estat</button>
+            <button type="submit" name="update_stock" id="update-button">Actualitzar</button>
         </form>
     </div>
 {% endblock content %}
