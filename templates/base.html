@@ -40,24 +40,27 @@
                 </a></button>
                 -->
                 <!--
-                    <button> <a href="{% url 'new_reservation_1' %}">
+                    <button> <a href="% url 'new_reservation_1' %}">
                         RECEPTION - Room Reservation
                     </a></button>
 
-                <button> <a href="{% url 'add_room' %}">
+                <button> <a href="% url 'add_room' %}">
                     RECEPTION - Add Room
                 </a></button>
 
-                <button> <a href="{% url 'check_in' %}">
+                <button> <a href="% url 'check_in' %}">
                     RECEPTION - Check-in
                 </a></button>
 
-                <button> <a href="{% url 'fetch_rooms' %}">
+                <button> <a href="% url 'fetch_rooms' %}">
                     RECEPTION - Fetch Rooms
                 </a></button>
                 -->
                 <button> <a href="{% url 'receptionist_home'%}">
                     RECEPTION - Home
+                </a></button>
+                <button> <a href="{% url 'cleaner_stock'%}">
+                    CLEANER - Stock
                 </a></button>
                 {% if not user.is_authenticated %}
                     <button> <a href="{% url 'login'%}">
