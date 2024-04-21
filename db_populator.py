@@ -113,6 +113,64 @@ def populate_reservations(n) -> None:
             f' with pension type {pension_type}')
 
 
+def create_cleaning_materials(n) -> None:
+    """Populate the Cleaning_Material table with n entries."""
+    for _ in range(n):
+        material_name = fake.word()
+        image = fake.image_url(width=800, height=600)
+        cleaning_material = Cleaning_Material.objects.create(
+            material_name=material_name,
+            image=image
+        )
+        cleaning_material.save()
+        print(f'Created Cleaning Material: {cleaning_material.material_name}')
+
+
+def populate_stock(n):
+    """Populate the Stock table with n entries."""
+    cleaning_materials = Cleaning_Material.objects.all()
+    if not cleaning_materials.exists():
+        print("No cleaning materials available to create stock.")
+        return
+
+    for _ in range(n):
+        material = random.choice(cleaning_materials)
+        price = random.uniform(1.0, 100.0).__round__(2)
+        is_available = random.choice([True, False])
+        stock = Stock.objects.create(
+            material=material,
+            price=price,
+            is_available=is_available,
+            is_active=True
+        )
+        stock.save()
+        print(f'Created Stock: {stock.material.material_name} - Price: {stock.price} - Available: {stock.is_available}')
+
+
+def populate_cleaned_rooms(n):
+    """Populate the CleanedRoom table with n entries."""
+    rooms = Room.objects.all()
+    if not rooms.exists():
+        print("No rooms available to create cleaned room records.")
+        return
+
+    for _ in range(n):
+        room = random.choice(rooms)
+        missing_objects = fake.word() if random.choice([True, False]) else ''
+        need_towels = random.randint(0, 5)
+        additional_comments = fake.text() if random.choice([True, False]) else ''
+        is_cleaned = random.choice([True, False])
+        cleaned_room = CleanedRoom.objects.create(
+            room=room,
+            missing_objects=missing_objects,
+            need_towels=need_towels,
+            additional_comments=additional_comments,
+            is_cleaned=is_cleaned
+        )
+        cleaned_room.save()
+        print(f'Created Cleaned Room: Room {cleaned_room.room.room_num} - Cleaned: {cleaned_room.is_cleaned}')
+
+
 def print_bar(length=75, new_line=True) -> None:
     """Print a bar of a certain length."""
     if new_line:
@@ -142,6 +200,9 @@ def main() -> None:
     populate(populate_clients, 10)
     populate(populate_rooms, 10)
     populate(populate_reservations, 10)
+    populate(create_cleaning_materials, 10)
+    populate(populate_stock, 10)
+    populate(populate_cleaned_rooms, 10)
     print("Finished populating the database.")
 
 
