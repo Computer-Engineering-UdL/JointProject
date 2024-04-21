@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from Cleaner.forms import StockForm, CleanedRoomForm
-from Cleaner.models import Stock
+from Cleaner.models import Stock, CleanedRoom
 from Reception.models import Room
 from User.decorators import worker_required
 from Cleaner.config import Config as c
@@ -49,16 +49,27 @@ def cleaner_cleaned_rooms(request):
 def cleaner_cleaned_room_info(request, room_id):
     form = CleanedRoomForm(request.POST or None)
     room = Room.objects.get(id=room_id)
+    cleaned_room = CleanedRoom.objects.filter(room=room)
 
     if request.method == 'POST':
         if form.is_valid():
-            missing_objects = form.cleaned_data.get('missing_objects')
-            need_towels = form.cleaned_data.get('need_towels')
-            additional_comments = form.cleaned_data.get('additional_comments')
-            cleaned_room = room.cleanedroom_set.create(missing_objects=missing_objects,
-                                                       need_towels=need_towels,
-                                                       additional_comments=additional_comments,
-                                                       is_cleaned=True)
-            cleaned_room.save()
-            return redirect('cleaner_cleaned_rooms')
-    return render(request, c.get_cleaner_rooms_path(2), {'room': room})
+            if cleaned_room.exists():
+                cleaned_room = cleaned_room.first()
+                cleaned_room.missing_objects = form.cleaned_data.get('missing_objects')
+                cleaned_room.need_towels = form.cleaned_data.get('need_towels')
+                cleaned_room.additional_comments = form.cleaned_data.get('additional_comments')
+                cleaned_room.is_cleaned = True
+                cleaned_room.save()
+            else:
+                missing_objects = form.cleaned_data.get('missing_objects')
+                need_towels = form.cleaned_data.get('need_towels')
+                additional_comments = form.cleaned_data.get('additional_comments')
+                cleaned_room = room.cleanedroom_set.create(missing_objects=missing_objects,
+                                                           need_towels=need_towels,
+                                                           additional_comments=additional_comments,
+                                                           is_cleaned=True)
+                cleaned_room.save()
+        else:
+            print(form.errors)
+        return redirect('cleaner_cleaned_rooms')
+    return render(request, c.get_cleaner_rooms_path(2), {'room': room, 'cleaned_room': cleaned_room})
