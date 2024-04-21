@@ -11,8 +11,9 @@ django.setup()
 from Reception.models import HotelUser, Client, Worker, Room, RoomReservation, CheckIn, Despeses, ExtraCosts
 from Cleaner.models import Cleaning_Material, Stock, CleanedRoom
 from Reception.config import Config as c
+from User.gen_dni import gen_dni
 
-fake = Faker()
+fake = Faker('es_ES')
 
 
 def create_users(n) -> None:
@@ -35,7 +36,7 @@ def populate_clients(n) -> None:
         email = fake.email()
         username = f"{first_name.lower()}_{last_name.lower()}"
         phone_number = fake.phone_number()
-        id_number = fake.ssn()
+        id_number = gen_dni()
         is_hosted = random.choice([True, False])
 
         client = Client.objects.create_user(
