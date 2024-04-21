@@ -25,11 +25,13 @@
             {% csrf_token %}
             <div class="stock">
                 {% for item in stock %}
-                    <div class="stock_element">
-                        <p for="stock_{{ item.id }}">{{ item.material.material_name }}</p>
+                    <div class="stock-element">
+                        <label id="stock-name" for="stock_{{ item.id }}">{{ item.material.material_name }}</label>
                         <input type="checkbox" name="stock[]" value="{{ item.id }}" id="stock_{{ item.id }}"
-                                {% if not item.is_available %} checked {% endif %}><label for="stock_{{ item.id }}"><img
-                            src="{{ item.material.image.url }}" alt="{{ item.material.material_name }} image"></label>
+                                {% if not item.is_available %} checked {% endif %}>
+                        <label for="stock_{{ item.id }}"><img src="{{ item.material.image.url }}"
+                                                              alt="{{ item.material.material_name }} image">
+                        </label>
                     </div>
                 {% endfor %}
             </div>
