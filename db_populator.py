@@ -15,6 +15,8 @@ from User.gen_dni import gen_dni
 
 fake = Faker('es_ES')
 
+IMAGE_SRC = "https://picsum.photos/800/600"  # Old: fake_image_url(800, 600)
+
 
 def create_users(n) -> None:
     """Populate the User table with n entries."""
@@ -117,7 +119,7 @@ def create_cleaning_materials(n) -> None:
     """Populate the Cleaning_Material table with n entries."""
     for _ in range(n):
         material_name = fake.word()
-        image = fake.image_url(width=800, height=600)
+        image = IMAGE_SRC
         cleaning_material = Cleaning_Material.objects.create(
             material_name=material_name,
             image=image
