@@ -51,16 +51,77 @@ class BaseTest(TestCase):
             pension_type='Sense pensió',
             num_guests=2
         )
+
         self.client.force_login(self.worker)
 
 
-class CheckInViewTest(BaseTest):
+class CheckInFormsAndRedirectsTest(BaseTest):
 
     def test_check_in_view_status_code(self):
         url = reverse('check_in')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
+    def test_check_in_redirect_with_reservation(self):
+        url = reverse('check_in')
+        response = self.client.post(url, {'num_reservation': self.reservation.id})
+        self.assertTemplateUsed(response, c.get_check_in_path(1))
+
+    def test_check_in_redirect_with_id_number(self):
+        url = reverse('check_in')
+        response = self.client.post(url, {'id_number': self.client_user.id_number})
+        self.assertTemplateUsed(response, c.get_check_in_path(1))
+
+    def test_check_in_redirect_with_room_number(self):
+        url = reverse('check_in')
+        response = self.client.post(url, {'room_num': self.room.room_num})
+        self.assertTemplateUsed(response, c.get_check_in_path(1))
+
+    def test_check_in_correct_search_with_reservation(self):
+        form = SearchReservationForm(data={'num_reservation': self.reservation.id})
+        self.assertTrue(form.is_valid())
+
+    def test_check_in_incorrect_search_with_reservation(self):
+        form = SearchReservationForm(data={'num_reservation': '11'})
+        self.assertFalse(form.is_valid())
+        self.assertTrue('No existeix cap reserva amb aquest número' in form.errors['__all__'])
+
+
+class CheckInViewTest(BaseTest):
+    def test_check_in_view_status_code(self):
+        url = reverse('check_in')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_check_in_1_view_exist_reservation(self):
+        url = reverse('check_in')
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 200)
+
+        reservations = response.context['reservations']
+        self.assertIn(self.reservation, reservations)
+
+    def test_check_in_1_view_non_exist_reservation(self):
+        url = reverse('check_in')
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 200)
+
+        reservation = RoomReservation.objects.create(
+            client=self.client_user,
+            room=self.room1,
+            entry=timezone.now().date(),
+            exit=(timezone.now() + timezone.timedelta(days=1)).date(),
+            pension_type='Sense pensió',
+            num_guests=1
+        )
+
+        reservations = response.context['reservations']
+        self.assertNotIn(reservation, reservations)
+
+
+class RoomReservationTest(BaseTest):
     def test_room_reservation(self):
         url = reverse('new_reservation_1')
         response = self.client.get(url)
@@ -136,18 +197,20 @@ class CheckOutFormsAndRedirectsTest(BaseTest):
         self.assertFalse(form.is_valid())
         self.assertTrue('Introdueix un número d\'identificació vàlid' in form.errors['__all__'])
 
+
 class CheckOutViewTest(BaseTest):
 
     def test_check_out_view_status_code(self):
         url = reverse('check_out')
         response = self.client.get(url)
-        print(response)
         self.assertEqual(response.status_code, 200)
 
     def test_check_out_summary_view_status_code(self):
         url = reverse('check_out_summary', args=[self.reservation.id])
         print(url)
+
         response = self.client.get(url)
+        print(response)
         self.assertEqual(response.status_code, 200)
 
     def test_check_out_3_view_status_code(self):
