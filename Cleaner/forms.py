@@ -13,13 +13,10 @@ class StockForm(forms.ModelForm):
 
 
 class CleanedRoomForm(forms.Form):
-    occupied_rooms = forms.ModelChoiceField(queryset=Room.objects.filter(is_taken=True,
-                                                                         roomreservation__check_out_active=False),
-                                            empty_label="Select a client")
-    missing_objects = forms.CharField(label="S'han deixat alguna cosa?", required=False)
-    need_towels = forms.IntegerField(label="Falten tovalloles?", required=False)
-    additional_comments = forms.CharField(label="Comentaris addicionals", required=False)
+    missing_objects = forms.CharField(required=False)
+    need_towels = forms.IntegerField(required=False)
+    additional_comments = forms.CharField(required=False)
 
     class Meta:
         model = CleanedRoom
-        fields = ['occupied_rooms', 'missing_objects', 'need_towels', 'additional_comments']
+        fields = ['missing_objects', 'need_towels', 'additional_comments']
