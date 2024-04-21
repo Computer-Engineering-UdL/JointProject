@@ -102,11 +102,13 @@ def populate_reservations(n) -> None:
             exit=exit_date,
             num_guests=num_guests,
             pension_type=pension_type,
-            is_active=True
+            is_active=True,
+            check_in_active=random.choice([True, False]),
+            check_out_active=random.choice([True, False])
         )
         reservation.save()
-        print(
-            f'Created Reservation: Room {reservation.room.room_num} from {reservation.entry} to {reservation.exit} with pension type {pension_type}')
+        print(f'Created Reservation: Room {reservation.room.room_num} from {reservation.entry} to {reservation.exit}'
+              f' with pension type {pension_type}')
 
 
 def print_bar(length=75, new_line=True) -> None:
