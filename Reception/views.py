@@ -1,7 +1,8 @@
 from django.http import JsonResponse, FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, SearchReservationForm
+from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, SearchReservationForm, \
+    AddExtraCostsForm
 from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn, Despeses, ExtraCosts, create_despesa
 from User.decorators import worker_required, admin_required
 from Reception.config import Config as c
@@ -125,22 +126,24 @@ def check_in_1(request):
 def check_in_summary(request, pk):
     try:
         reservation = RoomReservation.objects.get(id=pk, is_active=True, check_in_active=False)
+        client = reservation.client
 
         if request.method == 'POST':
-            client = reservation.client
-            check_in, created = CheckIn.objects.get_or_create(
-                num_reservation=str(reservation.id),
-                defaults={'id_number': client.id_number}
-            )
+            action = request.POST.get('action')
 
-            if created:
-                check_in.save()
-                reservation.check_in_active = True
-                reservation.save()
-
-            if 'print_receipt' in request.POST:
+            if action == 'print_receipt':
                 return redirect('print_receipt', reservation_id=reservation.id)
-            else:
+            elif action == 'check_in':
+                check_in, created = CheckIn.objects.get_or_create(
+                    num_reservation=str(reservation.id),
+                    defaults={'id_number': client.id_number}
+                )
+
+                if created:
+                    check_in.save()
+                    reservation.check_in_active = True
+                    reservation.save()
+
                 messages.success(request, "Check-in completat amb èxit")
                 return redirect('check_in')
 
@@ -215,6 +218,37 @@ def reservation_details(request, pk):
 
 
 @worker_required('receptionist')
+def add_extra_costs(request, pk):
+    reservation = get_object_or_404(RoomReservation, pk=pk)
+    room = get_object_or_404(Room, pk=reservation.room_id)
+    extra_costs = ExtraCosts.objects.filter(room_reservation=reservation.id)
+
+    if request.method == 'POST':
+        form = AddExtraCostsForm(request.POST)
+        if form.is_valid():
+            extra_costs_type = form.cleaned_data.get('extra_costs_type')
+            extra_costs_price = form.cleaned_data.get('extra_costs_price')
+            new_extra_cost = ExtraCosts(
+                room_reservation=reservation,
+                extra_costs_type=extra_costs_type,
+                extra_costs_price=extra_costs_price
+            )
+            new_extra_cost.save()
+            print("S'ha afegit els costos extra a la reserva, els valors son: ", extra_costs_type, extra_costs_price)
+            messages.success(request, "Despesa afegida amb èxit")
+            return redirect('check_out_summary', pk=pk)
+    else:
+        form = AddExtraCostsForm()
+
+    return render(request, c.get_check_out_path(5), {
+        'form': form,
+        'reservation': reservation,
+        'room': room,
+        'extra_costs': extra_costs
+    })
+
+
+@worker_required('receptionist')
 def delete_reservation(request, pk):
     reservation = get_object_or_404(RoomReservation, pk=pk)
     if request.method == 'POST':
@@ -275,11 +309,13 @@ def check_out_3(request, pk):
     client = get_object_or_404(HotelUser, id=reservation.client_id)
     room.is_clean = False
     room.is_taken = False
+    reservation.check_out_active = True
+    reservation.is_active = False
     room.save()
     # Enviar dades a les autoritats
     # return redirect('check_out_5')
 
-    return render(request, c.get_check_out_path(3), {'reservation': reservation, 'client': client})
+    return render(request, c.get_check_out_path(4), {'reservation': reservation, 'client': client})
 
 
 @worker_required('receptionist')

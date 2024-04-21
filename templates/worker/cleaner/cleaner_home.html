@@ -1,2 +1,18 @@
-{% extends "worker/base_worker.html" %}
+{% extends "worker/cleaner/base_cleaner.html" %}
 <!-- This template shows the cleaner all the assigned rooms to clean for the day -->
+<!-- This template is the first step for the main cleaner process -->
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/cleaner/cleaner_home.css' %}">
+{% endblock extra_css %}
+
+<!-- This block must appear in every cleaner template as it is -->
+{% block id_cleaner_home %} id="current-page" {% endblock id_cleaner_home %}
+
+{% block content %}
+    <div class="main">
+        <h1 class="section-title">HABITACIONS ASSIGNADES</h1>
+        <!-- Test temporal code in here -->
+    </div>
+{% endblock content %}

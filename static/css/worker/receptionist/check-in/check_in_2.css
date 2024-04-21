@@ -1,8 +1,9 @@
-.first_block {
-	border: solid 1px black;
+form {
+	width: 100%;
+	max-width: 1200px;
 }
 
-.entry-data {
-	margin-left: 5px;
-	font-weight: bold;
+/******** Overwrite ********/
+.procedural-buttons {
+	height: 100%;
 }

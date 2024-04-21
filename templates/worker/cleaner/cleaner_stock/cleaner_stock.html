@@ -1,0 +1,20 @@
+{% extends "worker/base_worker.html" %}
+<!-- This template shows the cleaner all the cleaning stock and allows to mark each item as 'no stock' -->
+<!-- The items selected as 'no stock' must be showed differently -->
+
+{% block title %}Stock{% endblock title %}
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/cleaner/cleaner_stock.css' %}">
+{% endblock extra_css %}
+
+<!-- This block must appear in every cleaner template as it is -->
+{% block id_cleaner_stock %} id="current-page" {% endblock id_cleaner_stock %}
+
+{% block content %}
+    <div class="main">
+        <h1 class="section-title">STOCK</h1>
+        <!-- Test temporal code in here -->
+    </div>
+{% endblock content %}

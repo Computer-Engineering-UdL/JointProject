@@ -3,7 +3,6 @@
 {% load static %}
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/worker/receptionist/reservation/new_reservation/new_reservation_4.css' %}">
-    <script src="{% static 'js/utils.js' %}"></script>
 {% endblock %}
 
 <!-- This block must appear in every reservation template as it is -->
@@ -11,32 +10,29 @@
 
 {% block content %}
     <div class="main">
+        <h2>Reserva {{ reservation.id }}</h2>
+        <div class="reservation-briefing">
+            <div class="reservation-briefing-data">
+                <div><p>Reserva:</p> <span class="entry-data">{{ reservation.id }}</span></div>
+                <div><p>Data entrada:</p> <span class="entry-data"> {{ reservation.entry }}</span></div>
+                <div><p>Data sortida:</p> <span class="entry-data">{{ reservation.exit }}</span></div>
+                <div><p>Número d'hostes:</p> <span class="entry-data">{{ reservation.num_guests }}</span></div>
+                <div><p>Tipus d'habitació:</p> <span class="entry-data">{{ room.room_type }}</span></div>
+                <div><p>Pensió:</p> <span class="entry-data">{{ reservation.pension_type }}</span></div>
+                <div><p>Número d'habitació:</p> <span class="entry-data">{{ reservation.room }}</span></div>
+            </div>
+            <div class="reservation-briefing-data">
+                <div><p>Nº reserva:</p> <span class="entry-data"> {{ reservation.id }}</span></div>
+                <div><p>Id:</p> <span class="entry-data"> {{ client.id_number }}</span></div>
+                <div><p>Nom:</p> <span class="entry-data"> {{ client.first_name }}</span></div>
+                <div><p>Cognoms:</p> <span class="entry-data"> {{ client.last_name }}</span></div>
+                <div><p>Correu electrònic:</p> <span class="entry-data"> {{ client.email }}</span></div>
+                <div><p>Telèfon:</p> <span class="entry-data"> {{ reservation.client.phone_number }}</span></div>
+            </div>
+        </div>
+        <h3>Preu total: {{ reservation.total_price }}€</h3>
         <form action="{% url 'submit_reservation' %}" method="post">
             {% csrf_token %}
-            <h1>Reserva {{ reservation.id }}</h1>
-            <div id="big-container">
-                <div class="data-container">
-                    <div class="inner-container">
-                        <p>Data entrada: {{ reservation.entry }}</p>
-                        <p>Data sortida: {{ reservation.exit }}</p>
-                        <p>Número d'hostes: {{ reservation.num_guests }}</p>
-                        <p>Tipus d'habitació: {{ reservation.room.room_type }}</p>
-                        <p>Tipus de pensió: {{ reservation.pension_type }}</p>
-                        <p>Habitació: {{ reservation.room }}</p>
-                    </div>
-                </div>
-                <div class="data-container">
-                    <div class="inner-container">
-                        <p>Nº reserva: {{ reservation.id }}</p>
-                        <p>Id: {{ client.id_number }}</p>
-                        <p>Nom: {{ client.first_name }}</p>
-                        <p>Cognoms: {{ client.last_name }}</p>
-                        <p>Correu electrònic: {{ client.email }}</p>
-                        <p>Telèfon: {{ reservation.client.phone_number }}</p>
-                    </div>
-                </div>
-            </div>
-            <h3>Preu total: {{ reservation.total_price }}€</h3>
             <div class="procedural-buttons">
                 <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
                 <button class="continue-button" type="submit" onclick="return confirm('Vols finalitzar la reserva?');">Finalitzar Reserva &#10093;</button>

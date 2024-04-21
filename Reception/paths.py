@@ -23,6 +23,7 @@ class Path:
         2: 'worker/receptionist/check-out/check_out_2.html',
         3: 'worker/receptionist/check-out/check_out_3.html',
         4: 'worker/receptionist/check-out/check_out_4.html',
+        5: 'worker/receptionist/check-out/add_extra_costs.html',
     }
 
     ADMIN_TESTS_PATH = {

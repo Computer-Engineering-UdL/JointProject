@@ -22,6 +22,10 @@ class Config:
         return ROOM_TYPES
 
     @staticmethod
+    def get_room_number_range(room_type: str):
+        return ROOM_NUMBER_RANGES[room_type]
+
+    @staticmethod
     def get_room_prices_per_type(room_type: str):
         return ROOM_PRICES_PER_TYPE[room_type]
 
@@ -51,7 +55,6 @@ class Config:
 
 
 ROOM_EXTRA_COSTS = [
-    ('Minibar', 'Minibar'),
     ('Desperfectes', 'Desperfectes'),
     ('Servei habitacions', 'Servei habitacions'),
     ('Parking', 'Parking'),
@@ -71,6 +74,13 @@ ROOM_TYPES = [
     ('Suite', 'Suite'),
     ('Deluxe', 'Deluxe')
 ]
+
+ROOM_NUMBER_RANGES = {
+    'Individual': (100, 299),
+    'Double': (300, 499),
+    'Deluxe': (500, 599),
+    'Suite': (600, 699)
+}
 
 ROOM_PRICES_PER_TYPE = {
     'No seleccionat': 0,
