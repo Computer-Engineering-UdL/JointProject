@@ -56,7 +56,6 @@ def populate_clients(n) -> None:
 def populate_rooms(n) -> None:
     """Populate the Room table with n entries, assigning room numbers based on type."""
     room_types = c.get_room_types()[1:]
-    print(room_types)
     room_counts = {room_type[0]: c.get_room_number_range(room_type[0])[0] for room_type in room_types}
 
     for i in range(n):
@@ -96,6 +95,7 @@ def populate_reservations(n) -> None:
         pension_choice = random.choice(pension_types)
         pension_type = pension_choice[0]
         num_guests = random.randint(1, 4)
+        room_type = room.room_type
         reservation = RoomReservation(
             client=client,
             room=room,
@@ -108,7 +108,7 @@ def populate_reservations(n) -> None:
             check_out_active=random.choice([True, False])
         )
         reservation.save()
-        print(f'Created Reservation: Room {reservation.room.room_num} from {reservation.entry} to {reservation.exit}'
+        print(f'Created Reservation: Room {reservation.room.room_num} [{room_type}] from {reservation.entry} to {reservation.exit}'
               f' with pension type {pension_type}')
 
 
