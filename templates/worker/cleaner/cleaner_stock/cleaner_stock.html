@@ -15,6 +15,23 @@
 {% block content %}
     <div class="main">
         <h1 class="section-title">STOCK</h1>
-        <!-- Test temporal code in here -->
+        <form action="{% url 'cleaner_stock' %}" method="post" id="stock-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button id="search" type="submit"><img width="30" src="{% static 'img/icons/lupa-icon.png' %}" alt="Buscar"></button>
+        </form>
+        <form action="{% url 'cleaner_stock' %}" method="post">
+            {% csrf_token %}
+            <div class="stock">
+                {% for item in stock %}
+                <div>
+                    <input type="checkbox" name="stock[]" value="{{ item.id }}" id="stock_{{ item.id }}" {% if not item.is_available %} checked {% endif %}>
+                    <label for="stock_{{ item.id }}">{{ item.material.material_name }}</label>
+                    <img src="{{ item.material.image.url }}" alt="{{ item.material.material_name }} image">
+                </div>
+                {% endfor %}
+            </div>
+            <button type="submit" name="update_stock">Actualitzar Estat</button>
+        </form>
     </div>
 {% endblock content %}
