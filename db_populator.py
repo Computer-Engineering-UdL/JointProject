@@ -109,8 +109,8 @@ def populate_reservations(n) -> None:
         )
         reservation.save()
         print(
-            f'Created Reservation: Room {reservation.room.room_num} [{room_type}] from {reservation.entry} to {reservation.exit}'
-            f' with pension type {pension_type}')
+            f'Created Reservation: Room {reservation.room.room_num} [{room_type}] from {reservation.entry} '
+            f'to {reservation.exit} with pension type {pension_type}')
 
 
 def create_cleaning_materials(n) -> None:
@@ -144,7 +144,8 @@ def populate_stock(n):
             is_active=True
         )
         stock.save()
-        print(f'Created Stock: {stock.material.material_name} - Price: {stock.price} - Available: {stock.is_available}')
+        available_msg = 'Available' if stock.is_available else 'Not Available'
+        print(f'Created Stock: {stock.material.material_name} - Price: {stock.price} - {available_msg}')
 
 
 def populate_cleaned_rooms(n):
@@ -168,7 +169,8 @@ def populate_cleaned_rooms(n):
             is_cleaned=is_cleaned
         )
         cleaned_room.save()
-        print(f'Created Cleaned Room: Room {cleaned_room.room.room_num} - Cleaned: {cleaned_room.is_cleaned}')
+        cleaned_msg = 'Cleaned' if cleaned_room.is_cleaned else 'Not Cleaned'
+        print(f'Created Cleaned Room: Room {cleaned_room.room.room_num} - {cleaned_msg}')
 
 
 def print_bar(length=75, new_line=True) -> None:
