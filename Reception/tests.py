@@ -102,6 +102,7 @@ class CheckInFormsAndRedirectsTest(BaseTest):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
+
 class CheckInViewTest(BaseTest):
     def test_check_in_1_view_exist_reservation(self):
         url = reverse('check_in')
@@ -121,8 +122,8 @@ class CheckInViewTest(BaseTest):
         reservation = RoomReservation.objects.create(
             client=self.client_user,
             room=self.room1,
-            entry=timezone.now().date(),
-            exit=(timezone.now() + timezone.timedelta(days=1)).date(),
+            entry=timezone.now().date() + timezone.timedelta(days=1),
+            exit=(timezone.now() + timezone.timedelta(days=2)).date(),
             pension_type='Sense pensió',
             num_guests=1
         )
@@ -135,9 +136,8 @@ class CheckInViewTest(BaseTest):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-
     def test_check_in_summary_view_with_nonexistent_reservation(self):
-        url = reverse('check_in_summary', args=[1])
+        url = reverse('check_in_summary', args=[122])
         response = self.client.get(url)
         messages = list(get_messages(response.wsgi_request))
         self.assertEqual(len(messages), 1)
@@ -201,9 +201,9 @@ class CheckOutFormsAndRedirectsTest(BaseTest):
         self.assertTrue(form.is_valid())
 
     def test_check_out_incorrect_search_with_room_number(self):
-        form = SearchReservationForm(data={'room_num': '202'})
+        form = SearchReservationForm(data={'room_num': '204'})
         self.assertFalse(form.is_valid())
-        self.assertTrue('No existeix cap reserva per aquesta habitació' in form.errors['__all__'])
+        self.assertTrue('No existeix cap habitació amb aquest número' in form.errors['__all__'])
 
     def test_check_out_search_with_non_existent_room_number(self):
         form = SearchReservationForm(data={'room_num': '20122'})
@@ -245,5 +245,3 @@ class CheckOutViewTest(BaseTest):
 
         reservations = response.context['reservations']
         self.assertNotIn(self.reservation, reservations)
-
-
