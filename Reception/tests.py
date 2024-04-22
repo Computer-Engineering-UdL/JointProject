@@ -53,6 +53,16 @@ class BaseTest(TestCase):
             num_guests=2
         )
 
+        self.reservationCheckInActive = RoomReservation.objects.create(
+            client=self.client_user,
+            room=self.room1,
+            entry=timezone.now().date(),
+            exit=(timezone.now() + timezone.timedelta(days=1)).date(),
+            pension_type='Sense pensió',
+            num_guests=2,
+            check_in_active=True
+        )
+
         self.client.force_login(self.worker)
 
 
@@ -147,6 +157,11 @@ class CheckOutFormsAndRedirectsTest(BaseTest):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
+    def test_check_out_3_view_status_code(self):
+        url = reverse('check_out_3', args=[self.reservation.id])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
     # TEST CASES FOR CHECK OUT IN PROCESS
     def test_check_out_view_redirect_with_reservation(self):
         url = reverse('check_out')
@@ -213,18 +228,22 @@ class CheckOutFormsAndRedirectsTest(BaseTest):
 
 class CheckOutViewTest(BaseTest):
 
-    def test_check_out_view_status_code(self):
+    def test_check_out_1_view_exist_reservation(self):
         url = reverse('check_out')
         response = self.client.get(url)
+
         self.assertEqual(response.status_code, 200)
 
-    def test
-    def test_check_out_3_view_status_code(self):
-        url = reverse('check_out_3', args=[self.reservation.id])
+        reservations = response.context['reservations']
+        self.assertIn(self.reservationCheckInActive, reservations)
+
+    def test_check_out_1_view_non_exist_reservation(self):
+        url = reverse('check_out')
         response = self.client.get(url)
+
         self.assertEqual(response.status_code, 200)
 
-    """def test_print_receipt_check_out_view_status_code(self):
-        url = reverse('print_receipt_check_out', args=[self.client_user.id, self.reservation.id])
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)"""
+        reservations = response.context['reservations']
+        self.assertNotIn(self.reservation, reservations)
+
+
