@@ -1,3 +1,4 @@
+from django.contrib.messages import get_messages
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
@@ -86,13 +87,12 @@ class CheckInFormsAndRedirectsTest(BaseTest):
         self.assertFalse(form.is_valid())
         self.assertTrue('No existeix cap reserva amb aquest número' in form.errors['__all__'])
 
-
-class CheckInViewTest(BaseTest):
-    def test_check_in_view_status_code(self):
-        url = reverse('check_in')
+    def test_check_in_summary_view_status_code(self):
+        url = reverse('check_in_summary', args=[self.reservation.id])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
+class CheckInViewTest(BaseTest):
     def test_check_in_1_view_exist_reservation(self):
         url = reverse('check_in')
         response = self.client.get(url)
@@ -119,6 +119,19 @@ class CheckInViewTest(BaseTest):
 
         reservations = response.context['reservations']
         self.assertNotIn(reservation, reservations)
+
+    def test_check_in_summary_view_with_reservation(self):
+        url = reverse('check_in_summary', args=[self.reservation.id])
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+
+    def test_check_in_summary_view_with_nonexistent_reservation(self):
+        url = reverse('check_in_summary', args=[1])
+        response = self.client.get(url)
+        messages = list(get_messages(response.wsgi_request))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), "No s'ha trobat la reserva")
 
 
 class RoomReservationTest(BaseTest):
@@ -205,14 +218,7 @@ class CheckOutViewTest(BaseTest):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-    def test_check_out_summary_view_status_code(self):
-        url = reverse('check_out_summary', args=[self.reservation.id])
-        print(url)
-
-        response = self.client.get(url)
-        print(response)
-        self.assertEqual(response.status_code, 200)
-
+    def test
     def test_check_out_3_view_status_code(self):
         url = reverse('check_out_3', args=[self.reservation.id])
         response = self.client.get(url)
