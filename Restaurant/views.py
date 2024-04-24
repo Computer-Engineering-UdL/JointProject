@@ -34,7 +34,7 @@ def new_restaurant_reservation_2(request):
         form = NewRestaurantReservationForm(reservation_data)
         if form.is_valid():
             reservation = form.save(commit=False)
-            reservation.client = request.user
+            reservation.client = form.cleaned_data['client']
             reservation.save()
             del request.session['reservation_data']
             return redirect('restaurant_home')
