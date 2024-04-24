@@ -1,13 +1,13 @@
 from django import forms
 from Restaurant.models import RestaurantReservation
-from Reception.models import HotelUser
+from Reception.models import HotelUser, Client
 from datetime import date
 
 
 class NewRestaurantReservationForm(forms.ModelForm):
     day = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), initial=date.today, label='Dia')
     num_guests = forms.ChoiceField(choices=[(i, i) for i in range(1, 7)], label='Nombre de clients')
-    client = forms.ModelChoiceField(queryset=HotelUser.objects.all())
+    client = forms.ModelChoiceField(queryset=Client.objects.all())
 
     class Meta:
         model = RestaurantReservation
