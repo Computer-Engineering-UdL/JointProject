@@ -65,14 +65,14 @@
                     </li>
                     <div class="list-extra">
                         <div class="icon"><a href="{% url 'reservation_details' pk=reservation.id %}">
-                            <img src="{% static 'img/icons/edit-icon.png' %}" alt="edit"></a>
+                            <img src="{% static 'img/icons/edit-icon.png' %}" alt="Editar reserva"></a>
                         </div>
                         <div class="icon">
                             <form action="{% url 'delete_reservation' reservation.id %}" method="post">
                                 {% csrf_token %}
                                 <button type="submit"
                                         onclick="return confirm('Estàs segur que vols eliminar aquesta reserva?');">
-                                    <img src="{% static 'img/icons/delete-icon.png' %}" alt="delete"></button>
+                                    <img src="{% static 'img/icons/delete-icon.png' %}" alt="Eliminar reserva"></button>
                             </form>
                         </div>
                     </div>

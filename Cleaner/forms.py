@@ -5,7 +5,7 @@ from Reception.models import Room
 
 class StockForm(forms.ModelForm):
     material = forms.ModelChoiceField(queryset=Cleaning_Material.objects.all(),
-                                      label="Introdueix el nom del item a cercar", required=False)
+                                      label="", required=False)
 
     class Meta:
         model = Stock

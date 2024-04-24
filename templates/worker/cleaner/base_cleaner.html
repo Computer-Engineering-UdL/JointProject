@@ -9,6 +9,6 @@
 {% block title %}Neteja{% endblock %}
 
 {% block menu %}
-    <li><a href="{% url 'cleaner_home' %}"><button> {% block id_cleaner_home %}{% endblock %}</button></a></li>
-    <li><a href="{% url 'cleaner_stock' %}"><button> {% block id_cleaner_stock %}{% endblock %}</button></a></li>
+    <li><a href="{% url 'cleaner_home' %}"><button {% block id_cleaner_home %}{% endblock %}>Habitacions</button></a></li>
+    <li><a href="{% url 'cleaner_stock' %}"><button {% block id_cleaner_stock %}{% endblock %}>Stock</button></a></li>
 {% endblock menu %}
