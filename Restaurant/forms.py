@@ -17,4 +17,6 @@ class NewRestaurantReservationForm(forms.ModelForm):
         day = self.cleaned_data.get('day')
         if day < date.today():
             raise forms.ValidationError("No es pot reservar per a un dia passat")
+        if day.year > date.today().year + 1:
+            raise forms.ValidationError("No es poden fer reserves per a més d'un any")
         return day
