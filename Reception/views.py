@@ -58,7 +58,7 @@ def new_reservation_1(request):
             create_despesa(room_rsv, room_reservation.pension_type, room.room_type)
             return redirect('new_reservation_4', room_rsv.id)
         else:
-            form.add_error(None, "Error en el formulari")
+            print("Error validacio room reservation")
     else:
         form = RoomReservationForm()
 

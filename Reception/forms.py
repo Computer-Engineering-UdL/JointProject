@@ -1,5 +1,7 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
+
 from Reception.models import RoomReservation, Client, Room, CheckIn, HotelUser, ExtraCosts
 from Reception.config import Config as c
 from Reception import forms_verify as fv
@@ -20,7 +22,7 @@ class RoomReservationForm(forms.ModelForm):
     entry = forms.DateField(input_formats=['%d/%m/%Y'])
     exit = forms.DateField(input_formats=['%d/%m/%Y'])
     pension_type = forms.ChoiceField(choices=c.get_pension_types)
-    num_guests = forms.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(4)])
+    num_guests = forms.IntegerField()
     room_type = forms.ChoiceField(choices=c.get_room_types)
     room = forms.ChoiceField()
     client = forms.ModelChoiceField(queryset=Client.objects.all(), empty_label="Select a client")
@@ -49,14 +51,14 @@ class RoomReservationForm(forms.ModelForm):
         entry = cleaned_data.get('entry')
         exit = cleaned_data.get('exit')
 
+        fv.verify_room_reservation_form(entry, exit, cleaned_data.get('num_guests'), cleaned_data.get('room_type'))
+
         if room and entry and exit:
             overlapping_reservations = RoomReservation.objects.filter(
                 room=room,
                 entry__lt=exit,
                 exit__gt=entry
             )
-            if overlapping_reservations.exists():
-                raise forms.ValidationError("L'habitació ja està reservada en aquestes dates")
 
         return cleaned_data
 
