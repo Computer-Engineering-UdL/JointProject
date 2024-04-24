@@ -9,7 +9,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "JointProject.settings")
 django.setup()
 
 from Reception.models import HotelUser, Client, Worker, Room, RoomReservation, CheckIn, Despeses, ExtraCosts
-from Cleaner.models import Cleaning_Material, Stock, CleanedRoom
+from Cleaner.models import CleaningMaterial, Stock, CleanedRoom
 from Reception.config import Config as c
 from User.gen_dni import gen_dni
 
@@ -120,7 +120,7 @@ def create_cleaning_materials(n) -> None:
     for _ in range(n):
         material_name = fake.word()
         image = IMAGE_SRC
-        cleaning_material = Cleaning_Material.objects.create(
+        cleaning_material = CleaningMaterial.objects.create(
             material_name=material_name,
             image=image
         )
@@ -130,7 +130,7 @@ def create_cleaning_materials(n) -> None:
 
 def populate_stock(n):
     """Populate the Stock table with n entries."""
-    cleaning_materials = Cleaning_Material.objects.all()
+    cleaning_materials = CleaningMaterial.objects.all()
     if not cleaning_materials.exists():
         print("No cleaning materials available to create stock.")
         return
