@@ -178,8 +178,8 @@ input[type="checkbox"]:checked + label:active img {
 #update-button {
     position: absolute;
     z-index: 2;
-    bottom: 20px;
-    right: 20px;
+    bottom: 40px;
+    right: 0;
     height: 65px;
     width: 160px;
     display: flex;
