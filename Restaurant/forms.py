@@ -27,11 +27,11 @@ class NewRestaurantReservationForm(forms.ModelForm):
         if day.year > date.today().year + 1:
             raise ValidationError("No es poden fer reserves per a més d'un any")
 
-        total_guests = RestaurantReservation.objects.filter(day=day).aggregate(Sum('num_guests'))[
-                           'num_guests__sum'] or 0
+        total_guests = (RestaurantReservation.objects.filter(day=day)
+                        .aggregate(Sum('num_guests'))['num_guests__sum'] or 0)
         if total_guests + int(num_guests) > rc.MAX_GUESTS_PER_DAY:
             raise ValidationError(
-                f"El nombre màxim de convidats per aquest dia ha estat superat. Ja estan reservats {total_guests} convidats.")
+                f"El nombre màxim de convidats per aquest dia ha estat superat ({total_guests})")
 
         return cleaned_data
 
