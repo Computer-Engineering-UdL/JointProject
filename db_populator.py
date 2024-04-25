@@ -27,7 +27,15 @@ def create_users(n: int) -> None:
         last_name = fake.last_name()
         email = fake.email()
         username = f"{first_name.lower()}_{last_name.lower()}"
-        user = HotelUser.objects.create_user(username=username, email=email, password='password')
+        user = HotelUser.objects.create_user(
+            username=username,
+            email=email,
+            password='password',
+            first_name=first_name,
+            last_name=last_name,
+            phone_number=fake.phone_number(),
+            id_number=gen_dni()
+        )
         user.save()
         print(f'Created User: {username}')
 
