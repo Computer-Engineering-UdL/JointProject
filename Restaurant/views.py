@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
 from User.decorators import worker_required
 from Restaurant.config import Config as c
 from Restaurant.forms import NewRestaurantReservationForm
 from Restaurant.models import RestaurantReservation
+from Reception.models import HotelUser, Client
 
 
 @worker_required('restaurant')
@@ -48,4 +49,23 @@ def new_restaurant_reservation_2(request):
 @worker_required('restaurant')
 def restaurant_reservations(request):
     reservations = RestaurantReservation.objects.filter(is_active=True)
-    return render(request, c.get_restaurant_check_reservations_path(1), {'reservations': reservations})
+    reservation_details = []
+    for reservation in reservations:
+        client = HotelUser.objects.get(id=reservation.client_id)
+        try:
+            Client.objects.get(id=client.id, is_hosted=True)
+            is_internal = True
+        except ObjectDoesNotExist:
+            is_internal = False
+
+        reservation_details.append({
+            'reservation_id': reservation.id,
+            'client_id': client.id,
+            'client_name': client.first_name,
+            'client_last_name': client.last_name,
+            'day': reservation.day,
+            'num_guests': reservation.num_guests,
+            'is_active': reservation.is_active,
+            'is_internal': is_internal
+        })
+    return render(request, c.get_restaurant_check_reservations_path(1), {'reservations': reservation_details})
