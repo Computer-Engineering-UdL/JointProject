@@ -3,7 +3,7 @@ from django.db import models
 from Reception.models import Room
 
 
-class Cleaning_Material(models.Model):
+class CleaningMaterial(models.Model):
     material_name = models.CharField(max_length=50)
     image = models.ImageField(upload_to='cleaning_materials/')
 
@@ -12,7 +12,7 @@ class Cleaning_Material(models.Model):
 
 
 class Stock(models.Model):
-    material = models.ForeignKey(Cleaning_Material, on_delete=models.CASCADE)
+    material = models.ForeignKey(CleaningMaterial, on_delete=models.CASCADE)
     price = models.FloatField()
     is_available = models.BooleanField(default=True)
     is_active = models.BooleanField(default=True)

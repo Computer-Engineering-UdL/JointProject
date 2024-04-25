@@ -22,12 +22,16 @@ def cleaner_stock(request):
                 stock = Stock.objects.filter(material__material_name__icontains=material_name, is_active=True)
             else:
                 stock = Stock.objects.filter(is_active=True)
+
             if 'update_stock' in request.POST:
-                stock_ids = request.POST.getlist('stock[]')
-                for stock_id in stock_ids:
+                submitted_stock_ids = set(map(int, request.POST.getlist('stock[]')))
+                all_active_stocks = set(Stock.objects.filter(is_active=True).values_list('id', flat=True))
+
+                for stock_id in all_active_stocks:
                     item = Stock.objects.get(id=stock_id)
-                    item.is_available = not item.is_available
+                    item.is_available = stock_id not in submitted_stock_ids
                     item.save()
+
                 return redirect('cleaner_stock')
         else:
             stock = Stock.objects.filter(is_active=True)

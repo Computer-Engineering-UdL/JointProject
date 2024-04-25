@@ -2,6 +2,9 @@ from Restaurant.paths import Path as p
 
 
 class Config:
+    MAX_GUESTS_PER_DAY = 25
+    MAX_GUESTS_PER_RESERVATION = 6
+
     @staticmethod
     def get_restaurant_home_path(n: int):
         return p.RESTAURANT_HOME_PATH[n]

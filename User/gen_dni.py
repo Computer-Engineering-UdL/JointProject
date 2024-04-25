@@ -1,5 +1,5 @@
 import random
-from validators import get_nif_word, is_valid_dni
+from User.validators import get_nif_word, is_valid_dni
 
 
 def rand_dni_numbers() -> str:
