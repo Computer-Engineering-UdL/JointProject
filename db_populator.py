@@ -186,19 +186,27 @@ def populate_cleaned_rooms(n: int) -> None:
 
 
 def populate_restaurant_reservations(n):
-    """Populate the RestaurantReservation table with n entries."""
+    """Populate the RestaurantReservation table with n entries, ensuring no duplicates for the same day and client."""
     for _ in range(n):
-        client = Client.objects.order_by('?').first()
-        num_guests = random.randint(1, rc.MAX_GUESTS_PER_RESERVATION)
-        entry_date = timezone.now().date() + timedelta(days=random.randint(1, 30))
-        reservation = RestaurantReservation(
-            client=client,
-            num_guests=num_guests,
-            day=entry_date,
-            is_active=random.choice([True, False])
-        )
-        reservation.save()
-        print(f'Created Restaurant Reservation: {reservation.client.username} - Guests: {reservation.num_guests}')
+        valid_reservation = False
+        while not valid_reservation:
+            client = Client.objects.order_by('?').first()
+            num_guests = random.randint(1, rc.MAX_GUESTS_PER_RESERVATION)
+            entry_date = timezone.now().date() + timedelta(days=random.randint(1, 30))
+
+            if not RestaurantReservation.objects.filter(client=client, day=entry_date).exists():
+                reservation = RestaurantReservation(
+                    client=client,
+                    num_guests=num_guests,
+                    day=entry_date,
+                    is_active=random.choice([True, False])
+                )
+                reservation.save()
+                print(
+                    f'Created Restaurant Reservation: {reservation.client.username} - Guests: {reservation.num_guests}')
+                valid_reservation = True
+            else:
+                print(f'Skipping duplicate reservation for {client.username} on {entry_date}')
 
 
 def print_bar(length: int = 75, new_line: bool = True) -> None:
