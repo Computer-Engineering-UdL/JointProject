@@ -9,5 +9,5 @@
 {% block title %}Restaurant{% endblock %}
 
 {% block menu %}
-    <li><a href="{% url 'restaurant_home' %}"><button> {% block id_restaurant_home %}{% endblock %}</button></a></li>
+    <li><a href="{% url 'restaurant_home' %}"><button {% block id_restaurant_home %}{% endblock %}>Restaurant</button></a></li>
 {% endblock menu %}
