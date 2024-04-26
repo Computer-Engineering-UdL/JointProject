@@ -248,14 +248,14 @@ def populate(function, entries: int) -> None:
 def main() -> None:
     """Populate the database with random data."""
     print("Starting to populate the database...")
-    # populate(create_users, 10)
-    # populate(populate_clients, 10)
-    # populate(populate_rooms, 10)
-    # populate(populate_reservations, 10)
+    populate(create_users, 10)
+    populate(populate_clients, 10)
+    populate(populate_rooms, 10)
+    populate(populate_reservations, 10)
     populate(create_cleaning_materials, len(MATERIALS_NAMES))
     populate(populate_stock, len(MATERIALS_NAMES))
-    # populate(populate_cleaned_rooms, 10)
-    # populate(populate_restaurant_reservations, 10)
+    populate(populate_cleaned_rooms, 10)
+    populate(populate_restaurant_reservations, 10)
     print("Finished populating the database.")
 
 
