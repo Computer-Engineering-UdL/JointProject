@@ -130,6 +130,9 @@ def create_cleaning_materials(n: int) -> None:
     """Populate the Cleaning_Material table with n entries."""
     for i in range(n):
         material_name = list(MATERIALS_NAMES)[i]
+        if CleaningMaterial.objects.filter(material_name=material_name).exists():
+            print(f'Cleaning Material already exists: {material_name}')
+            continue
         image = IMAGE_SRC + MATERIALS_NAMES[material_name]
         image_cleaned = image.lstrip('media/')
         cleaning_material = CleaningMaterial(
@@ -148,7 +151,16 @@ def populate_stock(n: int) -> None:
         return
 
     for i in range(n):
-        material = cleaning_materials.get(material_name=list(MATERIALS_NAMES)[i])
+        material_name = list(MATERIALS_NAMES)[i]
+        material = cleaning_materials.filter(material_name=material_name).first()
+        if not material:
+            material = CleaningMaterial.objects.create(material_name=material_name)
+            material.save()
+            print(f'Created Cleaning Material: {material.material_name}')
+
+        if Stock.objects.filter(material=material).exists():
+            print(f'Stock already exists for material: {material.material_name}')
+            continue
         price = random.uniform(1.0, 100.0).__round__(2)
         is_available = random.choice([True, False])
         stock = Stock.objects.create(
