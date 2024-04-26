@@ -24,7 +24,7 @@ def create_users(n: int) -> None:
     """Populate the User table with n entries."""
     for _ in range(n):
         first_name = fake.first_name()
-        last_name = fake.last_name()
+        last_name = fake.last_name() + random.choice(['', ' ' + fake.last_name()])
         email = fake.email()
         username = f"{first_name.lower()}_{last_name.lower()}"
         user = HotelUser.objects.create_user(
@@ -44,7 +44,7 @@ def populate_clients(n: int) -> None:
     """Populate the Client table with n entries."""
     for _ in range(n):
         first_name = fake.first_name()
-        last_name = fake.last_name()
+        last_name = fake.last_name() + random.choice(['', ' ' + fake.last_name()])
         email = fake.email()
         username = f"{first_name.lower()}_{last_name.lower()}"
         phone_number = fake.phone_number()
