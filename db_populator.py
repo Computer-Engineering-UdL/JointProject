@@ -10,6 +10,7 @@ django.setup()
 
 from Reception.models import HotelUser, Client, Worker, Room, RoomReservation, CheckIn, Despeses, ExtraCosts
 from Cleaner.models import CleaningMaterial, Stock, CleanedRoom
+from Cleaner.config import MATERIALS_NAMES
 from Restaurant.models import RestaurantReservation
 from Reception.config import Config as c
 from Restaurant.config import Config as rc
@@ -127,12 +128,13 @@ def populate_reservations(n: int) -> None:
 
 def create_cleaning_materials(n: int) -> None:
     """Populate the Cleaning_Material table with n entries."""
-    for _ in range(n):
-        material_name = fake.word()
-        image = random.choice([f'{IMAGE_SRC}/{i}' for i in os.listdir(IMAGE_SRC)]).lstrip('media/')
-        cleaning_material = CleaningMaterial.objects.create(
+    for i in range(n):
+        material_name = list(MATERIALS_NAMES)[i]
+        image = IMAGE_SRC + MATERIALS_NAMES[material_name]
+        image_cleaned = image.lstrip('media/')
+        cleaning_material = CleaningMaterial(
             material_name=material_name,
-            image=image
+            image=image_cleaned
         )
         cleaning_material.save()
         print(f'Created Cleaning Material: {cleaning_material.material_name}')
@@ -145,8 +147,8 @@ def populate_stock(n: int) -> None:
         print("No cleaning materials available to create stock.")
         return
 
-    for _ in range(n):
-        material = random.choice(cleaning_materials)
+    for i in range(n):
+        material = cleaning_materials.get(material_name=list(MATERIALS_NAMES)[i])
         price = random.uniform(1.0, 100.0).__round__(2)
         is_available = random.choice([True, False])
         stock = Stock.objects.create(
@@ -234,14 +236,14 @@ def populate(function, entries: int) -> None:
 def main() -> None:
     """Populate the database with random data."""
     print("Starting to populate the database...")
-    populate(create_users, 10)
-    populate(populate_clients, 10)
-    populate(populate_rooms, 10)
-    populate(populate_reservations, 10)
-    populate(create_cleaning_materials, 10)
-    populate(populate_stock, 10)
-    populate(populate_cleaned_rooms, 10)
-    populate(populate_restaurant_reservations, 10)
+    # populate(create_users, 10)
+    # populate(populate_clients, 10)
+    # populate(populate_rooms, 10)
+    # populate(populate_reservations, 10)
+    populate(create_cleaning_materials, len(MATERIALS_NAMES))
+    populate(populate_stock, len(MATERIALS_NAMES))
+    # populate(populate_cleaned_rooms, 10)
+    # populate(populate_restaurant_reservations, 10)
     print("Finished populating the database.")
 
 
