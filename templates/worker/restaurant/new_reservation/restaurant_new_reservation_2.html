@@ -11,6 +11,14 @@
 
 {% block content %}
     <div class="main">
-        <!-- Test temporal code in here -->
+        <form method="post">
+            {% csrf_token %}
+            <label for="client_type">Seleccioneu el tipus de client:</label>
+            <select name="client_type" id="client_type">
+                <option value="internal">Intern</option>
+                <option value="external">Extern</option>
+            </select>
+            <button type="submit">Continuar</button>
+        </form>
     </div>
-{% endblock content %}
+{% endblock %}

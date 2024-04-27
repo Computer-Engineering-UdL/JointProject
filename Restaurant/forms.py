@@ -50,15 +50,24 @@ class AddInternalClientForm(forms.ModelForm):
         return client
 
 
-class AddExternalClientForm(forms.ModelForm):
-    client = forms.ModelChoiceField(queryset=u.get_external_clients(), label='Client Extern')
+class CreateExternalClientForm(forms.ModelForm):
+    first_name = forms.CharField(label='Nom')
+    second_name = forms.CharField(label='Cognoms')
+    email = forms.EmailField(label='Correu electrònic')
+    phone_number = forms.CharField(label='Telèfon')
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if HotelUser.objects.filter(email=email).exists():
+            raise forms.ValidationError("Aquest correu electrònic ja està registrat")
+        return email
+
+    def clean_phone(self):
+        phone = self.cleaned_data.get('phone')
+        if HotelUser.objects.filter(phone=phone).exists():
+            raise forms.ValidationError("Aquest telèfon ja està registrat")
+        return phone
 
     class Meta:
-        model = RestaurantReservation
-        fields = ['client']
-
-    def clean_client(self):
-        client = self.cleaned_data.get('client')
-        if client is None:
-            raise forms.ValidationError("Aquest client no existeix")
-        return client
+        model = HotelUser
+        fields = ['first_name', 'last_name', 'email', 'phone_number']

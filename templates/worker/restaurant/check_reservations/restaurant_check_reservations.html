@@ -11,6 +11,29 @@
 
 {% block content %}
     <div class="main">
-        <!-- Test temporal code in here -->
+        <table class="reservation-table">
+            <thead>
+                <tr>
+                    <th>ID de la Reserva</th>
+                    <th>ID del Client</th>
+                    <th>Data de la Reserva</th>
+                    <th>Nom del Client</th>
+                    <th>Cognoms del Client</th>
+                    <th>Tipus de Client (Intern/Extern)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reservation in reservations %}
+                    <tr>
+                        <td>{{ reservation.reservation_id }}</td>
+                        <td>{{ reservation.client_id }}</td>
+                        <td>{{ reservation.day|date:"d M Y" }}</td>
+                        <td>{{ reservation.client_name }}</td>
+                        <td>{{ reservation.client_last_name }}</td>
+                        <td>{{ reservation.is_internal|yesno:"Intern,Extern" }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock content %}
