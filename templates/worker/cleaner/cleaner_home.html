@@ -13,6 +13,22 @@
 {% block content %}
     <div class="main">
         <h1 class="section-title">HABITACIONS ASSIGNADES</h1>
-        <!-- Test temporal code in here -->
+        <div class="check-out-rooms">
+            <h4>Check-out</h4>
+            <div class="check-out-room-list">
+                {% for room in check_out_rooms %}
+                    <p>hola</p>
+                    <span>{{ room.id }}</span>
+                {% endfor %}
+        </div>
+        <div class="occupied-rooms">
+            <h4>En ocupació</h4>
+            <div class="occupied-room-list">
+                {% for room in occupied_rooms %}
+                    <div class="occupied-hab">
+                        <p>{{ room.id }}</p>
+                    </div>
+                {% endfor %}
+        </div>
     </div>
 {% endblock content %}
