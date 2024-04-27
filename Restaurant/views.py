@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect
-from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
 from django.forms import modelform_factory
 from User.decorators import worker_required
 from Restaurant.config import Config as c
 from Restaurant.forms import NewRestaurantReservationForm, AddInternalClientForm, CreateExternalClientForm
 from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
-from Reception.models import HotelUser, Client
 from datetime import datetime
 
 
@@ -84,6 +83,7 @@ def new_restaurant_reservation_3(request):
                         )
                     reservation.save()
                     del request.session['reservation_data']
+                    messages.success(request, "S'ha creat la reserva de restaurant amb èxit!")
                     return redirect('restaurant_home')
     else:
         form = ClientForm()

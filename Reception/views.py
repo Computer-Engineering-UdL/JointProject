@@ -96,6 +96,7 @@ def new_reservation_4(request, pk):
 
 @worker_required('receptionist')
 def submit_reservation(request):
+    messages.success(request, "Reserva completada amb èxit")
     return redirect('receptionist_home')
 
 
@@ -234,8 +235,7 @@ def add_extra_costs(request, pk):
                 extra_costs_price=extra_costs_price
             )
             new_extra_cost.save()
-            print("S'ha afegit els costos extra a la reserva, els valors son: ", extra_costs_type, extra_costs_price)
-            messages.success(request, "Despesa afegida amb èxit")
+            messages.success(request, "S'han afegit els costos extra a la reserva amb èxit")
             return redirect('check_out_summary', pk=pk)
     else:
         form = AddExtraCostsForm()
@@ -314,7 +314,7 @@ def check_out_3(request, pk):
     room.save()
     # Enviar dades a les autoritats
     # return redirect('check_out_5')
-
+    messages.success(request, "Check-out completat amb èxit")
     return render(request, c.get_check_out_path(4), {'reservation': reservation, 'client': client})
 
 

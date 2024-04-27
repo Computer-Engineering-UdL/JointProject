@@ -124,8 +124,8 @@ class SearchReservationForm(forms.ModelForm):
 
 
 class AddExtraCostsForm(forms.ModelForm):
-    extra_costs_price = forms.IntegerField(label="Costs addicionals", validators=[MinValueValidator(0)])
-    extra_costs_type = forms.ChoiceField(choices=c.get_room_extra_costs)
+    extra_costs_price = forms.IntegerField(label="Preu dels costs addicionals", validators=[MinValueValidator(0)])
+    extra_costs_type = forms.ChoiceField(label="Tipus de cost addicional", choices=c.get_room_extra_costs)
 
     class Meta:
         model = ExtraCosts
