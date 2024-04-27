@@ -215,8 +215,8 @@ def populate_external_clients(n: int) -> None:
             phone=phone_number
         )
         external_client.save()
-        print(
-            f'Created External Client: {external_client.first_name} {external_client.last_name} - Email: {external_client.email}')
+        print(f'Created External Client: {external_client.first_name} {external_client.last_name}'
+              f' - Email: {external_client.email}')
 
 
 def populate_restaurant_reservations(n: int) -> None:
@@ -243,8 +243,9 @@ def populate_restaurant_reservations(n: int) -> None:
             )
             reservation.save()
             client_type = "internal" if is_internal else "external"
-            print(
-                f'Created Restaurant Reservation for {client_type} client: {client.username if is_internal else client.first_name} - Guests: {reservation.num_guests}')
+            print(f'Created Restaurant Reservation for {client_type}'
+                  f' client: {client.username if is_internal else client.first_name}'
+                  f' - Guests: {reservation.num_guests}')
         else:
             client_type = "internal" if is_internal else "external"
             print(f'Skipping duplicate reservation for {client_type} client on {entry_date}')
