@@ -3,8 +3,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.forms import modelform_factory
 from User.decorators import worker_required
 from Restaurant.config import Config as c
-from Restaurant.forms import NewRestaurantReservationForm, AddInternalClientForm, AddExternalClientForm
-from Restaurant.models import RestaurantReservation
+from Restaurant.forms import NewRestaurantReservationForm, AddInternalClientForm, CreateExternalClientForm
+from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
 from Reception.models import HotelUser, Client
 from datetime import datetime
 
@@ -51,19 +51,40 @@ def new_restaurant_reservation_3(request):
     if not reservation_data or not client_type:
         return redirect('new_restaurant_reservation_1')
 
-    ClientForm = modelform_factory(RestaurantReservation, form=AddInternalClientForm) \
-        if client_type == 'internal' else modelform_factory(RestaurantReservation, form=AddExternalClientForm)
+    if client_type == 'internal':
+        ClientForm = modelform_factory(RestaurantReservation, form=AddInternalClientForm)
+    else:
+        ClientForm = modelform_factory(ExternalRestaurantClient, form=CreateExternalClientForm)
 
     if request.method == 'POST':
         form = ClientForm(request.POST)
         if form.is_valid():
-            reservation = form.save(commit=False)
-            reservation.day = datetime.strptime(reservation_data['day'], '%Y-%m-%d').date()
-            reservation.num_guests = reservation_data['num_guests']
-            reservation.is_active = True
-            reservation.save()
-            del request.session['reservation_data']
-            return redirect('restaurant_home')
+            if client_type == 'internal':
+                ClientForm = modelform_factory(RestaurantReservation, form=AddInternalClientForm)
+            else:
+                ClientForm = modelform_factory(ExternalRestaurantClient, form=CreateExternalClientForm)
+
+            if request.method == 'POST':
+                form = ClientForm(request.POST)
+                if form.is_valid():
+                    if client_type == 'internal':
+                        reservation = form.save(commit=False)
+                        reservation.client = form.cleaned_data['client']
+                        reservation.day = datetime.strptime(reservation_data['day'], '%Y-%m-%d').date()
+                        reservation.num_guests = reservation_data['num_guests']
+                        reservation.is_active = True
+                    else:
+                        external_client = form.save()
+                        reservation = RestaurantReservation(
+                            client=None,
+                            external_client=external_client,
+                            day=datetime.strptime(reservation_data['day'], '%Y-%m-%d').date(),
+                            num_guests=reservation_data['num_guests'],
+                            is_active=True
+                        )
+                    reservation.save()
+                    del request.session['reservation_data']
+                    return redirect('restaurant_home')
     else:
         form = ClientForm()
 
@@ -74,22 +95,35 @@ def new_restaurant_reservation_3(request):
 def restaurant_reservations(request):
     reservations = RestaurantReservation.objects.filter(is_active=True)
     reservation_details = []
+
     for reservation in reservations:
-        client = HotelUser.objects.get(id=reservation.client_id)
-        try:
-            Client.objects.get(id=client.id, is_hosted=True)
+        client_id = None
+        client_name = "No especificat"
+        client_last_name = ""
+        is_internal = False
+
+        if reservation.client:
+            client = reservation.client
+            client_id = client.id
+            client_name = client.first_name
+            client_last_name = client.last_name
             is_internal = True
-        except ObjectDoesNotExist:
+        elif reservation.external_client:
+            external_client = reservation.external_client
+            client_id = external_client.id
+            client_name = external_client.first_name
+            client_last_name = external_client.last_name
             is_internal = False
 
         reservation_details.append({
             'reservation_id': reservation.id,
-            'client_id': client.id,
-            'client_name': client.first_name,
-            'client_last_name': client.last_name,
+            'client_id': client_id,
+            'client_name': client_name,
+            'client_last_name': client_last_name,
             'day': reservation.day,
             'num_guests': reservation.num_guests,
             'is_active': reservation.is_active,
             'is_internal': is_internal
         })
+
     return render(request, c.get_restaurant_check_reservations_path(1), {'reservations': reservation_details})
