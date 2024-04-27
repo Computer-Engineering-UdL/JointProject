@@ -8,7 +8,7 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "JointProject.settings")
 django.setup()
 
-from Reception.models import HotelUser, Client, Worker, Room, RoomReservation, CheckIn, Despeses, ExtraCosts
+from Reception.models import HotelUser, Client, Worker, Room, RoomReservation, create_despesa
 from Cleaner.models import CleaningMaterial, Stock, CleanedRoom
 from Cleaner.config import MATERIALS_NAMES
 from Restaurant.models import RestaurantReservation
@@ -97,7 +97,7 @@ def populate_rooms(n: int) -> None:
 
 
 def populate_reservations(n: int) -> None:
-    """Populate the RoomReservation table with n entries."""
+    """Populate the RoomReservation table with n entries and associated costs."""
     pension_types = c.get_pension_types()
     for _ in range(n):
         client = Client.objects.order_by('?').first()
@@ -122,9 +122,9 @@ def populate_reservations(n: int) -> None:
             check_out_active=random.choice([True, False])
         )
         reservation.save()
-        print(
-            f'Created Reservation: Room {reservation.room.room_num} [{room_type}] from {reservation.entry} '
-            f'to {reservation.exit} with pension type {pension_type}')
+        create_despesa(reservation, pension_type, room_type)
+        print(f'Created Reservation: Room {reservation.room.room_num} [{room_type}]'
+              f' from {reservation.entry} to {reservation.exit} with pension type {pension_type}')
 
 
 def create_cleaning_materials(n: int) -> None:
