@@ -212,7 +212,7 @@ def populate_external_clients(n: int) -> None:
             first_name=first_name,
             last_name=last_name,
             email=email,
-            phone=phone_number
+            phone_number=phone_number
         )
         external_client.save()
         print(f'Created External Client: {external_client.first_name} {external_client.last_name}'
