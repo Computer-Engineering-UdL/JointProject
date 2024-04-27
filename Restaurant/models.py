@@ -40,10 +40,10 @@ class ExternalRestaurantClient(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField()
-    phone = models.CharField(max_length=9)
+    phone_number = models.CharField(max_length=9)
 
     def clean(self):
-        if self.phone is None and self.email is None:
+        if self.phone_number is None and self.email is None:
             raise ValidationError("Cal com a mínim un telèfon o correu electrònic")
         return self
 
