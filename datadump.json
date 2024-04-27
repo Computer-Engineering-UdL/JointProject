@@ -468,6 +468,222 @@
     }
   },
   {
+    "model": "auth.permission",
+    "pk": 53,
+    "fields": {
+      "name": "Can add cleaning_ material",
+      "content_type": 14,
+      "codename": "add_cleaning_material"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 54,
+    "fields": {
+      "name": "Can change cleaning_ material",
+      "content_type": 14,
+      "codename": "change_cleaning_material"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 55,
+    "fields": {
+      "name": "Can delete cleaning_ material",
+      "content_type": 14,
+      "codename": "delete_cleaning_material"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 56,
+    "fields": {
+      "name": "Can view cleaning_ material",
+      "content_type": 14,
+      "codename": "view_cleaning_material"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 57,
+    "fields": {
+      "name": "Can add stock",
+      "content_type": 15,
+      "codename": "add_stock"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 58,
+    "fields": {
+      "name": "Can change stock",
+      "content_type": 15,
+      "codename": "change_stock"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 59,
+    "fields": {
+      "name": "Can delete stock",
+      "content_type": 15,
+      "codename": "delete_stock"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 60,
+    "fields": {
+      "name": "Can view stock",
+      "content_type": 15,
+      "codename": "view_stock"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 61,
+    "fields": {
+      "name": "Can add cleaned room",
+      "content_type": 16,
+      "codename": "add_cleanedroom"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 62,
+    "fields": {
+      "name": "Can change cleaned room",
+      "content_type": 16,
+      "codename": "change_cleanedroom"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 63,
+    "fields": {
+      "name": "Can delete cleaned room",
+      "content_type": 16,
+      "codename": "delete_cleanedroom"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 64,
+    "fields": {
+      "name": "Can view cleaned room",
+      "content_type": 16,
+      "codename": "view_cleanedroom"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 65,
+    "fields": {
+      "name": "Can add cleaning material",
+      "content_type": 14,
+      "codename": "add_cleaningmaterial"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 66,
+    "fields": {
+      "name": "Can change cleaning material",
+      "content_type": 14,
+      "codename": "change_cleaningmaterial"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 67,
+    "fields": {
+      "name": "Can delete cleaning material",
+      "content_type": 14,
+      "codename": "delete_cleaningmaterial"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 68,
+    "fields": {
+      "name": "Can view cleaning material",
+      "content_type": 14,
+      "codename": "view_cleaningmaterial"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 69,
+    "fields": {
+      "name": "Can add restaurant reservation",
+      "content_type": 17,
+      "codename": "add_restaurantreservation"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 70,
+    "fields": {
+      "name": "Can change restaurant reservation",
+      "content_type": 17,
+      "codename": "change_restaurantreservation"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 71,
+    "fields": {
+      "name": "Can delete restaurant reservation",
+      "content_type": 17,
+      "codename": "delete_restaurantreservation"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 72,
+    "fields": {
+      "name": "Can view restaurant reservation",
+      "content_type": 17,
+      "codename": "view_restaurantreservation"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 73,
+    "fields": {
+      "name": "Can add external restaurant client",
+      "content_type": 18,
+      "codename": "add_externalrestaurantclient"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 74,
+    "fields": {
+      "name": "Can change external restaurant client",
+      "content_type": 18,
+      "codename": "change_externalrestaurantclient"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 75,
+    "fields": {
+      "name": "Can delete external restaurant client",
+      "content_type": 18,
+      "codename": "delete_externalrestaurantclient"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 76,
+    "fields": {
+      "name": "Can view external restaurant client",
+      "content_type": 18,
+      "codename": "view_externalrestaurantclient"
+    }
+  },
+  {
     "model": "contenttypes.contenttype",
     "pk": 1,
     "fields": {
@@ -572,6 +788,94 @@
     }
   },
   {
+    "model": "contenttypes.contenttype",
+    "pk": 14,
+    "fields": {
+      "app_label": "Cleaner",
+      "model": "cleaningmaterial"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 15,
+    "fields": {
+      "app_label": "Cleaner",
+      "model": "stock"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 16,
+    "fields": {
+      "app_label": "Cleaner",
+      "model": "cleanedroom"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 17,
+    "fields": {
+      "app_label": "Restaurant",
+      "model": "restaurantreservation"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 18,
+    "fields": {
+      "app_label": "Restaurant",
+      "model": "externalrestaurantclient"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "07h7qlxb2jpbhj6bhfib5qjcstfdghdq",
+    "fields": {
+      "session_data": ".eJxVjMsOwiAQRf-FtSE8hBlcuu83kGGgUjU0Ke3K-O_apAvd3nPOfYlI21rj1ssSpywuQovT75aIH6XtIN-p3WbJc1uXKcldkQftcphzeV4P9--gUq_f2nhkAO0YMRlldQIKyhc6a200Zk8WgcEVBMxjUKPj4NgoIEvZe7bi_QG6Nzcd:1rx4PP:8O8jL4D0r8hqaid_FdNKLDLoXmPc4cszHYSfnTg969w",
+      "expire_date": "2024-05-01T12:29:03.843Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "186ls3n752cvl8xlhxk4mh088j0womvk",
+    "fields": {
+      "session_data": ".eJxVjMsOwiAQRf-FtSE8hBlcuu83kGGgUjU0Ke3K-O_apAvd3nPOfYlI21rj1ssSpywuQovT75aIH6XtIN-p3WbJc1uXKcldkQftcphzeV4P9--gUq_f2nhkAO0YMRlldQIKyhc6a200Zk8WgcEVBMxjUKPj4NgoIEvZe7bi_QG6Nzcd:1rwT16:qh7CFeOV5qrjAWyMahcuOldssTGQDRLQkhoknSIfri4",
+      "expire_date": "2024-04-29T20:33:28.921Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "6azijtc93r8thw3j945t2zrnoouw4b8b",
+    "fields": {
+      "session_data": ".eJxVjMsOwiAQRf-FtSE8hBlcuu83kGGgUjU0Ke3K-O_apAvd3nPOfYlI21rj1ssSpywuQovT75aIH6XtIN-p3WbJc1uXKcldkQftcphzeV4P9--gUq_f2nhkAO0YMRlldQIKyhc6a200Zk8WgcEVBMxjUKPj4NgoIEvZe7bi_QG6Nzcd:1rx4cs:uTDfhqbbGTObEEHXLTvinXCGd53tbWGWoBXuykdwNPg",
+      "expire_date": "2024-05-01T12:42:58.960Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "a0kk14jenqnxdl6zcqeh354zk62gmdly",
+    "fields": {
+      "session_data": ".eJxVjMsOwiAQRf-FtSE8hBlcuu83kGGgUjU0Ke3K-O_apAvd3nPOfYlI21rj1ssSpywuQovT75aIH6XtIN-p3WbJc1uXKcldkQftcphzeV4P9--gUq_f2nhkAO0YMRlldQIKyhc6a200Zk8WgcEVBMxjUKPj4NgoIEvZe7bi_QG6Nzcd:1rx4e4:30G-f8fs5kzvyGFmBGs2TUWbOgEUz5mSlwpb-Z5Zeb0",
+      "expire_date": "2024-05-01T12:44:12.691Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "c1wm4fe3ziado8a674o248c6yb2glju5",
+    "fields": {
+      "session_data": ".eJxVjMsOwiAQRf-FtSE8hBlcuu83kGGgUjU0Ke3K-O_apAvd3nPOfYlI21rj1ssSpywuQovT75aIH6XtIN-p3WbJc1uXKcldkQftcphzeV4P9--gUq_f2nhkAO0YMRlldQIKyhc6a200Zk8WgcEVBMxjUKPj4NgoIEvZe7bi_QG6Nzcd:1rx1cl:cupqu8ztGizaKv30_IX7-nJvh5vlIp5DotGyEqpePoY",
+      "expire_date": "2024-05-01T09:30:39.858Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "e57zfym0xcc1mgrmjr14hh2sb4wz86cy",
+    "fields": {
+      "session_data": ".eJxVjMsOwiAQRf-FtSE8hBlcuu83kGGgUjU0Ke3K-O_apAvd3nPOfYlI21rj1ssSpywuQovT75aIH6XtIN-p3WbJc1uXKcldkQftcphzeV4P9--gUq_f2nhkAO0YMRlldQIKyhc6a200Zk8WgcEVBMxjUKPj4NgoIEvZe7bi_QG6Nzcd:1rx4ey:xVHGQOwnB68JtAVG8by9bmk-bV2Lh40Gmq0qsUdUnEc",
+      "expire_date": "2024-05-01T12:45:08.461Z"
+    }
+  },
+  {
     "model": "sessions.session",
     "pk": "f99jwh33nc2jmc6kegmnvgqf6b8zd5g9",
     "fields": {
@@ -581,10 +885,66 @@
   },
   {
     "model": "sessions.session",
+    "pk": "fglfq2h67xv9wdh3wbqu9ogj1nuavt0t",
+    "fields": {
+      "session_data": ".eJxVjMsOwiAQRf-FtSE8hBlcuu83kGGgUjU0Ke3K-O_apAvd3nPOfYlI21rj1ssSpywuQovT75aIH6XtIN-p3WbJc1uXKcldkQftcphzeV4P9--gUq_f2nhkAO0YMRlldQIKyhc6a200Zk8WgcEVBMxjUKPj4NgoIEvZe7bi_QG6Nzcd:1rwU9n:QycEK2pHy-fxfq-rMK2dnFp-SOkEDYbEUIBGcSaqFgk",
+      "expire_date": "2024-04-29T21:46:31.312Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "j5jrtxjbztspr9lwi82ptqcns75an6qe",
+    "fields": {
+      "session_data": ".eJxVjMsOwiAQRf-FtSE8hBlcuu83kGGgUjU0Ke3K-O_apAvd3nPOfYlI21rj1ssSpywuQovT75aIH6XtIN-p3WbJc1uXKcldkQftcphzeV4P9--gUq_f2nhkAO0YMRlldQIKyhc6a200Zk8WgcEVBMxjUKPj4NgoIEvZe7bi_QG6Nzcd:1rx1sc:aNrt8vx9mwgARSUkZ_BfZyKy92b7uu7JlAsDwY1iUVg",
+      "expire_date": "2024-05-01T09:47:02.786Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "mocdlb9jxel0bn9eqmguh1lpi4ig31pr",
+    "fields": {
+      "session_data": ".eJxVjMsOwiAQRf-FtSE8hBlcuu83kGGgUjU0Ke3K-O_apAvd3nPOfYlI21rj1ssSpywuQovT75aIH6XtIN-p3WbJc1uXKcldkQftcphzeV4P9--gUq_f2nhkAO0YMRlldQIKyhc6a200Zk8WgcEVBMxjUKPj4NgoIEvZe7bi_QG6Nzcd:1rxsNy:cRtVgTb7dz5NiouL6aUIfYfYxTZXAxZZ3D0XrkTBtfc",
+      "expire_date": "2024-05-03T17:50:54.420Z"
+    }
+  },
+  {
+    "model": "sessions.session",
     "pk": "mxk8o5nf2w93371o79vcrohfffgvfsnv",
     "fields": {
       "session_data": ".eJxVjMsOwiAQRf-FtSE8hBlcuu83kGGgUjU0Ke3K-O_apAvd3nPOfYlI21rj1ssSpywuQovT75aIH6XtIN-p3WbJc1uXKcldkQftcphzeV4P9--gUq_f2nhkAO0YMRlldQIKyhc6a200Zk8WgcEVBMxjUKPj4NgoIEvZe7bi_QG6Nzcd:1rs0gb:2h2JhILv5z_gw8jM-bmqnhtFrNDScbNmsAKiHLyN0fU",
       "expire_date": "2024-04-17T13:29:53.124Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "ox436yxnma0rk3bteupzi1h3i5422f5z",
+    "fields": {
+      "session_data": ".eJxVjMsOwiAQRf-FtSE8hBlcuu83kGGgUjU0Ke3K-O_apAvd3nPOfYlI21rj1ssSpywuQovT75aIH6XtIN-p3WbJc1uXKcldkQftcphzeV4P9--gUq_f2nhkAO0YMRlldQIKyhc6a200Zk8WgcEVBMxjUKPj4NgoIEvZe7bi_QG6Nzcd:1rwUQN:kYwILSdgeRHtBVwln7ypNZ90X7RybkZugU4cgkQ-U8Q",
+      "expire_date": "2024-04-29T22:03:39.184Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "pj1adair2bx0a916417ua7giialheehv",
+    "fields": {
+      "session_data": ".eJxVjMsOwiAQRf-FtSE8hBlcuu83kGGgUjU0Ke3K-O_apAvd3nPOfYlI21rj1ssSpywuQovT75aIH6XtIN-p3WbJc1uXKcldkQftcphzeV4P9--gUq_f2nhkAO0YMRlldQIKyhc6a200Zk8WgcEVBMxjUKPj4NgoIEvZe7bi_QG6Nzcd:1rwTGb:oJYzUvtaBTlPOzmbjsHTMb_cJVYaM1-R22fw-3REwKI",
+      "expire_date": "2024-04-29T20:49:29.926Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "pmxgiypaqy000ocfribxngp1uvjwxe1t",
+    "fields": {
+      "session_data": ".eJxVjMsOwiAQRf-FtSE8hBlcuu83kGGgUjU0Ke3K-O_apAvd3nPOfYlI21rj1ssSpywuQovT75aIH6XtIN-p3WbJc1uXKcldkQftcphzeV4P9--gUq_f2nhkAO0YMRlldQIKyhc6a200Zk8WgcEVBMxjUKPj4NgoIEvZe7bi_QG6Nzcd:1rwUIf:SWp5lMI9Gqt1rMyflzqYwC6Pz0ABr35hUR8TFddbz7U",
+      "expire_date": "2024-04-29T21:55:41.396Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "sv5xgiedimjf2lg08dnyv2f8e7i1r2bb",
+    "fields": {
+      "session_data": ".eJxVjMsOwiAQRf-FtSE8hBlcuu83kGGgUjU0Ke3K-O_apAvd3nPOfYlI21rj1ssSpywuQovT75aIH6XtIN-p3WbJc1uXKcldkQftcphzeV4P9--gUq_f2nhkAO0YMRlldQIKyhc6a200Zk8WgcEVBMxjUKPj4NgoIEvZe7bi_QG6Nzcd:1rwU8B:yolr2NtUayE0WLfHBtPAIUgoAZ1wt1hrM4M0K-LDaCg",
+      "expire_date": "2024-04-29T21:44:51.910Z"
     }
   },
   {
@@ -612,11 +972,27 @@
     }
   },
   {
+    "model": "sessions.session",
+    "pk": "y5nonha7e7vh3p7xoh8bhk9ztf11051q",
+    "fields": {
+      "session_data": ".eJxVjMsOgjAQRf-la9P0YTvFpXu_oZlOB0FJMVASjfHfhYSFbu8597xFxKV2cZl5in0WJ6HF4XdLSHcuG8g3LNdR0ljq1Ce5KXKns7yMmYfz7v4FOpy79W18IADtKIRklNUJsFGe8ai10SF7tAEIHAcIuW1U66hxZBSgxew92TVKQ8-lxvp68BrkZ-Wp4CA-X4vVQA4:1s0gxk:YFIyu_84rlvZxCCRJXJrIp5NFRwmgTZDNDMIpwypMto",
+      "expire_date": "2024-05-11T12:15:28.248Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "z2jirzctcgjx5emkzqxksap6ngnctqyy",
+    "fields": {
+      "session_data": ".eJxVjjkOgzAQRe_iGlle4oWU6TkDGo-H4ATZEpg0Ue4eQBRJ-ben_2Y9rHXs14XmPkV2ZZI1v14AfFLeg_iAfC8cS65zCnyv8DNdeFciTbez-wcYYRm3tbIenZMGvQ9KaBkctMISXKRU0kcL2jt0hrzzcWjFYLA1qIQDDdFa1Bt0po33gppKPq5K3TCcEuV6SPX5AtalQpA:1rsVjQ:tkozIEyBGDR8xg58o28HzuXUewh8nBtfhJ0jxNSWvl4",
+      "expire_date": "2024-04-18T22:38:52.434Z"
+    }
+  },
+  {
     "model": "Reception.hoteluser",
     "pk": 1,
     "fields": {
       "password": "pbkdf2_sha256$720000$2apEguAOaabZkwWaeyUk4o$L+P0nfYydcCvpqIAe1qzN7TK+kIPQRW5WOPAspl1i68=",
-      "last_login": "2024-04-04T16:29:02.120Z",
+      "last_login": "2024-04-19T17:50:54.418Z",
       "is_superuser": true,
       "username": "admin",
       "first_name": "Admin FN",
@@ -625,7 +1001,7 @@
       "is_active": true,
       "date_joined": "2024-04-03T13:25:53.807Z",
       "email": "admin@admin.com",
-      "phone_number": "65131313",
+      "phone_number": "432094234",
       "id_number": "541224251",
       "groups": [],
       "user_permissions": []
@@ -672,6 +1048,826 @@
     }
   },
   {
+    "model": "Reception.hoteluser",
+    "pk": 84,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$TDnjV67BUlq3VhKchPLxUu$3EJhIEyBW/BKI4wbrvCWANzvJ4R9l8JeAhIi/Gnejks=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "jose francisco_gonzalo",
+      "first_name": "Jose Francisco",
+      "last_name": "Gonzalo",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:01:57.167Z",
+      "email": "amadafigueras@example.com",
+      "phone_number": "+34 878888982",
+      "id_number": "42221392Q",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 85,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$ZGOh2z9PObkU7Jd6QwDRkx$LXADuTwdJqL/WgpwPVzi7f/eUplFFszR+PSaOZcsUyA=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "paz_donoso",
+      "first_name": "Paz",
+      "last_name": "Donoso",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:01:57.448Z",
+      "email": "vasco02@example.net",
+      "phone_number": "+34874605637",
+      "id_number": "77419581V",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 86,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$I18wjF7NLxM5uyGFFloZkw$4pJi+qoInJP1xALI6s1D2aQBlChKhPFIUgdUJ0lNiFI=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "silvia_caro",
+      "first_name": "Silvia",
+      "last_name": "Caro",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:01:57.727Z",
+      "email": "filomena44@example.org",
+      "phone_number": "+34 849989583",
+      "id_number": "17334036V",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 87,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$QH1W4Lqy7CyoJnJDGjtKU7$bX3hWjtAdUORJEInte8JXv/yF3CB2l1kDUMG2/GoTOg=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "gregorio_tejedor",
+      "first_name": "Gregorio",
+      "last_name": "Tejedor",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:01:58.007Z",
+      "email": "ordonezbernardino@example.com",
+      "phone_number": "+34917 054 116",
+      "id_number": "45798689P",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 88,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$JM1yUoE8M6UqBLsEt2Aa4c$voSE3mnJRFIfcdpqrHPXnG7elZiukYS72sEaJsUMF5U=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "macarena_carballo",
+      "first_name": "Macarena",
+      "last_name": "Carballo Blanco",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:01:58.282Z",
+      "email": "obenavente@example.org",
+      "phone_number": "+34 730010220",
+      "id_number": "50864817H",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 89,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$9ldo4LHXa3owO1YizS67vH$JKDGRh0uNCkOlRUkLpXSVnldqpd1vY2tapXsWuLimQU=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "leticia_romeu",
+      "first_name": "Leticia",
+      "last_name": "Romeu",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:01:58.559Z",
+      "email": "torrentsbaudelio@example.com",
+      "phone_number": "+34982 557 572",
+      "id_number": "05098264S",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 90,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$2vLtKg5G6i1rC4M6te1832$9xlZNK7hH+hI5WRUxWhSfNAdSBk6u+8Io8BhNzF1GvM=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "benjam�n_villena",
+      "first_name": "Benjam�n",
+      "last_name": "Villena",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:01:58.832Z",
+      "email": "alvarezalberto@example.net",
+      "phone_number": "+34 871 88 20 48",
+      "id_number": "15286549J",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 91,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$mwfOUUgfrsJHxsSk7fMcjA$OZ9LRervnrTHxTVPHxpAhq8IH+irzQJBPBV6+1rfD/c=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "adelardo_ar�valo",
+      "first_name": "Adelardo",
+      "last_name": "Ar�valo",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:01:59.123Z",
+      "email": "reynaldo52@example.com",
+      "phone_number": "+34 928 73 75 65",
+      "id_number": "21303830B",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 92,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$tYfwtSAqzS22TvcLD2Q7W1$/pt4tW8xexlU5z1FRyr/WGDuEJ3ax5QPwDYGfEtne3Q=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "rosalinda_vega",
+      "first_name": "Rosalinda",
+      "last_name": "Vega",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:01:59.408Z",
+      "email": "paolasanmiguel@example.net",
+      "phone_number": "+34942 43 35 43",
+      "id_number": "95137854X",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 93,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$UN9ZCru9DXpz85M5K2nDCv$gVUIsUFs292OL1hWyZkSnuMzBShcLNCYtqUhoZtSQ2Q=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "javi_mesa",
+      "first_name": "Javi",
+      "last_name": "Mesa",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:01:59.691Z",
+      "email": "arnaldani@example.org",
+      "phone_number": "+34 844 901 006",
+      "id_number": "01498889W",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 94,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$3JmMXFhh66JEQHHA6OUn4H$0MSnpkcZD5mLsLFfesiv304p8I4LtBhxwVKQuahSsHc=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "paca_giner",
+      "first_name": "Paca",
+      "last_name": "Giner",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:01:59.972Z",
+      "email": "gaston44@example.org",
+      "phone_number": "+34 806853604",
+      "id_number": "00704983X",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 95,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$10Ys4Mn8d9TiJNJaPRwG9P$VXQlz15moC95QX/lta89Gl5kmQiVY4gVlsEN8+WY2nk=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "inmaculada_pedro",
+      "first_name": "Inmaculada",
+      "last_name": "Pedro Matamoros",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:02:00.254Z",
+      "email": "flaviopascual@example.com",
+      "phone_number": "+34988 67 14 72",
+      "id_number": "83393134X",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 96,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$auUSDEIQC1ZRAO7FMWzZPP$4NVXtWpZ+/K1RTA0ck4+7xyEi6A7ed+/BAUGLGMFPtw=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "bernab�_fonseca",
+      "first_name": "Bernab�",
+      "last_name": "Fonseca",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:02:00.533Z",
+      "email": "segarrademetrio@example.com",
+      "phone_number": "+34 881 53 38 03",
+      "id_number": "59905842L",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 97,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$uWQvJvaRV7DPt16wv3UwNi$S73Dp3uN2stOBP99NpuFy6pUwMNIcNts/fVYYE/J4p8=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "sosimo_galindo",
+      "first_name": "Sosimo",
+      "last_name": "Galindo",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:02:00.812Z",
+      "email": "tmosquera@example.net",
+      "phone_number": "+34 879 26 81 83",
+      "id_number": "80370553C",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 98,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$fkgHVXzkFGYvBKx4m9mTt5$8fGQSmUaolTmFq/e01AGhWXZlAqofA0toFPNBSjSg4E=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "sebasti�n_higueras",
+      "first_name": "Sebasti�n",
+      "last_name": "Higueras",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:02:01.088Z",
+      "email": "ingridcrespo@example.org",
+      "phone_number": "+34823 303 702",
+      "id_number": "24928573T",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 99,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$DzVv2QuLpNcsaf25s69xFh$+XpKJT2gFnl/aKKGZT7I5Ew1pn4Gc90vfKCeR5V93z8=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "javiera_milla",
+      "first_name": "Javiera",
+      "last_name": "Milla",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:02:01.365Z",
+      "email": "dcontreras@example.com",
+      "phone_number": "+34 872 95 96 70",
+      "id_number": "71326621X",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 100,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$cv2ENwzjnc90qCszsRVqOw$8xqmZARpi6k6M4sy0cdrllIO3PreK/qpTDzbvowvjkY=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "fito_redondo",
+      "first_name": "Fito",
+      "last_name": "Redondo Rack",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:02:01.646Z",
+      "email": "godofredo12@example.net",
+      "phone_number": "+34 844254723",
+      "id_number": "76665638Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 101,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$LqxaiHDLMkCaSgGftNX8V4$NaRMkZELYW6rK2vSVwTyhIiPHI9eosKRYPc8dXRTxTg=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "belen_barcel�",
+      "first_name": "Belen",
+      "last_name": "Barcel�",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:02:01.926Z",
+      "email": "amalia02@example.net",
+      "phone_number": "+34 948 23 92 15",
+      "id_number": "88311441C",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 102,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$hyNr37z2YOfV3rmlU7KfES$owmzpZ5EVbGBNd9g+iizuK2859yzfDFh0fhcsunCJx0=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "vinicio_sancho",
+      "first_name": "Vinicio",
+      "last_name": "Sancho",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:02:02.201Z",
+      "email": "ginertoni@example.com",
+      "phone_number": "+34935 17 15 88",
+      "id_number": "63315256M",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 103,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$DFy3dzXS3EJQvVecScnHCD$3HT81/5pRBa4lntqbmkbJDQtkZYRSN50xhWJ1+1Djpw=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "ignacia_nu�ez",
+      "first_name": "Ignacia",
+      "last_name": "Nu�ez",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:02:02.479Z",
+      "email": "dionisianunez@example.org",
+      "phone_number": "+34875 069 661",
+      "id_number": "64828302L",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 104,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$vSa4vz4WgoAC3QQ57q4S66$YX/FLGmm0qYfaNOYwbhNgw1YVlbPmTOeWeCIHJok90Q=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "eric_ar�valo",
+      "first_name": "Eric",
+      "last_name": "Ar�valo",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:42.653Z",
+      "email": "ramoncelso@example.net",
+      "phone_number": "+34821 652 685",
+      "id_number": "79630894H",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 105,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$2YyVX4WRaJST7QFcPfHE2k$cfND7qemc/mLkqfYRDPDEdgd6afI2w2t5mE8wr2IYZA=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "filomena_monta�a",
+      "first_name": "Filomena",
+      "last_name": "Monta�a Serg",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:42.939Z",
+      "email": "pdelgado@example.com",
+      "phone_number": "+34 845 190 795",
+      "id_number": "04750940Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 106,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$jWMij2x12j63H51AxcPFmy$cYQP703ia156RTZilhiEU6w+8VhzgWNr7UeL+7upIJo=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "jorge_ayll�n",
+      "first_name": "Jorge",
+      "last_name": "Ayll�n",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:43.222Z",
+      "email": "carrenoteo@example.net",
+      "phone_number": "+34 965624938",
+      "id_number": "93444754D",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 107,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$9GMHBSpYX3XEF7M1vPKLd3$EvF0zwveQ6zW/cI/ChnfsZOw+Mp26u9FFZizisG9A4s=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "buenaventura_peralta",
+      "first_name": "Buenaventura",
+      "last_name": "Peralta",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:43.508Z",
+      "email": "rafael50@example.net",
+      "phone_number": "+34972113722",
+      "id_number": "50438990J",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 108,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$yVZLQCB58BQykAOeYXdAYP$1bckuGfsIDy8Ipmcw0n35PQskpsfjkhxAKu+B7/FNOk=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "narcisa_coloma",
+      "first_name": "Narcisa",
+      "last_name": "Coloma",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:43.794Z",
+      "email": "hpizarro@example.org",
+      "phone_number": "+34842647818",
+      "id_number": "40237649T",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 109,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$rGj88AfWIXHcByA7z4NVc2$baH202+Kao8pTfXwxp51baJG0USEBRRiw/HC9QmwnnQ=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "leonor_cuesta",
+      "first_name": "Leonor",
+      "last_name": "Cuesta",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:44.074Z",
+      "email": "esmeralda01@example.net",
+      "phone_number": "+34883 00 94 73",
+      "id_number": "15571354D",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 110,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$0p7TKmYrHcM6hPVXrBEipx$KMSn3EwB1+mKlZviW3IXWOD/msrVt+HgyD33kbo5c8U=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "calisto_cant�n",
+      "first_name": "Calisto",
+      "last_name": "Cant�n",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:44.360Z",
+      "email": "domitilazabala@example.com",
+      "phone_number": "+34 844 062 151",
+      "id_number": "25068539B",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 111,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$tTYBlXBpyFCe1DTpCaFBVD$cVfv4Zk182kGvelDhCSlIqTLFNq7L1vFlxDx1BO7kAw=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "marianela_bayona",
+      "first_name": "Marianela",
+      "last_name": "Bayona Perona",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:44.646Z",
+      "email": "susanarossello@example.org",
+      "phone_number": "+34949 632 495",
+      "id_number": "30938210J",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 112,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$fKd4nZZ8KTgLAIKNNS8UbT$wFFWx4ewS6MWbxcBWHdyO/YgefTXzHkMB2QiGVnCW9g=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "isaac_novoa",
+      "first_name": "Isaac",
+      "last_name": "Novoa",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:44.938Z",
+      "email": "earamburu@example.org",
+      "phone_number": "+34 820 07 35 68",
+      "id_number": "38492525R",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 113,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$5opcICHwVswCNLouTsPyUb$D6Yf8VhKgL3o7ttO3jiPPACw6EGlgdSF9F6taWcO95o=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "luc�a_requena",
+      "first_name": "Luc�a",
+      "last_name": "Requena",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:45.226Z",
+      "email": "tejedorflorinda@example.org",
+      "phone_number": "+34871 03 83 51",
+      "id_number": "83880648Q",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 114,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$i8B4o20GQTOpH1jezCqdgz$lZ51SowHUfIu0d7mu/Zbbyj6z/v8/ANwnmGguZbqMjA=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "ciriaco_tena",
+      "first_name": "Ciriaco",
+      "last_name": "Tena",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:45.513Z",
+      "email": "salazarmanolo@example.net",
+      "phone_number": "+34983 436 778",
+      "id_number": "43537744D",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 115,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Ow0eWTFcsDhb2mAhZuc4Or$Fxs/KGGp4aFwlhK0xTHqkG7PA8l0pR7sx7SiPlSuE1E=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "hernando_ponce",
+      "first_name": "Hernando",
+      "last_name": "Ponce Santo",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:45.799Z",
+      "email": "davidfrutos@example.org",
+      "phone_number": "+34 827 521 183",
+      "id_number": "35698810G",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 116,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$nKZW08hi82uR5b4H1y5XeX$8NaQEqhRogLYbjZ288Y5pou/UznrXFhyUgSPbnm7MO4=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "segismundo_moliner",
+      "first_name": "Segismundo",
+      "last_name": "Moliner",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:46.080Z",
+      "email": "vicente94@example.net",
+      "phone_number": "+34 927492118",
+      "id_number": "30417937T",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 117,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$oG89tx5ZsjlNlWptK8NFdK$3A/mhUU8NCPusDWEZ2h90Zr3av+yFuQyhYm8Fbr4pZE=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "joaquina_bueno",
+      "first_name": "Joaquina",
+      "last_name": "Bueno Bonito",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:46.362Z",
+      "email": "hvall@example.com",
+      "phone_number": "+34923 386 858",
+      "id_number": "75534744F",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 118,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$RPv8zNGLRv6c4oiraIlNCL$+UwckvKfVrB7QgPB2f5cKaicv0w+LGo78ZGerW7CGhI=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "lope_carnero",
+      "first_name": "Lope",
+      "last_name": "Carnero",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:46.644Z",
+      "email": "zmarmol@example.net",
+      "phone_number": "+34 826 55 39 76",
+      "id_number": "37582680J",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 119,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$tDozzeqNc5IbDQwzskotQX$3k6rooypTMygvHaLjLr4fIC6d/Cxmx4vCsneCg7uUKM=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "manuel_bautista",
+      "first_name": "Manuel",
+      "last_name": "Bautista",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:46.929Z",
+      "email": "lamasdan@example.net",
+      "phone_number": "+34900 052 453",
+      "id_number": "96540335C",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 120,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$D5zOWV5yMhjzEK9I5CZkn0$WcK1Yr9CVLjgGJ7kzos72jqshV9g7kv+5/UXZzHGUcA=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "espiridi�n_salvador",
+      "first_name": "Espiridi�n",
+      "last_name": "Salvador",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:47.216Z",
+      "email": "eduardo04@example.com",
+      "phone_number": "+34 924 793 643",
+      "id_number": "70449640L",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 121,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$9lvRYvXbbC9KWO1rIQA3OE$yNxigKBvSFsCNa07iwAzQQSW3B8PbefYSU/vrxqy6XM=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "ruperto_pol",
+      "first_name": "Ruperto",
+      "last_name": "Pol Llosa",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:47.511Z",
+      "email": "htaboada@example.org",
+      "phone_number": "+34706876572",
+      "id_number": "72653576A",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 122,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$LD9CNgQHvV8569O1zm5iBs$C0LkOUguCceMbDsjmtjydzETtLolc/hVDYuQpqnT3Mw=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "josu�_vargas",
+      "first_name": "Josu�",
+      "last_name": "Vargas",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:47.794Z",
+      "email": "xperalta@example.net",
+      "phone_number": "+34803 969 197",
+      "id_number": "53809963Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 123,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$JxqwKXnLuIOYUTh4UAx1kp$dkFuHNAS4kYcXD2zN6y+DsdF4eg83rbUFRdJ5ATrSPA=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "gustavo_ari�o",
+      "first_name": "Gustavo",
+      "last_name": "Ari�o",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-25T15:03:48.078Z",
+      "email": "pedrofebe@example.com",
+      "phone_number": "+34 821 31 21 81",
+      "id_number": "15931600Y",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "Reception.hoteluser",
+    "pk": 124,
+    "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "",
+      "first_name": "Test nou client",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-04-27T11:50:11.585Z",
+      "email": "sadkjas@hola.com",
+      "phone_number": "123123123",
+      "id_number": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
     "model": "Reception.worker",
     "pk": 1,
     "fields": {
@@ -681,129 +1877,1383 @@
   },
   {
     "model": "Reception.client",
-    "pk": 2,
+    "pk": 94,
     "fields": {
       "is_hosted": false
     }
   },
   {
     "model": "Reception.client",
-    "pk": 3,
+    "pk": 95,
     "fields": {
       "is_hosted": false
     }
   },
   {
-    "model": "Reception.room",
-    "pk": 1,
+    "model": "Reception.client",
+    "pk": 96,
     "fields": {
-      "is_clean": true,
-      "is_taken": false,
-      "room_num": 1,
-      "room_price": 100,
-      "room_type": "Deluxe"
+      "is_hosted": false
+    }
+  },
+  {
+    "model": "Reception.client",
+    "pk": 97,
+    "fields": {
+      "is_hosted": true
+    }
+  },
+  {
+    "model": "Reception.client",
+    "pk": 98,
+    "fields": {
+      "is_hosted": true
+    }
+  },
+  {
+    "model": "Reception.client",
+    "pk": 99,
+    "fields": {
+      "is_hosted": true
+    }
+  },
+  {
+    "model": "Reception.client",
+    "pk": 100,
+    "fields": {
+      "is_hosted": false
+    }
+  },
+  {
+    "model": "Reception.client",
+    "pk": 101,
+    "fields": {
+      "is_hosted": true
+    }
+  },
+  {
+    "model": "Reception.client",
+    "pk": 102,
+    "fields": {
+      "is_hosted": false
+    }
+  },
+  {
+    "model": "Reception.client",
+    "pk": 103,
+    "fields": {
+      "is_hosted": false
+    }
+  },
+  {
+    "model": "Reception.client",
+    "pk": 114,
+    "fields": {
+      "is_hosted": false
+    }
+  },
+  {
+    "model": "Reception.client",
+    "pk": 115,
+    "fields": {
+      "is_hosted": false
+    }
+  },
+  {
+    "model": "Reception.client",
+    "pk": 116,
+    "fields": {
+      "is_hosted": true
+    }
+  },
+  {
+    "model": "Reception.client",
+    "pk": 117,
+    "fields": {
+      "is_hosted": false
+    }
+  },
+  {
+    "model": "Reception.client",
+    "pk": 118,
+    "fields": {
+      "is_hosted": false
+    }
+  },
+  {
+    "model": "Reception.client",
+    "pk": 119,
+    "fields": {
+      "is_hosted": true
+    }
+  },
+  {
+    "model": "Reception.client",
+    "pk": 120,
+    "fields": {
+      "is_hosted": false
+    }
+  },
+  {
+    "model": "Reception.client",
+    "pk": 121,
+    "fields": {
+      "is_hosted": true
+    }
+  },
+  {
+    "model": "Reception.client",
+    "pk": 122,
+    "fields": {
+      "is_hosted": true
+    }
+  },
+  {
+    "model": "Reception.client",
+    "pk": 123,
+    "fields": {
+      "is_hosted": true
     }
   },
   {
     "model": "Reception.room",
-    "pk": 2,
+    "pk": 52,
+    "fields": {
+      "is_clean": true,
+      "is_taken": false,
+      "room_num": 500,
+      "room_type": "Deluxe",
+      "room_price": 125
+    }
+  },
+  {
+    "model": "Reception.room",
+    "pk": 53,
+    "fields": {
+      "is_clean": true,
+      "is_taken": false,
+      "room_num": 600,
+      "room_type": "Suite",
+      "room_price": 100
+    }
+  },
+  {
+    "model": "Reception.room",
+    "pk": 54,
     "fields": {
       "is_clean": false,
       "is_taken": false,
-      "room_num": 2,
-      "room_price": 1000,
-      "room_type": "Double"
+      "room_num": 100,
+      "room_type": "Individual",
+      "room_price": 50
     }
   },
   {
     "model": "Reception.room",
-    "pk": 3,
+    "pk": 55,
     "fields": {
       "is_clean": true,
-      "is_taken": false,
-      "room_num": 3,
-      "room_price": 400,
-      "room_type": "Suite"
+      "is_taken": true,
+      "room_num": 501,
+      "room_type": "Deluxe",
+      "room_price": 125
     }
   },
   {
     "model": "Reception.room",
-    "pk": 4,
+    "pk": 56,
+    "fields": {
+      "is_clean": true,
+      "is_taken": true,
+      "room_num": 101,
+      "room_type": "Individual",
+      "room_price": 50
+    }
+  },
+  {
+    "model": "Reception.room",
+    "pk": 57,
     "fields": {
       "is_clean": true,
       "is_taken": false,
-      "room_num": 4,
-      "room_price": 300,
-      "room_type": "Individual"
+      "room_num": 300,
+      "room_type": "Double",
+      "room_price": 75
+    }
+  },
+  {
+    "model": "Reception.room",
+    "pk": 58,
+    "fields": {
+      "is_clean": false,
+      "is_taken": true,
+      "room_num": 102,
+      "room_type": "Individual",
+      "room_price": 50
+    }
+  },
+  {
+    "model": "Reception.room",
+    "pk": 59,
+    "fields": {
+      "is_clean": true,
+      "is_taken": false,
+      "room_num": 502,
+      "room_type": "Deluxe",
+      "room_price": 125
+    }
+  },
+  {
+    "model": "Reception.room",
+    "pk": 60,
+    "fields": {
+      "is_clean": true,
+      "is_taken": true,
+      "room_num": 601,
+      "room_type": "Suite",
+      "room_price": 100
+    }
+  },
+  {
+    "model": "Reception.room",
+    "pk": 61,
+    "fields": {
+      "is_clean": true,
+      "is_taken": false,
+      "room_num": 103,
+      "room_type": "Individual",
+      "room_price": 50
+    }
+  },
+  {
+    "model": "Reception.room",
+    "pk": 62,
+    "fields": {
+      "is_clean": true,
+      "is_taken": false,
+      "room_num": 300,
+      "room_type": "Double",
+      "room_price": 75
+    }
+  },
+  {
+    "model": "Reception.room",
+    "pk": 63,
+    "fields": {
+      "is_clean": false,
+      "is_taken": true,
+      "room_num": 301,
+      "room_type": "Double",
+      "room_price": 75
+    }
+  },
+  {
+    "model": "Reception.room",
+    "pk": 64,
+    "fields": {
+      "is_clean": false,
+      "is_taken": true,
+      "room_num": 600,
+      "room_type": "Suite",
+      "room_price": 100
+    }
+  },
+  {
+    "model": "Reception.room",
+    "pk": 65,
+    "fields": {
+      "is_clean": false,
+      "is_taken": true,
+      "room_num": 500,
+      "room_type": "Deluxe",
+      "room_price": 125
+    }
+  },
+  {
+    "model": "Reception.room",
+    "pk": 66,
+    "fields": {
+      "is_clean": false,
+      "is_taken": false,
+      "room_num": 601,
+      "room_type": "Suite",
+      "room_price": 100
+    }
+  },
+  {
+    "model": "Reception.room",
+    "pk": 67,
+    "fields": {
+      "is_clean": false,
+      "is_taken": false,
+      "room_num": 302,
+      "room_type": "Double",
+      "room_price": 75
+    }
+  },
+  {
+    "model": "Reception.room",
+    "pk": 68,
+    "fields": {
+      "is_clean": true,
+      "is_taken": false,
+      "room_num": 602,
+      "room_type": "Suite",
+      "room_price": 100
+    }
+  },
+  {
+    "model": "Reception.room",
+    "pk": 69,
+    "fields": {
+      "is_clean": false,
+      "is_taken": false,
+      "room_num": 100,
+      "room_type": "Individual",
+      "room_price": 50
+    }
+  },
+  {
+    "model": "Reception.room",
+    "pk": 70,
+    "fields": {
+      "is_clean": false,
+      "is_taken": false,
+      "room_num": 101,
+      "room_type": "Individual",
+      "room_price": 50
+    }
+  },
+  {
+    "model": "Reception.room",
+    "pk": 71,
+    "fields": {
+      "is_clean": false,
+      "is_taken": false,
+      "room_num": 603,
+      "room_type": "Suite",
+      "room_price": 100
     }
   },
   {
     "model": "Reception.roomreservation",
-    "pk": 1,
+    "pk": 63,
     "fields": {
-      "client": 2,
-      "room": 1,
-      "entry": "2024-04-03",
-      "exit": "2024-04-04",
+      "client": 99,
+      "room": 54,
+      "entry": "2024-05-25",
+      "exit": "2024-06-08",
       "pension_type": "Esmorzar Buffet",
-      "num_guests": 2
+      "num_guests": 4,
+      "is_active": true,
+      "check_in_active": false,
+      "check_out_active": true
     }
   },
   {
     "model": "Reception.roomreservation",
-    "pk": 4,
+    "pk": 64,
     "fields": {
-      "client": 2,
-      "room": 1,
-      "entry": "2024-06-05",
-      "exit": "2024-06-05",
-      "pension_type": "Esmorzar Buffet",
-      "num_guests": 2
+      "client": 95,
+      "room": 61,
+      "entry": "2024-05-19",
+      "exit": "2024-05-24",
+      "pension_type": "Sense pensi�",
+      "num_guests": 1,
+      "is_active": true,
+      "check_in_active": true,
+      "check_out_active": false
     }
   },
   {
     "model": "Reception.roomreservation",
-    "pk": 7,
+    "pk": 65,
     "fields": {
-      "client": 3,
-      "room": 2,
-      "entry": "2024-04-04",
-      "exit": "2024-04-05",
+      "client": 103,
+      "room": 57,
+      "entry": "2024-04-26",
+      "exit": "2024-05-10",
+      "pension_type": "Completa",
+      "num_guests": 2,
+      "is_active": true,
+      "check_in_active": false,
+      "check_out_active": false
+    }
+  },
+  {
+    "model": "Reception.roomreservation",
+    "pk": 66,
+    "fields": {
+      "client": 98,
+      "room": 52,
+      "entry": "2024-04-27",
+      "exit": "2024-05-07",
+      "pension_type": "Completa",
+      "num_guests": 4,
+      "is_active": true,
+      "check_in_active": false,
+      "check_out_active": false
+    }
+  },
+  {
+    "model": "Reception.roomreservation",
+    "pk": 67,
+    "fields": {
+      "client": 94,
+      "room": 54,
+      "entry": "2024-05-13",
+      "exit": "2024-05-20",
+      "pension_type": "Sense pensi�",
+      "num_guests": 4,
+      "is_active": true,
+      "check_in_active": false,
+      "check_out_active": true
+    }
+  },
+  {
+    "model": "Reception.roomreservation",
+    "pk": 68,
+    "fields": {
+      "client": 100,
+      "room": 55,
+      "entry": "2024-04-29",
+      "exit": "2024-04-30",
       "pension_type": "Esmorzar Buffet",
-      "num_guests": 2
+      "num_guests": 4,
+      "is_active": true,
+      "check_in_active": true,
+      "check_out_active": false
     }
   },
   {
-    "model": "Reception.checkin",
-    "pk": 1,
+    "model": "Reception.roomreservation",
+    "pk": 69,
     "fields": {
-      "num_reservation": "2",
-      "id_number": "2"
+      "client": 98,
+      "room": 60,
+      "entry": "2024-05-03",
+      "exit": "2024-05-04",
+      "pension_type": "Esmorzar Buffet",
+      "num_guests": 4,
+      "is_active": true,
+      "check_in_active": true,
+      "check_out_active": true
     }
   },
   {
-    "model": "Reception.checkin",
-    "pk": 2,
+    "model": "Reception.roomreservation",
+    "pk": 70,
     "fields": {
-      "num_reservation": "1",
-      "id_number": "2"
+      "client": 96,
+      "room": 60,
+      "entry": "2024-05-04",
+      "exit": "2024-05-08",
+      "pension_type": "Sense pensi�",
+      "num_guests": 4,
+      "is_active": true,
+      "check_in_active": false,
+      "check_out_active": true
     }
   },
   {
-    "model": "Reception.checkin",
-    "pk": 3,
+    "model": "Reception.roomreservation",
+    "pk": 71,
     "fields": {
-      "num_reservation": "7",
-      "id_number": "3"
+      "client": 99,
+      "room": 52,
+      "entry": "2024-05-19",
+      "exit": "2024-06-01",
+      "pension_type": "Sense pensi�",
+      "num_guests": 3,
+      "is_active": true,
+      "check_in_active": false,
+      "check_out_active": false
+    }
+  },
+  {
+    "model": "Reception.roomreservation",
+    "pk": 72,
+    "fields": {
+      "client": 97,
+      "room": 59,
+      "entry": "2024-04-26",
+      "exit": "2024-04-28",
+      "pension_type": "Completa",
+      "num_guests": 3,
+      "is_active": true,
+      "check_in_active": false,
+      "check_out_active": true
+    }
+  },
+  {
+    "model": "Reception.roomreservation",
+    "pk": 73,
+    "fields": {
+      "client": 95,
+      "room": 58,
+      "entry": "2024-05-25",
+      "exit": "2024-05-28",
+      "pension_type": "Sense pensi�",
+      "num_guests": 4,
+      "is_active": true,
+      "check_in_active": true,
+      "check_out_active": false
+    }
+  },
+  {
+    "model": "Reception.roomreservation",
+    "pk": 74,
+    "fields": {
+      "client": 119,
+      "room": 70,
+      "entry": "2024-05-01",
+      "exit": "2024-05-04",
+      "pension_type": "Sense pensi�",
+      "num_guests": 2,
+      "is_active": true,
+      "check_in_active": false,
+      "check_out_active": true
+    }
+  },
+  {
+    "model": "Reception.roomreservation",
+    "pk": 75,
+    "fields": {
+      "client": 95,
+      "room": 70,
+      "entry": "2024-04-27",
+      "exit": "2024-05-11",
+      "pension_type": "Esmorzar Buffet",
+      "num_guests": 3,
+      "is_active": true,
+      "check_in_active": true,
+      "check_out_active": true
+    }
+  },
+  {
+    "model": "Reception.roomreservation",
+    "pk": 76,
+    "fields": {
+      "client": 119,
+      "room": 56,
+      "entry": "2024-05-02",
+      "exit": "2024-05-16",
+      "pension_type": "Completa",
+      "num_guests": 4,
+      "is_active": true,
+      "check_in_active": true,
+      "check_out_active": true
+    }
+  },
+  {
+    "model": "Reception.roomreservation",
+    "pk": 77,
+    "fields": {
+      "client": 101,
+      "room": 56,
+      "entry": "2024-05-08",
+      "exit": "2024-05-21",
+      "pension_type": "Sense pensi�",
+      "num_guests": 2,
+      "is_active": true,
+      "check_in_active": true,
+      "check_out_active": true
+    }
+  },
+  {
+    "model": "Reception.roomreservation",
+    "pk": 78,
+    "fields": {
+      "client": 121,
+      "room": 61,
+      "entry": "2024-05-06",
+      "exit": "2024-05-08",
+      "pension_type": "Esmorzar Buffet",
+      "num_guests": 1,
+      "is_active": true,
+      "check_in_active": true,
+      "check_out_active": false
+    }
+  },
+  {
+    "model": "Reception.roomreservation",
+    "pk": 79,
+    "fields": {
+      "client": 98,
+      "room": 71,
+      "entry": "2024-05-20",
+      "exit": "2024-05-22",
+      "pension_type": "Sense pensi�",
+      "num_guests": 4,
+      "is_active": true,
+      "check_in_active": false,
+      "check_out_active": false
+    }
+  },
+  {
+    "model": "Reception.roomreservation",
+    "pk": 80,
+    "fields": {
+      "client": 95,
+      "room": 56,
+      "entry": "2024-04-28",
+      "exit": "2024-05-06",
+      "pension_type": "Esmorzar Buffet",
+      "num_guests": 3,
+      "is_active": true,
+      "check_in_active": true,
+      "check_out_active": true
+    }
+  },
+  {
+    "model": "Reception.roomreservation",
+    "pk": 81,
+    "fields": {
+      "client": 95,
+      "room": 70,
+      "entry": "2024-05-04",
+      "exit": "2024-05-14",
+      "pension_type": "Esmorzar Buffet",
+      "num_guests": 2,
+      "is_active": true,
+      "check_in_active": false,
+      "check_out_active": true
+    }
+  },
+  {
+    "model": "Reception.roomreservation",
+    "pk": 82,
+    "fields": {
+      "client": 114,
+      "room": 62,
+      "entry": "2024-04-26",
+      "exit": "2024-05-08",
+      "pension_type": "Esmorzar Buffet",
+      "num_guests": 2,
+      "is_active": true,
+      "check_in_active": true,
+      "check_out_active": false
     }
   },
   {
     "model": "Reception.despeses",
+    "pk": 8,
+    "fields": {
+      "room_reservation": 63,
+      "pension_costs": 0,
+      "room_type_costs": 20
+    }
+  },
+  {
+    "model": "Reception.despeses",
+    "pk": 10,
+    "fields": {
+      "room_reservation": 64,
+      "pension_costs": 0,
+      "room_type_costs": 30
+    }
+  },
+  {
+    "model": "Reception.despeses",
+    "pk": 12,
+    "fields": {
+      "room_reservation": 65,
+      "pension_costs": 0,
+      "room_type_costs": 400
+    }
+  },
+  {
+    "model": "Reception.despeses",
+    "pk": 13,
+    "fields": {
+      "room_reservation": 66,
+      "pension_costs": 0,
+      "room_type_costs": 500
+    }
+  },
+  {
+    "model": "Reception.despeses",
+    "pk": 14,
+    "fields": {
+      "room_reservation": 67,
+      "pension_costs": 0,
+      "room_type_costs": 100
+    }
+  },
+  {
+    "model": "Reception.despeses",
+    "pk": 15,
+    "fields": {
+      "room_reservation": 68,
+      "pension_costs": 20,
+      "room_type_costs": 100
+    }
+  },
+  {
+    "model": "Cleaner.cleaningmaterial",
+    "pk": 141,
+    "fields": {
+      "material_name": "Esponja",
+      "image": "cleaning_materials/esponja.png"
+    }
+  },
+  {
+    "model": "Cleaner.cleaningmaterial",
+    "pk": 142,
+    "fields": {
+      "material_name": "Guantes",
+      "image": "cleaning_materials/guantes.png"
+    }
+  },
+  {
+    "model": "Cleaner.cleaningmaterial",
+    "pk": 143,
+    "fields": {
+      "material_name": "Spray",
+      "image": "cleaning_materials/spray.png"
+    }
+  },
+  {
+    "model": "Cleaner.cleaningmaterial",
+    "pk": 144,
+    "fields": {
+      "material_name": "Toalla",
+      "image": "cleaning_materials/toalla.avif"
+    }
+  },
+  {
+    "model": "Cleaner.stock",
+    "pk": 149,
+    "fields": {
+      "material": 141,
+      "price": 38.59,
+      "is_available": true,
+      "is_active": true
+    }
+  },
+  {
+    "model": "Cleaner.stock",
+    "pk": 150,
+    "fields": {
+      "material": 142,
+      "price": 42.2,
+      "is_available": false,
+      "is_active": true
+    }
+  },
+  {
+    "model": "Cleaner.stock",
+    "pk": 151,
+    "fields": {
+      "material": 143,
+      "price": 50.29,
+      "is_available": true,
+      "is_active": true
+    }
+  },
+  {
+    "model": "Cleaner.stock",
+    "pk": 152,
+    "fields": {
+      "material": 144,
+      "price": 14.04,
+      "is_available": false,
+      "is_active": true
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 41,
+    "fields": {
+      "room": 54,
+      "date": "2024-04-25",
+      "missing_objects": "tenetur",
+      "need_towels": 0,
+      "additional_comments": "Provident pariatur libero explicabo natus aspernatur dolorem. Officiis aspernatur quibusdam tempore neque cupiditate eaque veritatis. Tempore cupiditate minima illum soluta fugiat.",
+      "is_cleaned": false
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 42,
+    "fields": {
+      "room": 52,
+      "date": "2024-04-25",
+      "missing_objects": "",
+      "need_towels": 4,
+      "additional_comments": "",
+      "is_cleaned": true
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 43,
+    "fields": {
+      "room": 53,
+      "date": "2024-04-25",
+      "missing_objects": "",
+      "need_towels": 2,
+      "additional_comments": "Eligendi ratione temporibus. Et delectus commodi repellendus voluptates sunt at. Culpa culpa reprehenderit eos sunt sint quidem aperiam.",
+      "is_cleaned": false
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 44,
+    "fields": {
+      "room": 57,
+      "date": "2024-04-25",
+      "missing_objects": "",
+      "need_towels": 2,
+      "additional_comments": "Debitis sunt alias officia et doloremque. Fugiat numquam sed expedita praesentium voluptatum maxime quia.",
+      "is_cleaned": false
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 45,
+    "fields": {
+      "room": 55,
+      "date": "2024-04-25",
+      "missing_objects": "",
+      "need_towels": 3,
+      "additional_comments": "Inventore minima explicabo perspiciatis voluptatum non. Ipsa optio alias tenetur dignissimos quod accusamus. Aliquid exercitationem praesentium voluptate quia voluptatum ad.",
+      "is_cleaned": false
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 46,
+    "fields": {
+      "room": 56,
+      "date": "2024-04-25",
+      "missing_objects": "neque",
+      "need_towels": 0,
+      "additional_comments": "",
+      "is_cleaned": false
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 47,
+    "fields": {
+      "room": 60,
+      "date": "2024-04-25",
+      "missing_objects": "",
+      "need_towels": 5,
+      "additional_comments": "Veritatis molestiae soluta saepe recusandae exercitationem corporis corrupti. Animi voluptatum dignissimos.\nCum laborum iusto voluptatibus eaque possimus voluptas. Sapiente deleniti tenetur dolor.",
+      "is_cleaned": true
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 48,
+    "fields": {
+      "room": 52,
+      "date": "2024-04-25",
+      "missing_objects": "perspiciatis",
+      "need_towels": 5,
+      "additional_comments": "",
+      "is_cleaned": false
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 49,
+    "fields": {
+      "room": 55,
+      "date": "2024-04-25",
+      "missing_objects": "nihil",
+      "need_towels": 4,
+      "additional_comments": "",
+      "is_cleaned": false
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 50,
+    "fields": {
+      "room": 53,
+      "date": "2024-04-25",
+      "missing_objects": "",
+      "need_towels": 1,
+      "additional_comments": "Aliquid eaque laboriosam eius. Ex dolores doloribus ipsum occaecati debitis inventore. Cum consequuntur delectus.\nLibero iure dolor fugit. Est consequatur asperiores magni quasi incidunt.",
+      "is_cleaned": true
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 51,
+    "fields": {
+      "room": 63,
+      "date": "2024-04-25",
+      "missing_objects": "",
+      "need_towels": 1,
+      "additional_comments": "Illo nemo unde qui ratione libero. Eos cumque nam neque assumenda. Sunt sequi temporibus provident dignissimos facilis velit.",
+      "is_cleaned": false
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 52,
+    "fields": {
+      "room": 61,
+      "date": "2024-04-25",
+      "missing_objects": "cupiditate",
+      "need_towels": 3,
+      "additional_comments": "Ratione modi nobis aspernatur voluptatem. Dolorum officia fuga. Cumque molestiae asperiores aperiam dolorum recusandae.",
+      "is_cleaned": false
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 53,
+    "fields": {
+      "room": 63,
+      "date": "2024-04-25",
+      "missing_objects": "aliquam",
+      "need_towels": 2,
+      "additional_comments": "",
+      "is_cleaned": true
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 54,
+    "fields": {
+      "room": 59,
+      "date": "2024-04-25",
+      "missing_objects": "eos",
+      "need_towels": 1,
+      "additional_comments": "",
+      "is_cleaned": false
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 55,
+    "fields": {
+      "room": 52,
+      "date": "2024-04-25",
+      "missing_objects": "reprehenderit",
+      "need_towels": 2,
+      "additional_comments": "Eos ipsam perferendis mollitia. Ex neque iusto. Consectetur cum libero hic quos velit labore officiis. Nisi odio blanditiis autem perferendis doloribus.",
+      "is_cleaned": true
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 56,
+    "fields": {
+      "room": 70,
+      "date": "2024-04-25",
+      "missing_objects": "",
+      "need_towels": 2,
+      "additional_comments": "Ex ipsa unde explicabo excepturi. Officia quibusdam veritatis cumque vitae. Omnis eveniet occaecati minus quaerat numquam.\nCorporis non culpa laudantium voluptas beatae. Minus sequi sint libero.",
+      "is_cleaned": false
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 57,
+    "fields": {
+      "room": 69,
+      "date": "2024-04-25",
+      "missing_objects": "animi",
+      "need_towels": 3,
+      "additional_comments": "Delectus distinctio minus animi natus facilis fuga. Aliquam eos repudiandae vero laboriosam saepe impedit.\nQuia ducimus nobis eos. Rem qui ex impedit id iste eos.",
+      "is_cleaned": false
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 58,
+    "fields": {
+      "room": 52,
+      "date": "2024-04-25",
+      "missing_objects": "cum",
+      "need_towels": 1,
+      "additional_comments": "Et est saepe quidem nulla. Eius molestias corporis. Alias tempore amet labore ad sint.",
+      "is_cleaned": true
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 59,
+    "fields": {
+      "room": 64,
+      "date": "2024-04-25",
+      "missing_objects": "quod",
+      "need_towels": 2,
+      "additional_comments": "Possimus voluptates tempore nobis atque illo natus aliquid. Suscipit doloremque distinctio quisquam odit. Amet impedit consectetur facere deleniti quae iure.",
+      "is_cleaned": false
+    }
+  },
+  {
+    "model": "Cleaner.cleanedroom",
+    "pk": 60,
+    "fields": {
+      "room": 60,
+      "date": "2024-04-25",
+      "missing_objects": "sed",
+      "need_towels": 5,
+      "additional_comments": "",
+      "is_cleaned": true
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 21,
+    "fields": {
+      "day": "2024-05-25",
+      "num_guests": 4,
+      "is_active": false,
+      "client": 94,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 22,
+    "fields": {
+      "day": "2024-05-17",
+      "num_guests": 5,
+      "is_active": false,
+      "client": 101,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 23,
+    "fields": {
+      "day": "2024-04-27",
+      "num_guests": 2,
+      "is_active": true,
+      "client": 97,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 24,
+    "fields": {
+      "day": "2024-05-03",
+      "num_guests": 5,
+      "is_active": false,
+      "client": 94,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 25,
+    "fields": {
+      "day": "2024-05-06",
+      "num_guests": 5,
+      "is_active": true,
+      "client": 100,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 26,
+    "fields": {
+      "day": "2024-05-15",
+      "num_guests": 4,
+      "is_active": true,
+      "client": 96,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 27,
+    "fields": {
+      "day": "2024-05-23",
+      "num_guests": 3,
+      "is_active": false,
+      "client": 99,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 28,
+    "fields": {
+      "day": "2024-05-14",
+      "num_guests": 1,
+      "is_active": false,
+      "client": 103,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 29,
+    "fields": {
+      "day": "2024-05-13",
+      "num_guests": 6,
+      "is_active": false,
+      "client": 101,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 30,
+    "fields": {
+      "day": "2024-05-10",
+      "num_guests": 5,
+      "is_active": true,
+      "client": 114,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 31,
+    "fields": {
+      "day": "2024-05-05",
+      "num_guests": 2,
+      "is_active": true,
+      "client": 99,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 32,
+    "fields": {
+      "day": "2024-04-30",
+      "num_guests": 2,
+      "is_active": false,
+      "client": 120,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 33,
+    "fields": {
+      "day": "2024-05-11",
+      "num_guests": 5,
+      "is_active": true,
+      "client": 95,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 34,
+    "fields": {
+      "day": "2024-05-02",
+      "num_guests": 6,
+      "is_active": false,
+      "client": 98,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 35,
+    "fields": {
+      "day": "2024-05-10",
+      "num_guests": 4,
+      "is_active": true,
+      "client": 115,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 36,
+    "fields": {
+      "day": "2024-05-20",
+      "num_guests": 6,
+      "is_active": true,
+      "client": 115,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 37,
+    "fields": {
+      "day": "2024-04-27",
+      "num_guests": 3,
+      "is_active": true,
+      "client": 101,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 38,
+    "fields": {
+      "day": "2024-05-18",
+      "num_guests": 5,
+      "is_active": true,
+      "client": 123,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 39,
+    "fields": {
+      "day": "2024-04-27",
+      "num_guests": 1,
+      "is_active": true,
+      "client": 116,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 40,
+    "fields": {
+      "day": "2024-04-27",
+      "num_guests": 1,
+      "is_active": true,
+      "client": 124,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 41,
+    "fields": {
+      "day": "2024-04-27",
+      "num_guests": 1,
+      "is_active": true,
+      "client": 98,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 42,
+    "fields": {
+      "day": "2024-04-27",
+      "num_guests": 1,
+      "is_active": true,
+      "client": null,
+      "external_client": 6
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 43,
+    "fields": {
+      "day": "2024-04-27",
+      "num_guests": 1,
+      "is_active": true,
+      "client": 101,
+      "external_client": null
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 44,
+    "fields": {
+      "day": "2024-04-27",
+      "num_guests": 1,
+      "is_active": true,
+      "client": null,
+      "external_client": 7
+    }
+  },
+  {
+    "model": "Restaurant.restaurantreservation",
+    "pk": 45,
+    "fields": {
+      "day": "2024-04-27",
+      "num_guests": 1,
+      "is_active": true,
+      "client": null,
+      "external_client": 8
+    }
+  },
+  {
+    "model": "Restaurant.externalrestaurantclient",
     "pk": 1,
     "fields": {
-      "room_reservation": 7,
-      "pension_costs": 400,
-      "room_type_costs": 200
+      "first_name": "dsadsadqweqwe",
+      "last_name": "",
+      "email": "234234@gmaul.cos",
+      "phone_number": ""
+    }
+  },
+  {
+    "model": "Restaurant.externalrestaurantclient",
+    "pk": 2,
+    "fields": {
+      "first_name": "e234234234",
+      "last_name": "",
+      "email": "23423423@gmail.com",
+      "phone_number": ""
+    }
+  },
+  {
+    "model": "Restaurant.externalrestaurantclient",
+    "pk": 3,
+    "fields": {
+      "first_name": "e234234234",
+      "last_name": "",
+      "email": "23423423@gmail.com",
+      "phone_number": ""
+    }
+  },
+  {
+    "model": "Restaurant.externalrestaurantclient",
+    "pk": 4,
+    "fields": {
+      "first_name": "e234234234",
+      "last_name": "",
+      "email": "23423423@gmail.com",
+      "phone_number": ""
+    }
+  },
+  {
+    "model": "Restaurant.externalrestaurantclient",
+    "pk": 5,
+    "fields": {
+      "first_name": "e234234234",
+      "last_name": "",
+      "email": "23423423@gmail.com",
+      "phone_number": ""
+    }
+  },
+  {
+    "model": "Restaurant.externalrestaurantclient",
+    "pk": 6,
+    "fields": {
+      "first_name": "e234234234",
+      "last_name": "",
+      "email": "23423423@gmail.com",
+      "phone_number": ""
+    }
+  },
+  {
+    "model": "Restaurant.externalrestaurantclient",
+    "pk": 7,
+    "fields": {
+      "first_name": "TEST",
+      "last_name": "",
+      "email": "TEST@TEST.COM",
+      "phone_number": ""
+    }
+  },
+  {
+    "model": "Restaurant.externalrestaurantclient",
+    "pk": 8,
+    "fields": {
+      "first_name": "asdsad",
+      "last_name": "asdasdasdasd",
+      "email": "saasdas@asd.com",
+      "phone_number": ""
     }
   }
 ]
