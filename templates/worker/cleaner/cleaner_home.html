@@ -18,17 +18,19 @@
             <div class="check-out-room-list">
                 {% for room in check_out_rooms %}
                     <p>hola</p>
-                    <span>{{ room.id }}</span>
+                    <span>{{ room.room_num }}</span>
                 {% endfor %}
+            </div>
         </div>
         <div class="occupied-rooms">
             <h4>En ocupació</h4>
             <div class="occupied-room-list">
                 {% for room in occupied_rooms %}
                     <div class="occupied-hab">
-                        <p>{{ room.id }}</p>
+                        <p>{{ room.room_num }}</p>
                     </div>
                 {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock content %}
