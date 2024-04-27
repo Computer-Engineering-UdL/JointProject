@@ -1,6 +1,6 @@
 from django import forms
 from django.core.validators import MinValueValidator, MaxValueValidator
-from .models import RoomReservation, Client, Room, CheckIn, HotelUser
+from Reception.models import RoomReservation, Client, Room, CheckIn, HotelUser, ExtraCosts
 from Reception.config import Config as c
 from Reception import forms_verify as fv
 
@@ -9,12 +9,11 @@ class RoomForm(forms.ModelForm):
     is_clean = forms.BooleanField(required=False)
     is_taken = forms.BooleanField(required=False)
     room_num = forms.IntegerField(validators=[MinValueValidator(200), MaxValueValidator(499)])
-    room_price = forms.IntegerField(validators=[MinValueValidator(20), MaxValueValidator(1000)])
     room_type = forms.ChoiceField(choices=c.get_room_types)
 
     class Meta:
         model = Room
-        fields = ['room_num', 'room_price', 'room_type', 'is_clean', 'is_taken']
+        fields = ['room_num', 'room_type', 'is_clean', 'is_taken']
 
 
 class RoomReservationForm(forms.ModelForm):
@@ -83,16 +82,16 @@ class AddClientForm(forms.ModelForm):
 class InfoClientForm(forms.ModelForm):
     num_reservation = forms.CharField(label="Número de reserva", required=False)
     id_number = forms.CharField(max_length=20, label="Document identificatiu", required=False)
+    room_num = forms.IntegerField(label="Número d'habitació", required=False,
+                                  validators=[MinValueValidator(1)])
 
     def clean(self):
         cleaned_data = super().clean()
         num_reservation = cleaned_data.get("num_reservation")
         id_number = cleaned_data.get("id_number")
+        room_num = cleaned_data.get("room_num")
 
-        fv.verify_search_reservation_form(num_reservation, id_number, None)
-
-        if not num_reservation and not id_number:
-            raise forms.ValidationError("Introdueix el número de la reserva o del document identificatiu")
+        fv.verify_search_reservation_form(num_reservation, id_number, room_num)
 
         return cleaned_data
 
@@ -122,3 +121,12 @@ class SearchReservationForm(forms.ModelForm):
     class Meta:
         model = RoomReservation
         fields = []
+
+
+class AddExtraCostsForm(forms.ModelForm):
+    extra_costs_price = forms.IntegerField(label="Costs addicionals", validators=[MinValueValidator(0)])
+    extra_costs_type = forms.ChoiceField(choices=c.get_room_extra_costs)
+
+    class Meta:
+        model = ExtraCosts
+        fields = ['extra_costs_price', 'extra_costs_type']

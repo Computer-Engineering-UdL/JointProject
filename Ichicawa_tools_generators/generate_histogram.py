@@ -21,6 +21,7 @@ labels_count = {
     "front-end": 0,
     "tests": 0,
     "wontfix": 0,
+    "user-story": 0,
 }
 
 
@@ -50,7 +51,8 @@ def generate_plot() -> None:
     plt.ylabel('Number of Issues')
     plt.title('Histogram of Issues by Label - General Report')
     plt.xticks(rotation=20)
-    plt.yticks(range(0, max(labels_count.values()) + 1))
+    plt.yticks(range(0, max(labels_count.values()) + 1, 5))
+    plt.tight_layout()
     plt.savefig("histogram_issues.png")
 
 

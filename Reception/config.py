@@ -22,6 +22,18 @@ class Config:
         return ROOM_TYPES
 
     @staticmethod
+    def get_room_number_range(room_type: str):
+        return ROOM_NUMBER_RANGES[room_type]
+
+    @staticmethod
+    def get_room_prices_per_type(room_type: str):
+        return ROOM_PRICES_PER_TYPE[room_type]
+
+    @staticmethod
+    def get_pension_cost_per_type(pension_type: str):
+        return PENSION_COST_PER_TYPE[pension_type]
+
+    @staticmethod
     def get_check_in_path(n: int):
         return p.CHECK_IN_PATH[n]
 
@@ -43,7 +55,6 @@ class Config:
 
 
 ROOM_EXTRA_COSTS = [
-    ('Minibar', 'Minibar'),
     ('Desperfectes', 'Desperfectes'),
     ('Servei habitacions', 'Servei habitacions'),
     ('Parking', 'Parking'),
@@ -63,3 +74,24 @@ ROOM_TYPES = [
     ('Suite', 'Suite'),
     ('Deluxe', 'Deluxe')
 ]
+
+ROOM_NUMBER_RANGES = {
+    'Individual': (100, 299),
+    'Double': (300, 499),
+    'Deluxe': (500, 599),
+    'Suite': (600, 699)
+}
+
+ROOM_PRICES_PER_TYPE = {
+    'No seleccionat': 0,
+    'Individual': 50,
+    'Double': 75,
+    'Suite': 100,
+    'Deluxe': 125
+}
+
+PENSION_COST_PER_TYPE = {
+    'Sense pensió': 0,
+    'Esmorzar Buffet': 10,
+    'Completa': 20
+}

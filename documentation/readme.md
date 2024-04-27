@@ -21,4 +21,4 @@ In total this project has 3 sprints:
 
 To model the database it has been done using schemas. The latest schema is the following:
 
-![Database schema](./database_schema/database_schema_v0.png)
+![Database schema](./database_schema/database_schema_v2.png)

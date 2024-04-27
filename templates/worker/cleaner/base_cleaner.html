@@ -1,0 +1,14 @@
+{% extends "worker/base_worker.html" %}
+<!-- This is the base template for the cleaner, every cleaner template must extend this one (except for the cleaner_stock template) -->
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/worker.css' %}">
+{% endblock extra_css %}
+
+{% block title %}Neteja{% endblock %}
+
+{% block menu %}
+    <li><a href="{% url 'cleaner_home' %}"><button {% block id_cleaner_home %}{% endblock %}>Habitacions</button></a></li>
+    <li><a href="{% url 'cleaner_stock' %}"><button {% block id_cleaner_stock %}{% endblock %}>Stock</button></a></li>
+{% endblock menu %}

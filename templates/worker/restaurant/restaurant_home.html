@@ -1,2 +1,29 @@
-{% extends "worker/base_worker.html" %}
-<!-- The restaurant_home template must be the first step of the reservation process -->
+{% extends "worker/restaurant/base_restaurant.html" %}
+<!-- The restaurant_home template must let the worker choose between creating a new reservation and showing the list of reservations -->
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/restaurant/restaurant_home.css' %}">
+{% endblock extra_css %}
+
+<!-- This block must appear in every restaurant template as it is -->
+{% block id_restaurant_home %} id="current-page" {% endblock id_restaurant_home %}
+
+{% block content %}
+    <div class="main">
+        <h1 id="section-title">
+            RESERVES
+        </h1>
+        <p id="process-guidance">
+            Esculli el procediment que desitja realitzar:
+        </p>
+        <div class="buttons">
+            <a href="{% url 'new_restaurant_reservation_1' %}">
+                <button class="access-process-button">Crear nova reserva</button>
+            </a>
+            <a href="{% url 'restaurant_reservations' %}">
+                <button class="access-process-button">Consultar estat reserves</button>
+            </a>
+        </div>
+    </div>
+{% endblock content %}

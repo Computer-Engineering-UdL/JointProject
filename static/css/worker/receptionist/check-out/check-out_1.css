@@ -1,0 +1,62 @@
+h2 {
+
+}
+
+/******** Overwrite ********/
+.procedural-buttons {
+	width: 104px;
+	min-width: 80px;
+	height: 58px;
+}
+
+.procedural-buttons button {
+	width: 100%;
+	height: 100%;
+}
+
+/***** Overwrite *****/
+.icon {
+	margin-left: 3px;
+	width: 100%;
+}
+
+.list-extra {
+	width: 4%;
+}
+
+#reservation-id {
+    width: 8%;
+}
+
+#entry {
+    width: 16%;
+}
+
+#exit {
+    width: 16%;
+}
+
+#name {
+    width: 35%;
+}
+
+#pension {
+    width: 18%;
+}
+
+#num-guests {
+    width: 10%;
+    min-width: max-content;
+}
+
+.list-div li {
+	width: 96%;
+}
+
+.list-index {
+	width: 96%;
+}
+
+#divider {
+    width: calc(96% - 2px);
+}

@@ -3,26 +3,3 @@
 	flex-direction: row;
 	justify-content: space-around;
 }
-
-.reservation-data {
-	display: flex;
-	gap: 100px;
-}
-
-.reservation-data-field {
-	display: flex;
-	justify-content: flex-start;
-	flex-direction: column;
-	width: 250px;
-}
-
-.entry-data {
-	font-weight: bold;
-	align-content: center;
-}
-
-.reservation-data-field div {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-}

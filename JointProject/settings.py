@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Reception.apps.ReceptionConfig',
     'User.apps.UserConfig',
+    "Cleaner.apps.CleanerConfig",
+    "Restaurant.apps.RestaurantConfig"
 ]
 
 MIDDLEWARE = [
@@ -145,3 +147,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "base"
 LOGOUT_REDIRECT_URL = "base"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'

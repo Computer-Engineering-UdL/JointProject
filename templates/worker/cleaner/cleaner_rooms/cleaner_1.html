@@ -1,0 +1,19 @@
+{% extends "worker/cleaner/base_cleaner.html" %}
+<!-- This template shows the detail for every the assigned room to clean for the day -->
+<!-- It shows a form for every assigned room -->
+<!-- When a cleaned room is selected, it should show the information of the form (with the possibility of editing) -->
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/cleaner/cleaner_home.css' %}">
+{% endblock extra_css %}
+
+<!-- This block must appear in every cleaner template as it is -->
+{% block id_cleaner_home %} id="current-page" {% endblock id_cleaner_home %}
+
+{% block content %}
+    <div class="main">
+        <h1 class="section-title">HABITACIONS ASSIGNADES</h1>
+        <!-- Test temporal code in here -->
+    </div>
+{% endblock content %}
