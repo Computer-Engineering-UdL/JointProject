@@ -15,6 +15,7 @@ from Restaurant.models import RestaurantReservation
 from Reception.config import Config as c
 from Restaurant.config import Config as rc
 from Restaurant.models import ExternalRestaurantClient
+from Restaurant.forms import get_available_clients
 from User.gen_dni import gen_dni
 
 fake = Faker('es_ES')
@@ -227,7 +228,11 @@ def populate_restaurant_reservations(n: int) -> None:
         entry_date = timezone.now().date() + timedelta(days=random.randint(1, 30))
 
         if is_internal:
-            client = HotelUser.objects.order_by('?').first()
+            available_clients = get_available_clients()
+            if not available_clients.exists():
+                print("No available internal clients for reservation on", entry_date)
+                continue
+            client = available_clients.order_by('?').first()
             reservation_filter = RestaurantReservation.objects.filter(client=client, day=entry_date)
         else:
             client = ExternalRestaurantClient.objects.order_by('?').first()
@@ -285,7 +290,7 @@ def main() -> None:
     populate(populate_stock, len(MATERIALS_NAMES))
     populate(populate_cleaned_rooms, 10)
     populate(populate_external_clients, 10)
-    populate(populate_restaurant_reservations, 10)
+    populate(populate_restaurant_reservations, 20)
     print("Finished populating the database.")
 
 
