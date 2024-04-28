@@ -239,6 +239,7 @@ def populate_restaurant_reservations(n: int) -> None:
                 external_client=None if is_internal else client,
                 num_guests=num_guests,
                 day=entry_date,
+                service=random.choice(rc.get_restaurant_services())[0],
                 is_active=random.choice([True, False])
             )
             reservation.save()
