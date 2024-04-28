@@ -71,6 +71,7 @@ def new_restaurant_reservation_3(request):
                         reservation.client = form.cleaned_data['client']
                         reservation.day = datetime.strptime(reservation_data['day'], '%Y-%m-%d').date()
                         reservation.num_guests = reservation_data['num_guests']
+                        reservation.service = reservation_data['service']
                         reservation.is_active = True
                     else:
                         external_client = form.save()
@@ -79,6 +80,7 @@ def new_restaurant_reservation_3(request):
                             external_client=external_client,
                             day=datetime.strptime(reservation_data['day'], '%Y-%m-%d').date(),
                             num_guests=reservation_data['num_guests'],
+                            service=reservation_data['service'],
                             is_active=True
                         )
                     reservation.save()
