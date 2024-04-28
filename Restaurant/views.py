@@ -57,39 +57,31 @@ def new_restaurant_reservation_3(request):
 
     if request.method == 'POST':
         form = ClientForm(request.POST)
+
         if form.is_valid():
             if client_type == 'internal':
-                ClientForm = modelform_factory(RestaurantReservation, form=AddInternalClientForm)
+                reservation = form.save(commit=False)
+                reservation.client = form.cleaned_data['client']
+                reservation.day = datetime.strptime(reservation_data['day'], '%Y-%m-%d').date()
+                reservation.num_guests = reservation_data['num_guests']
+                reservation.service = reservation_data['service']
+                reservation.is_active = True
             else:
-                ClientForm = modelform_factory(ExternalRestaurantClient, form=CreateExternalClientForm)
-
-            if request.method == 'POST':
-                form = ClientForm(request.POST)
-                if form.is_valid():
-                    if client_type == 'internal':
-                        reservation = form.save(commit=False)
-                        reservation.client = form.cleaned_data['client']
-                        reservation.day = datetime.strptime(reservation_data['day'], '%Y-%m-%d').date()
-                        reservation.num_guests = reservation_data['num_guests']
-                        reservation.service = reservation_data['service']
-                        reservation.is_active = True
-                    else:
-                        external_client = form.save()
-                        reservation = RestaurantReservation(
-                            client=None,
-                            external_client=external_client,
-                            day=datetime.strptime(reservation_data['day'], '%Y-%m-%d').date(),
-                            num_guests=reservation_data['num_guests'],
-                            service=reservation_data['service'],
-                            is_active=True
-                        )
-                    reservation.save()
-                    del request.session['reservation_data']
-                    messages.success(request, "S'ha creat la reserva de restaurant amb èxit!")
-                    return redirect('restaurant_home')
+                external_client = form.save()
+                reservation = RestaurantReservation(
+                    client=None,
+                    external_client=external_client,
+                    day=datetime.strptime(reservation_data['day'], '%Y-%m-%d').date(),
+                    num_guests=reservation_data['num_guests'],
+                    service=reservation_data['service'],
+                    is_active=True
+                )
+            reservation.save()
+            del request.session['reservation_data']
+            messages.success(request, "S'ha creat la reserva de restaurant amb èxit!")
+            return redirect('restaurant_home')
     else:
         form = ClientForm()
-
     return render(request, c.get_restaurant_new_reservation_path(3), {'form': form})
 
 
