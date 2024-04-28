@@ -36,8 +36,26 @@ class NewRestaurantReservationForm(forms.ModelForm):
         return cleaned_data
 
 
+def get_available_clients():
+    today = date.today()
+
+    active_hosted_clients = Client.objects.filter(is_hosted=True, is_active=True)
+
+    clients_with_today_reservations = RestaurantReservation.objects.filter(
+        day=today,
+        client__isnull=False,
+        is_active=True
+    ).values_list('client', flat=True)
+
+    available_clients = active_hosted_clients.exclude(id__in=clients_with_today_reservations)
+
+    return available_clients
+
+
 class AddInternalClientForm(forms.ModelForm):
-    client = forms.ModelChoiceField(queryset=Client.objects.filter(is_hosted=True), label='Client Intern')
+    client = forms.ModelChoiceField(
+        queryset=get_available_clients(),
+        label='Client Intern')
 
     class Meta:
         model = RestaurantReservation
