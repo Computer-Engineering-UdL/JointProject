@@ -116,6 +116,7 @@ def restaurant_reservations(request):
             'client_last_name': client_last_name,
             'day': reservation.day,
             'num_guests': reservation.num_guests,
+            'service': reservation.service,
             'is_active': reservation.is_active,
             'is_internal': is_internal
         })
