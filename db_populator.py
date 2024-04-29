@@ -279,6 +279,19 @@ def populate(function, entries: int) -> None:
     print_bar()
 
 
+populate_functions = {
+    'users': create_users,
+    'clients': populate_clients,
+    'rooms': populate_rooms,
+    'reservations': populate_reservations,
+    'materials': create_cleaning_materials,
+    'stock': populate_stock,
+    'cleaned_rooms': populate_cleaned_rooms,
+    'external_clients': populate_external_clients,
+    'restaurant_reservations': populate_restaurant_reservations
+}
+
+
 def main() -> None:
     """Populate the database with random data."""
     print("Starting to populate the database...")

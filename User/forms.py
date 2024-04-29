@@ -49,3 +49,20 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = UserModel
         fields = ('username', 'id_number', 'email', 'password1', 'password2',)
+
+
+class PopulateForm(forms.Form):
+    CHOICES = (
+        ('users', 'Create Users'),
+        ('clients', 'Populate Clients'),
+        ('rooms', 'Populate Rooms'),
+        ('reservations', 'Populate Reservations'),
+        ('materials', 'Create Cleaning Materials'),
+        ('stock', 'Populate Stock'),
+        ('cleaned_rooms', 'Populate Cleaned Rooms'),
+        ('external_clients', 'Populate External Clients'),
+        ('restaurant_reservations', 'Populate Restaurant Reservations')
+    )
+
+    data_type = forms.ChoiceField(choices=CHOICES, label="Select data type to populate")
+    entries = forms.IntegerField(min_value=1, max_value=100, initial=10, label="Number of entries")
