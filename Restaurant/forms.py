@@ -8,21 +8,30 @@ from django.core.exceptions import ValidationError
 from django.db.models import Sum
 
 
-def get_available_guests_number():
-    today = date.today()
-    total_guests = RestaurantReservation.objects.filter(day=today).aggregate(Sum('num_guests'))['num_guests__sum'] or 0
-    return rc.MAX_GUESTS_PER_DAY - total_guests
+def get_available_guests_number(day, service):
+    total_guests = RestaurantReservation.objects.filter(
+        day=day,
+        service=service,
+        is_active=True
+    ).aggregate(Sum('num_guests'))['num_guests__sum'] or 0
+    return rc.MAX_GUESTS_PER_SERVICE - total_guests
 
 
 class NewRestaurantReservationForm(forms.ModelForm):
     day = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), initial=date.today, label='Dia')
-    num_guests = forms.ChoiceField(choices=[(i, i) for i in range(1, get_available_guests_number() + 1)],
-                                   label='Nombre de clients')
+    num_guests = forms.ChoiceField(choices=[], label='Nombre de clients')
     service = forms.ChoiceField(choices=rc.get_restaurant_services(), label='Servei')
 
     class Meta:
         model = RestaurantReservation
         fields = ['day', 'num_guests', 'service']
+
+    def __init__(self, *args, **kwargs):
+        super(NewRestaurantReservationForm, self).__init__(*args, **kwargs)
+        day = self.initial.get('day', date.today())
+        service = self.initial.get('service', rc.get_restaurant_services()[0][0])
+        available_guests = get_available_guests_number(day, service)
+        self.fields['num_guests'].choices = [(i, i) for i in range(1, available_guests + 1)]
 
     def clean(self):
         cleaned_data = super().clean()
@@ -35,11 +44,13 @@ class NewRestaurantReservationForm(forms.ModelForm):
         if day.year > date.today().year + 1:
             raise ValidationError("No es poden fer reserves per a més d'un any")
 
-        if int(num_guests) > get_available_guests_number():
-            raise ValidationError("El nombre màxim de convidats per aquest dia ha estat superat")
+        total_guests = RestaurantReservation.objects.filter(
+            day=day, service=service, is_active=True
+        ).aggregate(total=Sum('num_guests'))['total'] or 0
 
-        if RestaurantReservation.objects.filter(day=day, service=service).exists():
-            raise ValidationError("Ja hi ha una reserva per aquest dia i servei")
+        if total_guests + int(num_guests) > rc.MAX_GUESTS_PER_SERVICE:
+            raise ValidationError(f"El nombre màxim de convidats per aquest servei"
+                                  f" i dia ha estat superat ({total_guests}).")
 
         return cleaned_data
 
