@@ -44,6 +44,7 @@ h6 {
 }
 
 .process-guidance {
+    margin-bottom: 15px;
     display: flex;
     justify-content: center;
 }
@@ -56,8 +57,10 @@ header {
     /*background-color: #A39E94;*/
     background-color: rgb(184, 189, 201);
     color: white;
-    height: 8vh;
-    min-height: 60px;
+    height: 70px;
+    min-height: 70px;
+    /*height: 8vh;
+    min-height: 60px;*/
 }
 
 header button{

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from Cleaner.forms import StockForm, CleanedRoomForm
 from Cleaner.models import Stock, CleanedRoom
 from Reception.models import Room
@@ -22,12 +23,17 @@ def cleaner_stock(request):
                 stock = Stock.objects.filter(material__material_name__icontains=material_name, is_active=True)
             else:
                 stock = Stock.objects.filter(is_active=True)
+
             if 'update_stock' in request.POST:
-                stock_ids = request.POST.getlist('stock[]')
-                for stock_id in stock_ids:
+                submitted_stock_ids = set(map(int, request.POST.getlist('stock[]')))
+                all_active_stocks = set(Stock.objects.filter(is_active=True).values_list('id', flat=True))
+
+                for stock_id in all_active_stocks:
                     item = Stock.objects.get(id=stock_id)
-                    item.is_available = not item.is_available
+                    item.is_available = stock_id not in submitted_stock_ids
                     item.save()
+                    messages.success(request, 'Stock actualitzat correctament')
+
                 return redirect('cleaner_stock')
         else:
             stock = Stock.objects.filter(is_active=True)
@@ -69,7 +75,6 @@ def cleaner_cleaned_room_info(request, room_id):
                                                            additional_comments=additional_comments,
                                                            is_cleaned=True)
                 cleaned_room.save()
-        else:
-            print(form.errors)
+            messages.success(request, 'Habitació actualitzada correctament')
         return redirect('cleaner_cleaned_rooms')
     return render(request, c.get_cleaner_rooms_path(2), {'room': room, 'cleaned_room': cleaned_room})

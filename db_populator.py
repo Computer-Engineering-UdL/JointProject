@@ -8,33 +8,46 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "JointProject.settings")
 django.setup()
 
-from Reception.models import HotelUser, Client, Worker, Room, RoomReservation, CheckIn, Despeses, ExtraCosts
-from Cleaner.models import Cleaning_Material, Stock, CleanedRoom
+from Reception.models import HotelUser, Client, Worker, Room, RoomReservation, create_despesa
+from Cleaner.models import CleaningMaterial, Stock, CleanedRoom
+from Cleaner.config import MATERIALS_NAMES
+from Restaurant.models import RestaurantReservation
 from Reception.config import Config as c
+from Restaurant.config import Config as rc
+from Restaurant.models import ExternalRestaurantClient
+from Restaurant.forms import get_available_clients
 from User.gen_dni import gen_dni
 
 fake = Faker('es_ES')
 
-IMAGE_SRC = "https://picsum.photos/800/600"  # Old: fake_image_url(800, 600)
+IMAGE_SRC = "media/cleaning_materials/"
 
 
-def create_users(n) -> None:
+def create_users(n: int) -> None:
     """Populate the User table with n entries."""
     for _ in range(n):
         first_name = fake.first_name()
-        last_name = fake.last_name()
+        last_name = fake.last_name() + random.choice(['', ' ' + fake.last_name()])
         email = fake.email()
         username = f"{first_name.lower()}_{last_name.lower()}"
-        user = HotelUser.objects.create_user(username=username, email=email, password='password')
+        user = HotelUser.objects.create_user(
+            username=username,
+            email=email,
+            password='password',
+            first_name=first_name,
+            last_name=last_name,
+            phone_number=fake.phone_number(),
+            id_number=gen_dni()
+        )
         user.save()
         print(f'Created User: {username}')
 
 
-def populate_clients(n) -> None:
+def populate_clients(n: int) -> None:
     """Populate the Client table with n entries."""
     for _ in range(n):
         first_name = fake.first_name()
-        last_name = fake.last_name()
+        last_name = fake.last_name() + random.choice(['', ' ' + fake.last_name()])
         email = fake.email()
         username = f"{first_name.lower()}_{last_name.lower()}"
         phone_number = fake.phone_number()
@@ -55,37 +68,43 @@ def populate_clients(n) -> None:
         print(f'Created Client: {client.username}')
 
 
-def populate_rooms(n) -> None:
-    """Populate the Room table with n entries, assigning room numbers based on type."""
+def populate_rooms(n: int) -> None:
+    """Populate the Room table with n entries, assigning unique room numbers based on type."""
     room_types = c.get_room_types()[1:]
     room_counts = {room_type[0]: c.get_room_number_range(room_type[0])[0] for room_type in room_types}
+    used_room_numbers = set(Room.objects.values_list('room_num', flat=True))
 
-    for i in range(n):
-        room_type_choice = random.choice(room_types)
-        room_type = room_type_choice[0]
+    for _ in range(n):
+        room_created = False
+        while not room_created:
+            room_type_choice = random.choice(room_types)
+            room_type = room_type_choice[0]
 
-        start, end = c.get_room_number_range(room_type)
-        room_number = room_counts[room_type]
-        room_counts[room_type] += 1
+            start, end = c.get_room_number_range(room_type)
+            room_number = room_counts[room_type]
 
-        if room_number > end:
-            room_number = start
-            room_counts[room_type] = start + 1
+            if start <= room_number <= end and room_number not in used_room_numbers:
+                room_price = c.get_room_prices_per_type(room_type)
+                room = Room(
+                    room_num=room_number,
+                    room_type=room_type,
+                    is_clean=random.choice([True, False]),
+                    is_taken=random.choice([True, False]),
+                    room_price=room_price
+                )
+                room.save()
+                used_room_numbers.add(room_number)
+                room_counts[room_type] += 1
+                room_created = True
+                print(f'Created Room: {room.room_num} - Type: {room_type} - Price: {room_price}')
+            else:
+                room_counts[room_type] += 1
+                if room_counts[room_type] > end:
+                    room_counts[room_type] = start
 
-        room_price = c.get_room_prices_per_type(room_type)
-        room = Room(
-            room_num=room_number,
-            room_type=room_type,
-            is_clean=random.choice([True, False]),
-            is_taken=random.choice([True, False]),
-            room_price=room_price
-        )
-        room.save()
-        print(f'Created Room: {room.room_num} - Type: {room_type} - Price: {room_price}')
 
-
-def populate_reservations(n) -> None:
-    """Populate the RoomReservation table with n entries."""
+def populate_reservations(n: int) -> None:
+    """Populate the RoomReservation table with n entries and associated costs."""
     pension_types = c.get_pension_types()
     for _ in range(n):
         client = Client.objects.order_by('?').first()
@@ -110,33 +129,46 @@ def populate_reservations(n) -> None:
             check_out_active=random.choice([True, False])
         )
         reservation.save()
-        print(
-            f'Created Reservation: Room {reservation.room.room_num} [{room_type}] from {reservation.entry} '
-            f'to {reservation.exit} with pension type {pension_type}')
+        create_despesa(reservation, pension_type, room_type)
+        print(f'Created Reservation: Room {reservation.room.room_num} [{room_type}]'
+              f' from {reservation.entry} to {reservation.exit} with pension type {pension_type}')
 
 
-def create_cleaning_materials(n) -> None:
+def create_cleaning_materials(n: int) -> None:
     """Populate the Cleaning_Material table with n entries."""
-    for _ in range(n):
-        material_name = fake.word()
-        image = IMAGE_SRC
-        cleaning_material = Cleaning_Material.objects.create(
+    for i in range(n):
+        material_name = list(MATERIALS_NAMES)[i]
+        if CleaningMaterial.objects.filter(material_name=material_name).exists():
+            print(f'Cleaning Material already exists: {material_name}')
+            continue
+        image = IMAGE_SRC + MATERIALS_NAMES[material_name]
+        image_cleaned = image.lstrip('media/')
+        cleaning_material = CleaningMaterial(
             material_name=material_name,
-            image=image
+            image=image_cleaned
         )
         cleaning_material.save()
         print(f'Created Cleaning Material: {cleaning_material.material_name}')
 
 
-def populate_stock(n):
+def populate_stock(n: int) -> None:
     """Populate the Stock table with n entries."""
-    cleaning_materials = Cleaning_Material.objects.all()
+    cleaning_materials = CleaningMaterial.objects.all()
     if not cleaning_materials.exists():
         print("No cleaning materials available to create stock.")
         return
 
-    for _ in range(n):
-        material = random.choice(cleaning_materials)
+    for i in range(n):
+        material_name = list(MATERIALS_NAMES)[i]
+        material = cleaning_materials.filter(material_name=material_name).first()
+        if not material:
+            material = CleaningMaterial.objects.create(material_name=material_name)
+            material.save()
+            print(f'Created Cleaning Material: {material.material_name}')
+
+        if Stock.objects.filter(material=material).exists():
+            print(f'Stock already exists for material: {material.material_name}')
+            continue
         price = random.uniform(1.0, 100.0).__round__(2)
         is_available = random.choice([True, False])
         stock = Stock.objects.create(
@@ -150,7 +182,7 @@ def populate_stock(n):
         print(f'Created Stock: {stock.material.material_name} - Price: {stock.price} - {available_msg}')
 
 
-def populate_cleaned_rooms(n):
+def populate_cleaned_rooms(n: int) -> None:
     """Populate the CleanedRoom table with n entries."""
     rooms = Room.objects.all()
     if not rooms.exists():
@@ -175,7 +207,63 @@ def populate_cleaned_rooms(n):
         print(f'Created Cleaned Room: Room {cleaned_room.room.room_num} - {cleaned_msg}')
 
 
-def print_bar(length=75, new_line=True) -> None:
+def populate_external_clients(n: int) -> None:
+    """Populate the ExternalRestaurantClient table with n entries."""
+    for _ in range(n):
+        first_name = fake.first_name()
+        last_name = fake.last_name() + random.choice(['', ' ' + fake.last_name()])
+        email = fake.email()
+        phone_number = fake.phone_number()
+
+        external_client = ExternalRestaurantClient.objects.create(
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            phone_number=phone_number
+        )
+        external_client.save()
+        print(f'Created External Client: {external_client.first_name} {external_client.last_name}'
+              f' - Email: {external_client.email}')
+
+
+def populate_restaurant_reservations(n: int) -> None:
+    """Populate the RestaurantReservation table with n entries, ensuring no duplicates for the same day and client."""
+    for _ in range(n):
+        is_internal = random.choice([True, False])
+        num_guests = random.randint(1, rc.MAX_GUESTS_PER_RESERVATION)
+        entry_date = timezone.now().date() + timedelta(days=random.randint(1, 30))
+
+        if is_internal:
+            available_clients = get_available_clients()
+            if not available_clients.exists():
+                print("No available internal clients for reservation on", entry_date)
+                continue
+            client = available_clients.order_by('?').first()
+            reservation_filter = RestaurantReservation.objects.filter(client=client, day=entry_date)
+        else:
+            client = ExternalRestaurantClient.objects.order_by('?').first()
+            reservation_filter = RestaurantReservation.objects.filter(external_client=client, day=entry_date)
+
+        if not reservation_filter.exists():
+            reservation = RestaurantReservation(
+                client=client if is_internal else None,
+                external_client=None if is_internal else client,
+                num_guests=num_guests,
+                day=entry_date,
+                service=random.choice(rc.get_restaurant_services())[0],
+                is_active=random.choice([True, False])
+            )
+            reservation.save()
+            client_type = "internal" if is_internal else "external"
+            print(f'Created Restaurant Reservation for {client_type}'
+                  f' client: {client.username if is_internal else client.first_name}'
+                  f' - Guests: {reservation.num_guests}')
+        else:
+            client_type = "internal" if is_internal else "external"
+            print(f'Skipping duplicate reservation for {client_type} client on {entry_date}')
+
+
+def print_bar(length: int = 75, new_line: bool = True) -> None:
     """Print a bar of a certain length."""
     if new_line:
         print("─" * length)
@@ -197,6 +285,19 @@ def populate(function, entries: int) -> None:
     print_bar()
 
 
+populate_functions = {
+    'users': create_users,
+    'clients': populate_clients,
+    'rooms': populate_rooms,
+    'reservations': populate_reservations,
+    'materials': create_cleaning_materials,
+    'stock': populate_stock,
+    'cleaned_rooms': populate_cleaned_rooms,
+    'external_clients': populate_external_clients,
+    'restaurant_reservations': populate_restaurant_reservations
+}
+
+
 def main() -> None:
     """Populate the database with random data."""
     print("Starting to populate the database...")
@@ -204,9 +305,11 @@ def main() -> None:
     populate(populate_clients, 10)
     populate(populate_rooms, 10)
     populate(populate_reservations, 10)
-    populate(create_cleaning_materials, 10)
-    populate(populate_stock, 10)
+    populate(create_cleaning_materials, len(MATERIALS_NAMES))
+    populate(populate_stock, len(MATERIALS_NAMES))
     populate(populate_cleaned_rooms, 10)
+    populate(populate_external_clients, 10)
+    populate(populate_restaurant_reservations, 20)
     print("Finished populating the database.")
 
 

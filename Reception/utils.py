@@ -3,6 +3,13 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
+from Reception.models import HotelUser, Client
+
+
+def get_external_clients():
+    active_users = HotelUser.objects.filter(is_active=True)
+    internal_clients_ids = Client.objects.all().values_list('id', flat=True)
+    return active_users.exclude(id__in=internal_clients_ids)
 
 
 def create_receipt_check_in(reservation, client):
