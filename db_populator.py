@@ -69,32 +69,38 @@ def populate_clients(n: int) -> None:
 
 
 def populate_rooms(n: int) -> None:
-    """Populate the Room table with n entries, assigning room numbers based on type."""
+    """Populate the Room table with n entries, assigning unique room numbers based on type."""
     room_types = c.get_room_types()[1:]
     room_counts = {room_type[0]: c.get_room_number_range(room_type[0])[0] for room_type in room_types}
+    used_room_numbers = set(Room.objects.values_list('room_num', flat=True))
 
-    for i in range(n):
-        room_type_choice = random.choice(room_types)
-        room_type = room_type_choice[0]
+    for _ in range(n):
+        room_created = False
+        while not room_created:
+            room_type_choice = random.choice(room_types)
+            room_type = room_type_choice[0]
 
-        start, end = c.get_room_number_range(room_type)
-        room_number = room_counts[room_type]
-        room_counts[room_type] += 1
+            start, end = c.get_room_number_range(room_type)
+            room_number = room_counts[room_type]
 
-        if room_number > end:
-            room_number = start
-            room_counts[room_type] = start + 1
-
-        room_price = c.get_room_prices_per_type(room_type)
-        room = Room(
-            room_num=room_number,
-            room_type=room_type,
-            is_clean=random.choice([True, False]),
-            is_taken=random.choice([True, False]),
-            room_price=room_price
-        )
-        room.save()
-        print(f'Created Room: {room.room_num} - Type: {room_type} - Price: {room_price}')
+            if start <= room_number <= end and room_number not in used_room_numbers:
+                room_price = c.get_room_prices_per_type(room_type)
+                room = Room(
+                    room_num=room_number,
+                    room_type=room_type,
+                    is_clean=random.choice([True, False]),
+                    is_taken=random.choice([True, False]),
+                    room_price=room_price
+                )
+                room.save()
+                used_room_numbers.add(room_number)
+                room_counts[room_type] += 1
+                room_created = True
+                print(f'Created Room: {room.room_num} - Type: {room_type} - Price: {room_price}')
+            else:
+                room_counts[room_type] += 1
+                if room_counts[room_type] > end:
+                    room_counts[room_type] = start
 
 
 def populate_reservations(n: int) -> None:
