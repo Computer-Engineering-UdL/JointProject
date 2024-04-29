@@ -8,13 +8,19 @@ from django.core.exceptions import ValidationError
 from django.db.models import Sum
 
 
-def get_available_guests_number(day, service):
-    total_guests = RestaurantReservation.objects.filter(
-        day=day,
-        service=service,
-        is_active=True
-    ).aggregate(Sum('num_guests'))['num_guests__sum'] or 0
-    return rc.MAX_GUESTS_PER_SERVICE - total_guests
+def get_max_available_guests_number(day):
+    services = rc.get_restaurant_services()
+    max_available = 0
+    for service, _ in services:
+        total_guests = RestaurantReservation.objects.filter(
+            day=day,
+            service=service,
+            is_active=True
+        ).aggregate(Sum('num_guests'))['num_guests__sum'] or 0
+        available_guests = rc.MAX_GUESTS_PER_SERVICE - total_guests
+        if available_guests > max_available:
+            max_available = available_guests
+    return max_available
 
 
 class NewRestaurantReservationForm(forms.ModelForm):
@@ -29,8 +35,7 @@ class NewRestaurantReservationForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(NewRestaurantReservationForm, self).__init__(*args, **kwargs)
         day = self.initial.get('day', date.today())
-        service = self.initial.get('service', rc.get_restaurant_services()[0][0])
-        available_guests = get_available_guests_number(day, service)
+        available_guests = get_max_available_guests_number(day)
         self.fields['num_guests'].choices = [(i, i) for i in range(1, available_guests + 1)]
 
     def clean(self):
@@ -50,7 +55,7 @@ class NewRestaurantReservationForm(forms.ModelForm):
 
         if total_guests + int(num_guests) > rc.MAX_GUESTS_PER_SERVICE:
             raise ValidationError(f"El nombre màxim de convidats per aquest servei"
-                                  f" i dia ha estat superat ({total_guests}).")
+                                  f" i dia ha estat superat ({total_guests})")
 
         return cleaned_data
 
