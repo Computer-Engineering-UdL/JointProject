@@ -9,10 +9,10 @@ from django.db.models import Sum
 
 
 class NewRestaurantReservationForm(forms.ModelForm):
-    day = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), initial=date.today, label='Dia')
+    day = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), initial=date.today, label='Data')
+    service = forms.ChoiceField(choices=rc.get_restaurant_services(), label='Servei')
     num_guests = forms.ChoiceField(choices=[(i, i) for i in range(1, rc.MAX_GUESTS_PER_RESERVATION + 1)],
                                    label='Nombre de clients')
-    service = forms.ChoiceField(choices=rc.get_restaurant_services(), label='Servei')
 
     class Meta:
         model = RestaurantReservation
