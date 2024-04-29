@@ -24,7 +24,7 @@ def get_max_available_guests_number(day):
 
 
 class NewRestaurantReservationForm(forms.ModelForm):
-    day = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), initial=date.today, label='Dia')
+    day = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), initial=date.today, label='Data')
     num_guests = forms.ChoiceField(choices=[], label='Nombre de clients')
     service = forms.ChoiceField(choices=rc.get_restaurant_services(), label='Servei')
 
