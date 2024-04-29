@@ -35,10 +35,8 @@ def new_restaurant_reservation_2(request):
         return redirect('new_restaurant_reservation_1')
 
     if request.method == 'POST':
-        client_type = request.POST.get('client_type')
-        if client_type:
-            request.session['client_type'] = client_type
-            return redirect('new_restaurant_reservation_3')
+        request.session['client_type'] = request.POST.get('client_type')
+        return redirect('new_restaurant_reservation_3')
 
     return render(request, c.get_restaurant_new_reservation_path(2), {})
 
@@ -57,7 +55,6 @@ def new_restaurant_reservation_3(request):
 
     if request.method == 'POST':
         form = ClientForm(request.POST)
-
         if form.is_valid():
             if client_type == 'internal':
                 reservation = form.save(commit=False)
@@ -76,12 +73,26 @@ def new_restaurant_reservation_3(request):
                     service=reservation_data['service'],
                     is_active=True
                 )
+
+            existing_reservation = RestaurantReservation.objects.filter(
+                day=reservation.day,
+                service=reservation.service,
+                client=reservation.client if client_type == 'internal' else None,
+                external_client=reservation.external_client if client_type == 'external' else None,
+                is_active=True
+            ).first()
+
+            if existing_reservation:
+                messages.error(request, "Aquest client ja ha reservat aquest servei per a aquest dia")
+                return redirect('new_restaurant_reservation_3')
+
             reservation.save()
             del request.session['reservation_data']
             messages.success(request, "S'ha creat la reserva de restaurant amb èxit!")
             return redirect('restaurant_home')
     else:
         form = ClientForm()
+
     return render(request, c.get_restaurant_new_reservation_path(3), {'form': form})
 
 

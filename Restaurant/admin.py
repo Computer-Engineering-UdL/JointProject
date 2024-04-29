@@ -1,3 +1,5 @@
 from django.contrib import admin
+from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
 
-# Register your models here.
+admin.site.register(RestaurantReservation)
+admin.site.register(ExternalRestaurantClient)
