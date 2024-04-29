@@ -36,7 +36,10 @@ class NewRestaurantReservationForm(forms.ModelForm):
             raise ValidationError("No es poden fer reserves per a més d'un any")
 
         if int(num_guests) > get_available_guests_number():
-            raise ValidationError(f"El nombre màxim de convidats per aquest dia ha estat superat.")
+            raise ValidationError("El nombre màxim de convidats per aquest dia ha estat superat")
+
+        if RestaurantReservation.objects.filter(day=day, service=service).exists():
+            raise ValidationError("Ja hi ha una reserva per aquest dia i servei")
 
         return cleaned_data
 
