@@ -72,10 +72,24 @@ class TestStatusCode(BaseTest):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-class TestCleanerForms(BaseTest):
+class TestCleanerRedirects(BaseTest):
 
-    def test_cleaner_stock_form(self):
+    def test_cleaner_stock_esponja(self):
         url = reverse('cleaner_stock')
         response = self.client.post(url, {'material_name': self.cleaning_material_esponja.material_name})
         self.assertTemplateUsed(response, c.get_cleaner_stock_path(1))
+
+    def test_cleaner_stock_spray(self):
+        url = reverse('cleaner_stock')
+        response = self.client.post(url, {'material_name': self.cleaning_material_spray.material_name})
+        self.assertTemplateUsed(response, c.get_cleaner_stock_path(1))
+
+    def test_cleaner_stock_all(self):
+        url = reverse('cleaner_stock')
+        response = self.client.post(url, {'material_name': ''})
+        self.assertTemplateUsed(response, c.get_cleaner_stock_path(1))
+
+
+
+
 
