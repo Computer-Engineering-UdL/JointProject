@@ -12,23 +12,20 @@
 
 {% block content %}
     <div class="main">
-        <h1 class="section-title">HABITACIONS ASSIGNADES</h1>
-        <div class="check-out-rooms">
+        <h1 class="section-title">ASSIGNACIONS</h1>
+        <div class="cleaner-room-list">
             <h4>Check-out</h4>
-            <div class="check-out-room-list">
+            <div class="cleaner-rooms">
                 {% for room in check_out_rooms %}
-                    <p>hola</p>
-                    <span>{{ room.room_num }}</span>
+                    <a href="{% url 'cleaner_cleaned_room_info' room_id=room.id %}"><button>{{ room.room_num }}</button></a>
                 {% endfor %}
             </div>
         </div>
-        <div class="occupied-rooms">
+        <div class="cleaner-room-list">
             <h4>En ocupació</h4>
-            <div class="occupied-room-list">
+            <div class="cleaner-rooms">
                 {% for room in occupied_rooms %}
-                    <div class="occupied-hab">
-                        <p>{{ room.room_num }}</p>
-                    </div>
+                    <a href="{% url 'cleaner_cleaned_room_info' room_id=room.id %}"><button>{{ room.room_num }}</button></a>
                 {% endfor %}
             </div>
         </div>

@@ -1,1 +1,27 @@
+.cleaner-room-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
 
+.cleaner-rooms {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.cleaner-rooms button {
+    padding: 20px 25px;
+    border: solid 1px black;
+    border-radius: 4px;
+    background-color: #e3e8ff;
+}
+
+.cleaner-rooms button:hover {
+    cursor: pointer;
+    background-color: #a1b5ff;
+}
