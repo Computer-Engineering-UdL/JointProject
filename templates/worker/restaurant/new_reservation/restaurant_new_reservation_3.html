@@ -11,6 +11,11 @@
 
 {% block content %}
     <div class="main">
-        <!-- Test temporal code in here -->
+        <p class="process-guidance">Assigni un client a la reserva:</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group"><h5>{{ form.client.label }}</h5> {{ form.client }}</div>
+            <button class="confirm-button" type="submit">Crear Reserva</button>
+        </form>
     </div>
 {% endblock content %}
