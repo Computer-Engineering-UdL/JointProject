@@ -11,6 +11,11 @@
 
 {% block content %}
     <div class="main">
-        <!-- Test temporal code in here -->
+        <form method="post">
+            {% csrf_token %}
+            <p class="process-guidance">Seleccioni el tipus de client:</p>
+            <button class="select-button" type="submit" name="client_type" value="internal">Client Intern</button>
+            <button class="select-button" type="submit" name="client_type" value="external">Client Extern</button>
+        </form>
     </div>
 {% endblock content %}
