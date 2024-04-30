@@ -19,6 +19,7 @@ def cleaner_stock(request):
     if request.method == 'POST':
         if form.is_valid():
             material_name = form.cleaned_data.get('material')
+            print("Estoy en la view: ", material_name)
             if material_name:
                 stock = Stock.objects.filter(material__material_name__icontains=material_name, is_active=True)
             else:
