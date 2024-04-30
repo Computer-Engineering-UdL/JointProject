@@ -1,3 +1,4 @@
+import dateutil.utils
 from django import forms
 from User.validators import is_valid_id_number
 from Reception.models import RoomReservation, Client, Room, CheckIn, HotelUser
@@ -26,3 +27,23 @@ def verify_search_reservation_form(num_reservation, id_number, room_num):
 
     if id_number and not HotelUser.objects.filter(id_number=id_number).exists():
         raise forms.ValidationError("No existeix cap client amb aquest número d'identificació")
+
+
+def verify_room_reservation_form(entry_date, exit_date, hosts_num, room_type):
+    if entry_date > exit_date:
+        raise forms.ValidationError("La data d'entrada no pot ser posterior a la data de sortida")
+
+    if hosts_num < 1:
+        raise forms.ValidationError("El nombre d'hostes ha de ser com a mínim 1")
+
+    if hosts_num > 6:
+        raise forms.ValidationError("El nombre d'hostes no pot ser superior a 6")
+
+    if room_type == "Individual" and hosts_num != 1:
+        raise forms.ValidationError("Les habitacions individuals només poden allotjar un hoste")
+
+    if room_type == "Double" and hosts_num != 2:
+        raise forms.ValidationError("Les habitacions dobles només poden allotjar dos hostes")
+
+    if room_type == "No seleccionat":
+        raise forms.ValidationError("Selecciona un tipus d'habitació")
