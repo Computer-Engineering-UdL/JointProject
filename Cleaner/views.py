@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.utils import timezone
 from Cleaner.forms import StockForm, CleanedRoomForm
 from Cleaner.models import Stock, CleanedRoom
 from Reception.models import Room
@@ -45,10 +46,24 @@ def cleaner_stock(request):
 
 @worker_required('cleaner')
 def cleaner_cleaned_rooms(request):
-    occupied_rooms = Room.objects.filter(is_taken=True, roomreservation__check_out_active=False)
-    check_out_rooms = Room.objects.filter(is_taken=True, roomreservation__check_out_active=True)
-    return render(request, c.get_cleaner_rooms_path(1), {'occupied_rooms': occupied_rooms,
-                                                         'check_out_rooms': check_out_rooms})
+    today = timezone.now().date()
+
+    occupied_rooms = Room.objects.filter(
+        is_taken=True,
+        roomreservation__exit__gt=today,
+        roomreservation__check_out_active=False
+    ).distinct()
+
+    check_out_rooms = Room.objects.filter(
+        is_taken=False,
+        roomreservation__exit__gte=today,
+        roomreservation__check_out_active=True
+    ).distinct()
+
+    return render(request, c.get_cleaner_rooms_path(1), {
+        'occupied_rooms': occupied_rooms,
+        'check_out_rooms': check_out_rooms
+    })
 
 
 @worker_required('cleaner')
