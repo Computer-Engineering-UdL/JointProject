@@ -32,15 +32,14 @@ h4 {
 
 .cleaner-rooms button:hover {
     cursor: pointer;
-    background-color: #a1b5ff;
+    opacity: 0.6;
+    outline: solid 1px black;
 }
 
 .not-cleaned-room {
     background-color: #e3e8ff;
-    justify-self: flex-start;
 }
 
 .cleaned-room {
     background-color: #a1b5ff;
-    justify-self: flex-end;
 }
