@@ -17,7 +17,11 @@
             <h4>Check-out</h4>
             <div class="cleaner-rooms">
                 {% for room in check_out_rooms %}
-                    <a href="{% url 'cleaner_cleaned_room_info' room_id=room.id %}"><button>{{ room.room_num }}</button></a>
+                    {% if room.is_clean == False %}
+                        <a href="{% url 'cleaner_cleaned_room_info' room_id=room.id %}"><button class="not-cleaned-room">{{ room.room_num }}</button></a>
+                    {% else %}
+                    	<a href="{% url 'cleaner_cleaned_room_info' room_id=room.id %}"><button class="cleaned-room">{{ room.room_num }}</button></a>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
@@ -25,7 +29,11 @@
             <h4>En ocupació</h4>
             <div class="cleaner-rooms">
                 {% for room in occupied_rooms %}
-                    <a href="{% url 'cleaner_cleaned_room_info' room_id=room.id %}"><button>{{ room.room_num }}</button></a>
+                    {% if room.is_clean == False %}
+                        <a href="{% url 'cleaner_cleaned_room_info' room_id=room.id %}"><button class="not-cleaned-room">{{ room.room_num }}</button></a>
+                    {% else %}
+                        <a href="{% url 'cleaner_cleaned_room_info' room_id=room.id %}"><button class="cleaned-room">{{ room.room_num }}</button></a>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>

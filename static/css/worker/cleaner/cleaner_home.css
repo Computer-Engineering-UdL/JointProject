@@ -1,4 +1,6 @@
 h4 {
+    font-size: large;
+    margin-top: 0;
     margin-left: 5px;
     margin-bottom: 10px;
 }
@@ -9,6 +11,7 @@ h4 {
     flex-direction: column;
     flex-wrap: wrap;
     align-content: flex-start;
+    margin-bottom: 10px;
 }
 
 .cleaner-rooms {
@@ -25,10 +28,19 @@ h4 {
     padding: 25px 40px;
     border: solid 3px black;
     border-radius: 14px;
-    background-color: #e3e8ff;
 }
 
 .cleaner-rooms button:hover {
     cursor: pointer;
     background-color: #a1b5ff;
+}
+
+.not-cleaned-room {
+    background-color: #e3e8ff;
+    justify-self: flex-start;
+}
+
+.cleaned-room {
+    background-color: #a1b5ff;
+    justify-self: flex-end;
 }
