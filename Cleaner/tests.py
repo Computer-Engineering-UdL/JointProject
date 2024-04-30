@@ -153,6 +153,7 @@ class TestCleanerRedirects(BaseTest):
         url = reverse('cleaner_stock')
         response = self.client.post(url, {'update_stock': 'update_stock'})
         self.assertRedirects(response, reverse('cleaner_stock'))
+
     def test_cleaned_room_info(self):
         url = reverse('cleaner_cleaned_room_info', args=[self.room.id])
         response = self.client.post(url, {'missing_objects': 'missing_objects',
@@ -240,7 +241,6 @@ class TestCleanerViews(BaseTest):
         stock = list(stock)
         self.assertListEqual(stock, [self.stock_esponja, self.stock_spray])
 
-
     def test_cleaned_room(self):
         url = reverse('cleaner_cleaned_rooms')
         self.reservation.check_in_active = False
@@ -255,6 +255,3 @@ class TestCleanerViews(BaseTest):
         print(check_out_rooms)
         """self.assertListEqual(list(occupied_rooms), [self.room])
         self.assertListEqual(list(check_out_rooms), [])"""
-
-
-
