@@ -1,0 +1,19 @@
+.main {
+    justify-content: center;
+}
+
+.select-button {
+    padding: 20px 30px;
+    border-radius: 5px;
+    margin: 20px;
+    font-size: 17px;
+    font-family: "Gill Sans MT", Arial, sans-serif;
+}
+.select-button:hover {
+    cursor: pointer;
+    background-color: #b9c6f6;
+}
+.select-button:active {
+    border: solid 2px black;
+    opacity: 0.7;
+}

@@ -3,6 +3,7 @@ from django import forms
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from Reception.models import HotelUser
+from Restaurant.config import Config as rc
 
 
 class RestaurantReservation(models.Model):
@@ -26,6 +27,8 @@ class RestaurantReservation(models.Model):
         blank=True,
         related_name='reservations'
     )
+
+    service = models.CharField(max_length=15, choices=rc.get_restaurant_services(), default='None')
 
     def __str__(self):
         if self.client:

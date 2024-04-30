@@ -30,6 +30,7 @@ urlpatterns = [
     path('receptionist/', include('Reception.urls')),
     path('cleaner/', include('Cleaner.urls')),
     path('restaurant/', include('Restaurant.urls')),
+    path('populate/', v.populate, name='populate'),
     path("", v.home, name="base"),
 ]
 
