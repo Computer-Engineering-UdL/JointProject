@@ -121,11 +121,6 @@ class TestStatusCode(BaseTest):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-    def test_cleaner_cleaner_cleaned_rooms_status_code(self):
-        url = reverse('cleaner_cleaned_rooms')
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
     def test_cleaner_cleaner_cleaned_room_info_status_code(self):
         url = reverse('cleaner_cleaned_room_info', args=[self.room.id])
         response = self.client.get(url)
@@ -159,7 +154,7 @@ class TestCleanerRedirects(BaseTest):
         response = self.client.post(url, {'missing_objects': 'missing_objects',
                                           'need_towels': 2,
                                           'additional_comments': 'additional_comments'})
-        self.assertRedirects(response, reverse('cleaner_cleaned_rooms'))
+        self.assertRedirects(response, reverse('cleaner_home'))
 
 
 class TestCleanerForms(BaseTest):
@@ -242,7 +237,7 @@ class TestCleanerViews(BaseTest):
         self.assertListEqual(stock, [self.stock_esponja, self.stock_spray])
 
     def test_cleaned_room(self):
-        url = reverse('cleaner_cleaned_rooms')
+        url = reverse('cleaner_home')
         self.reservation.check_in_active = False
         self.reservation.check_out_active = False
         self.reservation.save()
