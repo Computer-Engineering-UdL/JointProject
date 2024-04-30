@@ -12,7 +12,36 @@
 
 {% block content %}
     <div class="main">
-        <h1 class="section-title">HABITACIONS ASSIGNADES</h1>
-        <!-- Test temporal code in here -->
+        <h1 class="section-title">ASSIGNACIONS</h1>
+        <div class="cleaner-room-list">
+            <h4>Check-out</h4>
+            <div class="cleaner-rooms">
+                {% for room in check_out_rooms %}
+                    {% if room.is_clean == False %}
+                        <a href="{% url 'cleaner_cleaned_room_info' room_id=room.id %}"><button class="not-cleaned-room">{{ room.room_num }}</button></a>
+                    {% endif %}
+                {% endfor %}
+                {% for room in check_out_rooms %}
+                    {% if room.is_clean == True %}
+                        <a href="{% url 'cleaner_cleaned_room_info' room_id=room.id %}"><button class="cleaned-room">{{ room.room_num }}</button></a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="cleaner-room-list">
+            <h4>En ocupació</h4>
+            <div class="cleaner-rooms">
+                {% for room in occupied_rooms %}
+                    {% if room.is_clean == False %}
+                        <a href="{% url 'cleaner_cleaned_room_info' room_id=room.id %}"><button class="not-cleaned-room">{{ room.room_num }}</button></a>
+                    {% endif %}
+                {% endfor %}
+                {% for room in occupied_rooms %}
+                    {% if room.is_clean == True %}
+                        <a href="{% url 'cleaner_cleaned_room_info' room_id=room.id %}"><button class="cleaned-room">{{ room.room_num }}</button></a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
     </div>
 {% endblock content %}
