@@ -47,18 +47,10 @@ class RoomReservationForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        room = cleaned_data.get('room')
         entry = cleaned_data.get('entry')
         exit = cleaned_data.get('exit')
 
         fv.verify_room_reservation_form(entry, exit, cleaned_data.get('num_guests'), cleaned_data.get('room_type'))
-
-        if room and entry and exit:
-            overlapping_reservations = RoomReservation.objects.filter(
-                room=room,
-                entry__lt=exit,
-                exit__gt=entry
-            )
 
         return cleaned_data
 
