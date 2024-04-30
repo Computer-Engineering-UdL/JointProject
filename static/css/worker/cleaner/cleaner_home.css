@@ -1,3 +1,8 @@
+h4 {
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+
 .cleaner-room-list {
     width: 100%;
     display: flex;
@@ -11,13 +16,15 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 }
 
 .cleaner-rooms button {
-    padding: 20px 25px;
-    border: solid 1px black;
-    border-radius: 4px;
+    font-size: 2em;
+    font-weight: bold;
+    padding: 25px 40px;
+    border: solid 3px black;
+    border-radius: 14px;
     background-color: #e3e8ff;
 }
 
