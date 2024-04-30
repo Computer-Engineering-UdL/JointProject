@@ -30,7 +30,6 @@ def verify_search_reservation_form(num_reservation, id_number, room_num):
 
 
 def verify_room_reservation_form(entry_date, exit_date, hosts_num, room_type):
-    print(room_type)
     if entry_date > exit_date:
         raise forms.ValidationError("La data d'entrada no pot ser posterior a la data de sortida")
 
