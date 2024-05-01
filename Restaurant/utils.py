@@ -22,4 +22,3 @@ def get_ordered_reservations():
     )
 
     return annotated_reservations.order_by('day', 'service_order')
-
