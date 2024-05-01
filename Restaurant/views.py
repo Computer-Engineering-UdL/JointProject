@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.forms import modelform_factory
 from User.decorators import worker_required
 from Restaurant.config import Config as c
+from Restaurant.utils import get_ordered_reservations
 from Restaurant.forms import NewRestaurantReservationForm, AddInternalClientForm, CreateExternalClientForm
 from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
 from datetime import datetime
@@ -87,7 +88,7 @@ def new_restaurant_reservation_3(request):
 
 @worker_required('restaurant')
 def restaurant_reservations(request):
-    reservations = RestaurantReservation.objects.filter(is_active=True).order_by('day', 'service')
+    reservations = get_ordered_reservations()
     reservation_details = []
 
     for reservation in reservations:
