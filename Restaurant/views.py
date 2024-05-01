@@ -87,7 +87,7 @@ def new_restaurant_reservation_3(request):
 
 @worker_required('restaurant')
 def restaurant_reservations(request):
-    reservations = RestaurantReservation.objects.filter(is_active=True)
+    reservations = RestaurantReservation.objects.filter(is_active=True).order_by('day', 'service')
     reservation_details = []
 
     for reservation in reservations:
