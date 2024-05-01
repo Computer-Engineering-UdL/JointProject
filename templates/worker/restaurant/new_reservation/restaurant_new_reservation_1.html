@@ -23,4 +23,12 @@
             </div>
         </form>
     </div>
+    {% csrf_token %}
+    <div id="notifications">
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <p class="notification-err">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
 {% endblock content %}
