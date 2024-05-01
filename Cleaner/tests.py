@@ -90,7 +90,7 @@ class BaseTest(TestCase):
         )
         self.cleaning_material_spray = CleaningMaterial.objects.create(
             material_name='Spray',
-            image='spray.png'
+            image='spray.avif'
         )
 
         self.stock_esponja = Stock.objects.create(
