@@ -1,0 +1,33 @@
+/************** Overwrite **************/
+.general-form {
+    gap: 10px;
+}
+
+.form-field-cleaner {
+    display: flex;
+    flex-direction: column;
+    border: solid 2px black;
+    border-radius: 10px;
+}
+
+.form-field-cleaner label {
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    background-color: #e3e8ff;
+}
+
+.form-field-cleaner input {
+    padding: 10px;
+    border: none;
+    box-shadow: 0 -2px 0 #000;
+    border-radius: 0 0 10px 10px;
+    text-align: center;
+}
+
+.form-field-cleaner input:focus {
+    border: none;
+    outline: solid 2px #a1b5ff;
+    border-radius: 0 0 10px 10px;
+}
