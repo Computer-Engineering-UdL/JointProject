@@ -82,7 +82,7 @@
                 {% if messages %}
                     {% for message in messages %}
                         {% if message.tags == 'error' %}
-                            <p class="notification-error">{{ message }}</p>
+                            <p class="notification-err">{{ message }}</p>
                         {% elif message.tags == 'success' %}
                             <p class="notification-success">{{ message }}</p>
                         {% else %}
