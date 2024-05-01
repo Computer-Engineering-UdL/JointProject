@@ -74,9 +74,11 @@ class CreateExternalClientForm(forms.ModelForm):
         cleaned_data = super().clean()
         email = cleaned_data.get('email')
         phone_number = cleaned_data.get('phone_number')
+        first_name = cleaned_data.get('first_name')
+        last_name = cleaned_data.get('last_name')
 
         try:
-            fv.verify_external_client_form(email, phone_number)
+            fv.verify_external_client_form(email, phone_number, first_name, last_name)
         except ValidationError as e:
             self.add_error(None, e)
 
