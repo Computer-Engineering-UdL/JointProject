@@ -335,7 +335,7 @@ input {
 	margin-left: 5px;
 }
 
-.filter-field input[type="text"], input[type="number"] {
+.filter-field input[type="text"], .filter-field input[type="number"] {
 	height: 34px;
 	border-radius: 5px;
 	text-align: center;
@@ -343,7 +343,7 @@ input {
 	padding: 10px;
 }
 
-.filter-field input[type="text"]:focus, input[type="number"]:focus {
+.filter-field input[type="text"]:focus, .filter-field input[type="number"]:focus {
     outline: solid 2px #a1b5ff;
 }
 

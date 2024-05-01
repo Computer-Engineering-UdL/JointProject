@@ -92,4 +92,4 @@ def cleaner_cleaned_room_info(request, room_id):
                 cleaned_room.save()
             messages.success(request, 'Habitació actualitzada correctament')
         return redirect('cleaner_home')
-    return render(request, c.get_cleaner_rooms_path(2), {'room': room, 'cleaned_room': cleaned_room})
+    return render(request, c.get_cleaner_rooms_path(2), {'form': form, 'room': room, 'cleaned_room': cleaned_room})
