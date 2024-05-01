@@ -6,6 +6,7 @@ from Reception import utils as u
 from datetime import date
 from django.core.exceptions import ValidationError
 from django.db.models import Sum
+from Restaurant import forms_verify as fv
 
 
 class NewRestaurantReservationForm(forms.ModelForm):
@@ -23,16 +24,10 @@ class NewRestaurantReservationForm(forms.ModelForm):
         day = cleaned_data.get('day')
         num_guests = cleaned_data.get('num_guests')
 
-        if day < date.today():
-            raise ValidationError("No es pot reservar per a un dia passat")
-        if day.year > date.today().year + 1:
-            raise ValidationError("No es poden fer reserves per a més d'un any")
-
-        total_guests = (RestaurantReservation.objects.filter(day=day)
-                        .aggregate(Sum('num_guests'))['num_guests__sum'] or 0)
-        if total_guests + int(num_guests) > rc.MAX_GUESTS_PER_DAY:
-            raise ValidationError(
-                f"El nombre màxim de convidats per aquest dia ha estat superat ({total_guests})")
+        try:
+            fv.verify_restaurant_reservation(day, num_guests)
+        except forms.ValidationError as e:
+            self.add_error(None, e)
 
         return cleaned_data
 
@@ -75,17 +70,19 @@ class CreateExternalClientForm(forms.ModelForm):
     email = forms.EmailField(label='Correu electrònic')
     phone_number = forms.CharField(label='Telèfon')
 
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        if HotelUser.objects.filter(email=email).exists():
-            raise forms.ValidationError("Aquest correu electrònic ja està registrat")
-        return email
+    def clean(self):
+        cleaned_data = super().clean()
+        email = cleaned_data.get('email')
+        phone_number = cleaned_data.get('phone_number')
+        first_name = cleaned_data.get('first_name')
+        last_name = cleaned_data.get('last_name')
 
-    def clean_phone(self):
-        phone = self.cleaned_data.get('phone')
-        if HotelUser.objects.filter(phone=phone).exists():
-            raise forms.ValidationError("Aquest telèfon ja està registrat")
-        return phone
+        try:
+            fv.verify_external_client_form(email, phone_number, first_name, last_name)
+        except ValidationError as e:
+            self.add_error(None, e)
+
+        return cleaned_data
 
     class Meta:
         model = HotelUser

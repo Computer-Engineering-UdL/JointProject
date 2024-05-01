@@ -1,6 +1,6 @@
 import dateutil.utils
 from django import forms
-from User.validators import is_valid_id_number
+from User import validators as uv
 from Reception.models import RoomReservation, Client, Room, CheckIn, HotelUser
 
 
@@ -11,7 +11,7 @@ def verify_search_reservation_form(num_reservation, id_number, room_num):
     if num_reservation and not num_reservation.isdigit():
         raise forms.ValidationError("Introdueix un número de reserva vàlid")
 
-    if id_number and not is_valid_id_number(id_number):
+    if id_number and not uv.is_valid_id_number(id_number):
         raise forms.ValidationError("Introdueix un número d'identificació vàlid")
 
     # Room num is not required to be validated since it is an integer field
@@ -47,3 +47,29 @@ def verify_room_reservation_form(entry_date, exit_date, hosts_num, room_type):
 
     if room_type == "No seleccionat":
         raise forms.ValidationError("Selecciona un tipus d'habitació")
+
+
+def verify_client_form(first_name, last_name, id_number, email, phone_number):
+    if not uv.is_valid_name(first_name):
+        raise forms.ValidationError("El nom no és vàlid")
+
+    if not uv.is_valid_name(last_name):
+        raise forms.ValidationError("El cognom no és vàlid")
+
+    if not uv.is_valid_id_number(id_number):
+        raise forms.ValidationError("El número d'identificació no és vàlid")
+
+    if not uv.is_valid_phone(phone_number):
+        raise forms.ValidationError("El número de telèfon no és vàlid")
+
+    if Client.objects.filter(id_number=id_number).exists():
+        raise forms.ValidationError("Aquest número d'identificació ja està registrat")
+
+    if Client.objects.filter(email=email).exists():
+        raise forms.ValidationError("Aquest correu electrònic ja està registrat")
+
+    if Client.objects.filter(phone_number=phone_number).exists():
+        raise forms.ValidationError("Aquest número de telèfon ja està registrat")
+
+    if not uv.is_valid_email(email):
+        raise forms.ValidationError("El correu electrònic no és vàlid")

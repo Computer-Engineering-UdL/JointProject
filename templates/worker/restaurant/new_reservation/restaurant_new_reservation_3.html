@@ -24,5 +24,13 @@
             {% endif %}
             <button class="confirm-button" type="submit">Crear Reserva</button>
         </form>
+        {% csrf_token %}
+        <div id="notifications">
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <p class="notification-err">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
     </div>
 {% endblock content %}

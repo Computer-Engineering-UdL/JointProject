@@ -71,6 +71,19 @@ class AddClientForm(forms.ModelForm):
         model = Client
         fields = ['first_name', 'last_name', 'id_number', 'email', 'phone_number', 'is_hosted']
 
+    def clean(self):
+        cleaned_data = super().clean()
+        first_name = cleaned_data.get('first_name')
+        last_name = cleaned_data.get('last_name')
+        id_number = cleaned_data.get('id_number')
+        email = cleaned_data.get('email')
+        phone_number = cleaned_data.get('phone_number')
+
+        try:
+            fv.verify_client_form(first_name, last_name, id_number, email, phone_number)
+        except ValidationError as e:
+            self.add_error(None, e)
+
 
 # Check-in forms
 class InfoClientForm(forms.ModelForm):
