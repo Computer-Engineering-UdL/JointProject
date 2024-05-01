@@ -8,4 +8,5 @@ urlpatterns = [
     path("new-reservation-2/", v.new_restaurant_reservation_2, name="new_restaurant_reservation_2"),
     path("new-reservation-3/", v.new_restaurant_reservation_3, name="new_restaurant_reservation_3"),
     path("reservations/", v.restaurant_reservations, name="restaurant_reservations"),
+    path("reservations/delete/<int:pk>/", v.delete_restaurant_reservation, name="delete_restaurant_reservation"),
 ]
