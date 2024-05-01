@@ -3,13 +3,42 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet
-from Reception.models import HotelUser, Client
+from Reception.models import HotelUser, Client, RoomReservation
+from django.contrib import messages
 
 
 def get_external_clients():
     active_users = HotelUser.objects.filter(is_active=True)
     internal_clients_ids = Client.objects.all().values_list('id', flat=True)
     return active_users.exclude(id__in=internal_clients_ids)
+
+
+def get_filtered_reservations(form, is_active=True, check_in_active=None, check_out_active=None) -> tuple:
+    if check_in_active is None and check_out_active is None:
+        reservations = RoomReservation.objects.filter(is_active=is_active)
+    else:
+        reservations = RoomReservation.objects.filter(is_active=is_active,
+                                                      check_in_active=check_in_active,
+                                                      check_out_active=check_out_active
+                                                      )
+    filtered_reservations = reservations
+
+    if form.is_valid():
+        num_reservation = form.cleaned_data.get('num_reservation')
+        id_number = form.cleaned_data.get('id_number')
+        room_num = form.cleaned_data.get('room_num')
+
+        if num_reservation:
+            filtered_reservations = filtered_reservations.filter(id=num_reservation)
+        if id_number:
+            filtered_reservations = filtered_reservations.filter(client__id_number=id_number)
+        if room_num:
+            filtered_reservations = filtered_reservations.filter(room__room_num=room_num)
+
+        if not filtered_reservations.exists():
+            return reservations, False
+
+    return filtered_reservations, True
 
 
 def create_receipt_check_in(reservation, client):
