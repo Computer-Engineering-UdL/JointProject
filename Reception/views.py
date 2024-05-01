@@ -102,6 +102,7 @@ def submit_reservation(request):
 def check_in_1(request):
     form = InfoClientForm(request.GET or None)
     reservations = RoomReservation.objects.filter(is_active=True, check_in_active=False, check_out_active=False)
+    filtered_reservations = reservations
 
     if form.is_valid():
         num_reservation = form.cleaned_data.get('num_reservation')
@@ -109,15 +110,18 @@ def check_in_1(request):
         room_num = form.cleaned_data.get('room_num')
 
         if num_reservation:
-            reservations = reservations.filter(id=num_reservation)
+            filtered_reservations = filtered_reservations.filter(id=num_reservation)
         if id_number:
-            reservations = reservations.filter(client__id_number=id_number)
+            filtered_reservations = filtered_reservations.filter(client__id_number=id_number)
         if room_num:
-            reservations = reservations.filter(room__room_num=room_num)
+            filtered_reservations = filtered_reservations.filter(room__room_num=room_num)
+
+        if not filtered_reservations.exists():
+            filtered_reservations = reservations
 
     return render(request, c.get_check_in_path(1), {
         'form': form,
-        'reservations': reservations
+        'reservations': filtered_reservations
     })
 
 
@@ -262,22 +266,25 @@ def delete_reservation(request, pk):
 def check_out_1(request):
     form = SearchReservationForm(request.GET or None)
     reservations = RoomReservation.objects.filter(is_active=True, check_in_active=True, check_out_active=False)
+    filtered_reservations = reservations
 
     if form.is_valid():
         num_reservation = form.cleaned_data.get('num_reservation')
         id_number = form.cleaned_data.get('id_number')
         room_num = form.cleaned_data.get('room_num')
 
-        filtered_reservations = reservations.filter(is_active=True, check_in_active=True, check_out_active=False)
-
         if num_reservation:
-            reservations = filtered_reservations.filter(id=num_reservation)
+            filtered_reservations = filtered_reservations.filter(id=num_reservation)
         if id_number:
-            reservations = filtered_reservations.filter(client__id_number=id_number)
+            filtered_reservations = filtered_reservations.filter(client__id_number=id_number)
         if room_num:
-            reservations = filtered_reservations.filter(room__room_num=room_num)
+            filtered_reservations = filtered_reservations.filter(room__room_num=room_num)
 
-    return render(request, c.get_check_out_path(1), {'form': form, 'reservations': reservations})
+        if not filtered_reservations.exists():
+            filtered_reservations = reservations
+            messages.error(request, "No s'ha trobat cap reserva")
+
+    return render(request, c.get_check_out_path(1), {'form': form, 'reservations': filtered_reservations})
 
 
 @worker_required('receptionist')
