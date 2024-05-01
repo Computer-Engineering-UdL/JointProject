@@ -19,6 +19,13 @@
             <div class="form-field-cleaner"><label>Els clients s'han deixat alguna cosa?</label> {{ form.missing_objects }}</div>
             <div class="form-field-cleaner"><label>Falten tovalloles?</label> {{ form.need_towels }}</div>
             <div class="form-field-cleaner"><label>Comentaris addicionals:</label> {{ form.additional_comments }}</div>
+            <div class="procedural-buttons">
+                {% if not cleaned_room %}
+                    <button type="submit" class="filter-button">Habitació netejada</button>
+                {% else %}
+                    <button type="submit" class="filter-button" id="checked-button">Habitació no netejada</button>
+                {% endif %}
+            </div>
         </form>
     </div>
 {% endblock content %}
