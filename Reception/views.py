@@ -1,8 +1,7 @@
 from django.http import JsonResponse, FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, SearchReservationForm, \
-    AddExtraCostsForm
+from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, SearchReservationForm, AddExtraCostsForm
 from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn, Despeses, ExtraCosts, create_despesa
 from User.decorators import worker_required, admin_required
 from Reception.config import Config as c
@@ -100,7 +99,7 @@ def submit_reservation(request):
 
 @worker_required('receptionist')
 def check_in_1(request):
-    form = InfoClientForm(request.GET or None)
+    form = SearchReservationForm(request.GET or None)
     reservations = RoomReservation.objects.filter(is_active=True, check_in_active=False, check_out_active=False)
     filtered_reservations = reservations
 
@@ -118,6 +117,7 @@ def check_in_1(request):
 
         if not filtered_reservations.exists():
             filtered_reservations = reservations
+            messages.error(request, "No s'ha trobat cap reserva")
 
     return render(request, c.get_check_in_path(1), {
         'form': form,

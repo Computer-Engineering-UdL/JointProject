@@ -17,7 +17,7 @@
             Per iniciar el procés de "Check-In" introdueixi una de les següents dades sol·licitades:
         </p> -->
 
-        <form method="post" class="filter-field">
+        <form method="get" class="filter-field">
             {% csrf_token %}
             <div class="form-group">
                 <h5>{{ form.num_reservation.label }}</h5>

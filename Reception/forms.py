@@ -85,30 +85,6 @@ class AddClientForm(forms.ModelForm):
             self.add_error(None, e)
 
 
-# Check-in forms
-class InfoClientForm(forms.ModelForm):
-    num_reservation = forms.CharField(label="Número de reserva", required=False)
-    id_number = forms.CharField(max_length=20, label="Document identificatiu", required=False)
-    room_num = forms.IntegerField(label="Número d'habitació", required=False,
-                                  validators=[MinValueValidator(1)])
-
-    def clean(self):
-        cleaned_data = super().clean()
-        num_reservation = cleaned_data.get("num_reservation")
-        id_number = cleaned_data.get("id_number")
-        room_num = cleaned_data.get("room_num")
-
-        fv.verify_search_reservation_form(num_reservation, id_number, room_num)
-
-        return cleaned_data
-
-    class Meta:
-        model = CheckIn
-        fields = ['num_reservation', 'id_number']
-
-
-# Cancel reservation form
-
 class SearchReservationForm(forms.ModelForm):
     num_reservation = forms.CharField(label="Número de reserva", required=False)
     id_number = forms.CharField(label="Document identificatiu", required=False)
@@ -127,7 +103,7 @@ class SearchReservationForm(forms.ModelForm):
 
     class Meta:
         model = RoomReservation
-        fields = []
+        fields = ['num_reservation', 'id_number', 'room_num']
 
 
 class AddExtraCostsForm(forms.ModelForm):
