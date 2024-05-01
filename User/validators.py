@@ -50,4 +50,4 @@ def is_valid_name(name):
 
 def is_valid_email(email):
     """Check if the email is valid."""
-    return re.match(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", email)
+    return re.match(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", str(email))
