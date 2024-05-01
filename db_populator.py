@@ -104,34 +104,59 @@ def populate_rooms(n: int) -> None:
 
 
 def populate_reservations(n: int) -> None:
-    """Populate the RoomReservation table with n entries and associated costs."""
+    """Populate the RoomReservation table with n entries, ensuring no conflicts with existing reservations."""
     pension_types = c.get_pension_types()
+    all_rooms = list(Room.objects.all())
+    max_attempts = 5
+
     for _ in range(n):
-        client = Client.objects.order_by('?').first()
-        room = Room.objects.order_by('?').first()
-        days_away = random.randint(1, 30)
-        duration = random.randint(1, 15)
-        entry_date = timezone.now().date() + timedelta(days=days_away)
-        exit_date = entry_date + timedelta(days=duration)
-        pension_choice = random.choice(pension_types)
-        pension_type = pension_choice[0]
-        num_guests = random.randint(1, 4)
-        room_type = room.room_type
-        reservation = RoomReservation(
-            client=client,
-            room=room,
-            entry=entry_date,
-            exit=exit_date,
-            num_guests=num_guests,
-            pension_type=pension_type,
-            is_active=True,
-            check_in_active=random.choice([True, False]),
-            check_out_active=random.choice([True, False])
-        )
-        reservation.save()
-        create_despesa(reservation, pension_type, room_type)
-        print(f'Created Reservation: Room {reservation.room.room_num} [{room_type}]'
-              f' from {reservation.entry} to {reservation.exit} with pension type {pension_type}')
+        random.shuffle(all_rooms)
+        reservation_created = False
+        attempt = 0
+
+        while not reservation_created and attempt < max_attempts:
+            room = random.choice(all_rooms)
+            if RoomReservation.objects.filter(room=room, is_active=True).exclude(
+                    exit__lte=timezone.now().date()).exists():
+                attempt += 1
+                continue
+
+            client = Client.objects.order_by('?').first()
+            days_away = random.randint(1, 30)
+            duration = random.randint(1, 15)
+            entry_date = timezone.now().date() + timedelta(days=days_away)
+            exit_date = entry_date + timedelta(days=duration)
+
+            if not RoomReservation.objects.filter(room=room, exit__gte=entry_date, entry__lte=exit_date).exists():
+                is_active = random.choice([True, False])
+                check_in_active = random.choice([True, False])
+                check_out_active = random.choice([True, False]) if check_in_active else False
+
+                pension_choice = random.choice(pension_types)
+                pension_type = pension_choice[0]
+                num_guests = random.randint(1, 4)
+                room_type = room.room_type
+
+                reservation = RoomReservation(
+                    client=client,
+                    room=room,
+                    entry=entry_date,
+                    exit=exit_date,
+                    num_guests=num_guests,
+                    pension_type=pension_type,
+                    is_active=is_active,
+                    check_in_active=check_in_active,
+                    check_out_active=check_out_active
+                )
+                reservation.save()
+                create_despesa(reservation, pension_type, room_type)
+                print(f'Created Reservation: Room {reservation.room.room_num} [{room_type}]'
+                      f' from {reservation.entry} to {reservation.exit} with pension type {pension_type}'
+                      f', is active: {is_active}, check-in: {check_in_active}, check-out: {check_out_active}')
+                reservation_created = True
+
+        if not reservation_created:
+            print("No s'ha pogut crear una reserva per falta d'habitacions disponibles sense conflictes.")
 
 
 def create_cleaning_materials(n: int) -> None:
