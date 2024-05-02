@@ -3,7 +3,8 @@
 
 {% load static %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/worker/restaurant/restaurant_check_reservations/restaurant_check_reservations.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'css/worker/restaurant/restaurant_check_reservations/restaurant_check_reservations.css' %}">
 {% endblock extra_css %}
 
 <!-- This block must appear in every restaurant template as it is -->
@@ -72,7 +73,14 @@
                             <button><img src="{% static 'img/icons/not-checked.png' %}" alt="Editar reserva"></button>
                         </div>
                         <div class="icon">
-                            <button><img src="{% static 'img/icons/delete-icon.png' %}" alt="Eliminar reserva"></button>
+                            <form action="{% url 'delete_restaurant_reservation' reservations.reservation_id %}"
+                                  method="post">
+                                {% csrf_token %}
+                                <button type="submit"
+                                        onclick="return confirm('Estàs segur que vols eliminar aquesta reserva?');">
+                                    <img src="{% static 'img/icons/delete-icon.png' %}" alt="Eliminar reserva">
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
