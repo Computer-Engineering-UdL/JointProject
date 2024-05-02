@@ -14,7 +14,11 @@
 
 ## Burn-down Graph
 
+![burn_down_chart_sprint2.png](burn_down_chart_sprint2.png)
+
 ## Brun-up (Velocity) Graph
+
+![burn_up_chart_sprint2.png](burn_up_chart_sprint2.png)
 
 ## Client Improvements
 
