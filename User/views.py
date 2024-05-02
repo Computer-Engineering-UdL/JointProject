@@ -1,11 +1,13 @@
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from User.forms import SignUpForm
+from User.forms import SignUpForm, PopulateForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from JointProject.settings import LOGOUT_REDIRECT_URL
-from User.decorators import worker_required
+from User.decorators import worker_required, admin_required
+from db_populator import populate_functions
+from Cleaner.config import MATERIALS_NAMES
 
 
 def redirect_user_based_on_type(user):
@@ -68,3 +70,27 @@ def user_logout(request):
 @login_required
 def home(request):
     return render(request, 'base.html')
+
+
+@login_required
+def populate(request):
+    if request.method == 'POST':
+        form = PopulateForm(request.POST)
+        if form.is_valid():
+            data_type = form.cleaned_data['data_type']
+            entries = form.cleaned_data['entries']
+            # Since stock and materials len must be the same as the MATERIALS_NAMES list, the entries must be changed
+            if data_type == 'stock' or data_type == 'materials':
+                entries = len(MATERIALS_NAMES)
+            populate_function = populate_functions.get(data_type)
+
+            if populate_function:
+                populate_function(entries)
+                messages.success(request, f"Successfully populated {entries} entries for {data_type}.")
+            else:
+                messages.error(request, "No valid function found for the selected data type")
+
+    else:
+        form = PopulateForm()
+
+    return render(request, 'admin-tests/populate.html', {'form': form})

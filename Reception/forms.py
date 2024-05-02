@@ -1,5 +1,7 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
+
 from Reception.models import RoomReservation, Client, Room, CheckIn, HotelUser, ExtraCosts
 from Reception.config import Config as c
 from Reception import forms_verify as fv
@@ -20,7 +22,7 @@ class RoomReservationForm(forms.ModelForm):
     entry = forms.DateField(input_formats=['%d/%m/%Y'])
     exit = forms.DateField(input_formats=['%d/%m/%Y'])
     pension_type = forms.ChoiceField(choices=c.get_pension_types)
-    num_guests = forms.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(4)])
+    num_guests = forms.IntegerField()
     room_type = forms.ChoiceField(choices=c.get_room_types)
     room = forms.ChoiceField()
     client = forms.ModelChoiceField(queryset=Client.objects.all(), empty_label="Select a client")
@@ -45,18 +47,10 @@ class RoomReservationForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        room = cleaned_data.get('room')
         entry = cleaned_data.get('entry')
         exit = cleaned_data.get('exit')
 
-        if room and entry and exit:
-            overlapping_reservations = RoomReservation.objects.filter(
-                room=room,
-                entry__lt=exit,
-                exit__gt=entry
-            )
-            if overlapping_reservations.exists():
-                raise forms.ValidationError("L'habitació ja està reservada en aquestes dates")
+        fv.verify_room_reservation_form(entry, exit, cleaned_data.get('num_guests'), cleaned_data.get('room_type'))
 
         return cleaned_data
 
@@ -77,30 +71,19 @@ class AddClientForm(forms.ModelForm):
         model = Client
         fields = ['first_name', 'last_name', 'id_number', 'email', 'phone_number', 'is_hosted']
 
-
-# Check-in forms
-class InfoClientForm(forms.ModelForm):
-    num_reservation = forms.CharField(label="Número de reserva", required=False)
-    id_number = forms.CharField(max_length=20, label="Document identificatiu", required=False)
-    room_num = forms.IntegerField(label="Número d'habitació", required=False,
-                                  validators=[MinValueValidator(1)])
-
     def clean(self):
         cleaned_data = super().clean()
-        num_reservation = cleaned_data.get("num_reservation")
-        id_number = cleaned_data.get("id_number")
-        room_num = cleaned_data.get("room_num")
+        first_name = cleaned_data.get('first_name')
+        last_name = cleaned_data.get('last_name')
+        id_number = cleaned_data.get('id_number')
+        email = cleaned_data.get('email')
+        phone_number = cleaned_data.get('phone_number')
 
-        fv.verify_search_reservation_form(num_reservation, id_number, room_num)
+        try:
+            fv.verify_client_form(first_name, last_name, id_number, email, phone_number)
+        except ValidationError as e:
+            self.add_error(None, e)
 
-        return cleaned_data
-
-    class Meta:
-        model = CheckIn
-        fields = ['num_reservation', 'id_number']
-
-
-# Cancel reservation form
 
 class SearchReservationForm(forms.ModelForm):
     num_reservation = forms.CharField(label="Número de reserva", required=False)
@@ -120,12 +103,12 @@ class SearchReservationForm(forms.ModelForm):
 
     class Meta:
         model = RoomReservation
-        fields = []
+        fields = ['num_reservation', 'id_number', 'room_num']
 
 
 class AddExtraCostsForm(forms.ModelForm):
-    extra_costs_price = forms.IntegerField(label="Costs addicionals", validators=[MinValueValidator(0)])
-    extra_costs_type = forms.ChoiceField(choices=c.get_room_extra_costs)
+    extra_costs_price = forms.IntegerField(label="Preu dels costs addicionals", validators=[MinValueValidator(0)])
+    extra_costs_type = forms.ChoiceField(label="Tipus de cost addicional", choices=c.get_room_extra_costs)
 
     class Meta:
         model = ExtraCosts

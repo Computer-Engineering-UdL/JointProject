@@ -1,8 +1,7 @@
 from django.http import JsonResponse, FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, InfoClientForm, SearchReservationForm, \
-    AddExtraCostsForm
+from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, SearchReservationForm, AddExtraCostsForm
 from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn, Despeses, ExtraCosts, create_despesa
 from User.decorators import worker_required, admin_required
 from Reception.config import Config as c
@@ -57,8 +56,6 @@ def new_reservation_1(request):
             room_reservation = get_object_or_404(RoomReservation, pk=room_rsv.id)
             create_despesa(room_rsv, room_reservation.pension_type, room.room_type)
             return redirect('new_reservation_4', room_rsv.id)
-        else:
-            form.add_error(None, "Error en el formulari")
     else:
         form = RoomReservationForm()
 
@@ -96,29 +93,22 @@ def new_reservation_4(request, pk):
 
 @worker_required('receptionist')
 def submit_reservation(request):
+    messages.success(request, "Reserva completada amb èxit")
     return redirect('receptionist_home')
 
 
 @worker_required('receptionist')
 def check_in_1(request):
-    form = InfoClientForm(request.GET or None)
-    reservations = RoomReservation.objects.filter(is_active=True, check_in_active=False, check_out_active=False)
+    form = SearchReservationForm(request.GET or None)
+    filtered_reservations, status = u.get_filtered_reservations(form, is_active=True, check_in_active=False,
+                                                                check_out_active=False)
 
-    if form.is_valid():
-        num_reservation = form.cleaned_data.get('num_reservation')
-        id_number = form.cleaned_data.get('id_number')
-        room_num = form.cleaned_data.get('room_num')
-
-        if num_reservation:
-            reservations = reservations.filter(id=num_reservation)
-        if id_number:
-            reservations = reservations.filter(client__id_number=id_number)
-        if room_num:
-            reservations = reservations.filter(room__room_num=room_num)
+    if not status:
+        messages.error(request, "No s'ha trobat cap reserva")
 
     return render(request, c.get_check_in_path(1), {
         'form': form,
-        'reservations': reservations
+        'reservations': filtered_reservations
     })
 
 
@@ -189,21 +179,12 @@ def check_in_2(request):
 @worker_required('receptionist')
 def search_reservation(request):
     form = SearchReservationForm(request.GET or None)
-    reservations = RoomReservation.objects.filter(is_active=True)
+    filtered_reservations, status = u.get_filtered_reservations(form, is_active=True)
 
-    if form.is_valid():
-        num_reservation = form.cleaned_data.get('num_reservation')
-        id_number = form.cleaned_data.get('id_number')
-        room_num = form.cleaned_data.get('room_num')
+    if not status:
+        messages.error(request, "No s'ha trobat cap reserva")
 
-        if num_reservation:
-            reservations = reservations.filter(id=num_reservation)
-        if id_number:
-            reservations = reservations.filter(client__id_number=id_number)
-        if room_num:
-            reservations = reservations.filter(room__room_num=room_num)
-
-    return render(request, c.get_manage_reservation_path(1), {'form': form, 'reservations': reservations})
+    return render(request, c.get_manage_reservation_path(1), {'form': form, 'reservations': filtered_reservations})
 
 
 @worker_required('receptionist')
@@ -234,8 +215,7 @@ def add_extra_costs(request, pk):
                 extra_costs_price=extra_costs_price
             )
             new_extra_cost.save()
-            print("S'ha afegit els costos extra a la reserva, els valors son: ", extra_costs_type, extra_costs_price)
-            messages.success(request, "Despesa afegida amb èxit")
+            messages.success(request, "S'han afegit els costos extra a la reserva amb èxit")
             return redirect('check_out_summary', pk=pk)
     else:
         form = AddExtraCostsForm()
@@ -263,23 +243,13 @@ def delete_reservation(request, pk):
 @worker_required('receptionist')
 def check_out_1(request):
     form = SearchReservationForm(request.GET or None)
-    reservations = RoomReservation.objects.filter(is_active=True, check_in_active=True, check_out_active=False)
+    filtered_reservations, status = u.get_filtered_reservations(form, is_active=True, check_in_active=True,
+                                                                check_out_active=False)
 
-    if form.is_valid():
-        num_reservation = form.cleaned_data.get('num_reservation')
-        id_number = form.cleaned_data.get('id_number')
-        room_num = form.cleaned_data.get('room_num')
+    if not status:
+        messages.error(request, "No s'ha trobat cap reserva")
 
-        filtered_reservations = reservations.filter(is_active=True, check_in_active=True, check_out_active=False)
-
-        if num_reservation:
-            reservations = filtered_reservations.filter(id=num_reservation)
-        if id_number:
-            reservations = filtered_reservations.filter(client__id_number=id_number)
-        if room_num:
-            reservations = filtered_reservations.filter(room__room_num=room_num)
-
-    return render(request, c.get_check_out_path(1), {'form': form, 'reservations': reservations})
+    return render(request, c.get_check_out_path(1), {'form': form, 'reservations': filtered_reservations})
 
 
 @worker_required('receptionist')
@@ -314,7 +284,7 @@ def check_out_3(request, pk):
     room.save()
     # Enviar dades a les autoritats
     # return redirect('check_out_5')
-
+    messages.success(request, "Check-out completat amb èxit")
     return render(request, c.get_check_out_path(4), {'reservation': reservation, 'client': client})
 
 

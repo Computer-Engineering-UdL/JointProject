@@ -3,7 +3,7 @@ from Restaurant.paths import Path as p
 
 class Config:
     MAX_GUESTS_PER_DAY = 25
-    MAX_GUESTS_PER_RESERVATION = 6
+    MAX_GUESTS_PER_RESERVATION = 25
 
     @staticmethod
     def get_restaurant_home_path(n: int):
@@ -16,3 +16,14 @@ class Config:
     @staticmethod
     def get_restaurant_check_reservations_path(n: int):
         return p.RESTAURANT_CHECK_RESERVATIONS_PATH[n]
+
+    @staticmethod
+    def get_restaurant_services():
+        return RESTAURANT_SERVICES
+
+
+RESTAURANT_SERVICES = [
+    ('Esmorzar', 'Esmorzar'),
+    ('Dinar', 'Dinar'),
+    ('Sopar', 'Sopar')
+]

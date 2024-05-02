@@ -132,11 +132,6 @@ input[type="checkbox"]:checked + label #stock-name {
 }
 
 /************** Stock unchecked element hover **************/
-input[type="checkbox"] + label:hover img {
-    filter: blur(3px);
-    cursor: pointer;
-}
-
 input[type="checkbox"] + label:hover::before {
     cursor: pointer;
     position: absolute;

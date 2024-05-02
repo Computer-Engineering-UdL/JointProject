@@ -41,3 +41,13 @@ def is_valid_id_number(id_number):
 def is_valid_phone(phone_number):
     """Check if the phone number is valid."""
     return re.match(r"\d{9}$", phone_number)
+
+
+def is_valid_name(name):
+    """Check if the name is valid."""
+    return re.match(r"[a-zA-ZÀ-ÿ\s]{2,50}$", name)
+
+
+def is_valid_email(email):
+    """Check if the email is valid."""
+    return re.match(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", str(email))
