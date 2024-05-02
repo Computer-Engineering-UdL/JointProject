@@ -12,7 +12,7 @@
 	display: inline-block;
 	padding: 10px 20px;
 	border: 2px solid #ff0000;
-	background-color: rgba(217, 94, 94, 0.5);
+	background-color: rgba(217, 94, 94, 1);
 	color: #ffffff;
 	border-radius: 10px;
 	font-size: 16px;
@@ -25,7 +25,7 @@
 
 .notification-success {
 	border: 2px solid #088508;
-	background-color: rgba(107, 208, 107, 0.5);
+	background-color: rgba(107, 208, 107, 1);
 	display: inline-block;
 	padding: 10px 20px;
 	border-radius: 10px;
@@ -43,7 +43,7 @@
 
 .notification-info {
 	border: 2px solid #b6a708;
-	background-color: rgba(200, 206, 91, 0.5);
+	background-color: rgba(200, 206, 91, 1);
 	animation: fadeOut 3s forwards;
 	display: inline-block;
 	padding: 10px 20px;
