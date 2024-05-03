@@ -215,10 +215,28 @@ input {
 }
 
 /************** Choice buttons **************/
+#access-process-buttons {
+    width: 90%;
+	height: 50%;
+	gap: 50px;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+	align-items: baseline;
+	justify-content: center;
+}
+
+#access-process-buttons a {
+    width: 45%;
+    max-width: 400px;
+    min-width: max-content;
+}
+
 .access-process-button {
+    width: 100%;
     font-size: 20px;
     padding: 30px 75px;
-    transition: background-color 0.2s, border-radius 0.2s
+    transition: background-color 0.2s, border-radius 0.2s;
 }
 
 .access-process-button:hover {

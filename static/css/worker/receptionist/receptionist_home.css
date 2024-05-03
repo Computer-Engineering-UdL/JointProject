@@ -1,9 +1,0 @@
-#buttons {
-	height: 50%;
-	gap: 50px;
-	display: flex;
-	flex-wrap: wrap;
-	align-content: center;
-	align-items: baseline;
-	justify-content: space-evenly;
-}
