@@ -5,6 +5,24 @@
     unicode-bidi: isolate;
 }
 
+input:hover, input:focus {
+    outline: solid 2px #a1b5ff;
+    cursor: text;
+}
+
+select:hover, select:focus {
+    outline: solid 2px #a1b5ff;
+    cursor: pointer;
+}
+
+input, select {
+    border: solid 2px black;
+}
+
+button {
+    cursor: pointer;
+}
+
 /************** Text standards **************/
 p {
     margin: 0;
@@ -360,11 +378,6 @@ input {
 	font-size: 30px;
 	padding: 10px;
 }
-
-.filter-field input[type="text"]:focus, .filter-field input[type="number"]:focus {
-    outline: solid 2px #a1b5ff;
-}
-
 
 .form-group {
 	display: flex;
