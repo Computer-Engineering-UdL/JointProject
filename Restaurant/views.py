@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.forms import modelform_factory
 from User.decorators import worker_required
 from Restaurant.config import Config as c
+from Restaurant.utils import get_ordered_reservations
 from Restaurant.forms import NewRestaurantReservationForm, AddInternalClientForm, CreateExternalClientForm
 from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
 from datetime import datetime
@@ -87,7 +88,7 @@ def new_restaurant_reservation_3(request):
 
 @worker_required('restaurant')
 def restaurant_reservations(request):
-    reservations = RestaurantReservation.objects.filter(is_active=True)
+    reservations = get_ordered_reservations()
     reservation_details = []
 
     for reservation in reservations:
@@ -122,3 +123,12 @@ def restaurant_reservations(request):
         })
 
     return render(request, c.get_restaurant_check_reservations_path(1), {'reservations': reservation_details})
+
+
+@worker_required('restaurant')
+def delete_restaurant_reservation(request, pk):
+    reservation = RestaurantReservation.objects.get(id=pk)
+    reservation.is_active = False
+    reservation.save()
+    messages.success(request, "S'ha eliminat la reserva de restaurant amb èxit!")
+    return redirect('restaurant_reservations')

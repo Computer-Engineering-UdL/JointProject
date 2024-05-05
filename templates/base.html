@@ -82,11 +82,11 @@
                 {% if messages %}
                     {% for message in messages %}
                         {% if message.tags == 'error' %}
-                            <p class="notification-error">{{ message }}</p>
+                            <p id="notifications" class="notification-err">{{ message }}</p>
                         {% elif message.tags == 'success' %}
-                            <p class="notification-success">{{ message }}</p>
+                            <p id="notifications" class="notification-success">{{ message }}</p>
                         {% else %}
-                            <p class="notification-info">{{ message }}</p>
+                            <p id="notifications" class="notification-info">{{ message }}</p>
                         {% endif %}
                     {% endfor %}
                 {% endif %}
