@@ -5,14 +5,12 @@ from django.utils import timezone
 from django import forms
 from Reception.models import RoomReservation, Client, Room, Worker
 from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
-from Restaurant.forms import NewRestaurantReservationForm, AddInternalClientForm, CreateExternalClientForm
+from Restaurant.forms import NewRestaurantReservationForm, AddInternalClientForm, CreateExternalClientForm, get_available_clients
 from Restaurant.config import Config as c
 from Reception.forms import SearchReservationForm
 
 
 class BaseTest(TestCase):
-
-
 
     def setUp(self):
         self.worker = Worker.objects.create_user(
@@ -22,57 +20,40 @@ class BaseTest(TestCase):
             type='restaurant'
         )
 
-        self.client_user = Client.objects.create_user(
-            username='john_doe',
+        self.client_user_is_hosted = Client.objects.create_user(
+            username='abde_client',
             email='client@example.com',
             password='clientpassword',
             id_number='12345678A',
-            first_name='John',
-            last_name='Doe',
+            first_name='Abdellah',
+            last_name='Lamrani',
             phone_number='123456789',
+            is_hosted=True
+        )
+        self.client_user_not_hosted = Client.objects.create_user(
+            username='marc_client',
+            email='client_marc@example.com',
+            password='clientmarcpassword',
+            id_number='12345678A',
+            first_name='Marc',
+            last_name='Marc',
+            phone_number='123356789',
             is_hosted=False
-        )
-
-        self.room = Room.objects.create(
-            is_clean=True,
-            is_taken=False,
-            room_num=201,
-            room_price=50,
-            room_type='Double'
-        )
-        self.room1 = Room.objects.create(
-            is_clean=True,
-            is_taken=False,
-            room_num=202,
-            room_price=50,
-            room_type='Double'
-        )
-
-        self.reservation = RoomReservation.objects.create(
-            client=self.client_user,
-            room=self.room,
-            entry=timezone.now().date(),
-            exit=(timezone.now() + timezone.timedelta(days=1)).date(),
-            pension_type='Sense pensió',
-            num_guests=2
-        )
-
-        self.reservationCheckInActive = RoomReservation.objects.create(
-            client=self.client_user,
-            room=self.room1,
-            entry=timezone.now().date(),
-            exit=(timezone.now() + timezone.timedelta(days=1)).date(),
-            pension_type='Sense pensió',
-            num_guests=2,
-            check_in_active=True
         )
 
         #ESTO ES LO QUE NECESITO
         self.reservationRestaurant = RestaurantReservation.objects.create(
-            client=self.client_user,
+            client=self.client_user_is_hosted,
             day='2024-05-06',
             num_guests=25,
             service='Dinar'
+        )
+
+        self.external_client = ExternalRestaurantClient.objects.create(
+            first_name='External1',
+            last_name='Client1',
+            email='externalclient1@gmail.com',
+            phone_number='123456789'
         )
 
         self.client.force_login(self.worker)
@@ -139,5 +120,64 @@ class TestRestaurantForms(BaseTest):
         self.assertTrue('El nombre màxim de convidats per aquest dia ha estat superat (25)' in form.errors['__all__'])
 
 
+    def test_add_internal_client_form(self):
+        form = AddInternalClientForm(data={'client': self.client_user_is_hosted})
+        self.assertTrue(form.is_valid())
 
+    def test_add_non_internal_client_form(self):
+        form = AddInternalClientForm(data={'client': self.client_user_not_hosted})
+        self.assertFalse(form.is_valid())
+
+    def test_create_external_client_form(self):
+        form = CreateExternalClientForm(data={'email': 'externalclient@gmail.com', 'phone_number': '223456789', 'first_name': 'External', 'last_name': 'Client'})
+        self.assertTrue(form.is_valid())
+
+    def test_create_external_client_form_email_exists(self):
+        form = CreateExternalClientForm(data={'email': 'externalclient1@gmail.com', 'phone_number': '223456789', 'first_name': 'External', 'last_name': 'Client'})
+        self.assertFalse(form.is_valid())
+        self.assertTrue('Aquest correu electrònic ja està registrat' in form.errors['__all__'])
+
+    def test_create_external_client_form_phone_number_exists(self):
+        form = CreateExternalClientForm(
+            data={'email': 'externalclient@gmail.com', 'phone_number': '123456789', 'first_name': 'External',
+                  'last_name': 'Client'})
+        self.assertFalse(form.is_valid())
+        self.assertTrue('Aquest telèfon ja està registrat' in form.errors['__all__'])
+
+    def test_create_external_client_form_invalid_phone_number(self):
+        form = CreateExternalClientForm(
+            data={'email': 'externalclient@gmail.com', 'phone_number': '12345678', 'first_name': 'External',
+                  'last_name': 'Client'})
+        self.assertFalse(form.is_valid())
+        self.assertTrue('El numero de telèfon no és vàlid' in form.errors['__all__'])
+
+    def test_create_external_client_form_invalid_first_name(self):
+        form = CreateExternalClientForm(
+            data={'email': 'externalclient@gmail.com', 'phone_number': '223456789', 'first_name': 'E',
+                  'last_name': 'Client'})
+        self.assertFalse(form.is_valid())
+
+        self.assertTrue('El nom no és vàlid' in form.errors['__all__'])
+
+    def test_create_external_client_form_invalid_last_name(self):
+        form = CreateExternalClientForm(
+            data={'email': 'externalclient@gmail.com', 'phone_number': '223456789', 'first_name': 'External',
+                  'last_name': 'C'})
+        self.assertFalse(form.is_valid())
+
+        self.assertTrue('El cognom no és vàlid' in form.errors['__all__'])
+
+    def test_create_external_client_form_invalid_email(self):
+        form = CreateExternalClientForm(
+            data={'email': 'externalclientgmail.com', 'phone_number': '223456789', 'first_name': 'External',
+                  'last_name': 'Client'})
+        self.assertFalse(form.is_valid())
+        self.assertTrue('El correu electrònic no és vàlid' in form.errors['__all__'])
+
+    def test_create_external_client_form_invalid_email_2(self):
+        form = CreateExternalClientForm(
+            data={'email': 'externalclient@gmailcom', 'phone_number': '223456789', 'first_name': 'External',
+                  'last_name': 'Client'})
+        self.assertFalse(form.is_valid())
+        self.assertTrue('El correu electrònic no és vàlid' in form.errors['__all__'])
 
