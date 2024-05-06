@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import timedelta, date
 from django import forms
 from django.core.validators import RegexValidator
 from django.db.models import Sum
@@ -9,10 +9,12 @@ from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
 
 def verify_restaurant_reservation(day, num_guests):
     if day < date.today():
-        print(day, date.today())
         raise forms.ValidationError("No es pot reservar per a un dia passat")
 
-    if day.year > date.today().year + 1:
+    today = date.today()
+    one_year_ahead = today + timedelta(days=365)
+
+    if day > one_year_ahead:
         raise forms.ValidationError("No es poden fer reserves per a més d'un any")
 
     total_guests = (RestaurantReservation.objects.filter(day=day)
