@@ -1,3 +1,5 @@
+from time import sleep
+
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.forms import modelform_factory
@@ -141,5 +143,6 @@ def confirm_restaurant_reservation(request, pk):
     reservation = RestaurantReservation.objects.get(id=pk)
     reservation.client_arrived = 'client_arrived' in request.POST
     reservation.save()
+    sleep(0.1)
     messages.success(request, "S'ha actualitzat la reserva de restaurant amb èxit!")
     return redirect('restaurant_reservations')
