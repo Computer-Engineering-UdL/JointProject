@@ -139,10 +139,8 @@ def delete_restaurant_reservation(request, pk):
 @worker_required('restaurant')
 def confirm_restaurant_reservation(request, pk):
     reservation = RestaurantReservation.objects.get(id=pk)
-    if 'client_arrived' in request.POST:
-        reservation.client_arrived = True
-    else:
-        reservation.client_arrived = False
+    reservation.client_arrived = 'client_arrived' in request.POST
     reservation.save()
     messages.success(request, "S'ha actualitzat la reserva de restaurant amb èxit!")
     return redirect('restaurant_reservations')
+
