@@ -143,4 +143,3 @@ def confirm_restaurant_reservation(request, pk):
     reservation.save()
     messages.success(request, "S'ha actualitzat la reserva de restaurant amb èxit!")
     return redirect('restaurant_reservations')
-
