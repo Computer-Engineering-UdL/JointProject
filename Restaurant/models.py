@@ -29,6 +29,7 @@ class RestaurantReservation(models.Model):
     )
 
     service = models.CharField(max_length=15, choices=rc.get_restaurant_services(), default='None')
+    client_arrived = models.BooleanField(default=False)
 
     def __str__(self):
         if self.client:
