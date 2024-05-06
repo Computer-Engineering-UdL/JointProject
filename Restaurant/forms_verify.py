@@ -12,7 +12,7 @@ def verify_restaurant_reservation(day, num_guests):
         raise forms.ValidationError("No es pot reservar per a un dia passat")
 
     today = date.today()
-    one_year_ahead = today + timedelta(days=365)
+    one_year_ahead = today + timedelta(days=rc.MAX_RESERVATION_YEAR_AHEAD * 365)
 
     if day > one_year_ahead:
         raise forms.ValidationError("No es poden fer reserves per a més d'un any")
