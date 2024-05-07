@@ -2,15 +2,13 @@
 
 ## Work Scheduled/Performed
 
-| Action                       | Brief Description                                                                                                                                               | Completed |
-|------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------|
-|               | Make the cleaner role the ability to mark a cleaning material as out of stock or not.                                                                           | Yes       |
-| Cleaner room cleaning        | Cleaner can see the list of the rooms that are not cleaned yet. Once the room is cleaned it can be marked as cleaned and cleaner can add some comments on that. | Yes       |
-| Cleaner tests                | Test all the functionalities of the cleaning role.                                                                                                              | Yes       |
-| Restaurant reservation       | The restaurant role can create new reservations based on the type of the client.                                                                                | Yes       |
-| Restaurant reservation list  | The restaurant role can check the reservations and mark if the client has arrived or not.                                                                       | Yes       |
-| Restaurant tests             | Test all the functionalities of the restaurant role.                                                                                                            | Yes       |
-| Fix and improve receptionist | Fix most of the problems related on the receptionist role and improve the functionalities.                                                                      | Yes       |
+| Action | Brief Description | Completed |
+|--------|-------------------|-----------|
+|        |                   |           |
+|        |                   |           |
+|        |                   |           |
+|        |                   |           |
+
 
 ## Burn-down Graph
 
