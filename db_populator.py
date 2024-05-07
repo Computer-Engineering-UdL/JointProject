@@ -293,9 +293,7 @@ def get_active_reservations_without_expenses():
 
 
 def create_expenses_for_active_reservations() -> None:
-    """
-    Crea despeses per a totes les reserves d'habitacions actives que encara no tenen un registre de despeses.
-    """
+    """Create an expense record for each active room reservation without an expense record."""
     active_reservations_without_expenses = get_active_reservations_without_expenses()
 
     for reservation in active_reservations_without_expenses:
