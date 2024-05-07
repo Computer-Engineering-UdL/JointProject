@@ -6,7 +6,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from JointProject.settings import LOGOUT_REDIRECT_URL
 from User.decorators import worker_required, admin_required
-from db_populator import populate_functions
+from db_populator import populate_functions, get_active_reservations_without_expenses
 from Cleaner.config import MATERIALS_NAMES
 
 
@@ -85,7 +85,11 @@ def populate(request):
             populate_function = populate_functions.get(data_type)
 
             if populate_function:
-                populate_function(entries)
+                if data_type == 'expenses':
+                    entries = get_active_reservations_without_expenses().count()
+                    populate_function()
+                else:
+                    populate_function(entries)
                 messages.success(request, f"Successfully populated {entries} entries for {data_type}.")
             else:
                 messages.error(request, "No valid function found for the selected data type")

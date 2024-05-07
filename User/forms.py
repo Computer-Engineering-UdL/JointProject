@@ -61,7 +61,8 @@ class PopulateForm(forms.Form):
         ('stock', 'Populate Stock'),
         ('cleaned_rooms', 'Populate Cleaned Rooms'),
         ('external_clients', 'Populate External Clients'),
-        ('restaurant_reservations', 'Populate Restaurant Reservations')
+        ('restaurant_reservations', 'Populate Restaurant Reservations'),
+        ('expenses', 'Populate Expenses'),
     )
 
     data_type = forms.ChoiceField(choices=CHOICES, label="Select data type to populate")
