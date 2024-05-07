@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <style>li { display: none; }</style>
     <h1>Populate Database</h1>
     <form method="post">
         {% csrf_token %}

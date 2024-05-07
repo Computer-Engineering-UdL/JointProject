@@ -63,6 +63,7 @@ class PopulateForm(forms.Form):
         ('external_clients', 'Populate External Clients'),
         ('restaurant_reservations', 'Populate Restaurant Reservations'),
         ('expenses', 'Populate Expenses'),
+        ('extra_costs', 'Populate Extra Costs'),
     )
 
     data_type = forms.ChoiceField(choices=CHOICES, label="Select data type to populate")

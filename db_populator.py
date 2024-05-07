@@ -8,7 +8,7 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "JointProject.settings")
 django.setup()
 
-from Reception.models import HotelUser, Client, Worker, Room, RoomReservation, create_despesa, Despeses
+from Reception.models import HotelUser, Client, Worker, Room, RoomReservation, create_despesa, Despeses, ExtraCosts
 from Cleaner.models import CleaningMaterial, Stock, CleanedRoom
 from Cleaner.config import MATERIALS_NAMES
 from Restaurant.models import RestaurantReservation
@@ -313,6 +313,39 @@ def create_expenses_for_active_reservations() -> None:
     print(f"Total expenses created: {active_reservations_without_expenses.count()}")
 
 
+def create_extra_costs(n: int) -> None:
+    """Populate the ExtraCosts table with n entries ensuring no duplicate extra costs type for the same reservation."""
+    reservations = RoomReservation.objects.all()
+    if not reservations.exists():
+        print("No reservations available to create extra costs.")
+        return
+
+    extra_costs_types = c.get_room_extra_costs()
+
+    for _ in range(n):
+        reservation = random.choice(reservations)
+        available_types = list(extra_costs_types)
+
+        used_types = ExtraCosts.objects.filter(room_reservation=reservation).values_list('extra_costs_type', flat=True)
+        available_types = [t for t in available_types if t[0] not in used_types]
+
+        if not available_types:
+            print(f'No more unique extra costs types available for reservation ID {reservation.id}')
+            continue
+
+        extra_costs_type = random.choice(available_types)[0]
+        extra_costs_price = random.uniform(1.0, 100.0).__round__(2)
+
+        extra_costs = ExtraCosts.objects.create(
+            room_reservation=reservation,
+            extra_costs_type=extra_costs_type,
+            extra_costs_price=extra_costs_price
+        )
+        extra_costs.save()
+        print(
+            f'Created Extra Costs: {extra_costs.extra_costs_type} - Price: {extra_costs.extra_costs_price} for Reservation ID {reservation.id}')
+
+
 def print_bar(length: int = 75, new_line: bool = True) -> None:
     """Print a bar of a certain length."""
     if new_line:
@@ -345,7 +378,8 @@ populate_functions = {
     'cleaned_rooms': populate_cleaned_rooms,
     'external_clients': populate_external_clients,
     'restaurant_reservations': populate_restaurant_reservations,
-    'expenses': create_expenses_for_active_reservations
+    'expenses': create_expenses_for_active_reservations,
+    'extra_costs': create_extra_costs
 }
 
 
