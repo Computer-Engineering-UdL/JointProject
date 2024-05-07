@@ -21,6 +21,7 @@ def add_client_admin(request):
         if form.is_valid():
             client = form.save(commit=False)
             client.username = f"{client.first_name}_{client.last_name}"
+            messages.success(request, "Client afegit amb èxit")
             client.save()
     else:
         form = AddClientForm()
@@ -35,6 +36,7 @@ def add_room_admin(request):
         form = RoomForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Habitació afegida amb èxit")
             return redirect('receptionist_home')
     else:
         form = RoomForm()
