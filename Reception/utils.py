@@ -191,6 +191,24 @@ def create_receipt_check_out(reservation, client, despeses, extra_costs):
         ('BOTTOMPADDING', (0, 1), (-1, -1), 5),
     ]))
 
+    total_costs = despeses.pension_costs + despeses.room_type_costs + sum(
+        [cost.extra_costs_price for cost in extra_costs])
+    total_costs_data = [
+        [Paragraph('Cost Total', styles['Heading2'])],
+        [f"Total: {total_costs}€"]
+    ]
+
+    total_costs_table = Table(total_costs_data, colWidths=[200, 260])
+    total_costs_table.setStyle(TableStyle([
+        ('SPAN', (0, 0), (-1, 0)),
+        ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
+        ('ALIGN', (0, 1), (-1, -1), 'LEFT'),
+        ('INNERGRID', (0, 1), (-1, -1), 0.25, colors.black),
+        ('BOX', (0, 1), (-1, -1), 0.25, colors.black),
+        ('TOPPADDING', (0, 1), (-1, -1), 5),
+        ('BOTTOMPADDING', (0, 1), (-1, -1), 5),
+    ]))
+
     doc.title = 'Comprovant de Check-Out'
     doc.author = 'Hotel Las Palmeras'
     doc.subject = 'Check-Out Document for Hotel Las Palmeras'
@@ -198,7 +216,7 @@ def create_receipt_check_out(reservation, client, despeses, extra_costs):
     doc.keywords = ['Hotel Las Palmeras', 'Check-Out', 'Reservation', str(reservation.id)]
 
     elements = [header_table, Spacer(1, 20), reservation_table, Spacer(1, 20), client_table, Spacer(1, 20),
-                despeses_table, Spacer(1, 20), extra_costs_table]
+                despeses_table, Spacer(1, 20), extra_costs_table, Spacer(1, 20), total_costs_table]
     doc.build(elements)
 
     buffer.seek(0)
