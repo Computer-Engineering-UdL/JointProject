@@ -8,7 +8,7 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "JointProject.settings")
 django.setup()
 
-from Reception.models import HotelUser, Client, Worker, Room, RoomReservation, create_despesa
+from Reception.models import HotelUser, Client, Worker, Room, RoomReservation, create_despesa, Despeses
 from Cleaner.models import CleaningMaterial, Stock, CleanedRoom
 from Cleaner.config import MATERIALS_NAMES
 from Restaurant.models import RestaurantReservation
@@ -107,21 +107,16 @@ def populate_reservations(n: int) -> None:
     """Populate the RoomReservation table with n entries, ensuring no conflicts with existing reservations."""
     pension_types = c.get_pension_types()
     all_rooms = list(Room.objects.all())
+    clients = list(Client.objects.all())
     max_attempts = 5
 
     for _ in range(n):
-        random.shuffle(all_rooms)
         reservation_created = False
         attempt = 0
 
         while not reservation_created and attempt < max_attempts:
             room = random.choice(all_rooms)
-            if RoomReservation.objects.filter(room=room, is_active=True).exclude(
-                    exit__lte=timezone.now().date()).exists():
-                attempt += 1
-                continue
-
-            client = Client.objects.order_by('?').first()
+            client = random.choice(clients)
             days_away = random.randint(1, 30)
             duration = random.randint(1, 15)
             entry_date = timezone.now().date() + timedelta(days=days_away)
@@ -129,13 +124,12 @@ def populate_reservations(n: int) -> None:
 
             if not RoomReservation.objects.filter(room=room, exit__gte=entry_date, entry__lte=exit_date).exists():
                 is_active = random.choice([True, False])
-                check_in_active = random.choice([True, False])
-                check_out_active = random.choice([True, False]) if check_in_active else False
 
-                pension_choice = random.choice(pension_types)
-                pension_type = pension_choice[0]
+                check_in_active = random.choice([True, False])
+                check_out_active = check_in_active and random.choice([True, False])
+
+                pension_type = random.choice(pension_types)[0]
                 num_guests = random.randint(1, 4)
-                room_type = room.room_type
 
                 reservation = RoomReservation(
                     client=client,
@@ -149,11 +143,13 @@ def populate_reservations(n: int) -> None:
                     check_out_active=check_out_active
                 )
                 reservation.save()
-                create_despesa(reservation, pension_type, room_type)
-                print(f'Created Reservation: Room {reservation.room.room_num} [{room_type}]'
-                      f' from {reservation.entry} to {reservation.exit} with pension type {pension_type}'
+                create_despesa(reservation, pension_type, room.room_type)
+                print(f'Created Reservation: Room {room.room_num} [{room.room_type}]'
+                      f' from {entry_date} to {exit_date} with pension type {pension_type}'
                       f', is active: {is_active}, check-in: {check_in_active}, check-out: {check_out_active}')
                 reservation_created = True
+            else:
+                attempt += 1
 
         if not reservation_created:
             print("No s'ha pogut crear una reserva per falta d'habitacions disponibles sense conflictes.")
@@ -288,6 +284,35 @@ def populate_restaurant_reservations(n: int) -> None:
             print(f'Skipping duplicate reservation for {client_type} client on {entry_date}')
 
 
+def get_active_reservations_without_expenses():
+    """Return all active room reservations without an expense record."""
+    return RoomReservation.objects.filter(
+        is_active=True,
+        despeses__isnull=True
+    )
+
+
+def create_expenses_for_active_reservations() -> None:
+    """
+    Crea despeses per a totes les reserves d'habitacions actives que encara no tenen un registre de despeses.
+    """
+    active_reservations_without_expenses = get_active_reservations_without_expenses()
+
+    for reservation in active_reservations_without_expenses:
+        pension_type = reservation.pension_type
+        room_type = reservation.room.room_type
+
+        pension_cost = c.get_pension_cost_per_type(pension_type)
+        room_cost = c.get_room_prices_per_type(room_type)
+
+        create_despesa(reservation, pension_type, room_type)
+
+        print(
+            f"Created expense for reservation {reservation.id}: Pension cost {pension_cost}, Room type cost {room_cost}")
+
+    print(f"Total expenses created: {active_reservations_without_expenses.count()}")
+
+
 def print_bar(length: int = 75, new_line: bool = True) -> None:
     """Print a bar of a certain length."""
     if new_line:
@@ -319,7 +344,8 @@ populate_functions = {
     'stock': populate_stock,
     'cleaned_rooms': populate_cleaned_rooms,
     'external_clients': populate_external_clients,
-    'restaurant_reservations': populate_restaurant_reservations
+    'restaurant_reservations': populate_restaurant_reservations,
+    'expenses': create_expenses_for_active_reservations
 }
 
 
@@ -335,6 +361,7 @@ def main() -> None:
     populate(populate_cleaned_rooms, 10)
     populate(populate_external_clients, 10)
     populate(populate_restaurant_reservations, 20)
+    create_expenses_for_active_reservations()
     print("Finished populating the database.")
 
 
