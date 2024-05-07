@@ -307,8 +307,8 @@ def create_expenses_for_active_reservations() -> None:
 
         create_despesa(reservation, pension_type, room_type)
 
-        print(
-            f"Created expense for reservation {reservation.id}: Pension cost {pension_cost}, Room type cost {room_cost}")
+        print(f"Created expense for reservation {reservation.id}: "
+              f"Pension cost {pension_cost}, Room type cost {room_cost}")
 
     print(f"Total expenses created: {active_reservations_without_expenses.count()}")
 
@@ -342,8 +342,8 @@ def create_extra_costs(n: int) -> None:
             extra_costs_price=extra_costs_price
         )
         extra_costs.save()
-        print(
-            f'Created Extra Costs: {extra_costs.extra_costs_type} - Price: {extra_costs.extra_costs_price} for Reservation ID {reservation.id}')
+        print(f'Created Extra Costs: {extra_costs.extra_costs_type} - '
+              f'Price: {extra_costs.extra_costs_price} for Reservation ID {reservation.id}')
 
 
 def print_bar(length: int = 75, new_line: bool = True) -> None:

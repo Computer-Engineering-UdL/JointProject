@@ -197,7 +197,8 @@ def create_receipt_check_out(reservation, client, despeses, extra_costs):
     doc.creator = 'JointProject'
     doc.keywords = ['Hotel Las Palmeras', 'Check-Out', 'Reservation', str(reservation.id)]
 
-    elements = [header_table, Spacer(1, 20), reservation_table, Spacer(1, 20), client_table, Spacer(1, 20), despeses_table, Spacer(1, 20), extra_costs_table]
+    elements = [header_table, Spacer(1, 20), reservation_table, Spacer(1, 20), client_table, Spacer(1, 20),
+                despeses_table, Spacer(1, 20), extra_costs_table]
     doc.build(elements)
 
     buffer.seek(0)
