@@ -33,7 +33,7 @@ def cleaner_stock(request):
                     item = Stock.objects.get(id=stock_id)
                     item.is_available = stock_id not in submitted_stock_ids
                     item.save()
-                    messages.success(request, 'Stock actualitzat correctament')
+                messages.success(request, 'Stock actualitzat correctament')
 
                 return redirect('cleaner_stock')
         else:

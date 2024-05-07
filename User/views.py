@@ -33,10 +33,10 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)  # Log in the User after signing up
-            messages.success(request, 'Account created successfully')
+            messages.success(request, "El compte s'ha creat correctament")
             return redirect(redirect_user_based_on_type(user))
         else:
-            messages.error(request, 'Please correct the error below')
+            messages.error(request, "Error al crear el compte")
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
@@ -52,10 +52,7 @@ def login_custom(request):
             if user is not None:
                 login(request, user)
                 return redirect(redirect_user_based_on_type(user))
-            else:
-                messages.error(request, "Invalid username or password")
-        else:
-            messages.error(request, "Invalid username or password")
+        messages.error(request, "Usuari o contrasenya incorrectes")
     else:
         form = AuthenticationForm()
     return render(request, 'registration/login.html', {'form': form})
