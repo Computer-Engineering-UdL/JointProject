@@ -64,6 +64,7 @@ def login_custom(request):
 @login_required
 def user_logout(request):
     logout(request)
+    messages.success(request, 'You have been logged out')
     return redirect(LOGOUT_REDIRECT_URL)
 
 
