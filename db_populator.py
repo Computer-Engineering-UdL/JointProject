@@ -315,7 +315,7 @@ def create_expenses_for_active_reservations() -> None:
 
 def create_extra_costs(n: int) -> None:
     """Populate the ExtraCosts table with n entries ensuring no duplicate extra costs type for the same reservation."""
-    reservations = RoomReservation.objects.all()
+    reservations = RoomReservation.objects.filter(is_active=True)
     if not reservations.exists():
         print("No reservations available to create extra costs.")
         return
