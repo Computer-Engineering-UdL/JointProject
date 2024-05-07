@@ -20,8 +20,8 @@ def verify_restaurant_reservation(day, num_guests):
     total_guests = (RestaurantReservation.objects.filter(day=day)
                     .aggregate(Sum('num_guests'))['num_guests__sum'] or 0)
     if total_guests + int(num_guests) > rc.MAX_GUESTS_PER_DAY:
-        raise forms.ValidationError(
-            f"El nombre màxim de convidats per aquest dia ha estat superat ({total_guests})")
+        raise forms.ValidationError(f"El nombre màxim de convidats per aquest dia ha "
+                                    f"estat superat (disponibles: {rc.MAX_GUESTS_PER_RESERVATION - total_guests})")
 
 
 def verify_external_client_form(email, phonenum, first_name, last_name):
