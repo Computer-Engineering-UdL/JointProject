@@ -90,7 +90,12 @@ def populate(request):
                     populate_function()
                 else:
                     populate_function(entries)
-                messages.success(request, f"Successfully populated {entries} entries for {data_type}.")
+                if entries == 0:
+                    messages.info(request, f"No entries were populated for {data_type}")
+                elif entries == 1:
+                    messages.success(request, f"Successfully populated {entries} entry for {data_type}")
+                else:
+                    messages.success(request, f"Successfully populated {entries} entries for {data_type}")
             else:
                 messages.error(request, "No valid function found for the selected data type")
 
