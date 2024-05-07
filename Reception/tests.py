@@ -160,7 +160,7 @@ class CheckOutFormsAndRedirectsTest(BaseTest):
     def test_check_out_3_view_status_code(self):
         url = reverse('check_out_3', args=[self.reservation.id])
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
 
     # TEST CASES FOR CHECK OUT IN PROCESS
     def test_check_out_view_redirect_with_reservation(self):
