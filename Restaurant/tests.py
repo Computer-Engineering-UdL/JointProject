@@ -181,3 +181,46 @@ class TestRestaurantForms(BaseTest):
         self.assertFalse(form.is_valid())
         self.assertTrue('El correu electrònic no és vàlid' in form.errors['__all__'])
 
+
+class TestRestaurantViews(BaseTest):
+
+    def test_restaurant_home_view1(self):
+        url = reverse('restaurant_home')
+        response = self.client.get(url)
+        self.assertTemplateUsed(response, 'restaurant/restaurant_home.html')
+    def test_restaurant_home_view(self):
+        url = reverse('restaurant_home')
+        response = self.client.get(url)
+        self.assertTemplateUsed(response, 'restaurant/restaurant_home.html')
+
+    def test_restaurant_reservations_view(self):
+        url = reverse('restaurant_reservations')
+        response = self.client.get(url)
+        self.assertTemplateUsed(response, 'restaurant/restaurant_reservations.html')
+
+    def test_new_restaurant_reservation_1_view(self):
+        url = reverse('new_restaurant_reservation_1')
+        response = self.client.get(url)
+        self.assertTemplateUsed(response, 'restaurant/new_restaurant_reservation_1.html')
+
+    def test_new_restaurant_reservation_2_view(self):
+        url = reverse('new_restaurant_reservation_1')
+        response = self.client.post(url, {'day': '11/05/2024', 'num_guests': 2, 'service': 'Dinar'})
+        self.assertRedirects(response, reverse('new_restaurant_reservation_2'))
+
+        url = reverse('new_restaurant_reservation_2')
+        response = self.client.get(url)
+        self.assertTemplateUsed(response, 'restaurant/new_restaurant_reservation_2.html')
+
+    def test_new_restaurant_reservation_3_view(self):
+        url = reverse('new_restaurant_reservation_1')
+        response = self.client.post(url, {'day': '11/05/2024', 'num_guests': 2, 'service': 'Dinar'})
+        self.assertRedirects(response, reverse('new_restaurant_reservation_2'))
+
+        url = reverse('new_restaurant_reservation_2')
+        response = self.client.post(url, {'client_type': 'internal'})
+        self.assertRedirects(response, reverse('new_restaurant_reservation_3'))
+
+        url = reverse('new_restaurant_reservation_3')
+        response = self.client.get(url)
+        self.assertTemplateUsed(response, 'restaurant/new_restaurant_reservation_3.html')
