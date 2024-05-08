@@ -126,15 +126,8 @@ def check_in_summary(request, pk):
             if action == 'print_receipt':
                 return redirect('print_receipt', reservation_id=reservation.id)
             elif action == 'check_in':
-                check_in, created = CheckIn.objects.get_or_create(
-                    num_reservation=str(reservation.id),
-                    defaults={'id_number': client.id_number}
-                )
-
-                if created:
-                    check_in.save()
-                    reservation.check_in_active = True
-                    reservation.save()
+                reservation.check_in_active = True
+                reservation.save()
 
                 messages.success(request, "Check-in completat amb èxit")
                 return redirect('check_in')
