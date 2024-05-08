@@ -40,9 +40,9 @@ body:
     attributes:
       value: |
         Make sure to link this task to the appropriate milestone and project to ensure proper tracking and visibility in the project management process.
-            
+        
         > [!NOTE]
-        > Role: ${{ inputs.user_role }}
-            
+        > Role: ${{ inputs.user_role.value }}
+        
         > [!IMPORTANT]
-        > Sprint: ${{ inputs.sprint_number }}
+        > Sprint: ${{ inputs.sprint_number.value }}
