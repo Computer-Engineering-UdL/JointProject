@@ -244,9 +244,7 @@ class TestCleanerViews(BaseTest):
         response = self.client.get(url)
         occupied_rooms = response.context['occupied_rooms']
         check_out_rooms = response.context['check_out_rooms']
-        occupied_rooms = list(occupied_rooms)
-        check_out_rooms = list(check_out_rooms)
-        print(occupied_rooms)
-        print(check_out_rooms)
+
+
         """self.assertListEqual(list(occupied_rooms), [self.room])
         self.assertListEqual(list(check_out_rooms), [])"""
