@@ -1,7 +1,7 @@
 import dateutil.utils
 from django import forms
 from User import validators as uv
-from Reception.models import RoomReservation, Client, Room, CheckIn, HotelUser
+from Reception.models import RoomReservation, Client, Room, HotelUser
 
 
 def verify_search_reservation_form(num_reservation, id_number, room_num):

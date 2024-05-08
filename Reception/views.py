@@ -2,7 +2,7 @@ from django.http import JsonResponse, FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, SearchReservationForm, AddExtraCostsForm
-from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn, Despeses, ExtraCosts, create_despesa
+from Reception.models import Room, RoomReservation, Client, HotelUser, Despeses, ExtraCosts, create_despesa
 from User.decorators import worker_required, admin_required
 from Reception.config import Config as c
 from Reception import utils as u
