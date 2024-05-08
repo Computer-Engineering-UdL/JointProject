@@ -50,7 +50,10 @@ class RoomReservationForm(forms.ModelForm):
         entry = cleaned_data.get('entry')
         exit = cleaned_data.get('exit')
 
-        fv.verify_room_reservation_form(entry, exit, cleaned_data.get('num_guests'), cleaned_data.get('room_type'))
+        try:
+            fv.verify_room_reservation_form(entry, exit, cleaned_data.get('num_guests'), cleaned_data.get('room_type'))
+        except TypeError:
+            self.add_error(None, "La data introduïda no és vàlida")
 
         return cleaned_data
 

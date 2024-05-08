@@ -21,6 +21,7 @@ def add_client_admin(request):
         if form.is_valid():
             client = form.save(commit=False)
             client.username = f"{client.first_name}_{client.last_name}"
+            messages.success(request, "Client afegit amb èxit")
             client.save()
     else:
         form = AddClientForm()
@@ -35,6 +36,7 @@ def add_room_admin(request):
         form = RoomForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "Habitació afegida amb èxit")
             return redirect('receptionist_home')
     else:
         form = RoomForm()
@@ -277,15 +279,20 @@ def check_out_3(request, pk):
     reservation = get_object_or_404(RoomReservation, pk=pk)
     room = get_object_or_404(Room, pk=reservation.room_id)
     client = get_object_or_404(HotelUser, id=reservation.client_id)
-    room.is_clean = False
-    room.is_taken = False
-    reservation.check_out_active = True
-    reservation.is_active = False
-    room.save()
-    # Enviar dades a les autoritats
-    # return redirect('check_out_5')
-    messages.success(request, "Check-out completat amb èxit")
-    return render(request, c.get_check_out_path(4), {'reservation': reservation, 'client': client})
+
+    if request.method == 'POST':
+        reservation.is_active = False
+        reservation.check_out_active = True
+        reservation.save()
+
+        room.is_clean = False
+        room.is_taken = False
+        room.save()
+
+        messages.success(request, "Check-out completat amb èxit")
+        return render(request, c.get_check_out_path(4), {'reservation': reservation, 'client': client})
+
+    return redirect('check_out_summary', pk=pk)
 
 
 @worker_required('receptionist')

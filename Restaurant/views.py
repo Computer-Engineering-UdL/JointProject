@@ -1,3 +1,5 @@
+from time import sleep
+
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.forms import modelform_factory
@@ -96,6 +98,7 @@ def restaurant_reservations(request):
         client_name = "No especificat"
         client_last_name = ""
         is_internal = False
+        client_arrvied = reservation.client_arrived
 
         if reservation.client:
             client = reservation.client
@@ -119,6 +122,7 @@ def restaurant_reservations(request):
             'num_guests': reservation.num_guests,
             'service': reservation.service,
             'is_active': reservation.is_active,
+            'client_arrived': client_arrvied,
             'is_internal': is_internal
         })
 
@@ -131,4 +135,13 @@ def delete_restaurant_reservation(request, pk):
     reservation.is_active = False
     reservation.save()
     messages.success(request, "S'ha eliminat la reserva de restaurant amb èxit!")
+    return redirect('restaurant_reservations')
+
+
+@worker_required('restaurant')
+def confirm_restaurant_reservation(request, pk):
+    reservation = RestaurantReservation.objects.get(id=pk)
+    reservation.client_arrived = 'client_arrived' in request.POST
+    reservation.save()
+    messages.success(request, "S'ha actualitzat la reserva de restaurant amb èxit!")
     return redirect('restaurant_reservations')

@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import timedelta, date
 from django import forms
 from django.core.validators import RegexValidator
 from django.db.models import Sum
@@ -9,17 +9,19 @@ from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
 
 def verify_restaurant_reservation(day, num_guests):
     if day < date.today():
-        print(day, date.today())
         raise forms.ValidationError("No es pot reservar per a un dia passat")
 
-    if day.year > date.today().year + 1:
+    today = date.today()
+    one_year_ahead = today + timedelta(days=rc.MAX_RESERVATION_YEAR_AHEAD * 365)
+
+    if day > one_year_ahead:
         raise forms.ValidationError("No es poden fer reserves per a més d'un any")
 
     total_guests = (RestaurantReservation.objects.filter(day=day)
                     .aggregate(Sum('num_guests'))['num_guests__sum'] or 0)
     if total_guests + int(num_guests) > rc.MAX_GUESTS_PER_DAY:
-        raise forms.ValidationError(
-            f"El nombre màxim de convidats per aquest dia ha estat superat ({total_guests})")
+        raise forms.ValidationError(f"El nombre màxim de convidats per aquest dia ha "
+                                    f"estat superat (disponibles: {rc.MAX_GUESTS_PER_RESERVATION - total_guests})")
 
 
 def verify_external_client_form(email, phonenum, first_name, last_name):

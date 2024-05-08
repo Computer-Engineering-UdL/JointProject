@@ -8,21 +8,29 @@ UserModel = get_user_model()
 
 
 class SignUpForm(UserCreationForm):
-    first_name = forms.CharField(max_length=80,
-                                 error_messages={'required': 'Required. Inform your first name.'})
-    last_name = forms.CharField(max_length=80,
-                                error_messages={'required': 'Required. Inform your last name.'})
-    phone_number = forms.CharField(max_length=9, label='Phone Number',
-                                   error_messages={'required': 'Required. Select your ID type.'})
+    first_name = forms.CharField(max_length=80, label='Nom',
+                                 error_messages={'required': 'Introdueix el teu nom'})
+    last_name = forms.CharField(max_length=80, label='Cognoms',
+                                error_messages={'required': 'Introdueix el teu cognom'})
+    phone_number = forms.CharField(max_length=9, label='Número de telèfon',
+                                   error_messages={'required': 'El número de telefon no és vàlid'})
 
     id_number = forms.CharField(max_length=20,
                                 required=False,
-                                label='ID Number',
-                                error_messages={'invalid': 'Invalid ID number.'})
+                                label='Número d\'identificació',
+                                error_messages={'invalid': 'El número d\'identificació no és vàlid'})
 
-    email = forms.EmailField(max_length=100,
-                             error_messages={'required': 'Required. Inform a valid email address.',
-                                             'invalid': 'Invalid email address.'})
+    email = forms.EmailField(max_length=100, label='Correu electrònic',
+                             error_messages={'required': 'Obligatori. Informeu una adreça de correu electrònic vàlida',
+                                             'invalid': 'El correu no és valid'})
+
+    password1 = forms.CharField(max_length=100, label='Contrasenya',
+                                widget=forms.PasswordInput,
+                                error_messages={'required': 'Introdueix una contrasenya'})
+
+    password2 = forms.CharField(max_length=100, label='Confirma la contrasenya',
+                                widget=forms.PasswordInput,
+                                error_messages={'required': 'Confirma la contrasenya'})
 
     def clean_id_number(self):
         """Check if the ID number provided is valid."""
@@ -31,7 +39,8 @@ class SignUpForm(UserCreationForm):
             if is_valid_id_number(id_number):
                 return id_number
             else:
-                raise ValidationError('Invalid ID number. Please enter a valid DNI, NIE, or Passport number.')
+                raise ValidationError("Número d'identificació no vàlid. "
+                                      "Introduïu un DNI, NIE o número de passaport vàlid")
 
         return id_number
 
@@ -42,7 +51,7 @@ class SignUpForm(UserCreationForm):
             if is_valid_phone(phone_number):
                 return phone_number
             else:
-                raise ValidationError('Invalid phone number. Please enter a valid phone number.')
+                raise ValidationError('Número de telèfon no vàlid. Introdueix un número de telèfon vàlid')
 
         return phone_number
 
@@ -61,7 +70,9 @@ class PopulateForm(forms.Form):
         ('stock', 'Populate Stock'),
         ('cleaned_rooms', 'Populate Cleaned Rooms'),
         ('external_clients', 'Populate External Clients'),
-        ('restaurant_reservations', 'Populate Restaurant Reservations')
+        ('restaurant_reservations', 'Populate Restaurant Reservations'),
+        ('expenses', 'Populate Expenses'),
+        ('extra_costs', 'Populate Extra Costs'),
     )
 
     data_type = forms.ChoiceField(choices=CHOICES, label="Select data type to populate")
