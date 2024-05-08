@@ -8,6 +8,7 @@ from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
 from Restaurant.forms import NewRestaurantReservationForm, AddInternalClientForm, CreateExternalClientForm, get_available_clients
 from Restaurant.config import Config as c
 from Reception.forms import SearchReservationForm
+from Restaurant.views import restaurant_home, new_restaurant_reservation_1, new_restaurant_reservation_2, new_restaurant_reservation_3
 
 
 class BaseTest(TestCase):
@@ -44,7 +45,7 @@ class BaseTest(TestCase):
         #ESTO ES LO QUE NECESITO
         self.reservationRestaurant = RestaurantReservation.objects.create(
             client=self.client_user_is_hosted,
-            day='2024-05-06',
+            day='2024-12-06',
             num_guests=25,
             service='Dinar'
         )
@@ -115,10 +116,9 @@ class TestRestaurantForms(BaseTest):
         self.assertTrue('No es poden fer reserves per a més d\'un any' in form.errors['__all__'])
 
     def test_new_restaurant_reservation_max_guests_form(self):
-        form = NewRestaurantReservationForm(data={'day': '2024-05-06', 'num_guests': 2, 'service': 'Dinar'})
+        form = NewRestaurantReservationForm(data={'day': '2024-12-06', 'num_guests': 2, 'service': 'Dinar'})
         self.assertFalse(form.is_valid())
-        self.assertTrue('El nombre màxim de convidats per aquest dia ha estat superat (25)' in form.errors['__all__'])
-
+        self.assertTrue('El nombre màxim de convidats per aquest dia ha estat superat (disponibles: 0)' in form.errors['__all__'])
 
     def test_add_internal_client_form(self):
         form = AddInternalClientForm(data={'client': self.client_user_is_hosted})
@@ -184,33 +184,40 @@ class TestRestaurantForms(BaseTest):
 
 class TestRestaurantViews(BaseTest):
 
-    def test_restaurant_home_view1(self):
+    def test_restaurant_home_view_template(self):
         url = reverse('restaurant_home')
         response = self.client.get(url)
-        self.assertTemplateUsed(response, 'restaurant/restaurant_home.html')
-    def test_restaurant_home_view(self):
-        url = reverse('restaurant_home')
-        response = self.client.get(url)
-        self.assertTemplateUsed(response, 'restaurant/restaurant_home.html')
+        self.assertTemplateUsed(response, c.get_restaurant_home_path(1))
 
-    def test_restaurant_reservations_view(self):
-        url = reverse('restaurant_reservations')
-        response = self.client.get(url)
-        self.assertTemplateUsed(response, 'restaurant/restaurant_reservations.html')
 
-    def test_new_restaurant_reservation_1_view(self):
+    def test_restaurant_new_reservations_view_1_with_free_tables(self):
         url = reverse('new_restaurant_reservation_1')
-        response = self.client.get(url)
-        self.assertTemplateUsed(response, 'restaurant/new_restaurant_reservation_1.html')
+        response = self.client.post(url, {'day': '11/12/2024', 'num_guests': 2, 'service': 'Dinar'})
+        self.assertRedirects(response, reverse('new_restaurant_reservation_2'))
 
-    def test_new_restaurant_reservation_2_view(self):
+    def test_restaurant_new_reservations_view_1_non_tables_available(self):
         url = reverse('new_restaurant_reservation_1')
-        response = self.client.post(url, {'day': '11/05/2024', 'num_guests': 2, 'service': 'Dinar'})
+        response = self.client.post(url, {'day': '12/06/2024', 'num_guests': 2, 'service': 'Dinar'})
+        self.assertEqual(response.status_code, 200)
+
+
+    def test_new_restaurant_reservation_2_view_with_internal_client(self):
+        url = reverse('new_restaurant_reservation_1')
+        response = self.client.post(url, {'day': '12/12/2024', 'num_guests': 2, 'service': 'Dinar'})
         self.assertRedirects(response, reverse('new_restaurant_reservation_2'))
 
         url = reverse('new_restaurant_reservation_2')
-        response = self.client.get(url)
-        self.assertTemplateUsed(response, 'restaurant/new_restaurant_reservation_2.html')
+        response = self.client.post(url, {'client_type': 'internal'})
+        self.assertRedirects(response, reverse('new_restaurant_reservation_3'))
+
+    def test_new_restaurant_reservation_2_view_with_external_client(self):
+        url = reverse('new_restaurant_reservation_1')
+        response = self.client.post(url, {'day': '12/12/2024', 'num_guests': 2, 'service': 'Dinar'})
+        self.assertRedirects(response, reverse('new_restaurant_reservation_2'))
+
+        url = reverse('new_restaurant_reservation_2')
+        response = self.client.post(url, {'client_type': 'external'})
+        self.assertRedirects(response, reverse('new_restaurant_reservation_3'))
 
     def test_new_restaurant_reservation_3_view(self):
         url = reverse('new_restaurant_reservation_1')
