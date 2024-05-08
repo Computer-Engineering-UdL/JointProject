@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 
-from Reception.models import RoomReservation, Client, Room, CheckIn, HotelUser, ExtraCosts
+from Reception.models import RoomReservation, Client, Room, HotelUser, ExtraCosts
 from Reception.config import Config as c
 from Reception import forms_verify as fv
 
