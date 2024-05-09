@@ -219,7 +219,18 @@ class TestRestaurantViews(BaseTest):
         response = self.client.post(url, {'client_type': 'external'})
         self.assertRedirects(response, reverse('new_restaurant_reservation_3'))
 
-    def test_new_restaurant_reservation_3_view(self):
+    def test_new_restaurant_reservation_2_view_without_client(self):
+        url = reverse('new_restaurant_reservation_1')
+        response = self.client.post(url, {'day': '12/12/2024', 'num_guests': 2, 'service': 'Dinar'})
+        self.assertRedirects(response, reverse('new_restaurant_reservation_2'))
+
+        url = reverse('new_restaurant_reservation_2')
+        response = self.client.post(url, {'client_type': ''})
+        self.assertEqual(response.status_code, 200)
+
+
+    def test_new_restaurant_reservation_3_view_with_internal_client(self):
+
         url = reverse('new_restaurant_reservation_1')
         response = self.client.post(url, {'day': '11/05/2024', 'num_guests': 2, 'service': 'Dinar'})
         self.assertRedirects(response, reverse('new_restaurant_reservation_2'))
@@ -229,5 +240,32 @@ class TestRestaurantViews(BaseTest):
         self.assertRedirects(response, reverse('new_restaurant_reservation_3'))
 
         url = reverse('new_restaurant_reservation_3')
-        response = self.client.get(url)
-        self.assertTemplateUsed(response, 'restaurant/new_restaurant_reservation_3.html')
+        response = self.client.post(url, {'client': self.client_user_is_hosted.id})
+        messages = list(response.wsgi_request._messages)
+        self.assertIn("S'ha creat la reserva de restaurant amb èxit!", [str(message) for message in messages])
+        self.assertRedirects(response, reverse('restaurant_home'))
+
+        reservation = RestaurantReservation.objects.get(day='2024-11-05', num_guests=2, service='Dinar',
+                                                        client=self.client_user_is_hosted)
+        self.assertIsNotNone(reservation)
+
+    def test_new_restaurant_reservation_3_view_with_external_client(self):
+        url = reverse('new_restaurant_reservation_1')
+        response = self.client.post(url, {'day': '11/05/2024', 'num_guests': 2, 'service': 'Dinar'})
+        self.assertRedirects(response, reverse('new_restaurant_reservation_2'))
+
+        url = reverse('new_restaurant_reservation_2')
+        response = self.client.post(url, {'client_type': 'external'})
+        self.assertRedirects(response, reverse('new_restaurant_reservation_3'))
+
+        url = reverse('new_restaurant_reservation_3')
+        response = self.client.post(url, {'email': 'example1@gmail.com', 'phone_number': '133456789', 'first_name': 'External1', 'last_name': 'External1'})
+
+        messages = list(response.wsgi_request._messages)
+        self.assertIn("S'ha creat la reserva de restaurant amb èxit!", [str(message) for message in messages])
+        self.assertRedirects(response, reverse('restaurant_home'))
+
+        reservation = RestaurantReservation.objects.get(day='2024-11-05', num_guests=2, service='Dinar',
+                                                        client=ExternalRestaurantClient.objects.get())
+        self.assertIsNotNone(reservation)
+
