@@ -27,3 +27,16 @@ h2 {
 .checked {
     color: grey;
 }
+
+/***** Overwrite *****/
+#name {
+    width: 34%;
+}
+
+.list-extra {
+    width: 6%;
+    margin-left: 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
