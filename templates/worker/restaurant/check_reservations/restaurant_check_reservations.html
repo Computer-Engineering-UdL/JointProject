@@ -36,7 +36,7 @@
                         </li>
                         <div class="list-extra">
                             <div class="icon" id="checkbox-icon">
-                                <form action="{% url 'confirm_restaurant_reservation' reservation.reservation_id %}" method="post" style="display: inline;">
+                                <form class="check-restaurant" action="{% url 'confirm_restaurant_reservation' reservation.reservation_id %}" method="post" style="display: inline;">
                                     {% csrf_token %}
                                     <input type="checkbox" name="client_arrived" id="client_arrived_{{ reservation.reservation_id }}" style="display:none;" onchange="this.form.submit()" {% if reservation.client_arrived %} checked {% endif %}>
                                     <label for="client_arrived_{{ reservation.reservation_id }}" style="cursor:pointer;">
@@ -82,7 +82,7 @@
                         </li>
                         <div class="list-extra">
                             <div class="icon" id="checkbox-icon">
-                                <form action="{% url 'confirm_restaurant_reservation' reservation.reservation_id %}" method="post" style="display: inline;">
+                                <form class="check-restaurant" action="{% url 'confirm_restaurant_reservation' reservation.reservation_id %}" method="post" style="display: inline;">
                                     {% csrf_token %}
                                     <input type="checkbox" name="client_arrived" id="client_arrived_{{ reservation.reservation_id }}" style="display:none;" onchange="this.form.submit()" {% if reservation.client_arrived %} checked {% endif %}>
                                     <label for="client_arrived_{{ reservation.reservation_id }}" style="cursor:pointer;">
