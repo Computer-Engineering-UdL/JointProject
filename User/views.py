@@ -6,7 +6,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from JointProject.settings import LOGOUT_REDIRECT_URL
 from User.decorators import worker_required, admin_required
-from db_populator import populate_functions
+from db_populator import populate_functions, get_active_reservations_without_expenses
 from Cleaner.config import MATERIALS_NAMES
 
 
@@ -19,6 +19,8 @@ def redirect_user_based_on_type(user):
             'receptionist': 'receptionist_home',
             'cleaner': 'cleaner_home',
             'restaurant': 'restaurant_home',
+            'accountant': 'accountant_home',
+            'planner': 'planner_home'
         }
         return worker_type_to_url.get(user.worker.type, 'base')
     # Not workers
@@ -33,10 +35,10 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)  # Log in the User after signing up
-            messages.success(request, 'Account created successfully')
+            messages.success(request, "El compte s'ha creat correctament")
             return redirect(redirect_user_based_on_type(user))
         else:
-            messages.error(request, 'Please correct the error below')
+            messages.error(request, "Error al crear el compte")
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
@@ -52,10 +54,7 @@ def login_custom(request):
             if user is not None:
                 login(request, user)
                 return redirect(redirect_user_based_on_type(user))
-            else:
-                messages.error(request, "Invalid username or password")
-        else:
-            messages.error(request, "Invalid username or password")
+        messages.error(request, "Usuari o contrasenya incorrectes")
     else:
         form = AuthenticationForm()
     return render(request, 'registration/login.html', {'form': form})
@@ -64,6 +63,7 @@ def login_custom(request):
 @login_required
 def user_logout(request):
     logout(request)
+    messages.success(request, 'You have been logged out')
     return redirect(LOGOUT_REDIRECT_URL)
 
 
@@ -85,8 +85,17 @@ def populate(request):
             populate_function = populate_functions.get(data_type)
 
             if populate_function:
-                populate_function(entries)
-                messages.success(request, f"Successfully populated {entries} entries for {data_type}.")
+                if data_type == 'expenses':
+                    entries = get_active_reservations_without_expenses().count()
+                    populate_function()
+                else:
+                    populate_function(entries)
+                if entries == 0:
+                    messages.info(request, f"No entries were populated for {data_type}")
+                elif entries == 1:
+                    messages.success(request, f"Successfully populated {entries} entry for {data_type}")
+                else:
+                    messages.success(request, f"Successfully populated {entries} entries for {data_type}")
             else:
                 messages.error(request, "No valid function found for the selected data type")
 

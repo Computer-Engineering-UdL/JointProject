@@ -30,8 +30,7 @@ select {
     background-color: transparent;
 }
 
-select:focus {
-    outline: solid 2px #a1b5ff;
+select:hover, select:focus {
     border-radius: 20px;
 }
 
@@ -183,7 +182,6 @@ input[type="checkbox"]:checked + label:active img {
     font-size: 15px;
     font-weight: bold;
     border-radius: 15px;
-    cursor: pointer;
     transition: opacity 0.2s;
     padding: 15px 10px;
 }

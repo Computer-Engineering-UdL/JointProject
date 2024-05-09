@@ -62,14 +62,6 @@ class RoomReservation(models.Model):
         return self.room.room_num
 
 
-class CheckIn(models.Model):
-    num_reservation = models.CharField(max_length=c.TEXT_SIZE)
-    id_number = models.CharField(max_length=c.ID_NUMBER, db_default='12345678A')
-
-    def __str__(self):
-        return self.num_reservation
-
-
 def create_despesa(room_reservation, pension_type, room_type):
     pension_cost = c.get_pension_cost_per_type(pension_type)
     room_cost = c.get_room_prices_per_type(room_type)

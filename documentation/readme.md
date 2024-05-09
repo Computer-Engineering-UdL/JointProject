@@ -15,10 +15,10 @@ In total this project has 3 sprints:
 
 1. [Sprint 1](./sprint1): 12/03/2024 - 06/04/2024
 2. [Sprint 2](./sprint2): 16/04/2024 - 04/05/2024
-3. [Sprint 3](./sprint3): 07/05/2024 - 25/05/2024
+3. [Sprint 3](./sprint3): 07/05/2024 - 13/06/2024
 
 ## Database schema
 
 To model the database it has been done using schemas. The latest schema is the following:
 
-![Database schema](./database_schema/database_schema_v2.png)
+![Database schema](./database_schema/database_schema_v3.png)

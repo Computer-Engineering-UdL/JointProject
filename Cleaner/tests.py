@@ -235,18 +235,3 @@ class TestCleanerViews(BaseTest):
         stock = response.context['stock']
         stock = list(stock)
         self.assertListEqual(stock, [self.stock_esponja, self.stock_spray])
-
-    def test_cleaned_room(self):
-        url = reverse('cleaner_home')
-        self.reservation.check_in_active = False
-        self.reservation.check_out_active = False
-        self.reservation.save()
-        response = self.client.get(url)
-        occupied_rooms = response.context['occupied_rooms']
-        check_out_rooms = response.context['check_out_rooms']
-        occupied_rooms = list(occupied_rooms)
-        check_out_rooms = list(check_out_rooms)
-        print(occupied_rooms)
-        print(check_out_rooms)
-        """self.assertListEqual(list(occupied_rooms), [self.room])
-        self.assertListEqual(list(check_out_rooms), [])"""

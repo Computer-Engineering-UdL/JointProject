@@ -6,7 +6,7 @@ from datetime import datetime
 
 token = os.getenv('GITHUB_TOKEN')
 repo_name = "Computer-Engineering-UdL/JointProject"
-sprint_milestone_title = "Sprint 2"
+sprint_milestone_title = "Sprint 3"
 
 g = Github(token)
 repo = g.get_repo(repo_name)

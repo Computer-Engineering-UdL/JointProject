@@ -46,8 +46,7 @@
     text-align: center;
 }
 
-.form-field-cleaner input:focus {
+.form-field-cleaner input:focus, .form-field-cleaner input:hover {
     border: none;
-    outline: solid 2px #a1b5ff;
     border-radius: 0 0 10px 10px;
 }

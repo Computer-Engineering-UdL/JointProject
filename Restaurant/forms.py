@@ -26,6 +26,8 @@ class NewRestaurantReservationForm(forms.ModelForm):
 
         try:
             fv.verify_restaurant_reservation(day, num_guests)
+        except TypeError:
+            self.add_error(None, "La data introduïda no és vàlida")
         except forms.ValidationError as e:
             self.add_error(None, e)
 

@@ -9,7 +9,7 @@ from Restaurant.config import Config as rc
 class RestaurantReservation(models.Model):
     day = models.DateField()
     num_guests = models.IntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(6)]
+        validators=[MinValueValidator(1), MaxValueValidator(rc.MAX_GUESTS_PER_RESERVATION)]
     )
     is_active = models.BooleanField(default=True)
 
@@ -29,6 +29,7 @@ class RestaurantReservation(models.Model):
     )
 
     service = models.CharField(max_length=15, choices=rc.get_restaurant_services(), default='None')
+    client_arrived = models.BooleanField(default=False)
 
     def __str__(self):
         if self.client:

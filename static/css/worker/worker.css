@@ -5,6 +5,24 @@
     unicode-bidi: isolate;
 }
 
+input:hover, input:focus {
+    outline: solid 2px #a1b5ff;
+    cursor: text;
+}
+
+select:hover, select:focus {
+    outline: solid 2px #a1b5ff;
+    cursor: pointer;
+}
+
+input, select {
+    border: solid 2px black;
+}
+
+button {
+    cursor: pointer;
+}
+
 /************** Text standards **************/
 p {
     margin: 0;
@@ -54,13 +72,10 @@ header {
     display: flex;
     align-items: stretch;
     justify-content: space-between;
-    /*background-color: #A39E94;*/
     background-color: rgb(184, 189, 201);
     color: white;
     height: 70px;
     min-height: 70px;
-    /*height: 8vh;
-    min-height: 60px;*/
 }
 
 header button{
@@ -215,10 +230,28 @@ input {
 }
 
 /************** Choice buttons **************/
+#access-process-buttons {
+    width: 90%;
+	height: 50%;
+	gap: 50px;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+	align-items: baseline;
+	justify-content: center;
+}
+
+#access-process-buttons a {
+    width: 45%;
+    max-width: 400px;
+    min-width: max-content;
+}
+
 .access-process-button {
+    width: 100%;
     font-size: 20px;
     padding: 30px 75px;
-    transition: background-color 0.2s, border-radius 0.2s
+    transition: background-color 0.2s, border-radius 0.2s;
 }
 
 .access-process-button:hover {
@@ -342,11 +375,6 @@ input {
 	font-size: 30px;
 	padding: 10px;
 }
-
-.filter-field input[type="text"]:focus, .filter-field input[type="number"]:focus {
-    outline: solid 2px #a1b5ff;
-}
-
 
 .form-group {
 	display: flex;

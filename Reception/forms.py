@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 
-from Reception.models import RoomReservation, Client, Room, CheckIn, HotelUser, ExtraCosts
+from Reception.models import RoomReservation, Client, Room, HotelUser, ExtraCosts
 from Reception.config import Config as c
 from Reception import forms_verify as fv
 
@@ -50,7 +50,10 @@ class RoomReservationForm(forms.ModelForm):
         entry = cleaned_data.get('entry')
         exit = cleaned_data.get('exit')
 
-        fv.verify_room_reservation_form(entry, exit, cleaned_data.get('num_guests'), cleaned_data.get('room_type'))
+        try:
+            fv.verify_room_reservation_form(entry, exit, cleaned_data.get('num_guests'), cleaned_data.get('room_type'))
+        except TypeError:
+            self.add_error(None, "La data introduïda no és vàlida")
 
         return cleaned_data
 

@@ -37,7 +37,6 @@
 }
 
 .form-input input:focus, select:focus {
-	outline: solid 2px #a1b5ff;
 	border: none;
 }
 
