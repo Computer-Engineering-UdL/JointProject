@@ -3,3 +3,15 @@
     width: 104px;
     height: 58px;
 }
+
+#name {
+    width: 34%;
+}
+
+.list-extra {
+    width: 6%;
+    margin-left: 2px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
