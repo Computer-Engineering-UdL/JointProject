@@ -3,7 +3,7 @@ from playwright.sync_api import Page, expect
 
 
 def test_has_title(page: Page):
-    page.goto("http://localhost:8000/accounts/login/?next=/")
+    page.goto("http://localhost:8000/")
     page.get_by_label("Username").click()
     page.get_by_label("Username").fill("admin")
     page.get_by_label("Password").click()
