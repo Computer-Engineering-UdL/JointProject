@@ -21,9 +21,9 @@
             <div class="form-field-cleaner"><label>Comentaris addicionals:</label> {{ form.additional_comments }}</div>
             <div class="procedural-buttons">
                 {% if not room.is_clean %}
-                    <button type="submit" class="filter-button">Habitació netejada</button>
+                    <button type="submit" class="filter-button">Marcar habitació netejada</button>
                 {% else %}
-                    <button type="submit" class="filter-button" id="checked-button">Habitació no netejada</button>
+                    <button type="submit" class="filter-button" id="checked-button">Marcar habitació no netejada</button>
                 {% endif %}
             </div>
         </form>

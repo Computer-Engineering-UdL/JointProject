@@ -42,6 +42,12 @@ p {
     font-size: 40px;
 }
 
+.subsubsection-title {
+    margin-bottom: 10px;
+    font-size: 35px;
+    font-style: italic;
+}
+
 h2 {
     margin-top: 10px;
     margin-bottom: 0;
