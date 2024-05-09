@@ -19,6 +19,8 @@ def redirect_user_based_on_type(user):
             'receptionist': 'receptionist_home',
             'cleaner': 'cleaner_home',
             'restaurant': 'restaurant_home',
+            'accountant': 'accountant_home',
+            'planner': 'planner_home'
         }
         return worker_type_to_url.get(user.worker.type, 'base')
     # Not workers
