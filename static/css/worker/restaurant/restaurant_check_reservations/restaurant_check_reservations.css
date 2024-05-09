@@ -1,0 +1,29 @@
+.main {
+    gap: 70px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.check-form {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+.check-form label {
+    width: 30px;
+    height: 30px;
+}
+.check-form label:hover {
+    border-radius: 10px;
+    background-color: #b4bdfc;
+    opacity: 0.5;
+}
+.check-form label:active {
+    opacity: 0.8;
+}
+
+.checked {
+    color: grey;
+}
