@@ -7,17 +7,6 @@ from Reception.config import Config as c
 from Reception import forms_verify as fv
 
 
-class RoomForm(forms.ModelForm):
-    is_clean = forms.BooleanField(required=False)
-    is_taken = forms.BooleanField(required=False)
-    room_num = forms.IntegerField(validators=[MinValueValidator(200), MaxValueValidator(499)])
-    room_type = forms.ChoiceField(choices=c.get_room_types)
-
-    class Meta:
-        model = Room
-        fields = ['room_num', 'room_type', 'is_clean', 'is_taken']
-
-
 class RoomReservationForm(forms.ModelForm):
     entry = forms.DateField(input_formats=['%d/%m/%Y'])
     exit = forms.DateField(input_formats=['%d/%m/%Y'])
