@@ -6,7 +6,7 @@ from User.decorators import worker_required
 
 
 @worker_required('planner')
-def add_room_admin(request):
+def add_room(request):
     """Add a new room to the database."""
     if request.method == 'POST':
         form = RoomForm(request.POST)

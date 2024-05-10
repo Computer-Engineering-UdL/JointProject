@@ -24,7 +24,7 @@ class Client(HotelUser):
 class Room(models.Model):
     is_clean = models.BooleanField()
     is_taken = models.BooleanField()
-    room_num = models.IntegerField()
+    room_num = models.IntegerField(unique=True)
     room_type = models.CharField(
         max_length=c.DROPDOWN_MAX_LENGTH,
         choices=c.get_room_types,
@@ -33,7 +33,8 @@ class Room(models.Model):
     room_price = models.IntegerField(default=0)
 
     def save(self, *args, **kwargs):
-        self.room_price = c.get_room_prices_per_type(self.room_type)
+        if not self.pk:
+            self.room_price = c.get_room_prices_per_type(self.room_type)
         super().save(*args, **kwargs)
 
     def __str__(self):
