@@ -26,7 +26,7 @@ class RoomForm(forms.ModelForm):
                 raise ValidationError(f'El número d\'habitació per {room_type} ha de '
                                       f'ser entre {valid_range[0]} i {valid_range[1]}')
         except TypeError:
-            raise ValidationError(f'El tipus d\'habitació seleccionat no és vàlid o no està ben configurat')
+            raise ValidationError('El tipus d\'habitació seleccionat no és vàlid o no està ben configurat')
 
         if Room.objects.filter(room_num=room_num).exists():
             raise ValidationError('Aquest número d\'habitació ja està en ús')
