@@ -17,7 +17,7 @@ jobs:
           token: ${{ secrets.MY_GITHUB_TOKEN }}
           assignees: ${{ github.event.workflow_run.head_commit.author.name }}
           labels: 'bug'
-          milestone: 'Sprint 3'
+          milestone: '7' # Milestone ID
           title: "CI Failure on commit -> ${{ github.event.workflow_run.head_commit.message }}"
           body: |
             There was a failure in the CI run for the ${{ github.event.workflow_run.head_branch }} branch. Here are the details:
