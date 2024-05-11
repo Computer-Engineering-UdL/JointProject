@@ -82,23 +82,21 @@
                 {% if messages %}
                     {% for message in messages %}
                         {% if message.tags == 'error' %}
-                            <p id="notifications" class="notification-err">{{ message }}</p>
+                            <p id="notifications" class="notification notification-err">{{ message }}</p>
                         {% elif message.tags == 'success' %}
-                            <p id="notifications" class="notification-success">{{ message }}</p>
+                            <p id="notifications" class="notification notification-success">{{ message }}</p>
                         {% else %}
-                            <p id="notifications" class="notification-info">{{ message }}</p>
+                            <p id="notifications" class="notification notification-info">{{ message }}</p>
                         {% endif %}
                     {% endfor %}
                 {% endif %}
                 <form method="post">
                     {% csrf_token %}
-                    <div id="notifications">
-                        {% if form.non_field_errors %}
-                            {% for error in form.non_field_errors %}
-                                <p class="notification-err">{{ error }}</p>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
+                    {% if form.non_field_errors %}
+                        {% for error in form.non_field_errors %}
+                            <p id="notifications" class="notification notification-err">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
                 </form>
             {% endblock notifications %}
         </main>
