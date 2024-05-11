@@ -18,6 +18,7 @@ jobs:
           assignees: ${{ github.event.workflow_run.head_commit.author.name }}
           labels: 'bug'
           milestone: '7' # Milestone ID
+          project: '5' # Project ID
           title: "CI Failure on commit -> ${{ github.event.workflow_run.head_commit.message }}"
           body: |
             There was a failure in the CI run for the ${{ github.event.workflow_run.head_branch }} branch. Here are the details:
