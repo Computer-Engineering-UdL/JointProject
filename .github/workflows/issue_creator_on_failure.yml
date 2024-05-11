@@ -11,13 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VALID_BRANCHES: 'main, production'
-    if: ${{ github.event.workflow_run.conclusion == 'failure' && contains(env.VALID_BRANCHES, github.event.workflow_run.head_branch) }}
+    if: ${{ github.event.workflow_run.conclusion == 'failure' && (github.event.workflow_run.head_branch == 'main' || github.event.workflow_run.head_branch == 'production') }}
     steps:
       - name: Create Issue
         uses: imjohnbo/issue-bot@v3
         with:
           token: ${{ secrets.MY_GITHUB_TOKEN }}
           assignees: ${{ github.event.workflow_run.head_commit.author.name }}
+          labels: 'bug'
+          milestone: 'Sprint 3'
           title: "CI Failure on commit -> ${{ github.event.workflow_run.head_commit.message }}"
           body: |
             There was a failure in the CI run for the ${{ github.event.workflow_run.head_branch }} branch. Here are the details:
