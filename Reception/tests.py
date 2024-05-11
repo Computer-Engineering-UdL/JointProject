@@ -71,7 +71,7 @@ class CheckInFormsAndRedirectsTest(BaseTest):
     def test_check_in_view_status_code(self):
         url = reverse('check_in')
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 100)
 
     def test_check_in_redirect_with_reservation(self):
         url = reverse('check_in')
