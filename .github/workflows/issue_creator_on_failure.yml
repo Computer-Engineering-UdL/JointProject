@@ -14,6 +14,7 @@ jobs:
       - name: Create Issue
         uses: imjohnbo/issue-bot@v3
         with:
+          token: ${{ secrets.MY_GITHUB_TOKEN }}
           assignees: ${{ github.event.workflow_run.head_commit.author.name }}
           title: "CI Failure on commit ${{ github.event.workflow_run.head_commit.id }}"
           body: |
@@ -28,4 +29,4 @@ jobs:
 
             Please check the logs and address the failure as soon as possible.
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
