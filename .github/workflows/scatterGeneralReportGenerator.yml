@@ -18,7 +18,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install PyGithub matplotlib
       - name: Generate scatter diagram (all closed issues)
-        run: python Ichicawa_tools_generators/generateScatterDiagram.py
+        run: python Ishikawa_tools_generators/generateScatterDiagram.py
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
       - name: Upload Scatter Diagram
