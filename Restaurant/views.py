@@ -61,6 +61,7 @@ def new_restaurant_reservation_3(request):
     if request.method == 'POST':
         form = ClientForm(request.POST)
 
+
         if form.is_valid():
             if client_type == 'internal':
                 reservation = form.save(commit=False)

@@ -5,10 +5,12 @@ from django.utils import timezone
 from django import forms
 from Reception.models import RoomReservation, Client, Room, Worker
 from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
-from Restaurant.forms import NewRestaurantReservationForm, AddInternalClientForm, CreateExternalClientForm, get_available_clients
+from Restaurant.forms import NewRestaurantReservationForm, AddInternalClientForm, CreateExternalClientForm, \
+    get_available_clients
 from Restaurant.config import Config as c
 from Reception.forms import SearchReservationForm
-from Restaurant.views import restaurant_home, new_restaurant_reservation_1, new_restaurant_reservation_2, new_restaurant_reservation_3
+from Restaurant.views import restaurant_home, new_restaurant_reservation_1, new_restaurant_reservation_2, \
+    new_restaurant_reservation_3
 
 
 class BaseTest(TestCase):
@@ -42,7 +44,7 @@ class BaseTest(TestCase):
             is_hosted=False
         )
 
-        #ESTO ES LO QUE NECESITO
+        # ESTO ES LO QUE NECESITO
         self.reservationRestaurant = RestaurantReservation.objects.create(
             client=self.client_user_is_hosted,
             day='2024-12-06',
@@ -94,7 +96,6 @@ class TestStatusCode(BaseTest):
         response = self.client.post(url, {'client_type': 'internal'})
         self.assertRedirects(response, reverse('new_restaurant_reservation_3'))
 
-
         url = reverse('new_restaurant_reservation_3')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
@@ -118,7 +119,8 @@ class TestRestaurantForms(BaseTest):
     def test_new_restaurant_reservation_max_guests_form(self):
         form = NewRestaurantReservationForm(data={'day': '2024-12-06', 'num_guests': 2, 'service': 'Dinar'})
         self.assertFalse(form.is_valid())
-        self.assertTrue('El nombre màxim de convidats per aquest dia ha estat superat (disponibles: 0)' in form.errors['__all__'])
+        self.assertTrue(
+            'El nombre màxim de convidats per aquest dia ha estat superat (disponibles: 0)' in form.errors['__all__'])
 
     def test_add_internal_client_form(self):
         form = AddInternalClientForm(data={'client': self.client_user_is_hosted})
@@ -129,11 +131,15 @@ class TestRestaurantForms(BaseTest):
         self.assertFalse(form.is_valid())
 
     def test_create_external_client_form(self):
-        form = CreateExternalClientForm(data={'email': 'externalclient@gmail.com', 'phone_number': '223456789', 'first_name': 'External', 'last_name': 'Client'})
+        form = CreateExternalClientForm(
+            data={'email': 'externalclient@gmail.com', 'phone_number': '223456789', 'first_name': 'External',
+                  'last_name': 'Client'})
         self.assertTrue(form.is_valid())
 
     def test_create_external_client_form_email_exists(self):
-        form = CreateExternalClientForm(data={'email': 'externalclient1@gmail.com', 'phone_number': '223456789', 'first_name': 'External', 'last_name': 'Client'})
+        form = CreateExternalClientForm(
+            data={'email': 'externalclient1@gmail.com', 'phone_number': '223456789', 'first_name': 'External',
+                  'last_name': 'Client'})
         self.assertFalse(form.is_valid())
         self.assertTrue('Aquest correu electrònic ja està registrat' in form.errors['__all__'])
 
@@ -189,7 +195,6 @@ class TestRestaurantViews(BaseTest):
         response = self.client.get(url)
         self.assertTemplateUsed(response, c.get_restaurant_home_path(1))
 
-
     def test_restaurant_new_reservations_view_1_with_free_tables(self):
         url = reverse('new_restaurant_reservation_1')
         response = self.client.post(url, {'day': '11/12/2024', 'num_guests': 2, 'service': 'Dinar'})
@@ -199,7 +204,6 @@ class TestRestaurantViews(BaseTest):
         url = reverse('new_restaurant_reservation_1')
         response = self.client.post(url, {'day': '12/06/2024', 'num_guests': 2, 'service': 'Dinar'})
         self.assertEqual(response.status_code, 200)
-
 
     def test_new_restaurant_reservation_2_view_with_internal_client(self):
         url = reverse('new_restaurant_reservation_1')
@@ -228,9 +232,7 @@ class TestRestaurantViews(BaseTest):
         response = self.client.post(url, {'client_type': ''})
         self.assertEqual(response.status_code, 200)
 
-
     def test_new_restaurant_reservation_3_view_with_internal_client(self):
-
         url = reverse('new_restaurant_reservation_1')
         response = self.client.post(url, {'day': '11/05/2024', 'num_guests': 2, 'service': 'Dinar'})
         self.assertRedirects(response, reverse('new_restaurant_reservation_2'))
@@ -259,13 +261,16 @@ class TestRestaurantViews(BaseTest):
         self.assertRedirects(response, reverse('new_restaurant_reservation_3'))
 
         url = reverse('new_restaurant_reservation_3')
-        response = self.client.post(url, {'email': 'example1@gmail.com', 'phone_number': '133456789', 'first_name': 'External1', 'last_name': 'External1'})
+        response = self.client.post(url, {'email': 'example1@gmail.com', 'phone_number': '133456789',
+                                          'first_name': 'ExternalName', 'last_name': 'ExternalLastName'})
+
 
         messages = list(response.wsgi_request._messages)
         self.assertIn("S'ha creat la reserva de restaurant amb èxit!", [str(message) for message in messages])
         self.assertRedirects(response, reverse('restaurant_home'))
 
-        reservation = RestaurantReservation.objects.get(day='2024-11-05', num_guests=2, service='Dinar',
-                                                        client=ExternalRestaurantClient.objects.get())
+        reservation = RestaurantReservation.objects.get(day='2024-11-05', num_guests=2, service='Dinar')
         self.assertIsNotNone(reservation)
 
+        self.assertEqual(reservation.external_client.first_name, 'ExternalName')
+        self.assertEqual(reservation.external_client.last_name, 'ExternalLastName')
