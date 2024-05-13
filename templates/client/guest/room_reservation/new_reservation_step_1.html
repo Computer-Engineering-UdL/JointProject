@@ -1,0 +1,81 @@
+{% extends "worker/receptionist/base_receptionist.html" %}
+<!-- This template shows the room reservation form, where the receptionist fills all the reservation fields -->
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet"
+          href="{% static 'css/worker/receptionist/reservation/new_reservation/new_reservation_1.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="{% static 'js/reservation_form.js' %}"></script>
+    <script src="{% static 'js/date_picker.js' %}"></script>
+{% endblock extra_css %}
+
+<!-- This block must appear in every reservation template as it is -->
+{% block id_reservation %} id="current-page" {% endblock id_reservation %}
+
+{% block title %}Reserva habitació{% endblock title %}
+
+{% block content %}
+    <div class="main">
+        <h2 class="subsection-title">Crear nova reserva</h2>
+        <form method="post" class="general-form">
+            <div class="add-reservation-form">
+                {% csrf_token %}
+                <div class="date">
+                    <div class="date-form">
+                        <div class="form-input date-input">
+                            <h5 class="title-input">Data d'entrada</h5>
+                            {{ form.entry }}
+                        </div>
+                        <div class="form-input date-input">
+                            <h5 class="title-input">Data de sortida</h5>
+                            {{ form.exit }}
+                        </div>
+                    </div>
+                    <!-- Temporal div -->
+                    <div id="temporal-div">
+                        <style>
+                            #temporal-div {
+                                margin-left: 15px;
+                            }
+                        </style>
+                        <div id="room-num">
+                            <div class="form-input select-input">
+                                <h5 class="title-input">Número d'habitació</h5>
+                                {{ form.room }}
+                            </div>
+                        </div>
+                        <div>
+                            <div class="form-input select-input">
+                                <h5 class="title-input">Client</h5>
+                                {{ form.client }}
+                            </div>
+                            <a href="{% url 'new_reservation_3' %}">Crear client</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="reservation-info-form">
+                    <div class="form-input number-input">
+                        <h5 class="title-input">Nombre d'hostes</h5>
+                        {{ form.num_guests }}
+                    </div>
+                    <div class="form-input select-input">
+                        <h5 class="title-input">Tipus d'habitació</h5>
+                        {{ form.room_type }}
+                    </div>
+                    <div class="form-input select-input">
+                        <h5 class="title-input">Tipus de pensió</h5>
+                        {{ form.pension_type }}
+                    </div>
+                </div>
+            </div>
+            <div class="procedural-buttons">
+                <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
+                <button class="continue-button" type="submit">Create &#10093;</button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}
