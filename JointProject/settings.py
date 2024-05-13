@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     "Cleaner.apps.CleanerConfig",
     "Restaurant.apps.RestaurantConfig",
     "Accountant.apps.AccountantConfig",
-    "Planner.apps.PlannerConfig"
+    "Planner.apps.PlannerConfig",
+    "Guest.apps.GuestConfig"
 ]
 
 MIDDLEWARE = [
