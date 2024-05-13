@@ -4,7 +4,6 @@ from Reception import views as v
 
 urlpatterns = [
     path('reservations/', v.receptionist_home, name="receptionist_home"),
-    path('add-room-admin/', v.add_room_admin, name='add_room'),
     path('add-client-admin/', v.add_client_admin, name='add_client'),
     path('new-reservation-1/', v.new_reservation_1, name='new_reservation_1'),
     path('new-reservation-3/', v.new_reservation_3, name='new_reservation_3'),

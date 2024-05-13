@@ -14,16 +14,16 @@
 {% block content %}
     <div class="main">
         <h2 class="subsection-title">{{ room.room_num }}</h2>
-        <form class="general-form">
+        <form class="general-form" method="POST">
             {% csrf_token %}
             <div class="form-field-cleaner"><label>Els clients s'han deixat alguna cosa?</label> {{ form.missing_objects }}</div>
             <div class="form-field-cleaner"><label>Falten tovalloles?</label> {{ form.need_towels }}</div>
             <div class="form-field-cleaner"><label>Comentaris addicionals:</label> {{ form.additional_comments }}</div>
             <div class="procedural-buttons">
-                {% if not cleaned_room %}
-                    <button type="submit" class="filter-button">Habitació netejada</button>
+                {% if not room.is_clean %}
+                    <button type="submit" class="filter-button">Marcar habitació netejada</button>
                 {% else %}
-                    <button type="submit" class="filter-button" id="checked-button">Habitació no netejada</button>
+                    <button type="submit" class="filter-button" id="checked-button">Marcar habitació no netejada</button>
                 {% endif %}
             </div>
         </form>

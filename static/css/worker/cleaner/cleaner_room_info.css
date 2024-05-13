@@ -9,8 +9,7 @@
 }
 
 .procedural-buttons button {
-    width: 22%;
-    min-width: 180px;
+    min-width: 240px;
 }
 
 #checked-button {

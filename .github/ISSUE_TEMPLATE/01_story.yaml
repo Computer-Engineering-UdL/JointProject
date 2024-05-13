@@ -1,15 +1,10 @@
 name: User Story
-description: A User story for the JointProject to outline new features or improvements from the User's perspective.
+description: A new User Story to be implemented.
 body:
-  - type: markdown
-    attributes:
-      value: |
-        A good user story should be "INVEST" (Independent, Negotiable, Valuable, Estimable, Small, Testable). Please provide as much detail as possible to help us understand the context and the value of this story.
-
   - type: input
     id: user_story_title
     attributes:
-      label: User Story Title
+      label: User Story brief description
       description: Brief title summarizing the User story.
       placeholder: "As a [role], I want [feature], so that [benefit]."
     validations:
@@ -19,8 +14,25 @@ body:
     id: user_story_description
     attributes:
       label: Detailed Description
-      description: Detailed description of the User story, including acceptance criteria.
-      placeholder: "Provide a detailed description, including any acceptance criteria or specific requirements."
+      description: Detailed description of the User story.
+    validations:
+      required: true
+
+  - type: input
+    id: user_role
+    attributes:
+      label: Role
+      description: Role involved in the user story.
+      placeholder: "Enter the role related to this user story."
+    validations:
+      required: true
+
+  - type: input
+    id: sprint_number
+    attributes:
+      label: Sprint Number
+      description: Number of the sprint this user story is part of.
+      placeholder: "Enter the sprint number."
     validations:
       required: true
 
@@ -28,3 +40,9 @@ body:
     attributes:
       value: |
         Make sure to link this task to the appropriate milestone and project to ensure proper tracking and visibility in the project management process.
+        
+        > [!NOTE]
+        > Role: ${{ inputs.user_role.value }}
+        
+        > [!IMPORTANT]
+        > Sprint: ${{ inputs.sprint_number.value }}

@@ -1,8 +1,8 @@
 from django.http import JsonResponse, FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from Reception.forms import AddClientForm, RoomReservationForm, RoomForm, SearchReservationForm, AddExtraCostsForm
-from Reception.models import Room, RoomReservation, Client, HotelUser, CheckIn, Despeses, ExtraCosts, create_despesa
+from Reception.forms import AddClientForm, RoomReservationForm, SearchReservationForm, AddExtraCostsForm
+from Reception.models import Room, RoomReservation, Client, HotelUser, Despeses, ExtraCosts, create_despesa
 from User.decorators import worker_required, admin_required
 from Reception.config import Config as c
 from Reception import utils as u
@@ -27,21 +27,6 @@ def add_client_admin(request):
         form = AddClientForm()
 
     return render(request, c.get_admin_tests_path(1), {'form': form})
-
-
-@admin_required
-def add_room_admin(request):
-    """Add a new room to the database."""
-    if request.method == 'POST':
-        form = RoomForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Habitació afegida amb èxit")
-            return redirect('receptionist_home')
-    else:
-        form = RoomForm()
-
-    return render(request, c.get_admin_tests_path(2), {'form': form})
 
 
 @worker_required('receptionist')
@@ -126,15 +111,8 @@ def check_in_summary(request, pk):
             if action == 'print_receipt':
                 return redirect('print_receipt', reservation_id=reservation.id)
             elif action == 'check_in':
-                check_in, created = CheckIn.objects.get_or_create(
-                    num_reservation=str(reservation.id),
-                    defaults={'id_number': client.id_number}
-                )
-
-                if created:
-                    check_in.save()
-                    reservation.check_in_active = True
-                    reservation.save()
+                reservation.check_in_active = True
+                reservation.save()
 
                 messages.success(request, "Check-in completat amb èxit")
                 return redirect('check_in')
