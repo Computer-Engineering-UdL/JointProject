@@ -54,7 +54,7 @@
                     </li>
                     <div class="list-extra">
                         <div class="icon"><a href="{% url 'reservation_details' pk=reservation.id %}">
-                            <img src="{% static 'img/icons/edit-icon.png' %}" alt="Editar reserva"></a>
+                            <img src="{% static 'img/icons/info-icon.png' %}" alt="Editar reserva"></a>
                         </div>
                         <div class="icon">
                             <form action="{% url 'delete_reservation' reservation.id %}" method="post">
