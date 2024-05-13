@@ -264,7 +264,6 @@ class TestRestaurantViews(BaseTest):
         response = self.client.post(url, {'email': 'example1@gmail.com', 'phone_number': '133456789',
                                           'first_name': 'ExternalName', 'last_name': 'ExternalLastName'})
 
-
         messages = list(response.wsgi_request._messages)
         self.assertIn("S'ha creat la reserva de restaurant amb èxit!", [str(message) for message in messages])
         self.assertRedirects(response, reverse('restaurant_home'))
