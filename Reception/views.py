@@ -37,7 +37,11 @@ def new_reservation_1(request):
         if form.is_valid():
             room_rsv = form.save(commit=False)
             room = get_object_or_404(Room, pk=room_rsv.room_id)
-            u.create_reservation(room_rsv, room)
+            room.is_taken = True
+            room_rsv.save()
+            room.save()
+            room_reservation = get_object_or_404(RoomReservation, pk=room_rsv.id)
+            create_despesa(room_rsv, room_reservation.pension_type, room.room_type)
             return redirect('new_reservation_4', room_rsv.id)
     else:
         form = RoomReservationForm()
@@ -71,16 +75,7 @@ def new_reservation_4(request, pk):
         messages.error(request, "No s'ha trobat la reserva")
         return redirect('search_reservation')
 
-    despeses = get_object_or_404(Despeses, room_reservation_id=pk)
-    extra_costs = ExtraCosts.objects.filter(room_reservation=reservation.id)
-
-    total_price, extra_total = u.get_total_price(extra_costs, despeses)
-
-    return render(request, c.get_reservation_path(4), {
-        'reservation': reservation,
-        'client': client,
-        'total_price': total_price,
-        'room_type': reservation.room.room_type})
+    return render(request, c.get_reservation_path(4), {'reservation': reservation, 'client': client})
 
 
 @worker_required('receptionist')
@@ -245,7 +240,11 @@ def check_out_summary(request, pk):
     despeses = get_object_or_404(Despeses, room_reservation_id=pk)
     extra_costs = ExtraCosts.objects.filter(room_reservation=reservation.id)
 
-    total_price, extra_total = u.get_total_price(extra_costs, despeses)
+    extra_total = 0
+    for extra in extra_costs:
+        extra_total += extra.extra_costs_price
+
+    total_price = despeses.pension_costs + despeses.room_type_costs + extra_total
 
     return render(request, c.get_check_out_path(2),
                   {'extra_costs': extra_costs, 'reservation': reservation, 'room': room, 'despeses': despeses,

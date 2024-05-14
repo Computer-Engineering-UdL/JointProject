@@ -6,25 +6,6 @@ from reportlab.lib.styles import getSampleStyleSheet
 from Reception.models import HotelUser, Client, RoomReservation
 from reportlab.lib import colors
 from reportlab.platypus import Table, TableStyle
-from django.shortcuts import get_object_or_404
-from Reception.models import create_despesa
-
-
-def get_total_price(extra_costs, despeses):
-    extra_total = 0
-    for extra in extra_costs:
-        extra_total += extra.extra_costs_price
-
-    total_price = despeses.pension_costs + despeses.room_type_costs + extra_total
-    return total_price, extra_total
-
-
-def create_reservation(room_rsv, room):
-    room.is_taken = True
-    room_rsv.save()
-    room.save()
-    room_reservation = get_object_or_404(RoomReservation, pk=room_rsv.id)
-    create_despesa(room_rsv, room_reservation.pension_type, room.room_type)
 
 
 def get_external_clients():
