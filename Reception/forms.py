@@ -78,7 +78,7 @@ class AddClientForm(forms.ModelForm):
 
 
 class SearchReservationForm(forms.ModelForm):
-    num_reservation = forms.CharField(label="Número de reserva", required=False)
+    num_reservation = forms.IntegerField(label="Número de reserva", required=False)
     id_number = forms.CharField(label="Document identificatiu", required=False)
     room_num = forms.IntegerField(label="Número d'habitació", required=False,
                                   validators=[MinValueValidator(1)])
