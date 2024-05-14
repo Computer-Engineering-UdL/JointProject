@@ -11,36 +11,38 @@ from Restaurant.config import Config as c
 from Reception.forms import SearchReservationForm
 from Restaurant.views import restaurant_home, new_restaurant_reservation_1, new_restaurant_reservation_2, \
     new_restaurant_reservation_3
+from User import gen_dni
+from db_populator import fake
 
 
 class BaseTest(TestCase):
 
     def setUp(self):
         self.worker = Worker.objects.create_user(
-            username='john_worker',
-            email='worker@example.com',
-            password='testpassword123',
+            username=f"{fake.first_name()}_{fake.last_name()}",
+            email=fake.email(),
+            password=fake.password(),
             type='restaurant'
         )
 
         self.client_user_is_hosted = Client.objects.create_user(
-            username='abde_client',
-            email='client@example.com',
-            password='clientpassword',
-            id_number='12345678A',
-            first_name='Abdellah',
-            last_name='Lamrani',
-            phone_number='123456789',
+            username=f"{fake.first_name()}_{fake.last_name()}",
+            email=fake.email(),
+            password=fake.password(),
+            id_number=gen_dni.gen_dni(),
+            first_name=fake.first_name(),
+            last_name=fake.last_name(),
+            phone_number=fake.phone_number(),
             is_hosted=True
         )
         self.client_user_not_hosted = Client.objects.create_user(
-            username='marc_client',
-            email='client_marc@example.com',
-            password='clientmarcpassword',
-            id_number='12345678A',
-            first_name='Marc',
-            last_name='Marc',
-            phone_number='123356789',
+            username=f"{fake.first_name()}_{fake.last_name()}",
+            email=fake.email(),
+            password=fake.password(),
+            id_number=gen_dni.gen_dni(),
+            first_name=fake.first_name(),
+            last_name=fake.last_name(),
+            phone_number=fake.phone_number(),
             is_hosted=False
         )
 
