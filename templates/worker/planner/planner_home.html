@@ -1,2 +1,29 @@
-{% extends "worker/base_worker.html" %}
-<!-- This template ¿? -->
+{% extends "worker/planner/base_planner.html" %}
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/planner/planner.css' %}">
+{% endblock extra_css %}
+
+
+{% block content %}
+    <div class="main">
+        <h1 class="section-title">
+            PLANIFICADOR
+        </h1>
+        <p class="process-guidance">
+            Esculli el procediment que desitja realitzar:
+        </p>
+        <div id="access-process-buttons">
+            <a href="{% url 'add_room' %}">
+                <button class="access-process-button">Afegir habitacions</button>
+            </a>
+            <a href="{% url 'new_worker' %}">
+                <button class="access-process-button">Nous treballadors</button>
+            </a>
+            <a href="{% url 'room_assignment' %}">
+                <button class="access-process-button">Assignacions neteja</button>
+            </a>
+        </div>
+    </div>
+{% endblock content %}
