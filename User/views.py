@@ -72,7 +72,7 @@ def home(request):
     return render(request, 'base.html')
 
 
-@login_required
+@admin_required
 def populate(request):
     if request.method == 'POST':
         form = PopulateForm(request.POST)
