@@ -4,7 +4,7 @@ from Cleaner.paths import Path as p
 class Config:
     @staticmethod
     def get_cleaner_home_path(n: int):
-        return p.CLEANER_ROOMS_PATH[n]
+        return p.CLEANER_HOME_PATH[n]
 
     @staticmethod
     def get_cleaner_stock_path(n: int):

@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="{% static 'css/worker/planner/planner.css' %}">
 {% endblock extra_css %}
 
+<!-- This block must appear in every reservation template as it is -->
+{% block id_home %} id="current-page" {% endblock id_home %}
+
+{% block title %}Planificador{% endblock title %}
 
 {% block content %}
     <div class="main">
