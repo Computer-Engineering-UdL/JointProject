@@ -8,6 +8,6 @@
 {% block title %}Comptabilitat{% endblock title %}
 
 {% block menu %}
-    <li><a href="{% url '' %}"><button {% block id_cleaning_material %}{% endblock %}>Material de neteja</button></a></li>
-    <li><a href="{% url '' %}"><button {% block id_billing_data %}{% endblock %}>Dades de facturació</button></a></li>
+    <li><a href="{% url 'cleaning_material' %}"><button {% block id_cleaning_material %}{% endblock %}>Material de neteja</button></a></li>
+    <li><a href="{% url 'billing_data' %}"><button {% block id_billing_data %}{% endblock %}>Dades de facturació</button></a></li>
 {% endblock menu %}
