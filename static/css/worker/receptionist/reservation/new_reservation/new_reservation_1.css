@@ -122,3 +122,9 @@
 .select-input p {
 	text-align: center;
 }
+
+/************** Overwrite **************/
+/******* Procedural buttons *******/
+.procedural-buttons {
+    flex-direction: row-reverse;
+}
