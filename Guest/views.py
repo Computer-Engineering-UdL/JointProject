@@ -10,6 +10,7 @@ from datetime import datetime
 def guest_home(request):
     return render(request, c.get_guest_path(2))
 
+
 def guest_room_reservation_1(request):
     """Client creates a new reservation."""
     if request.method == 'POST':
