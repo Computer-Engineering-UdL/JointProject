@@ -8,6 +8,7 @@
 {% block title %}Comptabilitat{% endblock title %}
 
 {% block menu %}
+    <a class="home" {% block id_home %}{% endblock %} href="{% url 'accountant_home' %}"><img src="{% static 'img/icons/home.png' %}" alt="home"></a>
     <li><a href="{% url 'cleaning_material' %}"><button {% block id_cleaning_material %}{% endblock %}>Material de neteja</button></a></li>
     <li><a href="{% url 'billing_data' %}"><button {% block id_billing_data %}{% endblock %}>Dades de facturació</button></a></li>
 {% endblock menu %}
