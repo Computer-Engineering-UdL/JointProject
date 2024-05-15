@@ -32,6 +32,7 @@ urlpatterns = [
     path('restaurant/', include('Restaurant.urls')),
     path('accountant/', include('Accountant.urls')),
     path('planner/', include('Planner.urls')),
+    path('guest/', include('Guest.urls')),
     path('populate/', v.populate, name='populate'),
     path("", v.home, name="base"),
 ]
