@@ -3,6 +3,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.core.exceptions import ValidationError
 from Reception.models import Room
 from Reception.config import Config as c
+from User.views import worker_type_to_url
 
 
 class RoomForm(forms.ModelForm):
@@ -35,5 +36,23 @@ class RoomForm(forms.ModelForm):
 
         if Room.objects.filter(room_num=room_num).exists():
             raise ValidationError('Aquest número d\'habitació ja està en ús')
+
+        return cleaned_data
+
+
+class CreateWorker(forms.Form):
+    worker_type_choices = [(key, key.capitalize()) for key in worker_type_to_url.keys()]
+
+    worker_type = forms.ChoiceField(choices=worker_type_choices, label='Tipus de treballador')
+
+    class Meta:
+        fields = ['worker_type']
+
+    def clean(self):
+        cleaned_data = super().clean()
+        worker_type = cleaned_data.get('worker_type')
+
+        if worker_type not in worker_type_to_url.keys():
+            raise ValidationError('El tipus de treballador seleccionat no és vàlid')
 
         return cleaned_data
