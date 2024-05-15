@@ -346,7 +346,7 @@ input {
 }
 .continue-button:hover {
     color: #7f9bff;
-    background-color: rgba(127, 155, 255, 0.15);
+    background-color: rgb(228, 234, 255);
     border: 2px solid #7f9bff;
 }
 .continue-button:active {
