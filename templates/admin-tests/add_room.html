@@ -11,9 +11,9 @@
     <form method="post">
         {{ form.as_p }}
         {% csrf_token %}
-            <div class="procedural-buttons" style="margin-top: 20%">
-                <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
-                <button type="submit" name="action" class="continue-button">Crear &#10093;</button>
-            </div>
+        <div class="procedural-buttons" style="margin-top: 20%">
+            <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
+            <button type="submit" name="action" class="continue-button">Crear &#10093;</button>
+        </div>
     </form>
 {% endblock %}
