@@ -57,10 +57,6 @@ class Config:
     def get_admin_tests_path(n: int):
         return p.ADMIN_TESTS_PATH[n]
 
-    @staticmethod
-    def get_guest_path(n: int):
-        return p.GUEST_PATH[n]
-
 
 ROOM_EXTRA_COSTS = [
     ('Desperfectes', 'Desperfectes'),

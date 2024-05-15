@@ -30,8 +30,3 @@ class Path:
         1: 'admin-tests/add_client.html',
         2: 'admin-tests/add_room.html',
     }
-
-    GUEST_PATH = {
-        1: 'client/guest/base_guest.html',
-        2: 'client/guest/room_reservation/new_reservation_step_1.html',
-    }

@@ -2,13 +2,13 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from Reception.forms import RoomReservationForm
 from Reception.models import RoomReservation, create_despesa, Room, Client
-from Reception.config import Config as c
+from Guest.config import Config as c
 from django.contrib import messages
 from datetime import datetime
 
 
 def guest_home(request):
-    return render(request, c.get_guest_path(2))
+    return render(request, c.get_guest_home_path())
 
 
 def guest_room_reservation_1(request):
@@ -44,8 +44,8 @@ def guest_room_reservation_1(request):
             room.save()
             new_rsv.save()
             create_despesa(new_rsv, new_rsv.pension_type, room.room_type)
-            return redirect(c.get_guest_path(1))
+            return redirect(c.get_guest_home_path())
     else:
         form = RoomReservationForm()
 
-    return render(request, c.get_guest_path(2), {'form': form})
+    return render(request, c.get_guest_path(1), {'form': form})

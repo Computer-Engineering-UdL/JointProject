@@ -71,6 +71,9 @@
                 <button> <a href="{% url 'planner_home'%}">
                     PLANNER - Home
                 </a></button>
+                <button> <a href="{% url 'guest_home'%}">
+                    GUESTS - Home
+                </a></button>
                 {% if not user.is_authenticated %}
                     <button> <a href="{% url 'login'%}">
                         Log-in
