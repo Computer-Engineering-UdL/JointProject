@@ -91,7 +91,7 @@ def new_reservation_4(request, pk):
 @worker_required('receptionist')
 def submit_reservation(request):
     messages.success(request, "Reserva completada amb èxit")
-    return redirect('receptionist_home')
+    return redirect('reservations')
 
 
 @worker_required('receptionist')

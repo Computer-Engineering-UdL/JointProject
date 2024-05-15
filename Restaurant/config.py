@@ -7,8 +7,8 @@ class Config:
     MAX_RESERVATION_YEAR_AHEAD = 1
 
     @staticmethod
-    def get_restaurant_home_path(n: int):
-        return p.RESTAURANT_HOME_PATH[n]
+    def get_restaurant_home_path():
+        return p.RESTAURANT_HOME_PATH
 
     @staticmethod
     def get_restaurant_new_reservation_path(n: int):

@@ -1,5 +1,3 @@
-from time import sleep
-
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.forms import modelform_factory
@@ -13,7 +11,7 @@ from datetime import datetime
 
 @worker_required('restaurant')
 def restaurant_home(request):
-    return render(request, c.get_restaurant_home_path(1))
+    return render(request, c.get_restaurant_home_path())
 
 
 @worker_required('restaurant')
