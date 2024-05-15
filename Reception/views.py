@@ -10,7 +10,12 @@ from Reception import utils as u
 
 @worker_required('receptionist')
 def receptionist_home(request):
-    return render(request, 'worker/receptionist/receptionist_home.html')
+    return render(request, c.get_receptionist_home_path())
+
+
+@worker_required('receptionist')
+def receptionist_reservations(request):
+    return render(request, 'worker/receptionist/reservation/reservations.html')
 
 
 @admin_required
@@ -86,7 +91,7 @@ def new_reservation_4(request, pk):
 @worker_required('receptionist')
 def submit_reservation(request):
     messages.success(request, "Reserva completada amb èxit")
-    return redirect('receptionist_home')
+    return redirect('reservations')
 
 
 @worker_required('receptionist')

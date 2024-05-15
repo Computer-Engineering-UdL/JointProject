@@ -8,11 +8,16 @@
 <!-- This block must appear in every reservation template as it is -->
 {% block id_add_room %} id="current-page" {% endblock id_add_room %}
 
-{% block title %}Afegir habitacions{% endblock title %}
+{% block title %}Crear habitacions{% endblock title %}
 
 {% block content %}
-    <div class="main">
-        <h2 class="subsection-title">Afegir habitacions</h2>
-        <!-- Temporal code here -->
-    </div>
-{% endblock content %}
+    <h1>Crear una habitació</h1>
+    <form method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <div class="procedural-buttons" style="margin-top: 20%">
+            <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
+            <button type="submit" name="action" class="continue-button">Crear &#10093;</button>
+        </div>
+    </form>
+{% endblock %}

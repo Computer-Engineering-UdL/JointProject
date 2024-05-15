@@ -1,7 +1,5 @@
 class Path:
-    RESTAURANT_HOME_PATH = {
-        1: 'worker/restaurant/restaurant_home.html',
-    }
+    RESTAURANT_HOME_PATH = 'worker/restaurant/restaurant_home.html'
 
     RESTAURANT_NEW_RESERVATION_PATH = {
         1: 'worker/restaurant/new_reservation/restaurant_new_reservation_1.html',

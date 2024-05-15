@@ -8,7 +8,7 @@ from Reception.config import Config as c
 class RoomForm(forms.ModelForm):
     is_clean = forms.BooleanField(required=False)
     is_taken = forms.BooleanField(required=False)
-    room_num = forms.IntegerField(validators=[MinValueValidator(200), MaxValueValidator(499)])
+    room_num = forms.IntegerField(validators=[MinValueValidator(100), MaxValueValidator(699)])
     room_type = forms.ChoiceField(choices=c.get_room_types)
 
     class Meta:
@@ -19,6 +19,11 @@ class RoomForm(forms.ModelForm):
         cleaned_data = super().clean()
         room_num = cleaned_data.get('room_num')
         room_type = cleaned_data.get('room_type')
+
+        room_types = [room[0] for room in c.get_room_types()]
+
+        if room_type not in room_types or room_type == 'No seleccionat':
+            raise ValidationError('El tipus d\'habitació seleccionat no és vàlid')
 
         try:
             valid_range = c.get_room_number_range(room_type)

@@ -8,5 +8,7 @@
 {% block title %}Restaurant{% endblock %}
 
 {% block menu %}
-    <li><a href="{% url 'restaurant_home' %}"><button {% block id_restaurant_home %}{% endblock %}>Restaurant</button></a></li>
+    <a class="home" {% block id_home %}{% endblock %} href="{% url 'restaurant_home' %}"><img src="{% static 'img/icons/home.png' %}" alt="home"></a>
+    <li><a href="{% url 'new_restaurant_reservation_1' %}"><button {% block id_new_reservation %}{% endblock %}>Nova reserva</button></a></li>
+    <li><a href="{% url 'restaurant_reservations' %}"><button {% block id_reservations %}{% endblock %}>Reserves</button></a></li>
 {% endblock menu %}
