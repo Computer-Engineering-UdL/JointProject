@@ -9,7 +9,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <script src="{% static 'js/reservation_form.js' %}"></script>
     <script src="{% static 'js/date_picker.js' %}"></script>
 {% endblock extra_css %}
 
@@ -42,19 +41,6 @@
                                 margin-left: 15px;
                             }
                         </style>
-                        <div id="room-num">
-                            <div class="form-input select-input">
-                                <h5 class="title-input">Número d'habitació</h5>
-                                {{ form.room }}
-                            </div>
-                        </div>
-                        <div>
-                            <div class="form-input select-input">
-                                <h5 class="title-input">Client</h5>
-                                {{ form.client }}
-                            </div>
-                            <a href="{% url 'new_reservation_3' %}">Crear client</a>
-                        </div>
                     </div>
                 </div>
                 <div class="reservation-info-form">

@@ -1,6 +1,6 @@
 from django import forms
 
-from Reception.models import RoomReservation, Client, Room, HotelUser, ExtraCosts
+from Reception.models import RoomReservation, Room
 from Reception.config import Config as c
 from Reception import forms_verify as fv
 
@@ -18,30 +18,6 @@ class RoomReservationForm(forms.ModelForm):
         self.fields['entry'].widget.attrs['id'] = 'entrada'
         self.fields['exit'].widget.attrs['id'] = 'sortida'
 
-    def clean_room(self):
-        room_id = self.cleaned_data.get('room')
-        try:
-            room_id = int(room_id)
-        except ValueError:
-            raise forms.ValidationError("No hi han habitacions d'aquest tipus disponibles")
-        try:
-            room = Room.objects.get(id=room_id)
-        except Room.DoesNotExist:
-            raise forms.ValidationError("L'habitació seleccionada no existeix")
-        return room
-
-    def clean_client(self):
-        client_id = self.cleaned_data.get('client')
-        try:
-            client_id = int(client_id)
-        except ValueError:
-            raise forms.ValidationError("El client seleccionat no existeix")
-        try:
-            client = Client.objects.get(id=client_id)
-        except Client.DoesNotExist:
-            raise forms.ValidationError("El client seleccionat no existeix")
-        return client
-
     def clean(self):
         cleaned_data = super().clean()
         entry = cleaned_data.get('entry')
@@ -56,4 +32,5 @@ class RoomReservationForm(forms.ModelForm):
 
     class Meta:
         model = RoomReservation
+        exclude = ['room', 'client']
         fields = ['entry', 'exit', 'pension_type', 'num_guests', 'room_type']
