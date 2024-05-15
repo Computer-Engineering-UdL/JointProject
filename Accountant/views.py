@@ -11,6 +11,7 @@ def accountant_home(request):
 def cleaning_material(request):
     return render(request, 'worker/accountant/cleaning_material.html')
 
+
 @worker_required('accountant')
 def billing_data(request):
     return render(request, 'worker/accountant/billing_data.html')
