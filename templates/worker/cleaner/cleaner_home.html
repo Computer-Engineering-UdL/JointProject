@@ -1,18 +1,28 @@
 {% extends "worker/cleaner/base_cleaner.html" %}
-<!-- This template shows the cleaner all the assigned rooms to clean for the day -->
-<!-- This template is the first step for the main cleaner process -->
 
 {% load static %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/worker/cleaner/cleaner_home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/worker/cleaner/cleaner_rooms.css' %}">
 {% endblock extra_css %}
 
-<!-- This block must appear in every cleaner template as it is -->
-{% block id_cleaner_home %} id="current-page" {% endblock id_cleaner_home %}
+<!-- This block must appear in every reservation template as it is -->
+{% block id_home %} id="current-page" {% endblock id_home %}
+
+{% block title %}Personal de neteja{% endblock title %}
 
 {% block content %}
     <div class="main">
-        <h1 class="section-title">HABITACIONS ASSIGNADES</h1>
-        <!-- Test temporal code in here -->
+        <h1 class="section-title">Home</h1>
+        <p class="process-guidance">
+            Esculli el procediment que desitja realitzar:
+        </p>
+        <div id="access-process-buttons">
+            <a href="{% url 'cleaner_rooms' %}">
+                <button class="access-process-button">Habitacions assignades</button>
+            </a>
+            <a href="{% url 'cleaner_stock' %}">
+                <button class="access-process-button">Stock de material</button>
+            </a>
+        </div>
     </div>
 {% endblock content %}

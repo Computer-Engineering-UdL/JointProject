@@ -1,0 +1,46 @@
+h4 {
+    font-size: 1.45em;
+    margin-top: 0;
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+
+.cleaner-room-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.cleaner-rooms {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+}
+
+.cleaner-rooms button {
+    width: 142px;
+    font-size: 2em;
+    font-weight: bold;
+    padding: 25px 40px;
+    border: solid 3px black;
+    border-radius: 14px;
+}
+
+.cleaner-rooms button:hover {
+    cursor: pointer;
+    opacity: 0.6;
+    outline: solid 1px black;
+}
+
+.not-cleaned-room {
+    background-color: #e3e8ff;
+}
+
+.cleaned-room {
+    background-color: #a1b5ff;
+}

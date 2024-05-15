@@ -29,4 +29,5 @@ main {
     max-height: 900px;
     max-width: 1600px;
     gap: 10px;
+    margin-bottom: 10px;
 }

@@ -5,7 +5,7 @@
 
 {% load static %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/worker/cleaner/cleaner_home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/worker/cleaner/cleaner_room_info.css' %}">
 {% endblock extra_css %}
 
 <!-- This block must appear in every cleaner template as it is -->
@@ -13,7 +13,19 @@
 
 {% block content %}
     <div class="main">
-        <h1 class="section-title"></h1>
-        <!-- Test temporal code in here -->
+        <h2 class="subsection-title">{{ room.room_num }}</h2>
+        <form class="general-form" method="POST">
+            {% csrf_token %}
+            <div class="form-field-cleaner"><label>Els clients s'han deixat alguna cosa?</label> {{ form.missing_objects }}</div>
+            <div class="form-field-cleaner"><label>Falten tovalloles?</label> {{ form.need_towels }}</div>
+            <div class="form-field-cleaner"><label>Comentaris addicionals:</label> {{ form.additional_comments }}</div>
+            <div class="procedural-buttons">
+                {% if not room.is_clean %}
+                    <button type="submit" class="filter-button">Marcar habitació netejada</button>
+                {% else %}
+                    <button type="submit" class="filter-button" id="checked-button">Marcar habitació no netejada</button>
+                {% endif %}
+            </div>
+        </form>
     </div>
 {% endblock content %}

@@ -1,0 +1,15 @@
+{% extends "worker/base_worker.html" %}
+<!-- This is the base template for the receptionist, every receptionist template must extend this one -->
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/worker/worker.css' %}">
+{% block extra_css %}{% endblock extra_css %}
+
+{% block title %}Planificador{% endblock title %}
+
+{% block menu %}
+    <a class="home" {% block id_home %}{% endblock %} href="{% url 'planner_home' %}"><img src="{% static 'img/icons/home.png' %}" alt="home"></a>
+    <li><a href="{% url 'room_assignment' %}"><button {% block id_room_assignment %}{% endblock %}>Assignacions neteja</button></a></li>
+    <li><a href="{% url 'new_worker' %}"><button {% block id_new_worker %}{% endblock %}>Nous treballadors</button></a></li>
+    <li><a href="{% url 'add_room' %}"><button {% block id_add_room %}{% endblock %}>Afegir habitacions</button></a></li>
+{% endblock menu %}

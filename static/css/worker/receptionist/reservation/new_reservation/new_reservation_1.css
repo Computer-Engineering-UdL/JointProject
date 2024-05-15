@@ -37,7 +37,6 @@
 }
 
 .form-input input:focus, select:focus {
-	outline: solid 2px #a1b5ff;
 	border: none;
 }
 
@@ -122,4 +121,10 @@
 
 .select-input p {
 	text-align: center;
+}
+
+/************** Overwrite **************/
+/******* Procedural buttons *******/
+.procedural-buttons {
+    flex-direction: row-reverse;
 }

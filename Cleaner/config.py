@@ -4,7 +4,7 @@ from Cleaner.paths import Path as p
 class Config:
     @staticmethod
     def get_cleaner_home_path(n: int):
-        return p.CLEANER_ROOMS_PATH[n]
+        return p.CLEANER_HOME_PATH[n]
 
     @staticmethod
     def get_cleaner_stock_path(n: int):
@@ -22,6 +22,11 @@ class Config:
 MATERIALS_NAMES = {
     'Esponja': 'esponja.png',
     'Guantes': 'guantes.png',
-    'Spray': 'spray.png',
+    'Spray': 'spray.avif',
     'Toalla': 'toalla.avif',
+    'Fregasuelos': 'fregasuelos.avif',
+    'lejia': 'lejia.avif',
+    'limpiacristales': 'limpiacristales.avif',
+    'mopa': 'mopa.avif',
+    'trapos': 'trapos.avif',
 }

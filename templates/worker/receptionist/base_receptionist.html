@@ -2,14 +2,14 @@
 <!-- This is the base template for the receptionist, every receptionist template must extend this one -->
 
 {% load static %}
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/worker/worker.css' %}">
-{% endblock extra_css %}
+<link rel="stylesheet" href="{% static 'css/worker/worker.css' %}">
+{% block extra_css %}{% endblock extra_css %}
 
-{% block title %}Recepció{% endblock title %}
+{% block title %}Recepcionista{% endblock title %}
 
 {% block menu %}
-    <li><a href="{% url 'receptionist_home' %}"><button {% block id_reservation %}{% endblock %}>Reserves</button></a></li>
+    <a class="home" {% block id_home %}{% endblock %} href="{% url 'receptionist_home' %}"><img src="{% static 'img/icons/home.png' %}" alt="home"></a>
+    <li><a href="{% url 'reservations' %}"><button {% block id_reservation %}{% endblock %}>Reserves</button></a></li>
     <li><a href="{% url 'check_in' %}"><button {% block id_check-in %}{% endblock %}>Check-in</button></a></li>
     <li><a href="{% url 'check_out' %}"><button {% block id_check-out %}{% endblock %}>Check-out</button></a></li>
 {% endblock menu %}

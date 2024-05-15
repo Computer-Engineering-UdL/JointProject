@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.utils import timezone
 from Cleaner.forms import StockForm, CleanedRoomForm
 from Cleaner.models import Stock, CleanedRoom
 from Reception.models import Room
@@ -31,6 +33,7 @@ def cleaner_stock(request):
                     item = Stock.objects.get(id=stock_id)
                     item.is_available = stock_id not in submitted_stock_ids
                     item.save()
+                messages.success(request, 'Stock actualitzat correctament')
 
                 return redirect('cleaner_stock')
         else:
@@ -43,37 +46,61 @@ def cleaner_stock(request):
 
 @worker_required('cleaner')
 def cleaner_cleaned_rooms(request):
-    occupied_rooms = Room.objects.filter(is_taken=True, roomreservation__check_out_active=False)
-    check_out_rooms = Room.objects.filter(is_taken=True, roomreservation__check_out_active=True)
-    return render(request, c.get_cleaner_rooms_path(1), {'occupied_rooms': occupied_rooms,
-                                                         'check_out_rooms': check_out_rooms})
+    today = timezone.now().date()
+
+    occupied_rooms = Room.objects.filter(
+        is_taken=True,
+        roomreservation__exit__gt=today,
+        roomreservation__check_out_active=False
+    ).distinct()
+
+    check_out_rooms = Room.objects.filter(
+        is_taken=False,
+        roomreservation__exit__gte=today,
+        roomreservation__check_out_active=True
+    ).distinct()
+
+    return render(request, c.get_cleaner_rooms_path(1), {
+        'occupied_rooms': occupied_rooms,
+        'check_out_rooms': check_out_rooms
+    })
 
 
 @worker_required('cleaner')
 def cleaner_cleaned_room_info(request, room_id):
-    form = CleanedRoomForm(request.POST or None)
     room = Room.objects.get(id=room_id)
-    cleaned_room = CleanedRoom.objects.filter(room=room)
+    cleaned_rooms = CleanedRoom.objects.filter(room=room)
+    initial_data = {
+        'missing_objects': cleaned_rooms.first().missing_objects if cleaned_rooms.exists() else '',
+        'need_towels': cleaned_rooms.first().need_towels if cleaned_rooms.exists() else 0,
+        'additional_comments': cleaned_rooms.first().additional_comments if cleaned_rooms.exists() else ''
+    }
 
     if request.method == 'POST':
+        form = CleanedRoomForm(request.POST)
         if form.is_valid():
-            if cleaned_room.exists():
-                cleaned_room = cleaned_room.first()
+            if cleaned_rooms.exists():
+                cleaned_room = cleaned_rooms.first()
                 cleaned_room.missing_objects = form.cleaned_data.get('missing_objects')
                 cleaned_room.need_towels = form.cleaned_data.get('need_towels')
                 cleaned_room.additional_comments = form.cleaned_data.get('additional_comments')
-                cleaned_room.is_cleaned = True
                 cleaned_room.save()
             else:
                 missing_objects = form.cleaned_data.get('missing_objects')
                 need_towels = form.cleaned_data.get('need_towels')
                 additional_comments = form.cleaned_data.get('additional_comments')
-                cleaned_room = room.cleanedroom_set.create(missing_objects=missing_objects,
-                                                           need_towels=need_towels,
-                                                           additional_comments=additional_comments,
-                                                           is_cleaned=True)
+                cleaned_room = CleanedRoom(
+                    room=room,
+                    missing_objects=missing_objects,
+                    need_towels=need_towels,
+                    additional_comments=additional_comments
+                )
                 cleaned_room.save()
-        else:
-            print(form.errors)
-        return redirect('cleaner_cleaned_rooms')
-    return render(request, c.get_cleaner_rooms_path(2), {'room': room, 'cleaned_room': cleaned_room})
+
+            room.is_clean = True
+            room.save()
+            messages.success(request, 'Habitació actualitzada correctament')
+        return redirect('cleaner_home')
+    else:
+        form = CleanedRoomForm(initial=initial_data)
+    return render(request, c.get_cleaner_rooms_path(2), {'form': form, 'room': room})

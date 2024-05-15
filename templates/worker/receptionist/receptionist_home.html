@@ -1,5 +1,4 @@
 {% extends "worker/receptionist/base_receptionist.html" %}
-<!-- The receptionist_home template must let the worker choose between creating a new reservation and modifying one -->
 
 {% load static %}
 {% block extra_css %}
@@ -7,22 +6,27 @@
 {% endblock extra_css %}
 
 <!-- This block must appear in every reservation template as it is -->
-{% block id_reservation %} id="current-page" {% endblock id_reservation %}
+{% block id_home %} id="current-page" {% endblock id_home %}
+
+{% block title %}Home{% endblock title %}
 
 {% block content %}
     <div class="main">
         <h1 class="section-title">
-            RESERVES
+            RECEPCIONISTA
         </h1>
         <p class="process-guidance">
             Esculli el procediment que desitja realitzar:
         </p>
-        <div id="buttons">
-            <a href="{% url 'new_reservation_1' %}">
-                <button class="access-process-button">Crear nova reserva</button>
+        <div id="access-process-buttons">
+            <a href="{% url 'reservations' %}">
+                <button class="access-process-button">Reserves</button>
             </a>
-            <a href="{% url 'search_reservation' %}">
-                <button class="access-process-button">Gestionar reserves</button>
+            <a href="{% url 'check_in' %}">
+                <button class="access-process-button">Check in</button>
+            </a>
+            <a href="{% url 'check_out' %}">
+                <button class="access-process-button">Check out</button>
             </a>
         </div>
     </div>

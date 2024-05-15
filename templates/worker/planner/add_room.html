@@ -1,0 +1,23 @@
+{% extends "worker/planner/base_planner.html" %}
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/planner/planner.css' %}">
+{% endblock extra_css %}
+
+<!-- This block must appear in every reservation template as it is -->
+{% block id_add_room %} id="current-page" {% endblock id_add_room %}
+
+{% block title %}Crear habitacions{% endblock title %}
+
+{% block content %}
+    <h1>Crear una habitació</h1>
+    <form method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <div class="procedural-buttons" style="margin-top: 20%">
+            <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
+            <button type="submit" name="action" class="continue-button">Crear &#10093;</button>
+        </div>
+    </form>
+{% endblock %}

@@ -1,31 +1,38 @@
 {% extends "worker/receptionist/base_receptionist.html" %}
+{% load static %}
 <!-- This template shows all the info of the client reservation -->
+
+{% block extra_css %}
+    <link rel="stylesheet"
+          href="{% static 'css/worker/receptionist/reservation/manage_reservation/reservation_details.css' %}">
+{% endblock extra_css %}
 
 <!-- This block must appear in every reservation template as it is -->
 {% block id_reservation %} id="current-page" {% endblock id_reservation %}
 
 {% block content %}
-    <div>
-        <div>
-            <div>
-                <h1>Reserva {{ reservation.id }}</h1>
-            </div>
-            <div>
-                <p>Hoste: {{ reservation.client }}</p>
-                <p>Habitació: {{ reservation.room }}</p>
-                <p>Data entrada: {{ reservation.entry }}</p>
-                <p>Data sortida: {{ reservation.exit }}</p>
-                <p>Tipus de pensió: {{ reservation.pension_type }}</p>
-                <p>Número d'hostes: {{ reservation.num_guests }}</p>
-            </div>
-
+    <div class="main">
+        <div id="title-delete">
+            <h2 class="subsubsection-title">Reserva {{ reservation.id }}</h2>
             <form action="{% url 'delete_reservation' reservation.id %}" method="post">
                 {% csrf_token %}
-                <button type="submit" onclick="return confirm('Estàs segur que vols eliminar aquesta reserva?');">Eliminar Reserva</button>
+                <button type="submit" onclick="return confirm('Estàs segur que vols eliminar aquesta reserva?');">
+                    <img src="{% static 'img/icons/delete-icon.png' %}" alt="Eliminar reserva"></button>
             </form>
-
-            <a href="{% url 'receptionist_home' %}">Torna a Inici</a>
-            <a href="{% url 'search_reservation' %}">Torna a Cerca Reserva</a>
+        </div>
+        <div id="info-buttons">
+            <div id="info">
+                <p><strong>Hoste:</strong> {{ reservation.client }} {{ reservation.client.last_name }}</p>
+                <p><strong>Habitació:</strong> {{ reservation.room.room_num }}</p>
+                <p><strong>Data entrada:</strong> {{ reservation.entry }}</p>
+                <p><strong>Data sortida:</strong> {{ reservation.exit }}</p>
+                <p><strong>Tipus de pensió:</strong> {{ reservation.pension_type }}</p>
+                <p><strong>Número d'hostes:</strong> {{ reservation.num_guests }}</p>
+            </div>
+            <div class="procedural-buttons">
+                <a class="back-button" href="{% url 'receptionist_home' %}">Torna a Inici</a>
+                <a class="back-button" href="{% url 'search_reservation' %}">Torna a Cercar Reserva</a>
+            </div>
         </div>
     </div>
 {% endblock %}

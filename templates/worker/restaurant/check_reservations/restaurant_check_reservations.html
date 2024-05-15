@@ -3,14 +3,105 @@
 
 {% load static %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/worker/restaurant/restaurant_check_reservations/restaurant_check_reservations.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'css/worker/restaurant/restaurant_check_reservations/restaurant_check_reservations.css' %}">
 {% endblock extra_css %}
 
 <!-- This block must appear in every restaurant template as it is -->
-{% block id_restaurant_home %} id="current-page" {% endblock id_restaurant_home %}
+{% block id_reservations %} id="current-page" {% endblock id_reservations %}
 
 {% block content %}
     <div class="main">
-        <!-- Test temporal code in here -->
+        <ul class="reservation-list">
+            <h2>Reserves pendents de confirmació</h2>
+            <ul class="list-index">
+                <li id="reservation-id">Reserva</li>
+                <li id="name">Nom Client</li>
+                <li id="entry">Data</li>
+                <li id="exit">Servei</li>
+                <li id="num-guests">Nº hostes</li>
+                <li id="pension">Tipus client</li>
+            </ul>
+            <div id="divider"></div>
+            {% for reservation in reservations %}
+                {% if not reservation.client_arrived %}
+                    <div class="list-div">
+                        <li>
+                            <div id="reservation-id">{{ reservation.reservation_id }}</div>
+                            <div id="name">{{ reservation.client_name }} {{ reservation.client_last_name }}</div>
+                            <div id="entry">{{ reservation.day }}</div>
+                            <div id="exit">{{ reservation.service }}</div>
+                            <div id="num-guests">{{ reservation.num_guests }}</div>
+                            <div id="pension">{{ reservation.is_internal|yesno:"Intern,Extern" }}</div>
+                        </li>
+                        <div class="list-extra">
+                            <div class="icon" id="checkbox-icon">
+                                <form class="check-form" action="{% url 'confirm_restaurant_reservation' reservation.reservation_id %}" method="post" style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="checkbox" name="client_arrived" id="client_arrived_{{ reservation.reservation_id }}" style="display:none;" onchange="this.form.submit()" {% if reservation.client_arrived %} checked {% endif %}>
+                                    <label for="client_arrived_{{ reservation.reservation_id }}" style="cursor:pointer;">
+                                        <img src="{% if reservation.client_arrived %}{% static 'img/icons/checked.png' %}{% else %}{% static 'img/icons/not-checked.png' %}{% endif %}" alt="Confirmar reserva" onclick="toggleCheckbox({{ reservation.reservation_id }});">
+                                    </label>
+                                </form>
+                            </div>
+                            <div class="icon">
+                                <form action="{% url 'delete_restaurant_reservation' reservation.reservation_id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" onclick="return confirm('Estàs segur que vols eliminar aquesta reserva?');">
+                                        <img src="{% static 'img/icons/delete-icon.png' %}" alt="Eliminar reserva">
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+        <ul class="reservation-list checked">
+            <h2>Reserves confirmades</h2>
+            <ul class="list-index">
+                <li id="reservation-id">Reserva</li>
+                <li id="name">Nom Client</li>
+                <li id="entry">Data</li>
+                <li id="exit">Servei</li>
+                <li id="num-guests">Nº hostes</li>
+                <li id="pension">Tipus client</li>
+            </ul>
+            <div id="divider"></div>
+            {% for reservation in reservations %}
+                {% if reservation.client_arrived %}
+                    <div class="list-div">
+                        <li>
+                            <div id="reservation-id">{{ reservation.reservation_id }}</div>
+                            <div id="name">{{ reservation.client_name }} {{ reservation.client_last_name }}</div>
+                            <div id="entry">{{ reservation.day }}</div>
+                            <div id="exit">{{ reservation.service }}</div>
+                            <div id="num-guests">{{ reservation.num_guests }}</div>
+                            <div id="pension">{{ reservation.is_internal|yesno:"Intern,Extern" }}</div>
+                        </li>
+                        <div class="list-extra">
+                            <div class="icon" id="checkbox-icon">
+                                <form class="check-form" action="{% url 'confirm_restaurant_reservation' reservation.reservation_id %}" method="post" style="display: inline;">
+                                    {% csrf_token %}
+                                    <input type="checkbox" name="client_arrived" id="client_arrived_{{ reservation.reservation_id }}" style="display:none;" onchange="this.form.submit()" {% if reservation.client_arrived %} checked {% endif %}>
+                                    <label for="client_arrived_{{ reservation.reservation_id }}" style="cursor:pointer;">
+                                        <img src="{% if reservation.client_arrived %}{% static 'img/icons/checked.png' %}{% else %}{% static 'img/icons/not-checked.png' %}{% endif %}" alt="Confirmar reserva" onclick="toggleCheckbox({{ reservation.reservation_id }});">
+                                    </label>
+                                </form>
+                            </div>
+                            <div class="icon">
+                                <form action="{% url 'delete_restaurant_reservation' reservation.reservation_id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" onclick="return confirm('Estàs segur que vols eliminar aquesta reserva?');">
+                                        <img src="{% static 'img/icons/delete-icon.png' %}" alt="Eliminar reserva">
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </ul>
     </div>
 {% endblock content %}

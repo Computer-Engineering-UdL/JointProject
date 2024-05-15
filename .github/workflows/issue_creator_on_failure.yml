@@ -1,0 +1,33 @@
+name: Create Issue on CI Failure
+
+on:
+  workflow_run:
+    workflows: [ "Django CI", "Playwright Tests" ]
+    types:
+      - completed
+
+jobs:
+  create_issue:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' && (github.event.workflow_run.head_branch == 'main' || github.event.workflow_run.head_branch == 'production') }}
+    steps:
+      - name: Create Issue
+        uses: imjohnbo/issue-bot@v3
+        with:
+          token: ${{ secrets.MY_GITHUB_TOKEN }}
+          assignees: ${{ github.event.workflow_run.head_commit.author.name }}
+          labels: 'bug'
+          title: "CI Failure on commit -> ${{ github.event.workflow_run.head_commit.message }}"
+          body: |
+            There was a failure in the CI run for the ${{ github.event.workflow_run.head_branch }} branch. Here are the details:
+
+            - Commit: ${{ github.event.workflow_run.head_commit.id }}
+            - Author: ${{ github.event.workflow_run.head_commit.author.name }}
+            - Message: ${{ github.event.workflow_run.head_commit.message }}
+            - Workflow: ${{ github.event.workflow_run.name }}
+            - Status: ${{ github.event.workflow_run.conclusion }}
+            - Log: https://github.com/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}
+
+            Please check the logs and address the failure as soon as possible.
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}

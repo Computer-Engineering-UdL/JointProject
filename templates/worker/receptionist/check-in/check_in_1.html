@@ -17,7 +17,7 @@
             Per iniciar el procés de "Check-In" introdueixi una de les següents dades sol·licitades:
         </p> -->
 
-        <form method="post" class="filter-field">
+        <form method="get" class="filter-field">
             {% csrf_token %}
             <div class="form-group">
                 <h5>{{ form.num_reservation.label }}</h5>
@@ -33,17 +33,6 @@
             </div>
             <div class="procedural-buttons">
                 <button class="filter-button" type="submit">Filtrar</button>
-            </div>
-        </form>
-
-        <form method="post">
-            {% csrf_token %}
-            <div id="notifications">
-                {% if form.non_field_errors %}
-                    {% for error in form.non_field_errors %}
-                        <p class="notification-err">{{ error }}</p>
-                    {% endfor %}
-                {% endif %}
             </div>
         </form>
 

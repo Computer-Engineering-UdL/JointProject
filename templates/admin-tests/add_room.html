@@ -1,9 +1,19 @@
 {% extends "base.html" %}
 
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/worker/worker.css' %}">
+    {% block extra_css %}{% endblock extra_css %}
+{% endblock css %}
+
 {% block content %}
+    <h1>Crear una habitació</h1>
     <form method="post">
         {{ form.as_p }}
         {% csrf_token %}
-        <button type="submit">Add room</button>
+        <div class="procedural-buttons" style="margin-top: 20%">
+            <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
+            <button type="submit" name="action" class="continue-button">Crear &#10093;</button>
+        </div>
     </form>
 {% endblock %}

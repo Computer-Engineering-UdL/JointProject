@@ -27,7 +27,6 @@ class CleanedRoom(models.Model):
     missing_objects = models.TextField(blank=True)
     need_towels = models.IntegerField(default=0)
     additional_comments = models.TextField(blank=True)
-    is_cleaned = models.BooleanField(default=False)
 
     def __str__(self):
         return self.room.room_num

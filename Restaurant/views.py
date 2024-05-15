@@ -1,17 +1,17 @@
 from django.shortcuts import render, redirect
-from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
 from django.forms import modelform_factory
 from User.decorators import worker_required
 from Restaurant.config import Config as c
+from Restaurant.utils import get_ordered_reservations
 from Restaurant.forms import NewRestaurantReservationForm, AddInternalClientForm, CreateExternalClientForm
 from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
-from Reception.models import HotelUser, Client
 from datetime import datetime
 
 
 @worker_required('restaurant')
 def restaurant_home(request):
-    return render(request, c.get_restaurant_home_path(1))
+    return render(request, c.get_restaurant_home_path())
 
 
 @worker_required('restaurant')
@@ -58,42 +58,37 @@ def new_restaurant_reservation_3(request):
 
     if request.method == 'POST':
         form = ClientForm(request.POST)
+
         if form.is_valid():
             if client_type == 'internal':
-                ClientForm = modelform_factory(RestaurantReservation, form=AddInternalClientForm)
+                reservation = form.save(commit=False)
+                reservation.client = form.cleaned_data['client']
+                reservation.day = datetime.strptime(reservation_data['day'], '%Y-%m-%d').date()
+                reservation.num_guests = reservation_data['num_guests']
+                reservation.service = reservation_data['service']
+                reservation.is_active = True
             else:
-                ClientForm = modelform_factory(ExternalRestaurantClient, form=CreateExternalClientForm)
-
-            if request.method == 'POST':
-                form = ClientForm(request.POST)
-                if form.is_valid():
-                    if client_type == 'internal':
-                        reservation = form.save(commit=False)
-                        reservation.client = form.cleaned_data['client']
-                        reservation.day = datetime.strptime(reservation_data['day'], '%Y-%m-%d').date()
-                        reservation.num_guests = reservation_data['num_guests']
-                        reservation.is_active = True
-                    else:
-                        external_client = form.save()
-                        reservation = RestaurantReservation(
-                            client=None,
-                            external_client=external_client,
-                            day=datetime.strptime(reservation_data['day'], '%Y-%m-%d').date(),
-                            num_guests=reservation_data['num_guests'],
-                            is_active=True
-                        )
-                    reservation.save()
-                    del request.session['reservation_data']
-                    return redirect('restaurant_home')
+                external_client = form.save()
+                reservation = RestaurantReservation(
+                    client=None,
+                    external_client=external_client,
+                    day=datetime.strptime(reservation_data['day'], '%Y-%m-%d').date(),
+                    num_guests=reservation_data['num_guests'],
+                    service=reservation_data['service'],
+                    is_active=True
+                )
+            reservation.save()
+            del request.session['reservation_data']
+            messages.success(request, "S'ha creat la reserva de restaurant amb èxit!")
+            return redirect('restaurant_home')
     else:
         form = ClientForm()
-
     return render(request, c.get_restaurant_new_reservation_path(3), {'form': form})
 
 
 @worker_required('restaurant')
 def restaurant_reservations(request):
-    reservations = RestaurantReservation.objects.filter(is_active=True)
+    reservations = get_ordered_reservations()
     reservation_details = []
 
     for reservation in reservations:
@@ -101,6 +96,7 @@ def restaurant_reservations(request):
         client_name = "No especificat"
         client_last_name = ""
         is_internal = False
+        client_arrvied = reservation.client_arrived
 
         if reservation.client:
             client = reservation.client
@@ -122,8 +118,28 @@ def restaurant_reservations(request):
             'client_last_name': client_last_name,
             'day': reservation.day,
             'num_guests': reservation.num_guests,
+            'service': reservation.service,
             'is_active': reservation.is_active,
+            'client_arrived': client_arrvied,
             'is_internal': is_internal
         })
 
     return render(request, c.get_restaurant_check_reservations_path(1), {'reservations': reservation_details})
+
+
+@worker_required('restaurant')
+def delete_restaurant_reservation(request, pk):
+    reservation = RestaurantReservation.objects.get(id=pk)
+    reservation.is_active = False
+    reservation.save()
+    messages.success(request, "S'ha eliminat la reserva de restaurant amb èxit!")
+    return redirect('restaurant_reservations')
+
+
+@worker_required('restaurant')
+def confirm_restaurant_reservation(request, pk):
+    reservation = RestaurantReservation.objects.get(id=pk)
+    reservation.client_arrived = 'client_arrived' in request.POST
+    reservation.save()
+    messages.success(request, "S'ha actualitzat la reserva de restaurant amb èxit!")
+    return redirect('restaurant_reservations')

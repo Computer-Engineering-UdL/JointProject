@@ -1,0 +1,42 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 30px;
+}
+
+.process-guidance {
+    margin-top: 30px;
+}
+
+h5 {
+    margin-bottom: 0;
+}
+
+input {
+    border-radius: 5px;
+    border: solid 1px black;
+    padding: 5px;
+    font-family: "Gill Sans MT", Arial, sans-serif;
+    font-size: 16px;
+}
+input:hover {
+    border: solid 1px #7f9bff;
+    cursor: text;
+}
+
+.form-group select {
+    border: solid 1px;
+    padding: 10px;
+    border-radius: 3px;
+    font-size: 15px;
+    font-family: "Gill Sans MT", Arial, sans-serif;
+}
+.form-group select:hover {
+    border: solid 1px #7f9bff;
+    cursor: pointer;
+}
+
+.procedural-buttons {
+    flex-direction: row-reverse;
+}

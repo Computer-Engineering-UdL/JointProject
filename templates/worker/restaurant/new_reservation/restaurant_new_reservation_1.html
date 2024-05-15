@@ -7,10 +7,20 @@
 {% endblock extra_css %}
 
 <!-- This block must appear in every restaurant template as it is -->
-{% block id_restaurant_home %} id="current-page" {% endblock id_restaurant_home %}
+{% block id_new_reservation %} id="current-page" {% endblock id_new_reservation %}
 
 {% block content %}
     <div class="main">
-        <!-- Test temporal code in here -->
+        <h2 class="subsection-title">Crear Nova Reserva</h2>
+        <p class="process-guidance">Introdueixi les següents dades:</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group"><h5>{{ form.day.label }}</h5> {{ form.day }}</div>
+            <div class="form-group"><h5>{{ form.service.label }}</h5> {{ form.service }}</div>
+            <div class="form-group"><h5>{{ form.num_guests.label }}</h5> {{ form.num_guests }}</div>
+            <div class="procedural-buttons">
+                <button class="filter-button" type="submit">Continua</button>
+            </div>
+        </form>
     </div>
 {% endblock content %}

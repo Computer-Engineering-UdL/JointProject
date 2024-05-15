@@ -1,0 +1,51 @@
+/************** Overwrite **************/
+.general-form {
+    gap: 10px;
+}
+
+.procedural-buttons {
+    height: min-content;
+    justify-content: flex-end;
+}
+
+.procedural-buttons button {
+    min-width: 240px;
+}
+
+#checked-button {
+    border-color: #c5c9de;
+    color: #c5c9de;
+}
+
+#checked-button:hover {
+    background-color: #f3f4ff;
+}
+
+/************** Form Field **************/
+.form-field-cleaner {
+    display: flex;
+    flex-direction: column;
+    border: solid 2px black;
+    border-radius: 13px;
+}
+
+.form-field-cleaner label {
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 13px 13px 0 0;
+    text-align: center;
+    background-color: #e3e8ff;
+}
+
+.form-field-cleaner input {
+    padding: 10px;
+    border: none;
+    box-shadow: 0 -2px 0 #000;
+    border-radius: 0 0 13px 13px;
+    text-align: center;
+}
+
+.form-field-cleaner input:focus, .form-field-cleaner input:hover {
+    border: none;
+    border-radius: 0 0 10px 10px;
+}

@@ -18,7 +18,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install PyGithub matplotlib numpy
       - name: Generate Burn Down Chart
-        run: python Ichicawa_tools_generators/burn_down_chart.py
+        run: python Ishikawa_tools_generators/burn_down_chart.py
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
       - name: Upload Burn Down Chart
@@ -27,7 +27,7 @@ jobs:
           name: burn_down_chart
           path: burn_down_chart.png
       - name: Generate Burn Up Chart
-        run: python Ichicawa_tools_generators/burn_up_chart.py
+        run: python Ishikawa_tools_generators/burn_up_chart.py
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
       - name: Upload Burn Up Chart

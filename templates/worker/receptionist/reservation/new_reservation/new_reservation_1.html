@@ -73,19 +73,8 @@
                 </div>
             </div>
             <div class="procedural-buttons">
-                <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
-                <button class="continue-button" type="submit">Create &#10093;</button>
+                <button class="filter-button" type="submit">Continua</button>
             </div>
         </form>
     </div>
-    <form method="post">
-        {% csrf_token %}
-        <div id="notifications">
-            {% if form.errors %}
-                {% for error in form.errors %}
-                    <p class="notification-err">{{ error }}</p>
-                {% endfor %}
-            {% endif %}
-        </div>
-    </form>
 {% endblock content %}
