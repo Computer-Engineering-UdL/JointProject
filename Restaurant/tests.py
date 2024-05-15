@@ -195,7 +195,7 @@ class TestRestaurantViews(BaseTest):
     def test_restaurant_home_view_template(self):
         url = reverse('restaurant_home')
         response = self.client.get(url)
-        self.assertTemplateUsed(response, c.get_restaurant_home_path(1))
+        self.assertTemplateUsed(response, c.get_restaurant_home_path())
 
     def test_restaurant_new_reservations_view_1_with_free_tables(self):
         url = reverse('new_restaurant_reservation_1')
