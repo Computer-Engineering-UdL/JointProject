@@ -8,7 +8,6 @@ ENV PYTHONUNBUFFERED 1
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     gcc \
-    sqlite3 \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /code /data
@@ -26,9 +25,5 @@ ENV SECRET_KEY "jPPWANxKYWxgPPITczsFNlQfJEBZ7Y6zjXMeRDzMhMApSnAjat"
 RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
-ENV SQLITE_DATABASE "/data/db.sqlite3"
-
 CMD python manage.py migrate && \
-    sqlite3 $SQLITE_DATABASE "PRAGMA journal_mode=WAL;" && \
-    sqlite3 $SQLITE_DATABASE "PRAGMA synchronous=1;" && \
     gunicorn --bind :8000 --workers 2 JointProject.wsgi
