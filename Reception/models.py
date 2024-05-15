@@ -13,7 +13,6 @@ class HotelUser(AbstractUser):
 
 
 class Worker(HotelUser):
-    schedule = models.CharField(max_length=c.TEXT_SIZE)
     type = models.CharField(max_length=c.TEXT_SIZE)
 
 
