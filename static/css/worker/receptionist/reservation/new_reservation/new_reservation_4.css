@@ -3,19 +3,3 @@ form{
     height: 100%;
     max-width: 1200px;
 }
-
-.filter-button {
-    color: white;
-    background-color: #a1b5ff;
-    border: 2px solid #7f9bff;
-}
-
-.filter-button:hover {
-    color: #7f9bff;
-    background-color: rgba(127, 155, 255, 0.15);
-    border: 2px solid #7f9bff;
-}
-
-.filter-button:active {
-    opacity: 0.4;
-}

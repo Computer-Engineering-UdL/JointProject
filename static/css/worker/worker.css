@@ -311,9 +311,17 @@ input {
 }
 
 .back-button {
-    color: black;
-    background-color: rgba(128, 128, 128, 0.58);
-    border: #7f9bff;
+    cursor: pointer;
+    border-radius: 50px;
+    padding: 10px 50px;
+    border: 2px solid #868686;
+}
+.back-button:hover {
+    color: white;
+    background-color: #969696;
+}
+.back-button:active {
+    opacity: 0.4;
 }
 
 .cancel-button {
@@ -332,17 +340,15 @@ input {
 }
 
 .continue-button {
-    color: #14b909;
-    background-color: rgba(20, 185, 9, 0.17);
-    border: 1px solid #14b909;
-}
-
-.continue-button:hover {
     color: white;
-    background-color: #14b909;
-    border: 1px solid #14b909;
+    background-color: #a1b5ff;
+    border: 2px solid #7f9bff;
 }
-
+.continue-button:hover {
+    color: #7f9bff;
+    background-color: rgba(127, 155, 255, 0.15);
+    border: 2px solid #7f9bff;
+}
 .continue-button:active {
     opacity: 0.4;
 }

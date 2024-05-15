@@ -34,10 +34,8 @@
         <form action="{% url 'submit_reservation' %}" method="post">
             {% csrf_token %}
             <div class="procedural-buttons">
-                <label for="back-button" style="cursor:pointer;">
-                    <img src="{% static 'img/icons/arrow-go-back-icon.png' %}" alt="Enrere" onclick="goBack()">
-                </label>
-                <button class="filter-button" type="submit" onclick="return confirm('Vol finalitzar la reserva?');">Confirmar</button>
+                <button class="back-button" onclick="goBack()">Enrere</button>
+                <button class="continue-button" type="submit" onclick="return confirm('Vol finalitzar la reserva?');">Confirmar</button>
             </div>
         </form>
     </div>
