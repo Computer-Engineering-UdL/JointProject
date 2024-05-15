@@ -1,0 +1,18 @@
+{% extends "worker/accountant/base_accountant.html" %}
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/accountant/accountant.css' %}">
+{% endblock extra_css %}
+
+<!-- This block must appear in every reservation template as it is -->
+{% block id_cleaning_material %} id="current-page" {% endblock id_cleaning_material %}
+
+{% block title %}Material de neteja{% endblock title %}
+
+{% block content %}
+    <div class="main">
+        <h2 class="subsection-title">Material de neteja</h2>
+        <!-- Temporal code here -->
+    </div>
+{% endblock content %}

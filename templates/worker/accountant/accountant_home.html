@@ -1,0 +1,26 @@
+{% extends "worker/accountant/base_accountant.html" %}
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/accountant/accountant.css' %}">
+{% endblock extra_css %}
+
+
+{% block content %}
+    <div class="main">
+        <h1 class="section-title">
+            COMPTABILITAT
+        </h1>
+        <p class="process-guidance">
+            Esculli el procediment que desitja realitzar:
+        </p>
+        <div id="access-process-buttons">
+            <a href="{% url '' %}">
+                <button class="access-process-button">Material de neteja</button>
+            </a>
+            <a href="{% url '' %}">
+                <button class="access-process-button">Dades de facturació</button>
+            </a>
+        </div>
+    </div>
+{% endblock content %}

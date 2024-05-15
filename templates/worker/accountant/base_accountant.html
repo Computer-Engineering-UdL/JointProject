@@ -1,0 +1,13 @@
+{% extends "worker/base_worker.html" %}
+<!-- This is the base template for the receptionist, every receptionist template must extend this one -->
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/worker/worker.css' %}">
+{% block extra_css %}{% endblock extra_css %}
+
+{% block title %}Comptabilitat{% endblock title %}
+
+{% block menu %}
+    <li><a href="{% url '' %}"><button {% block id_cleaning_material %}{% endblock %}>Material de neteja</button></a></li>
+    <li><a href="{% url '' %}"><button {% block id_billing_data %}{% endblock %}>Dades de facturació</button></a></li>
+{% endblock menu %}

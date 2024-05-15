@@ -24,3 +24,13 @@ def add_room(request):
 def planner_home(request):
     """Render the planner home page."""
     return render(request, c.get_admin_tests_path(1))
+
+
+@worker_required('planner')
+def room_assignment(request):
+    pass
+
+
+@worker_required('planner')
+def new_worker(request):
+    pass
