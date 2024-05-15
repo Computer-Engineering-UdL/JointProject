@@ -10,6 +10,10 @@ class Config:
     RECEIPT_CHECKOUT_FILENAME = 'receipt_checkout.pdf'
 
     @staticmethod
+    def get_receptionist_home_path():
+        return 'worker/receptionist/receptionist_home.html'
+
+    @staticmethod
     def get_room_extra_costs():
         return ROOM_EXTRA_COSTS
 

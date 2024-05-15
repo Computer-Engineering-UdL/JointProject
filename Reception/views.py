@@ -10,7 +10,12 @@ from Reception import utils as u
 
 @worker_required('receptionist')
 def receptionist_home(request):
-    return render(request, 'worker/receptionist/receptionist_home.html')
+    return render(request, c.get_receptionist_home_path())
+
+
+@worker_required('receptionist')
+def receptionist_reservations(request):
+    return render(request, 'worker/receptionist/reservation/reservations.html')
 
 
 @admin_required
