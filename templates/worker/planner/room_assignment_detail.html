@@ -1,0 +1,39 @@
+{% extends "worker/planner/base_planner.html" %}
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/planner/planner.css' %}">
+    <link rel="stylesheet" href="{% static 'css/worker/cleaner/cleaner_rooms.css' %}">
+{% endblock extra_css %}
+
+<!-- This block must appear in every reservation template as it is -->
+{% block id_room_assignment %} id="current-page" {% endblock id_room_assignment %}
+
+{% block title %}Assignar habitacions{% endblock title %}
+
+{% block content %}
+    <div class="main">
+        <h1>Detalls de l'habitació i assignació</h1>
+        <div>
+            <p>Número d'habitació: {{ room.room_num }}</p>
+            <p>Tipus d'habitació: {{ room.room_type }}</p>
+            <p>Treballador del personal de neteja: {{ cleaner }}</p>
+            <form method="POST" action="{% url 'assign_cleaner_to_room' room.id %}">
+                {% csrf_token %}
+                <label for="cleaner_id">Escull al treballador:</label>
+                <select name="cleaner_id" id="cleaner_id">
+                    {% for cleaner in cleaners %}
+                        <option value="{{ cleaner.id }}">{{ cleaner.get_full_name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Assignar</button>
+            </form>
+            {% if room.cleaner %}
+                <form method="POST" action="{% url 'unassign_cleaner_from_room' room.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Des-assignar habitació</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

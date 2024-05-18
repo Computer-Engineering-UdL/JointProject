@@ -98,6 +98,7 @@ def cleaner_cleaned_room_info(request, room_id):
                 cleaned_room.save()
 
             room.is_clean = True
+            room.cleaner_id = None
             room.save()
             messages.success(request, 'Habitació actualitzada correctament')
         return redirect('cleaner_home')

@@ -1,7 +1,10 @@
-from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.urls import reverse
+
 from Planner.forms import RoomForm, CreateWorker
-from Reception.models import Worker
+from Reception.models import Worker, Room
 from Planner.config import Config as c
 from User.forms import SignUpForm
 from User.decorators import worker_required
@@ -32,8 +35,51 @@ def planner_home(request):
 @worker_required('planner')
 def room_assignment(request):
     """Assign a room to a client."""
+    assigned_rooms = Room.objects.filter(is_taken=False, is_clean=False, cleaner__isnull=False).order_by('-room_num')
+    unassigned_rooms = Room.objects.filter(is_taken=False, is_clean=False, cleaner__isnull=True).order_by('-room_num')
 
-    return render(request, c.get_room_assignment_path())
+    return render(request, c.get_room_assignment_path(1), {
+        'assigned_rooms': assigned_rooms,
+        'unassigned_rooms': unassigned_rooms
+    })
+
+
+@worker_required('planner')
+def cleaner_room_detail(request, room_id):
+    room = get_object_or_404(Room, pk=room_id)
+    if not room.cleaner:
+        cleaner = 'No assignat'
+    else:
+        cleaner = room.cleaner.first_name + ' ' + room.cleaner.last_name
+    cleaners = Worker.objects.filter(type='cleaner')
+
+    return render(request, c.get_room_assignment_path(2), {
+        'room': room, 'cleaner': cleaner, 'cleaners': cleaners
+    })
+
+
+@worker_required('planner')
+def assign_cleaner_to_room(request, room_id):
+    if request.method == 'POST':
+        room = get_object_or_404(Room, pk=room_id)
+        cleaner_id = request.POST.get('cleaner_id')
+        cleaner = get_object_or_404(Worker, pk=cleaner_id)
+        room.cleaner = cleaner
+        room.save()
+        return redirect('room_assignment')
+    else:
+        return redirect('room_assignment')
+
+
+@worker_required('planner')
+def unassign_cleaner_from_room(request, room_id):
+    if request.method == 'POST':
+        room = get_object_or_404(Room, pk=room_id)
+        room.cleaner = None
+        room.save()
+        return redirect('planner_room_detail', room_id=room_id)
+    else:
+        return redirect('planner_room_detail', room_id=room_id)
 
 
 @worker_required('planner')
