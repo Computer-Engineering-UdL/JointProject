@@ -8,21 +8,14 @@ from JointProject.settings import LOGOUT_REDIRECT_URL
 from User.decorators import worker_required, admin_required
 from db_populator import populate_functions, get_active_reservations_without_expenses
 from Cleaner.config import MATERIALS_NAMES
-
-worker_type_to_url = {
-    'receptionist': 'receptionist_home',
-    'cleaner': 'cleaner_home',
-    'restaurant': 'restaurant_home',
-    'accountant': 'accountant_home',
-    'planner': 'planner_home'
-}
+from User.config import Config as c
 
 
 def redirect_user_based_on_type(user):
     """Determines the URL depending on the type of User."""
     # Workers
     if hasattr(user, 'worker'):
-        return worker_type_to_url.get(user.worker.type, 'base')
+        return c.get_worker_type_to_url().get(user.worker.type, 'base')
     # Not workers
     else:
         return 'base'

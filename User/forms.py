@@ -63,6 +63,7 @@ class SignUpForm(UserCreationForm):
 class PopulateForm(forms.Form):
     CHOICES = (
         ('users', 'Create Users'),
+        ('workers', 'Populate Workers'),
         ('clients', 'Populate Clients'),
         ('rooms', 'Populate Rooms'),
         ('reservations', 'Populate Reservations'),

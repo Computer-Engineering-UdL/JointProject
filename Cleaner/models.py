@@ -29,4 +29,4 @@ class CleanedRoom(models.Model):
     additional_comments = models.TextField(blank=True)
 
     def __str__(self):
-        return self.room.room_num
+        return f"{self.room} - {self.date}"

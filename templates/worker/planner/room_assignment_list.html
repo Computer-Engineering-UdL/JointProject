@@ -1,0 +1,41 @@
+{% extends "worker/planner/base_planner.html" %}
+
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/worker/planner/planner.css' %}">
+{% endblock extra_css %}
+
+<!-- This block must appear in every reservation template as it is -->
+{% block id_room_assignment %} id="current-page" {% endblock id_room_assignment %}
+
+{% block title %}Assignar habitacions{% endblock title %}
+
+{% block content %}
+<div class="main">
+    <h1>Assignació d'habitacions per a netejar</h1>
+    <div>
+        <h4>Habitacions Assignades</h4>
+        <div>
+            {% for room in assigned_rooms %}
+            <a href="{% url 'planner_room_detail' room.id %}">
+                <button class="assigned-room">{{ room.room_num }} - Assignat a: {{ room.cleaner.first_name }}</button>
+            </a>
+            {% empty %}
+            <p>No hi ha habitacions assignades.</p>
+            {% endfor %}
+        </div>
+    </div>
+    <div>
+        <h4>Habitacions No Assignades</h4>
+        <div>
+            {% for room in unassigned_rooms %}
+            <a href="{% url 'planner_room_detail' room.id %}">
+                <button>{{ room.room_num }}</button>
+            </a>
+            {% empty %}
+            <p>No hi ha habitacions no assignades.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
