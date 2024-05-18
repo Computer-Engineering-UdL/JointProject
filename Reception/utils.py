@@ -33,6 +33,10 @@ def get_external_clients():
     return active_users.exclude(id__in=internal_clients_ids)
 
 
+def is_external_client(hotel_user_id):
+    return hotel_user_id in get_external_clients().values_list('id', flat=True)
+
+
 def get_filtered_reservations(form, is_active=True, check_in_active=None, check_out_active=None) -> tuple:
     if check_in_active is None and check_out_active is None:
         reservations = RoomReservation.objects.filter(is_active=is_active)
