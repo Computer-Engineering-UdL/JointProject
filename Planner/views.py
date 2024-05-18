@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from Planner.forms import RoomForm, CreateWorker
 from Reception.models import Worker
-from Reception.config import Config as c
+from Planner.config import Config as c
 from User.forms import SignUpForm
 from User.decorators import worker_required
 from User.views import worker_type_to_url
@@ -20,19 +20,19 @@ def add_room(request):
     else:
         form = RoomForm()
 
-    return render(request, 'worker/planner/add_room.html', {'form': form})
+    return render(request, c.get_add_room_path(), {'form': form})
 
 
 @worker_required('planner')
 def planner_home(request):
     """Render the planner home page."""
-    return render(request, 'worker/planner/planner_home.html')
+    return render(request, c.get_planner_home_path())
 
 
 @worker_required('planner')
 def room_assignment(request):
     """Assign a room to a client."""
-    return render(request, 'worker/planner/room_assignment.html')
+    return render(request, c.get_room_assignment_path())
 
 
 @worker_required('planner')
@@ -59,5 +59,4 @@ def new_worker(request):
         form = SignUpForm()
         create_worker_form = CreateWorker()
 
-    return render(request, 'worker/planner/new_worker.html',
-                  {'form': form, 'create_worker_form': create_worker_form})
+    return render(request, c.get_new_worker_path(), {'form': form, 'create_worker_form': create_worker_form})
