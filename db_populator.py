@@ -17,6 +17,7 @@ from Restaurant.config import Config as rc
 from Restaurant.models import ExternalRestaurantClient
 from Restaurant.forms import get_available_clients
 from User.gen_dni import gen_dni
+from User.config import Config as uc
 
 fake = Faker('es_ES')
 
@@ -41,6 +42,31 @@ def create_users(n: int) -> None:
         )
         user.save()
         print(f'Created User: {username}')
+
+
+def create_workers(n: int) -> None:
+    """Populate the Worker table with n entries."""
+    for _ in range(n):
+        first_name = fake.first_name()
+        last_name = fake.last_name() + random.choice(['', ' ' + fake.last_name()])
+        email = fake.email()
+        username = f"{first_name.lower()}_{last_name.lower()}"
+        worker_type = random.choice(list(uc.get_worker_type_to_url().keys()))
+
+        user = HotelUser.objects.create_user(
+            username=username,
+            email=email,
+            password='password',
+            first_name=first_name,
+            last_name=last_name,
+            phone_number=fake.phone_number(),
+            id_number=gen_dni()
+        )
+        user.save()
+
+        worker = Worker(hoteluser_ptr_id=user.pk, type=worker_type)
+        worker.save_base(raw=True)
+        print(f'Created Worker: {username} - Type: {worker_type}')
 
 
 def populate_clients(n: int) -> None:
@@ -368,6 +394,7 @@ def populate(function, entries: int) -> None:
 
 populate_functions = {
     'users': create_users,
+    'workers': create_workers,
     'clients': populate_clients,
     'rooms': populate_rooms,
     'reservations': populate_reservations,
@@ -385,6 +412,7 @@ def main() -> None:
     """Populate the database with random data."""
     print("Starting to populate the database...")
     populate(create_users, 10)
+    populate(create_workers, 10)
     populate(populate_clients, 10)
     populate(populate_rooms, 10)
     populate(populate_reservations, 10)

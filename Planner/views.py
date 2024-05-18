@@ -5,7 +5,7 @@ from Reception.models import Worker
 from Planner.config import Config as c
 from User.forms import SignUpForm
 from User.decorators import worker_required
-from User.views import worker_type_to_url
+from User.config import Config as uc
 
 
 @worker_required('planner')
@@ -32,6 +32,7 @@ def planner_home(request):
 @worker_required('planner')
 def room_assignment(request):
     """Assign a room to a client."""
+
     return render(request, c.get_room_assignment_path())
 
 
@@ -45,7 +46,7 @@ def new_worker(request):
             user = form.save()
             user_type = create_worker_form.cleaned_data.get('worker_type')
 
-            if user_type in worker_type_to_url:
+            if user_type in uc.get_worker_type_to_url():
                 worker = Worker(hoteluser_ptr_id=user.pk, type=user_type)
                 worker.save_base(raw=True)
                 user.worker = worker
