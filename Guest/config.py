@@ -11,4 +11,6 @@ class Config:
 
 GUEST_PATHS = {
     1: 'client/room_reservation/new_reservation_step_1.html',
+    2: 'client/restaurant_reservation/new_restaurant_reservation_step_1.html',
+    3: 'client/restaurant_reservation/new_restaurant_reservation_step_2.html',
 }

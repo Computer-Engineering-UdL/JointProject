@@ -3,8 +3,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from Reception.forms import RoomReservationForm
 from Reception.models import RoomReservation, create_despesa, Room, Client
 from Guest.config import Config as c
+from Guest import utils
 from django.contrib import messages
 from datetime import datetime
+
+from Guest.forms import RestaurantReservationForm, SearchClientForm
 
 
 def guest_home(request):
@@ -49,3 +52,37 @@ def guest_room_reservation_1(request):
         form = RoomReservationForm()
 
     return render(request, c.get_guest_path(1), {'form': form})
+
+
+def guest_restaurant_reservation_1(request):
+    if request.method == 'POST':
+        form = RestaurantReservationForm(request.POST)
+        if form.is_valid():
+            reservation_data = form.cleaned_data
+            reservation_data['day'] = reservation_data['day'].strftime('%Y-%m-%d')
+            request.session['reservation_data'] = reservation_data
+            return redirect('guest_restaurant_reservation_2')
+    else:
+        form = RestaurantReservationForm()
+    return render(request, c.get_guest_path(2), {'form': form})
+
+
+def guest_restaurant_reservation_2(request):
+    reservation_data = request.session.get('reservation_data')
+    if not reservation_data:
+        return redirect('guest_restaurant_reservation_1')
+
+    if request.method == 'POST':
+        form = SearchClientForm(request.POST)
+
+        if form.is_valid():
+            client_type = utils.get_client_type(form.cleaned_data['id_number'])
+            if client_type == 'internal':
+                client = Client.objects.get(id_number=form.cleaned_data['id_number'])
+                reservation_data['client'] = client
+                request.session['reservation_data'] = reservation_data
+                return redirect('guest_restaurant_reservation_3')
+
+    else:
+        form = SearchClientForm()
+    return render(request, c.get_guest_path(3), {'form': form})
