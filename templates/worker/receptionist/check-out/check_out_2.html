@@ -14,36 +14,40 @@
     <div class="main">
         <h2>Resum de les dades de la reserva</h2>
         <div class="reservation-briefing">
-            <div class="reservation-briefing-data">
-                <div><p>Reserva:</p> <span class="entry-data">{{ reservation.id }}</span></div>
-                <div><p>Data entrada:</p> <span class="entry-data"> {{ reservation.entry }}</span></div>
-                <div><p>Data sortida:</p> <span class="entry-data">{{ reservation.exit }}</span></div>
-                <div><p>Número d'hostes:</p> <span class="entry-data">{{ reservation.num_guests }}</span></div>
-                <div><p>Tipus d'habitació:</p> <span class="entry-data">{{ room.room_type }}</span></div>
-                <div><p>Pensió:</p> <span class="entry-data">{{ reservation.pension_type }}</span></div>
-                <div><p>Número d'habitació:</p> <span class="entry-data">{{ reservation.room.room_num }}</span></div>
-            </div>
-
-            <div class="reservation-briefing-data">
-                <div><p>Hoste:</p> <span class="entry-data">{{ reservation.client }}</span></div>
-                <div><p>Preu habitació:</p> <span class="entry-data">{{ despeses.room_type_costs }}€</span></div>
-                <div><p>Preu pensió:</p> <span class="entry-data">{{ despeses.pension_costs }}€</span></div>
-                <div><p>Serveis Extra:</p></div>
+            <ul class="reservation-briefing-data">
+                <li><h5>Data d'entrada:</h5> <p>{{ reservation.entry }}</p></li>
+                <li><h5>Data de sortida:</h5> <p>{{ reservation.exit }}</p></li>
+                <li><h5>Número d'hostes:</h5> <p>{{ reservation.num_guests }}</p></li>
+                <li><h5>Tipus d'habitació:</h5> <p>{{ reservation.room.room_type }}</p></li>
+                <li><h5>Pensió:</h5> <p>{{ reservation.pension_type }}</p></li>
+                <li><h5>Número d'habitació:</h5> <p>{{ reservation.room.room_num }}</p></li>
+            </ul>
+            <ul class="reservation-briefing-data">
+                <li><h5>Preu habitació:</h5> <p>{{ despeses.room_type_costs }}€</p></li>
+                <li><h5>Preu pensió:</h5> <p>{{ despeses.pension_costs }}€</p></li>
+                <li><h5>Serveis extra:</h5> <p>{{ extra_total }}€</p></li>
                 {% for extra in extra_costs %}
-                    <div><p>Tipus:</p> <span class="entry-data">{{ extra.extra_costs_type }}</span></div>
-                    <div><p>Preu:</p> <span class="entry-data">{{ extra.extra_costs_price }}€</span></div>
+                    <li><p>- <i>{{ extra.extra_costs_type }}</i></p><p><i>{{ extra.extra_costs_price }}€</i></p></li>
                 {% endfor %}
-                <div><p>Total serveis extra:</p> <span class="entry-data">{{ extra_total }}€</span></div>
-                <div><p>Total:</p> <span class="entry-data">{{ total_price }}€</span></div>
-            </div>
+                <li><h5>Total:</h5> <p>{{ total_price }}€</p></li>
+            </ul>
+            <ul class="reservation-briefing-data">
+                <li><h5>Nº de reserva:</h5> <p>{{ reservation.id }}</p></li>
+                <li><h5>Número d'identificació:</h5> <p>{{ reservation.client.id_number }}</p></li>
+                <li><h5>Nom:</h5> <p>{{ reservation.client.first_name }}</p></li>
+                <li><h5>Cognoms:</h5> <p>{{ reservation.client.last_name }}</p></li>
+                <li><h5>Correu electrònic:</h5> <p>{{ reservation.client.email }}</p></li>
+                <li><h5>Telèfon:</h5> <p>{{ reservation.client.phone_number }}</p></li>
+            </ul>
         </div>
         <form action="{% url 'check_out_3' reservation.id %}" method="post">
             {% csrf_token %}
-            <button type="submit" class="submit-button" style="padding: 10px 20px; font-size: 16px" onclick="return confirm('Estàs segur que vols finalitzar el procés de check-out?');">Finalitzar check-out</button>
+            <div class="procedural-buttons">
+                <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
+                <button type="button"><a href="{% url 'add_extra_costs' reservation.id %}">Afegir costos extra</a></button>
+                <button class="continue-button" type="submit" name="action" value="check_out" onclick="return confirm('Estàs segur que vols finalitzar el procés de check-out?')">Check-out &#10093;</button>
+            </div>
         </form>
 
-        <a href="{% url 'add_extra_costs' reservation.id %}">Afegir costos extra</a>
-
-        <a href="{% url 'receptionist_home' %}">Torna a Inici</a>
     </div>
 {% endblock %}
