@@ -23,6 +23,11 @@
                 <li><h5>Número d'habitació:</h5> <p>{{ reservation.room.room_num }}</p></li>
             </ul>
             <ul class="reservation-briefing-data">
+                <li><h5>Preu habitació:</h5> <p>{{ reservation.despeses.room_type_costs }}€</p></li>
+                <li><h5>Preu pensió:</h5> <p>{{ reservation.despeses.pension_costs }}€</p></li>
+                <li><h5>Total:</h5> <p>{{ reservation.total_price }}€</p></li>
+            </ul>
+            <ul class="reservation-briefing-data">
                 <li><h5>Nº de reserva:</h5> <p>{{ reservation.id }}</p></li>
                 <li><h5>Número d'identificació:</h5> <p>{{ client.id_number }}</p></li>
                 <li><h5>Nom:</h5> <p>{{ client.first_name }}</p></li>
