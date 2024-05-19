@@ -17,9 +17,11 @@
                 <h2>Habitacions NO assignades</h2>
                 <div class="cleaner-rooms">
                     {% for room in unassigned_rooms %}
-                        <a href="{% url 'planner_room_detail' room.id %}"><button class="cleaned-room">{{ room.room_num }}</button></a>
-                        {% empty %}
-                            <p>No hi ha habitacions sense assignar.</p>
+                        <a href="{% url 'planner_room_detail' room.id %}">
+                            <button class="cleaned-room">{{ room.room_num }}</button>
+                        </a>
+                    {% empty %}
+                        <p>No hi ha habitacions sense assignar.</p>
                     {% endfor %}
                 </div>
             </div>
@@ -39,10 +41,13 @@
                         <div id="name">{{ room.cleaner.get_full_name }}</div>
                     </li>
                     <div class="list-extra">
-                        <a class="icon" href="{% url 'planner_room_detail' room.id %}"><img id="check" width="30" height="30" src="{% static 'img/icons/enter-icon.png' %}" alt="delete"></a>
+                        <a class="icon" href="{% url 'planner_room_detail' room.id %}"><img id="check" width="30"
+                                                                                            height="30"
+                                                                                            src="{% static 'img/icons/enter-icon.png' %}"
+                                                                                            alt="delete"></a>
                     </div>
                 </div>
-                {% empty %}
+            {% empty %}
                 <p>No hi ha habitacions assignades.</p>
             {% endfor %}
         </ul>

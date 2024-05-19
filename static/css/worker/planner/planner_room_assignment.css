@@ -37,11 +37,24 @@ h2 {
     opacity: 0.5;
 }
 
-
 .cleaned-room {
     background-color: #e3e8ff;
 }
 
 #reservation-id {
-    width: 11%;
+    width: 20%;
+}
+#exit {
+    width: 30%;
+}
+#name {
+    width: 50%;
+}
+
+.list-table {
+    width: 70%;
+}
+
+.main {
+    align-content: center;
 }
