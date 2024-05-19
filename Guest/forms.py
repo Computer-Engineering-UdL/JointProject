@@ -40,8 +40,8 @@ class RoomReservationForm(forms.ModelForm):
         exclude = ['room', 'client']
         fields = ['entry', 'exit', 'pension_type', 'num_guests', 'room_type']
 
-class RestaurantReservationForm(forms.ModelForm):
 
+class RestaurantReservationForm(forms.ModelForm):
     day = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), initial=date.today, label='Dia')
     num_guests = forms.ChoiceField(choices=[(i, i) for i in range(1, rc.MAX_GUESTS_PER_RESERVATION + 1)],
                                    label='Nombre de clients')
@@ -65,8 +65,8 @@ class RestaurantReservationForm(forms.ModelForm):
 
         return cleaned_data
 
-class SearchClientForm(forms.Form):
 
+class SearchClientForm(forms.Form):
     id_number = forms.CharField(label="Document identificatiu", required=True)
 
     def clean(self):
@@ -74,4 +74,3 @@ class SearchClientForm(forms.Form):
         id_number = cleaned_data.get("id_number")
         gfv.verify_search_reservation_form(id_number)
         return cleaned_data
-

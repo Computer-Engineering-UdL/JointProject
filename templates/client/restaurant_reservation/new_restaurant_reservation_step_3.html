@@ -1,0 +1,28 @@
+{% extends "worker/receptionist/base_receptionist.html" %}
+<!-- This template shows the room reservation form, where the receptionist fills all the reservation fields -->
+
+{% load static %}
+{% block extra_css %}
+
+{% endblock extra_css %}
+
+<!-- This block must appear in every reservation template as it is -->
+{% block id_reservation %} id="current-page" {% endblock id_reservation %}
+
+{% block title %}Reserva Restaurant{% endblock title %}
+
+{% block content %}
+
+    <h1 class="text-center">Reserva de Restaurante STEP 2</h1>
+    <br>
+    <h4 class="text-center">¿Confirmas las reserva?</h4>
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            <!-- Aquí puedes agregar otros campos de formulario si los necesitas -->
+            <input type="submit" name="reservation_action" value="Confirmar Reserva">
+            <input type="submit" name="reservation_action" value="Cancelar Reserva">
+        </form>
+    </div>
+
+{% endblock content %}
