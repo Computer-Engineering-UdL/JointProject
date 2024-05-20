@@ -2,13 +2,24 @@
 
 {% load static %}
 {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/client/client_home.css' %}">
 {% endblock extra_css %}
 
 
 {% block content %}
     <div class="main">
         <div id="background-img">
-            <h2 class="section-title">Welcome to the Client Dashboard</h2>
+            <h2 id="las-palmeras-title">Hotel Las Palmeras</h2>
         </div>
+        <section class="hotel-info">
+            <div class="not-image">
+                <h1 class="info-section-title">Hotel</h1>
+                <hr>
+                <p>Hotel Las Palmeras is a 4-star hotel located in the heart of the city of Fuengirola, right on the seafront and close to the shopping and leisure center of the city. The hotel has 400 rooms, all of them with a terrace and sea views, and is equipped with all the services and facilities to make your stay unforgettable.</p>
+            </div>
+            <aside>
+                <img src="{% static 'img/LasPalmeras/hotel-image-2.jpg' %}" alt="Hotel Las Palmeras">
+            </aside>
+        </section>
     </div>
 {% endblock content %}

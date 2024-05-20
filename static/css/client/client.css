@@ -1,39 +1,34 @@
 /***** Overwrite Main *****/
 main {
     justify-content: flex-start;
+    position: fixed;
+    top: 0;
+}
+
+body {
+    height: 100vh;
 }
 
 /***** Overwrite Menu *****/
 header {
-    background-color: #c0ccfd;
+    background-color: rgba(255, 255, 255, 0.2);
     color: white;
-    box-shadow: 0 0 5px 3px #c0ccfd;
+    box-shadow: 0 0 20px 20px rgba(255, 255, 255, 0.2);
+    z-index: 2;
 }
 
-.home:hover, #home:focus {
-    background-color: #B7C5FB;
-    box-shadow: 0 0 5px 3px #B7C5FB;
-}
-
-/***** Background Image *****/
-#background-img {
-    background-image: url("/static/img/LasPalmeras/hotel-image-1.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top;
-    aspect-ratio: 16/9;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 60px;
-    z-index: -1;
+.menu li a:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    color: white;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.5);
 }
 
 /***** User Home *****/
 #user-home {
-    width: 65px;
-    height: 65px;
+    height: 70px;
+    width: 70px;
     background: none;
     box-shadow: none;
 }
@@ -41,4 +36,8 @@ header {
 #user-home img{
     width: 100%;
     height: 100%;
+}
+
+#user-home img:hover {
+    opacity: 0.6;
 }
