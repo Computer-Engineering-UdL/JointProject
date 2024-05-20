@@ -23,7 +23,7 @@ def guest_room_reservation_1(request):
         try:
             room = Room.objects.filter(room_type=request.POST.get('room_type'), is_taken=False).first()
         except Room.DoesNotExist:
-            messages.error(request, "No hi han habitacions d'aquest tipus disponibles.")
+            messages.error(request, "No hi ha habitacions d'aquest tipus disponibles")
             room = None
 
         """Get the client based on the current user session."""
