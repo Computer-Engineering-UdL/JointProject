@@ -115,6 +115,10 @@ def check_in_summary(request, pk):
         reservation = RoomReservation.objects.get(id=pk, is_active=True, check_in_active=False)
         client = reservation.client
 
+        despeses = get_object_or_404(Despeses, room_reservation_id=pk)
+        extra_costs = ExtraCosts.objects.filter(room_reservation=reservation.id)
+        total_price, extra_costs = u.get_total_price(extra_costs, despeses)
+
         if request.method == 'POST':
             action = request.POST.get('action')
 
@@ -127,10 +131,11 @@ def check_in_summary(request, pk):
                 messages.success(request, "Check-in completat amb èxit")
                 return redirect('check_in')
 
-        client = reservation.client
         return render(request, c.get_check_in_path(2), {
             'client': client,
             'reservation': reservation,
+            'total_price': total_price,
+            'extra_costs': extra_costs,
             'check_in': None
         })
 
@@ -252,9 +257,14 @@ def check_out_summary(request, pk):
 
     total_price, extra_total = u.get_total_price(extra_costs, despeses)
 
-    return render(request, c.get_check_out_path(2),
-                  {'extra_costs': extra_costs, 'reservation': reservation, 'room': room, 'despeses': despeses,
-                   'total_price': total_price, 'extra_total': extra_total})
+    return render(request, c.get_check_out_path(2), {
+        'extra_costs': extra_costs,
+        'reservation': reservation,
+        'room': room,
+        'despeses': despeses,
+        'total_price': total_price,
+        'extra_total': extra_total
+    })
 
 
 @worker_required('receptionist')
