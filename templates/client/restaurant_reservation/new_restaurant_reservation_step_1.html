@@ -1,0 +1,31 @@
+{% extends "worker/receptionist/base_receptionist.html" %}
+<!-- This template shows the room reservation form, where the receptionist fills all the reservation fields -->
+
+{% load static %}
+{% block extra_css %}
+    
+{% endblock extra_css %}
+
+<!-- This block must appear in every reservation template as it is -->
+{% block id_reservation %} id="current-page" {% endblock id_reservation %}
+
+{% block title %}Reserva Restaurant{% endblock title %}
+
+{% block content %}
+    
+    <h1 class="text-center">Reserva de Restaurante</h1>
+    <form method="post">
+            {% csrf_token %}
+            <div class="form-group"><h5>{{ form.day.label }}</h5> {{ form.day }}</div>
+            <br>
+            <div class="form-group"><h5>{{ form.service.label }}</h5> {{ form.service }}</div>
+            <br>
+            <div class="form-group"><h5>{{ form.num_guests.label }}</h5> {{ form.num_guests }}</div>
+            <br>
+            <br>
+            <div class="procedural-buttons">
+                <button class="filter-button" type="submit">Continua</button>
+            </div>
+        </form>
+  
+{% endblock content %}

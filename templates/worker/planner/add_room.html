@@ -11,13 +11,16 @@
 {% block title %}Crear habitacions{% endblock title %}
 
 {% block content %}
-    <h1>Crear una habitació</h1>
-    <form method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
-        <div class="procedural-buttons" style="margin-top: 20%">
-            <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
-            <button type="submit" name="action" class="continue-button">Crear &#10093;</button>
-        </div>
-    </form>
+    <div class="main">
+        <h2 class="subsection-title">Crear Nova Habitació</h2>
+        <p class="process-guidance">Introdueixi les següents dades:</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group"><h5>Número d'habitació</h5> {{ form.room_num }}</div>
+            <div class="form-group"><h5>Tipus d'habitació</h5> {{ form.room_type }}</div>
+            <div class="procedural-buttons">
+                <button class="filter-button" type="submit">Confirma</button>
+            </div>
+        </form>
+    </div>
 {% endblock %}

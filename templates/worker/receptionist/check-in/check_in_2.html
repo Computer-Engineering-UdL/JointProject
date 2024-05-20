@@ -23,6 +23,12 @@
                 <li><h5>Número d'habitació:</h5> <p>{{ reservation.room.room_num }}</p></li>
             </ul>
             <ul class="reservation-briefing-data">
+                <li><h5>Preu habitació:</h5> <p>{{ reservation.despeses.room_type_costs }}€</p></li>
+                <li><h5>Preu pensió:</h5> <p>{{ reservation.despeses.pension_costs }}€</p></li>
+                <li><h5>Preu serveis extra:</h5> <p>{{ extra_costs }}€</p></li>
+                <li><h5>Total:</h5> <p>{{ total_price }}€</p></li>
+            </ul>
+            <ul class="reservation-briefing-data">
                 <li><h5>Nº de reserva:</h5> <p>{{ reservation.id }}</p></li>
                 <li><h5>Número d'identificació:</h5> <p>{{ client.id_number }}</p></li>
                 <li><h5>Nom:</h5> <p>{{ client.first_name }}</p></li>
@@ -35,7 +41,6 @@
             {% csrf_token %}
             <div class="procedural-buttons">
                 <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
-                <button type="submit" name="action" value="print_receipt">Imprimir resguard</button>
                 <button type="submit" name="action" value="check_in" class="continue-button">Check-in &#10093;</button>
             </div>
         </form>
