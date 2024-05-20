@@ -120,9 +120,6 @@ def create_receipt(reservation, client, despeses, extra_costs, metadata):
         [Paragraph('Detall de Despeses', styles['Heading2'])],
         ['Cost de la pensió:', f"{despeses.pension_costs}€"],
         ['Cost del tipus d\'habitació:', f"{despeses.room_type_costs}€"]
-    ] + [
-        [f"Tipus de cost extra: {cost.extra_costs_type}", f"Preu: {cost.extra_costs_price}€"]
-        for cost in extra_costs
     ]
 
     despeses_table = Table(despeses_data, colWidths=[200, 260])

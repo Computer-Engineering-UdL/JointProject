@@ -339,15 +339,15 @@ def create_expenses_for_active_reservations() -> None:
 
 def create_extra_costs(n: int) -> None:
     """Populate the ExtraCosts table with n entries ensuring no duplicate extra costs type for the same reservation."""
-    reservations = RoomReservation.objects.filter(is_active=True)
+    reservations = RoomReservation.objects.filter(is_active=True, check_in_active=True)
     if not reservations.exists():
-        print("No reservations available to create extra costs.")
+        print("No reservations available to create extra costs where check-in is completed.")
         return
 
     extra_costs_types = c.get_room_extra_costs()
 
     for _ in range(n):
-        reservation = random.choice(reservations)
+        reservation = random.choice(list(reservations))
         available_types = list(extra_costs_types)
 
         used_types = ExtraCosts.objects.filter(room_reservation=reservation).values_list('extra_costs_type', flat=True)
@@ -358,14 +358,13 @@ def create_extra_costs(n: int) -> None:
             continue
 
         extra_costs_type = random.choice(available_types)[0]
-        extra_costs_price = random.uniform(1.0, 100.0).__round__(2)
+        extra_costs_price = round(random.uniform(1.0, 100.0), 2)
 
         extra_costs = ExtraCosts.objects.create(
             room_reservation=reservation,
             extra_costs_type=extra_costs_type,
             extra_costs_price=extra_costs_price
         )
-        extra_costs.save()
         print(f'Created Extra Costs: {extra_costs.extra_costs_type} - '
               f'Price: {extra_costs.extra_costs_price} for Reservation ID {reservation.id}')
 
