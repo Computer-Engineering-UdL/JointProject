@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.forms import modelform_factory
 from User.decorators import worker_required
+from django.forms import modelform_factory
 from Restaurant.config import Config as c
 from Restaurant.utils import get_ordered_reservations
 from Restaurant.forms import NewRestaurantReservationForm, AddInternalClientForm, CreateExternalClientForm
