@@ -48,6 +48,11 @@
     cursor: text;
 }
 
+.hotel-info strong {
+    font-size: inherit;
+    font-style: italic;
+}
+
 .hotel-info hr {
     width: 30%;
     margin: 0 0 0 2px;
