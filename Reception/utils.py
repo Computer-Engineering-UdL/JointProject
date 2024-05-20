@@ -117,15 +117,51 @@ def create_receipt(reservation, client, despeses, extra_costs, metadata):
     ]))
 
     despeses_data = [
-                        [Paragraph('Detall de Despeses', styles['Heading2'])],
-                        ['Cost de la pensió:', f"{despeses.pension_costs}€"],
-                        ['Cost del tipus d\'habitació:', f"{despeses.room_type_costs}€"]
-                    ] + [
-                        [f"Tipus de cost extra: {cost.extra_costs_type}", f"Preu: {cost.extra_costs_price}€"] for cost
-                        in extra_costs
-                    ]
+        [Paragraph('Detall de Despeses', styles['Heading2'])],
+        ['Cost de la pensió:', f"{despeses.pension_costs}€"],
+        ['Cost del tipus d\'habitació:', f"{despeses.room_type_costs}€"]
+    ] + [
+        [f"Tipus de cost extra: {cost.extra_costs_type}", f"Preu: {cost.extra_costs_price}€"]
+        for cost in extra_costs
+    ]
+
     despeses_table = Table(despeses_data, colWidths=[200, 260])
     despeses_table.setStyle(TableStyle([
+        ('SPAN', (0, 0), (-1, 0)),
+        ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
+        ('ALIGN', (0, 1), (-1, -1), 'LEFT'),
+        ('INNERGRID', (0, 1), (-1, -1), 0.25, colors.black),
+        ('BOX', (0, 1), (-1, -1), 0.25, colors.black),
+        ('TOPPADDING', (0, 1), (-1, -1), 5),
+        ('BOTTOMPADDING', (0, 1), (-1, -1), 5),
+    ]))
+
+    extra_costs_data = [[Paragraph('Costos Extres', styles['Heading2'])]]
+    extra_costs_data += [
+        [f"Tipus de cost extra: {cost.extra_costs_type}", f"Preu: {cost.extra_costs_price}€"] for cost in extra_costs
+    ]
+    if not extra_costs:
+        extra_costs_data.append(['No hi ha costos extres'])
+    extra_costs_table = Table(extra_costs_data, colWidths=[200, 260])
+    extra_costs_table.setStyle(TableStyle([
+        ('SPAN', (0, 0), (-1, 0)),
+        ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
+        ('ALIGN', (0, 1), (-1, -1), 'LEFT'),
+        ('INNERGRID', (0, 1), (-1, -1), 0.25, colors.black),
+        ('BOX', (0, 1), (-1, -1), 0.25, colors.black),
+        ('TOPPADDING', (0, 1), (-1, -1), 5),
+        ('BOTTOMPADDING', (0, 1), (-1, -1), 5),
+    ]))
+
+    total_costs = despeses.pension_costs + despeses.room_type_costs + sum(
+        [cost.extra_costs_price for cost in extra_costs])
+    total_costs_data = [
+        [Paragraph('Cost Total', styles['Heading2'])],
+        [f"Total: {total_costs}€"]
+    ]
+
+    total_costs_table = Table(total_costs_data, colWidths=[200, 260])
+    total_costs_table.setStyle(TableStyle([
         ('SPAN', (0, 0), (-1, 0)),
         ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
         ('ALIGN', (0, 1), (-1, -1), 'LEFT'),
@@ -145,7 +181,9 @@ def create_receipt(reservation, client, despeses, extra_costs, metadata):
         header_table, Spacer(1, 20),
         reservation_table, Spacer(1, 20),
         client_table, Spacer(1, 20),
-        despeses_table
+        despeses_table, Spacer(1, 20),
+        extra_costs_table, Spacer(1, 20),
+        total_costs_table
     ]
     doc.build(elements)
 
