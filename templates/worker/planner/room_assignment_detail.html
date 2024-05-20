@@ -2,7 +2,7 @@
 
 {% load static %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/worker/planner/planner_add_room.css' %}">
+    <link rel="stylesheet" href="{% static 'css/worker/planner/planner_room_assignment_details.css' %}">
     <link rel="stylesheet" href="{% static 'css/worker/cleaner/cleaner_rooms.css' %}">
 {% endblock extra_css %}
 
@@ -14,24 +14,25 @@
 {% block content %}
     <div class="main">
         <h1>Detalls de l'habitació i assignació</h1>
-        <div>
-            <p>Número d'habitació: {{ room.room_num }}</p>
-            <p>Tipus d'habitació: {{ room.room_type }}</p>
-            <p>Treballador del personal de neteja: {{ cleaner }}</p>
+        <div id="info">
+            <p><strong>Número d'habitació:</strong> {{ room.room_num }}</p>
+            <p><strong>Tipus d'habitació:</strong> {{ room.room_type }}</p>
+            <p><strong>Treballador assignat:</strong> {{ cleaner }}</p>
             <form method="POST" action="{% url 'assign_cleaner_to_room' room.id %}">
                 {% csrf_token %}
-                <label for="cleaner_id">Escull al treballador:</label>
-                <select name="cleaner_id" id="cleaner_id">
-                    {% for cleaner in cleaners %}
-                        <option value="{{ cleaner.id }}">{{ cleaner.get_full_name }}</option>
-                    {% endfor %}
-                </select>
-                <button type="submit">Assignar</button>
+                <div class="form-group"><h5><label for="cleaner_id">Esculli al treballador:</label></h5>
+                    <select name="cleaner_id" id="cleaner_id">
+                        {% for cleaner in cleaners %}
+                            <option value="{{ cleaner.id }}">{{ cleaner.get_full_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            <button class="back-button" type="submit">Assignar</button>
             </form>
             {% if room.cleaner %}
                 <form method="POST" action="{% url 'unassign_cleaner_from_room' room.id %}">
                     {% csrf_token %}
-                    <button type="submit">Des-assignar habitació</button>
+                    <button class="back-button" type="submit">Desassignar</button>
                 </form>
             {% endif %}
         </div>
