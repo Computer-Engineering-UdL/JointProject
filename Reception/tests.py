@@ -63,8 +63,12 @@ class BaseTest(TestCase):
             check_in_active=True
         )
 
-        self.despesa = create_despesa(self.reservation, self.reservation.pension_type, self.room.room_type)
-        self.despesa1 = create_despesa(self.reservationCheckInActive, self.reservationCheckInActive.pension_type, self.room1.room_type)
+        self.despesa = create_despesa(self.reservation,
+                                      self.reservation.pension_type,
+                                      self.room.room_type)
+        self.despesa1 = create_despesa(self.reservationCheckInActive,
+                                       self.reservationCheckInActive.pension_type,
+                                       self.room1.room_type)
 
         self.client.force_login(self.worker)
 
