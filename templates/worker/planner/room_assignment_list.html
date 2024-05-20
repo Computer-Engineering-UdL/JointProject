@@ -2,7 +2,7 @@
 
 {% load static %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/worker/planner/planner_add_room.css' %}">
+    <link rel="stylesheet" href="{% static 'css/worker/planner/planner_room_assignment.css' %}">
 {% endblock extra_css %}
 
 <!-- This block must appear in every reservation template as it is -->
@@ -12,30 +12,44 @@
 
 {% block content %}
     <div class="main">
-        <h1>Assignació d'habitacions per a netejar</h1>
-        <div>
-            <h4>Habitacions Assignades</h4>
-            <div>
-                {% for room in assigned_rooms %}
-                    <a href="{% url 'planner_room_detail' room.id %}">
-                        <button class="assigned-room">{{ room.room_num }} - Assignat a: {{ room.cleaner.first_name }}</button>
-                    </a>
-                {% empty %}
-                    <p>No hi ha habitacions assignades.</p>
-                {% endfor %}
+        <ul class="reservation-list">
+            <div class="cleaner-room-list">
+                <h2>Habitacions NO assignades</h2>
+                <div class="cleaner-rooms">
+                    {% for room in unassigned_rooms %}
+                        <a href="{% url 'planner_room_detail' room.id %}">
+                            <button class="cleaned-room">{{ room.room_num }}</button>
+                        </a>
+                    {% empty %}
+                        <p>No hi ha habitacions sense assignar.</p>
+                    {% endfor %}
+                </div>
             </div>
-        </div>
-        <div>
-            <h4>Habitacions No Assignades</h4>
-            <div>
-                {% for room in unassigned_rooms %}
-                    <a href="{% url 'planner_room_detail' room.id %}">
-                        <button>{{ room.room_num }}</button>
-                    </a>
-                {% empty %}
-                    <p>No hi ha habitacions no assignades.</p>
-                {% endfor %}
-            </div>
-        </div>
+
+            <h2>Habitacions assignades</h2>
+            <ul class="list-index">
+                <li id="reservation-id">Nº habitació</li>
+                <li id="exit">Tipus habitació</li>
+                <li id="name">Nom treballador</li>
+            </ul>
+            <div id="divider"></div>
+            {% for room in assigned_rooms %}
+                <div class="list-div">
+                    <li>
+                        <div id="reservation-id">{{ room.room_num }}</div>
+                        <div id="exit">{{ room.room_type }}</div>
+                        <div id="name">{{ room.cleaner.get_full_name }}</div>
+                    </li>
+                    <div class="list-extra">
+                        <a class="icon" href="{% url 'planner_room_detail' room.id %}"><img id="check" width="30"
+                                                                                            height="30"
+                                                                                            src="{% static 'img/icons/enter-icon.png' %}"
+                                                                                            alt="delete"></a>
+                    </div>
+                </div>
+            {% empty %}
+                <p>No hi ha habitacions assignades.</p>
+            {% endfor %}
+        </ul>
     </div>
 {% endblock content %}

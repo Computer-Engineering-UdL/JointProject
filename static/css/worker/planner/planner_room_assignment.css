@@ -1,0 +1,60 @@
+h2 {
+    margin-bottom: 16px;
+    margin-top: 30px;
+}
+
+.cleaner-room-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.cleaner-rooms {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+}
+
+.cleaner-rooms button {
+    width: 110px;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 13px;
+    border: solid 3px black;
+    border-radius: 14px;
+}
+.cleaner-rooms button:hover {
+    cursor: pointer;
+    outline: solid 1px black;
+    background-color: #a1b5ff;
+}
+.cleaner-rooms button:active {
+    opacity: 0.5;
+}
+
+.cleaned-room {
+    background-color: #e3e8ff;
+}
+
+#reservation-id {
+    width: 20%;
+}
+#exit {
+    width: 30%;
+}
+#name {
+    width: 50%;
+}
+
+.list-table {
+    width: 70%;
+}
+
+.main {
+    align-content: center;
+}
