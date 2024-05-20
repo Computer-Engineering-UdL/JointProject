@@ -9,6 +9,22 @@ class Config:
     RECEIPT_CHECKIN_FILENAME = 'receipt_checkin.pdf'
     RECEIPT_CHECKOUT_FILENAME = 'receipt_checkout.pdf'
 
+    RECEIPT_CHECKIN_METADATA = {
+        'title': 'Comprovant de Check-In',
+        'author': 'Hotel Las Palmeras',
+        'subject': 'Document de Check-In per a Hotel Las Palmeras',
+        'creator': 'Sistema de Gestió de Reserves',
+        'keywords': ['Hotel Las Palmeras', 'Check-In', 'Reserva']
+    }
+
+    RECEIPT_CHECKOUT_METADATA = {
+        'title': 'Comprovant de Check-Out',
+        'author': 'Hotel Las Palmeras',
+        'subject': 'Document de Check-Out per a Hotel Las Palmeras',
+        'creator': 'Sistema de Gestió de Reserves',
+        'keywords': ['Hotel Las Palmeras', 'Check-Out', 'Reserva']
+    }
+
     @staticmethod
     def get_receptionist_home_path():
         return 'worker/receptionist/receptionist_home.html'
