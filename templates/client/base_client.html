@@ -12,7 +12,8 @@
 {% block header %}
     <nav>
         <ul class="menu">
-            {% block menu %}{% endblock menu %}
+            <a class="home" {% block id_home %}{% endblock %} href="{% url 'restaurant_home' %}"><img src="{% static 'img/icons/home.png' %}" alt="home"></a>
+            <li><a href="{% url 'new_restaurant_reservation_1' %}"><button {% block id_new_reservation %}{% endblock %}>Nova reserva</button></a></li>
         </ul>
     </nav>
     <div id="right-header">

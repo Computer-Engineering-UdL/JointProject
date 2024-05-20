@@ -1,0 +1,5 @@
+/***** Overwrite Menu *****/
+.home:hover, #home:focus {
+    background-color: #B7C5FB;
+    box-shadow: 0 0 5px 3px #B7C5FB;
+}
