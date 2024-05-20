@@ -98,7 +98,7 @@ def guest_restaurant_reservation_3(request):
     if request.method == 'POST':
         reservation_action = request.POST.get('reservation_action')
         if reservation_action == 'Confirmar Reserva':
-            utils.create_retaurant_reservation(reservation_data)
+            utils.create_restaurant_reservation(reservation_data)
             del request.session['reservation_data']
             messages.success(request, "S'ha creat la reserva de restaurant amb èxit!")
             return redirect('guest_home')
