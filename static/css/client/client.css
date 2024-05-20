@@ -1,5 +1,23 @@
 /***** Overwrite Menu *****/
+header {
+    background-color: #c0ccfd;
+    color: white;
+    box-shadow: 0 0 5px 3px #c0ccfd;
+}
+
 .home:hover, #home:focus {
     background-color: #B7C5FB;
     box-shadow: 0 0 5px 3px #B7C5FB;
+}
+
+/***** Background Image *****/
+#background-img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    aspect-ratio: 16/9;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
 }
