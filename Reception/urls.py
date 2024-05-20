@@ -11,7 +11,8 @@ urlpatterns = [
     path('new-reservation-4/<int:pk>/', v.new_reservation_4, name='new_reservation_4'),
     path('check-in/', v.check_in_1, name='check_in'),
     path('check-in/summary/<int:pk>/', v.check_in_summary, name='check_in_summary'),
-    path('print-receipt/<int:reservation_id>/', v.print_receipt, name='print_receipt'),
+    path('check-in/print-receipt/<int:client_id>/<int:reservation_id>/', v.print_receipt_check_in,
+         name='print_receipt_check_in'),
     path('fetch-rooms/', v.fetch_rooms, name='fetch_rooms'),
     path('search-reservation/', v.search_reservation, name='search_reservation'),
     path('reservation-details/<int:pk>/', v.reservation_details, name='reservation_details'),
@@ -21,6 +22,6 @@ urlpatterns = [
     path('check-out-summary/<int:pk>', v.check_out_summary, name='check_out_summary'),
     path('check-out-3/<int:pk>', v.check_out_3, name='check_out_3'),
     path('add-extra-costs/<int:pk>', v.add_extra_costs, name='add_extra_costs'),
-    path('print-receipt/<int:client_id>/<int:reservation_id>/', v.print_receipt_check_out,
+    path('check-out/print-receipt/<int:client_id>/<int:reservation_id>/', v.print_receipt_check_out,
          name='print_receipt_check_out'),
 ]

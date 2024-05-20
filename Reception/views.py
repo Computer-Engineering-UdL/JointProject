@@ -115,6 +115,10 @@ def check_in_summary(request, pk):
         reservation = RoomReservation.objects.get(id=pk, is_active=True, check_in_active=False)
         client = reservation.client
 
+        despeses = get_object_or_404(Despeses, room_reservation_id=pk)
+        extra_costs = ExtraCosts.objects.filter(room_reservation=reservation.id)
+        total_price, extra_costs = u.get_total_price(extra_costs, despeses)
+
         if request.method == 'POST':
             action = request.POST.get('action')
 
@@ -125,12 +129,13 @@ def check_in_summary(request, pk):
                 reservation.save()
 
                 messages.success(request, "Check-in completat amb èxit")
-                return redirect('check_in')
+                return render(request, c.get_check_in_path(4), {'reservation': reservation, 'client': client})
 
-        client = reservation.client
         return render(request, c.get_check_in_path(2), {
             'client': client,
             'reservation': reservation,
+            'total_price': total_price,
+            'extra_costs': extra_costs,
             'check_in': None
         })
 
@@ -143,11 +148,18 @@ def check_in_summary(request, pk):
 
 
 @worker_required('receptionist')
-def print_receipt(request, reservation_id):
+def print_receipt_check_in(request, reservation_id, client_id):
+    client = HotelUser.objects.get(id=client_id)
     reservation = RoomReservation.objects.get(id=reservation_id)
-    client = reservation.client
+    despeses = Despeses.objects.get(room_reservation_id=reservation_id)
+    extra_costs = ExtraCosts.objects.filter(room_reservation=reservation.id)
 
-    buffer = u.create_receipt_check_in(reservation, client)
+    metadata = dict(c.RECEIPT_CHECKIN_METADATA)
+
+    metadata['keywords'] = metadata['keywords'][:]
+    metadata['keywords'].append(str(reservation.id))
+
+    buffer = u.create_receipt(reservation, client, despeses, extra_costs, metadata)
 
     return FileResponse(buffer, as_attachment=True, filename=c.RECEIPT_CHECKIN_FILENAME)
 
@@ -252,9 +264,14 @@ def check_out_summary(request, pk):
 
     total_price, extra_total = u.get_total_price(extra_costs, despeses)
 
-    return render(request, c.get_check_out_path(2),
-                  {'extra_costs': extra_costs, 'reservation': reservation, 'room': room, 'despeses': despeses,
-                   'total_price': total_price, 'extra_total': extra_total})
+    return render(request, c.get_check_out_path(2), {
+        'extra_costs': extra_costs,
+        'reservation': reservation,
+        'room': room,
+        'despeses': despeses,
+        'total_price': total_price,
+        'extra_total': extra_total
+    })
 
 
 @worker_required('receptionist')
@@ -286,6 +303,11 @@ def print_receipt_check_out(request, reservation_id, client_id):
     despeses = Despeses.objects.get(room_reservation_id=reservation_id)
     extra_costs = ExtraCosts.objects.filter(room_reservation=reservation.id)
 
-    buffer = u.create_receipt_check_out(reservation, client, despeses, extra_costs)
+    metadata = dict(c.RECEIPT_CHECKOUT_METADATA)
+
+    metadata['keywords'] = metadata['keywords'][:]
+    metadata['keywords'].append(str(reservation.id))
+
+    buffer = u.create_receipt(reservation, client, despeses, extra_costs, metadata)
 
     return FileResponse(buffer, as_attachment=True, filename=c.RECEIPT_CHECKOUT_FILENAME)

@@ -3,3 +3,20 @@
 	flex-direction: row;
 	justify-content: space-around;
 }
+
+.reservation-briefing-data {
+	margin-bottom: 16px;
+	margin-top: 16px;
+}
+
+form {
+    width: 100%;
+    max-width: 1200px;
+}
+.procedural-buttons {
+    height: 100%;
+}
+.procedural-buttons button a {
+	text-decoration: none;
+	color: black;
+}

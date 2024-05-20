@@ -345,13 +345,13 @@ input {
 
 .cancel-button {
     color: black;
-    background-color: rgba(246, 46, 46, 0.2);
-    border: none;
+    background-color: #fcd4d4;
+    border: 2px solid #940101;
 }
 
 .cancel-button:hover {
-    background-color: rgba(246, 46, 46, 0.63);
-    border: black;
+    background-color: #f68686;
+    border: 2px solid #940101;
 }
 
 .cancel-button:active {
