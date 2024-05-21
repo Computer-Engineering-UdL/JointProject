@@ -66,9 +66,8 @@ def assign_cleaner_to_room(request, room_id):
         cleaner = get_object_or_404(Worker, pk=cleaner_id)
         room.cleaner = cleaner
         room.save()
-        return redirect('room_assignment')
-    else:
-        return redirect('room_assignment')
+
+    return redirect('planner_room_detail', room_id=room_id)
 
 
 @worker_required('planner')
