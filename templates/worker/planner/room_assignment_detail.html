@@ -21,13 +21,15 @@
             <form method="POST" action="{% url 'assign_cleaner_to_room' room.id %}">
                 {% csrf_token %}
                 <div class="form-group"><h5><label for="cleaner_id">Esculli al treballador:</label></h5>
-                    <select name="cleaner_id" id="cleaner_id">
+                    <div class="select-bar"><select name="cleaner_id" id="cleaner_id">
                         {% for cleaner in cleaners %}
                             <option value="{{ cleaner.id }}">{{ cleaner.get_full_name }}</option>
                         {% endfor %}
-                    </select>
+                    </select></div>
+                    <div class="assign-button">
+                        <button class="back-button" type="submit">Assignar</button>
+                    </div>
                 </div>
-            <button class="back-button" type="submit">Assignar</button>
             </form>
             {% if room.cleaner %}
                 <form method="POST" action="{% url 'unassign_cleaner_from_room' room.id %}">
