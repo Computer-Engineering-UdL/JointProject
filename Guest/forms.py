@@ -10,16 +10,13 @@ from Guest import forms_verify as gfv
 from datetime import date
 
 
-class RoomReservationForm(forms.ModelForm):
+class GuestRoomReservationFormStep1(forms.ModelForm):
     entry = forms.DateField(input_formats=['%d/%m/%Y'])
     exit = forms.DateField(input_formats=['%d/%m/%Y'])
-    pension_type = forms.ChoiceField(choices=c.get_pension_types)
-    num_guests = forms.IntegerField()
     room_type = forms.ChoiceField(choices=c.get_room_types)
 
     def __init__(self, *args, **kwargs):
-        super(RoomReservationForm, self).__init__(*args, **kwargs)
-        self.fields['room'].choices = [(room.id, room.room_num) for room in Room.objects.all()]
+        super(GuestRoomReservationFormStep1, self).__init__(*args, **kwargs)
         self.fields['entry'].widget.attrs['id'] = 'entrada'
         self.fields['exit'].widget.attrs['id'] = 'sortida'
 
@@ -28,17 +25,19 @@ class RoomReservationForm(forms.ModelForm):
         entry = cleaned_data.get('entry')
         exit = cleaned_data.get('exit')
 
-        try:
-            fv.verify_room_reservation_form(entry, exit, cleaned_data.get('num_guests'), cleaned_data.get('room_type'))
-        except TypeError:
-            self.add_error(None, "La data introduïda no és vàlida")
-
         return cleaned_data
 
     class Meta:
         model = RoomReservation
-        exclude = ['room', 'client']
-        fields = ['entry', 'exit', 'pension_type', 'num_guests', 'room_type']
+        fields = ['entry', 'exit']
+
+class GuestRoomReservationFormStep2(forms.ModelForm):
+    pension_type = forms.ChoiceField(choices=c.get_pension_types)
+    num_guests = forms.IntegerField()
+
+    class Meta:
+        model = RoomReservation
+        fields = ['pension_type', 'num_guests']
 
 
 class RestaurantReservationForm(forms.ModelForm):

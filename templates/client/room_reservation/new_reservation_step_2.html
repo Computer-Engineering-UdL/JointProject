@@ -5,11 +5,6 @@
 {% block extra_css %}
     <link rel="stylesheet"
           href="{% static 'css/worker/receptionist/reservation/new_reservation/new_reservation_1.css' %}">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <script src="{% static 'js/date_picker.js' %}"></script>
 {% endblock extra_css %}
 
 <!-- This block must appear in every reservation template as it is -->
@@ -24,16 +19,6 @@
             <div class="add-reservation-form">
                 {% csrf_token %}
                 <div class="date">
-                    <div class="date-form">
-                        <div class="form-input date-input">
-                            <h5 class="title-input">Data d'entrada</h5>
-                            {{ form.entry }}
-                        </div>
-                        <div class="form-input date-input">
-                            <h5 class="title-input">Data de sortida</h5>
-                            {{ form.exit }}
-                        </div>
-                    </div>
                     <!-- Temporal div -->
                     <div id="temporal-div">
                         <style>
@@ -44,9 +29,13 @@
                     </div>
                 </div>
                 <div class="reservation-info-form">
+                    <div class="form-input number-input">
+                        <h5 class="title-input">Nombre d'hostes</h5>
+                        {{ form.num_guests }}
+                    </div>
                     <div class="form-input select-input">
-                        <h5 class="title-input">Tipus d'habitació</h5>
-                        {{ form.room_type }}
+                        <h5 class="title-input">Tipus de pensió</h5>
+                        {{ form.pension_type }}
                     </div>
                 </div>
             </div>
