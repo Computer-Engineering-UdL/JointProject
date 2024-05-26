@@ -11,8 +11,10 @@ def calculate_cyclomatic_complexity(directory):
             if file.endswith('.py'):
                 filepath = os.path.join(root, file)
                 try:
-                    with open(filepath, 'r') as f:
+                    with open(filepath, 'rb') as f:
                         code = f.read()
+                        code = code.replace(b'\x00', b'')
+                        code = code.decode('utf-8')
                         blocks = cc_visit(code)
                         for block in blocks:
                             results.append(f"{filepath}: {block.name} - Complexity {block.complexity}")
@@ -26,11 +28,3 @@ def save_results(results, output_file):
     with open(output_file, 'w') as file:
         for result in results:
             file.write(result + "\n")
-
-
-if __name__ == "__main__":
-    directory = os.path.abspath(os.path.join(__file__, '../../../../'))
-    output_file = os.path.abspath(os.path.join(__file__, '../../results/cyclomatic_results.txt'))
-    results = calculate_cyclomatic_complexity(directory)
-    save_results(results, output_file)
-    print(f"Results saved to {output_file}")

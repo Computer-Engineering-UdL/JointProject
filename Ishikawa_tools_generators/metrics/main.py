@@ -1,6 +1,7 @@
 import os
 from fpdf import FPDF
 import Ishikawa_tools_generators.metrics.scripts.config as c
+from Ishikawa_tools_generators.metrics.scripts import cyclomatic_complexity
 
 
 class PDF(FPDF):
@@ -42,12 +43,13 @@ def add_complexity_by_directory_to_pdf(pdf, results_dir):
 
 
 if __name__ == "__main__":
-    current_dir = os.path.dirname(__file__)
-    results_dir = os.path.abspath(os.path.join(current_dir, 'results'))
+    directory = os.path.abspath(os.path.join(__file__, '../../../'))
+    output_file = os.path.abspath(os.path.join(__file__, '../../results/cyclomatic_results.txt'))
+    results = cyclomatic_complexity.calculate_cyclomatic_complexity(directory)
+    cyclomatic_complexity.save_results(results, output_file)
+
     pdf = PDF()
     pdf.alias_nb_pages()
-
+    results_dir = os.path.abspath(os.path.join(__file__, '../../results'))
     add_complexity_by_directory_to_pdf(pdf, results_dir)
-
     pdf.output(c.REPORT_FILE_NAME)
-    print(f"PDF generated and saved as {c.REPORT_FILE_NAME}")
