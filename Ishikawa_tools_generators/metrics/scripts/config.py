@@ -29,14 +29,18 @@ RESULTS_DIR = os.path.abspath(os.path.join(__file__, '../results'))
 CHART_FILENAMES = {
     'cyclomatic': 'cyclomatic_complexity_chart.png',
     'lines_of_code': 'lines_of_code_chart.png',
-    'nesting_depth': 'nesting_depth_chart.png'
+    'nesting_depth': 'nesting_depth_chart.png',
+    'number_of_functions': 'number_of_functions_chart.png',
+    'number_of_comments': 'number_of_comments_chart.png'
 }
 
 # Chart titles and y-axis labels
 CHART_TITLES = [
     ('Cyclomatic Complexity by Subdirectory', 'Complexity'),
     ('Lines of Code by Subdirectory', 'Lines of Code'),
-    ('Depth of Conditional Nesting by Subdirectory', 'Nesting Depth')
+    ('Depth of Conditional Nesting by Subdirectory', 'Nesting Depth'),
+    ('Number of Functions by Subdirectory', 'Number of Functions'),
+    ('Number of Comments by Subdirectory', 'Number of Comments')
 ]
 
 PROJECT_NAME = 'Joint Project'
