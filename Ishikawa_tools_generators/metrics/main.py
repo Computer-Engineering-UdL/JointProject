@@ -36,6 +36,12 @@ def create_pdf(pdf, total_complexity, chart_filename):
     pdf.set_font(c.FONT, 'B', 12)
     pdf.cell(0, 10, f'Total Cyclomatic Complexity: {total_complexity}', 0, 1, 'C')
 
+    pdf.set_title(c.METADATA['title'])
+    pdf.set_author(c.METADATA['author'])
+    pdf.set_creator(c.METADATA['creator'])
+    pdf.set_subject(c.METADATA['subject'])
+    pdf.set_keywords(c.METADATA['keywords'])
+
 
 if __name__ == "__main__":
     pdf = PDF()
