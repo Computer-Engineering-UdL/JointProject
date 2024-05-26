@@ -18,8 +18,24 @@ EXCLUDED_DIRS = {
 
 FONT = 'Arial'
 
+DATE_FORMAT = "%d-%m-%Y"
+
 REPORT_FILE_NAME = "Project_Metrics_Report.pdf"
 
 SOURCE_ROOT = os.path.abspath(os.path.join(__file__, '../../../../'))
 
 RESULTS_DIR = os.path.abspath(os.path.join(__file__, '../results'))
+
+CHART_FILENAME = os.path.join(RESULTS_DIR, 'complexity_chart.png')
+
+PROJECT_NAME = 'Joint Project'
+
+PROJECT_LINK = 'https://github.com/Computer-Engineering-UdL/JointProject/tree/main'
+
+METADATA = {
+    'title': 'Project Complexity Report',
+    'author': 'Aniol0012',
+    'creator': PROJECT_NAME,
+    'subject': 'Metrics analysis of the project',
+    'keywords': 'software, complexity, cyclomatic, code analysis'
+}
