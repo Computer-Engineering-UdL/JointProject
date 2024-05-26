@@ -32,10 +32,10 @@ jobs:
         run: find Ishikawa_tools_generators/ -type f
 
       - name: Search for the generated PDF
-        run: find Ishikawa_tools_generators -name 'Project_Metrics_Report.pdf'
+        run: find -name 'Project_Metrics_Report.pdf'
 
       - name: Upload Report
         uses: actions/upload-artifact@v4
         with:
           name: metrics-report
-          path: Ishikawa_tools_generators/metrics/Project_Metrics_Report.pdf
+          path: ./Project_Metrics_Report.pdf
