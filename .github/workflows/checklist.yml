@@ -28,7 +28,7 @@ jobs:
 
     - name: Run script
       run: |
-        python Ichicawa_tools_generators/generate_report.py
+        python Ishikawa_tools_generators/generate_report.py
         
     - name: Upload generated report
       uses: actions/upload-artifact@v2
