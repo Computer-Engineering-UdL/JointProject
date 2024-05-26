@@ -28,6 +28,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
+      - name: List output directory
+        run: ls -lah Ishikawa_tools_generators/metrics/
+
       - name: Upload Report
         uses: actions/upload-artifact@v4
         with:
