@@ -4,27 +4,30 @@ import Ishikawa_tools_generators.metrics.scripts.config as c
 
 
 def calculate_cyclomatic_complexity(directory):
-    results = []
+    complexity_per_dir = {}
+    total_complexity = 0
+
     for root, dirs, files in os.walk(directory, topdown=True):
         dirs[:] = [d for d in dirs if d not in c.EXCLUDED_DIRS]
+        dir_complexity = 0
+        current_dir = os.path.basename(root)
         for file in files:
             if file.endswith('.py'):
                 filepath = os.path.join(root, file)
                 try:
-                    with open(filepath, 'rb') as f:
+                    with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
                         code = f.read()
-                        code = code.replace(b'\x00', b'')
-                        code = code.decode('utf-8')
-                        blocks = cc_visit(code)
-                        for block in blocks:
-                            results.append(f"{filepath}: {block.name} - Complexity {block.complexity}")
+                    blocks = cc_visit(code)
+                    for block in blocks:
+                        complexity = block.complexity
+                        dir_complexity += complexity
+                        total_complexity += complexity
+                except SyntaxError as e:
+                    print(f"Syntax error in {filepath}: {e}")
                 except Exception as e:
-                    print(f"Error processing {filepath}: {e}")
-    return results
+                    print(f"Error analyzing {filepath}: {e}")
 
+        if dir_complexity > 0 and current_dir not in c.EXCLUDED_DIRS:
+            complexity_per_dir[current_dir] = dir_complexity
 
-def save_results(results, output_file):
-    os.makedirs(os.path.dirname(output_file), exist_ok=True)
-    with open(output_file, 'w') as file:
-        for result in results:
-            file.write(result + "\n")
+    return complexity_per_dir, total_complexity
