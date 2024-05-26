@@ -16,7 +16,7 @@ def get_client_type(id_number):
     return 'external'
 
 
-def create_retaurant_reservation(reservation_data):
+def create_restaurant_reservation(reservation_data):
     RestaurantReservation.objects.create(
         day=datetime.strptime(reservation_data['day'], '%Y-%m-%d').date(),
         num_guests=reservation_data['num_guests'],
