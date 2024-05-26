@@ -24,7 +24,7 @@ class PDF(FPDF):
 
         self.set_text_color(66, 143, 237)
         self.set_font(c.FONT, 'I', 8)
-        self.cell(-self.get_string_width(footer_text), 10, c.PROJECT_NAME, 0, 0, 'C', link=c.PROJECT_LINK)
+        self.cell(-139, 10, c.PROJECT_NAME, 0, 0, 'C', link=c.PROJECT_LINK)
         self.set_text_color(0)
         self.set_font(c.FONT, 'I', 8)
 
@@ -41,7 +41,7 @@ def create_pdf(pdf, total_complexity, total_lines):
 
     # Lines of Code
     pdf.image(os.path.join(c.RESULTS_DIR, c.CHART_FILENAMES['lines_of_code']), x=10, y=150, w=190)
-    pdf.ln(105)
+    pdf.ln(110)
     pdf.set_font(c.FONT, 'B', 12)
     pdf.cell(0, 10, f'Total Lines of Code: {total_lines}', 0, 1, 'C')
 
@@ -61,15 +61,12 @@ def create_charts():
     # Create charts
 
     ## Cyclomatic Complexity
-    filename = os.path.join(c.RESULTS_DIR, c.CHART_FILENAMES['cyclomatic'])
-    u.create_metric_chart(complexity_per_dir, filename,
-                          'Cyclomatic Complexity by Subdirectory Metric',
-                          'Complexity'
-                          )
+    filename = u.get_filename('cyclomatic')
+    u.create_metric_chart(complexity_per_dir, filename, c.CHART_TITLES[0][0], c.CHART_TITLES[0][1])
 
     ## Lines of Code
-    filename = os.path.join(c.RESULTS_DIR, c.CHART_FILENAMES['lines_of_code'])
-    u.create_metric_chart(lines_per_dir, filename, 'Lines of Code by Subdirectory Metric', 'Lines of Code')
+    filename = u.get_filename('lines_of_code')
+    u.create_metric_chart(lines_per_dir, filename, c.CHART_TITLES[1][0], c.CHART_TITLES[1][1])
 
     return total_complexity, total_lines
 

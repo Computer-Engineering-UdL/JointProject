@@ -31,6 +31,12 @@ CHART_FILENAMES = {
     'lines_of_code': 'lines_of_code_chart.png'
 }
 
+# Chart titles and y-axis labels
+CHART_TITLES = [
+    ['Cyclomatic Complexity by Subdirectory Metric', 'Complexity'],
+    ['Lines of Code by Subdirectory Metric', 'Lines of Code']
+]
+
 PROJECT_NAME = 'Joint Project'
 
 PROJECT_LINK = 'https://github.com/Computer-Engineering-UdL/JointProject/tree/main'

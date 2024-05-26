@@ -1,5 +1,10 @@
 import os
 import matplotlib.pyplot as plt
+import Ishikawa_tools_generators.metrics.scripts.config as c
+
+
+def get_filename(filename: str):
+    return os.path.join(c.RESULTS_DIR, c.CHART_FILENAMES[filename])
 
 
 def create_metric_chart(data, filename, title, ylabel):
