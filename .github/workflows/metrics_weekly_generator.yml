@@ -32,4 +32,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: metrics-report
-          path: Ishikawa_tools_generators/metrics/scripts/Project_Metrics_Report.pdf
+          path: Ishikawa_tools_generators/metrics/Project_Metrics_Report.pdf
