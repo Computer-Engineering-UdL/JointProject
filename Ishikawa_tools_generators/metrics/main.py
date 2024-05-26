@@ -37,13 +37,13 @@ def create_pdf(pdf, metrics_data):
     pdf.set_font(c.FONT, size=12)
 
     # Cyclomatic Complexity
-    pdf.image(os.path.join(c.RESULTS_DIR, c.CHART_FILENAMES['cyclomatic']), x=10, y=30, w=190)
+    pdf.image(u.get_filename('cyclomatic'), x=10, y=30, w=190)
     pdf.ln(105)
     pdf.set_font(c.FONT, 'B', 12)
     pdf.cell(0, 10, f'Total Cyclomatic Complexity: {metrics_data["cyclomatic"]}', 0, 1, 'C')
 
     # Lines of Code
-    pdf.image(os.path.join(c.RESULTS_DIR, c.CHART_FILENAMES['lines_of_code']), x=10, y=150, w=190)
+    pdf.image(u.get_filename('lines_of_code'), x=10, y=150, w=190)
     pdf.ln(110)
     pdf.set_font(c.FONT, 'B', 12)
     pdf.cell(0, 10, f'Total Lines of Code: {metrics_data["lines_of_code"]}', 0, 1, 'C')
@@ -53,20 +53,20 @@ def create_pdf(pdf, metrics_data):
     pdf.set_font(c.FONT, size=12)
 
     # Depth of Conditional Nesting
-    pdf.image(os.path.join(c.RESULTS_DIR, c.CHART_FILENAMES['nesting_depth']), x=10, y=30, w=190)
+    pdf.image(u.get_filename('nesting_depth'), x=10, y=30, w=190)
     pdf.ln(105)
     pdf.set_font(c.FONT, 'B', 12)
     pdf.cell(0, 10, f'Total Depth of Conditional Nesting: {metrics_data["nesting_depth"]}', 0, 1, 'C')
 
     # Number of Functions
-    pdf.image(os.path.join(c.RESULTS_DIR, c.CHART_FILENAMES['number_of_functions']), x=10, y=140, w=190)
+    pdf.image(u.get_filename('number_of_functions'), x=10, y=140, w=190)
     pdf.ln(105)
     pdf.set_font(c.FONT, 'B', 12)
     pdf.cell(0, 10, f'Total Number of Functions: {metrics_data["number_of_functions"]}', 0, 1, 'C')
 
     # Number of Comments
     pdf.add_page()
-    pdf.image(os.path.join(c.RESULTS_DIR, c.CHART_FILENAMES['number_of_comments']), x=10, y=30, w=190)
+    pdf.image(u.get_filename('number_of_comments'), x=10, y=30, w=190)
     pdf.ln(105)
     pdf.set_font(c.FONT, 'B', 12)
     pdf.cell(0, 10, f'Total Number of Comments: {metrics_data["number_of_comments"]}', 0, 1, 'C')
