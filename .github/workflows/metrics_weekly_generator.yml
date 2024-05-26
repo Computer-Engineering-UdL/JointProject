@@ -28,8 +28,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
-      - name: List output directory
-        run: ls -lah Ishikawa_tools_generators/metrics/
+      - name: List detailed directory structure
+        run: find Ishikawa_tools_generators/ -type f
+
+      - name: Search for the generated PDF
+        run: find Ishikawa_tools_generators -name 'Project_Metrics_Report.pdf'
 
       - name: Upload Report
         uses: actions/upload-artifact@v4
