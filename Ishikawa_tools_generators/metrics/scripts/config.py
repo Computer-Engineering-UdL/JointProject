@@ -26,7 +26,10 @@ SOURCE_ROOT = os.path.abspath(os.path.join(__file__, '../../../../'))
 
 RESULTS_DIR = os.path.abspath(os.path.join(__file__, '../results'))
 
-CHART_FILENAME = os.path.join(RESULTS_DIR, 'complexity_chart.png')
+CHART_FILENAMES = {
+    'cyclomatic': 'cyclomatic_complexity_chart.png',
+    'lines_of_code': 'lines_of_code_chart.png'
+}
 
 PROJECT_NAME = 'Joint Project'
 

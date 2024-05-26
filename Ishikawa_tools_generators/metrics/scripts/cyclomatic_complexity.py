@@ -1,7 +1,6 @@
 import os
 from radon.complexity import cc_visit
 import Ishikawa_tools_generators.metrics.scripts.config as c
-import matplotlib.pyplot as plt
 
 
 def calculate_cyclomatic_complexity(directory):
@@ -32,16 +31,3 @@ def calculate_cyclomatic_complexity(directory):
             complexity_per_dir[current_dir] = dir_complexity
 
     return complexity_per_dir, total_complexity
-
-
-def create_complexity_chart(complexity_per_dir, filename):
-    os.makedirs(os.path.dirname(filename), exist_ok=True)
-
-    plt.figure(figsize=(10, 5))
-    plt.bar(complexity_per_dir.keys(), complexity_per_dir.values(), color='#428FED')
-    plt.ylabel('Complexity')
-    plt.title('Cyclomatic Complexity by Subdirectory')
-    plt.xticks(rotation=20, ha='right')
-    plt.tight_layout()
-    plt.savefig(filename)
-    plt.close()
