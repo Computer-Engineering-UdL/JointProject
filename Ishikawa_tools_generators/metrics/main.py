@@ -3,7 +3,6 @@ from fpdf import FPDF
 import Ishikawa_tools_generators.metrics.scripts.config as c
 from Ishikawa_tools_generators.metrics.scripts import cyclomatic_complexity
 
-
 class PDF(FPDF):
     def header(self):
         self.set_font(c.FONT, 'B', 12)
@@ -13,7 +12,6 @@ class PDF(FPDF):
         self.set_y(-15)
         self.set_font(c.FONT, 'I', 8)
         self.cell(0, 10, f'Page {self.page_no()}', 0, 0, 'C')
-
 
 def add_complexity_by_directory_to_pdf(pdf, results_dir):
     complexity_per_dir = {}
@@ -41,15 +39,14 @@ def add_complexity_by_directory_to_pdf(pdf, results_dir):
         pdf.cell(200, 10, txt=f'{dir}: {complexity}', ln=True)
     pdf.cell(200, 10, txt=f'Total Complexity: {total_complexity}', ln=True)
 
-
 if __name__ == "__main__":
-    directory = os.path.abspath(os.path.join(__file__, '../../../'))
-    output_file = os.path.abspath(os.path.join(__file__, '../../results/cyclomatic_results.txt'))
+    directory = c.SOURCE_ROOT
+    output_file = os.path.join(c.RESULTS_DIR, 'cyclomatic_results.txt')
     results = cyclomatic_complexity.calculate_cyclomatic_complexity(directory)
     cyclomatic_complexity.save_results(results, output_file)
 
     pdf = PDF()
     pdf.alias_nb_pages()
-    results_dir = os.path.abspath(os.path.join(__file__, '../../results'))
-    add_complexity_by_directory_to_pdf(pdf, results_dir)
+    add_complexity_by_directory_to_pdf(pdf, c.RESULTS_DIR)
     pdf.output(c.REPORT_FILE_NAME)
+    print(f"PDF generated and saved as {c.REPORT_FILE_NAME}")

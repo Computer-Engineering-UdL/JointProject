@@ -3,6 +3,7 @@
 .env/
 
 *.pdf
+Ishikawa_tools_generators/metrics/scripts/results/*
 
 # JointProject
 */dni.txt
