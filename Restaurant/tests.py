@@ -1,5 +1,4 @@
 from django.test import TestCase
-from django.test import TestCase
 from django.urls import reverse
 
 from Reception.models import Client, Worker
