@@ -1,8 +1,9 @@
+import os
+from datetime import datetime
+
 import matplotlib.pyplot as plt
 import numpy as np
 from github import Github
-import os
-from datetime import datetime
 
 token = os.getenv('GITHUB_TOKEN')
 repo_name = "Computer-Engineering-UdL/JointProject"

@@ -1,13 +1,15 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from datetime import datetime
+
+from django.contrib import messages
 from django.forms import modelform_factory
+from django.shortcuts import render, redirect
+
+from Guest import utils
+from Guest.config import Config as c
+from Guest.forms import RestaurantReservationForm, SearchClientForm
 from Reception.forms import RoomReservationForm
 from Reception.models import RoomReservation, create_despesa, Room, Client
-from Guest.config import Config as c
-from Guest import utils
-from django.contrib import messages
-from datetime import datetime
-from Restaurant.forms import NewRestaurantReservationForm, AddInternalClientForm, CreateExternalClientForm
-from Guest.forms import RestaurantReservationForm, SearchClientForm
+from Restaurant.forms import CreateExternalClientForm
 from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
 
 

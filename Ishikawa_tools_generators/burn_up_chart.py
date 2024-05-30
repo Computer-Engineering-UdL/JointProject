@@ -1,6 +1,8 @@
+from datetime import datetime
+
 import matplotlib.pyplot as plt
 import numpy as np
-from datetime import datetime
+
 from burn_down_chart import get_sprint_milestone, count_closed_issues
 
 

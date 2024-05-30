@@ -1,14 +1,15 @@
-from django.contrib.auth.forms import AuthenticationForm
-from django.shortcuts import render, redirect
 from django.contrib import messages
-from User.forms import SignUpForm, PopulateForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from JointProject.settings import LOGOUT_REDIRECT_URL
-from User.decorators import worker_required, admin_required
-from db_populator import populate_functions, get_active_reservations_without_expenses
+from django.contrib.auth.forms import AuthenticationForm
+from django.shortcuts import render, redirect
+
 from Cleaner.config import MATERIALS_NAMES
+from JointProject.settings import LOGOUT_REDIRECT_URL
 from User.config import Config as c
+from User.decorators import admin_required
+from User.forms import SignUpForm, PopulateForm
+from db_populator import populate_functions, get_active_reservations_without_expenses
 
 
 def redirect_user_based_on_type(user):

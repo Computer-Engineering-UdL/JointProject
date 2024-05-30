@@ -1,10 +1,17 @@
-import os
 from fpdf import FPDF
 from datetime import datetime
 import Ishikawa_tools_generators.metrics.scripts.config as c
 from Ishikawa_tools_generators.metrics.scripts import cyclomatic_complexity, lines_of_code, nesting_depth, \
     number_of_functions, number_of_comments
 from Ishikawa_tools_generators.metrics import utils as u
+from datetime import datetime
+
+from fpdf import FPDF
+
+import Ishikawa_tools_generators.metrics.scripts.config as c
+from Ishikawa_tools_generators.metrics import utils as u
+from Ishikawa_tools_generators.metrics.scripts import cyclomatic_complexity, lines_of_code, nesting_depth, \
+    number_of_functions, number_of_comments
 
 
 class PDF(FPDF):

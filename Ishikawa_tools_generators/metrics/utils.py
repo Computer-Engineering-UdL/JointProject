@@ -1,5 +1,7 @@
 import os
+
 import matplotlib.pyplot as plt
+
 import Ishikawa_tools_generators.metrics.scripts.config as c
 
 

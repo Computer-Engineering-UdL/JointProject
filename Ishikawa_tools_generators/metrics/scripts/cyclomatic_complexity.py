@@ -1,5 +1,7 @@
 import os
+
 from radon.complexity import cc_visit
+
 import Ishikawa_tools_generators.metrics.scripts.config as c
 
 
