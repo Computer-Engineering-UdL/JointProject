@@ -6,4 +6,5 @@ urlpatterns = [
     path('', v.accountant_home, name='accountant_home'),
     path('cleaning-material', v.cleaning_material, name='cleaning_material'),
     path('billing', v.billing_data, name='billing_data'),
+    path('add-new-cleaning-material', v.add_new_cleaning_material, name='add_new_cleaning_material'),
 ]
