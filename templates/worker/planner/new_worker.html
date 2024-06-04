@@ -2,7 +2,7 @@
 
 {% load static %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/worker/planner/planner_add_room.css' %}">
+    <link rel="stylesheet" href="{% static 'css/worker/planner/planner_new_worker.css' %}">
 {% endblock extra_css %}
 
 <!-- This block must appear in every reservation template as it is -->
@@ -12,14 +12,23 @@
 
 {% block content %}
     <div class="main">
-        <h2 class="subsection-title">Nou treballador</h2>
+        <h2 class="subsection-title">Crear Nou Treballador</h2>
+        <p class="process-guidance">Introdueixi les següents dades:</p>
         <form method="post">
-            {{ form.as_p }}
-            {{ create_worker_form.as_p }}
             {% csrf_token %}
-            <div class="procedural-buttons" style="margin-top: 20%">
-                <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
-                <button type="submit" name="action" class="continue-button">Crear &#10093;</button>
+            <div class="form-group"><h5>Nom</h5> {{ form.first_name }}</div>
+            <div class="form-group"><h5>Cognoms</h5> {{ form.last_name }}</div>
+            <div class="form-group"><h5>ID</h5> {{ form.id_number }}</div>
+            <div class="form-group"><h5>Correu electrònic</h5> {{ form.email }}</div>
+            <div class="form-group"><h5>Telèfon</h5> {{ form.phone_number }}</div>
+            
+            <div class="form-group"><h5>Nom d'usuari</h5> {{ form.username }}</div>
+            <div class="form-group"><h5>Contrasenya</h5> {{ form.password1 }}</div>
+            <div class="form-group"><h5>Confirma la contrasenya</h5> {{ form.password2 }}</div>
+            
+            <div class="form-group"><h5>Tipus de treballador</h5> {{ create_worker_form.worker_type }}</div>
+            <div class="procedural-buttons">
+                <button class="filter-button" type="submit">Confirma</button>
             </div>
         </form>
     </div>
