@@ -1,0 +1,78 @@
+.main {
+    justify-content: normal;
+}
+
+#info {
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    padding: 20px 25px;
+    font-size: 1.3em;
+    border: 1px solid #a1b5ff;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    width: 85%;
+    max-width: 500px;
+}
+
+#info p {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#info strong {
+    font-style: italic;
+}
+.form-group {
+    width: 100%;
+}
+
+.form-group input {
+    padding: 10px;
+    border-radius: 3px;
+    font-size: 15px;
+    font-family: "Gill Sans MT", Arial, sans-serif;
+}
+
+.form-group select {
+    padding: 10px;
+    border-radius: 3px;
+    font-size: 20px;
+    font-family: "Gill Sans MT", Arial, sans-serif;
+    width: 100%;
+}
+
+.list-bar {
+    display: flex;
+    width: 100%;
+}
+
+.back-button {
+    width: 100%;
+    text-align: center;
+    background-color: #eff2fd;
+    color: #a1b5ff;
+    text-decoration: none;
+    border: solid 1px #a1b5ff;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.1em;
+}
+
+.back-button:hover {
+    background-color: #6f8cff;
+    color: white;
+    cursor: pointer;
+}
+
+.select-bar {
+    margin-top: 5px;
+}
+
+.assign-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}

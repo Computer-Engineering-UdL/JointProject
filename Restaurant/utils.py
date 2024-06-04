@@ -1,6 +1,7 @@
 from django.db.models import Case, When, Value, IntegerField
-from Restaurant.models import RestaurantReservation
+
 from Restaurant.config import Config as c
+from Restaurant.models import RestaurantReservation
 
 
 def get_ordered_reservations():

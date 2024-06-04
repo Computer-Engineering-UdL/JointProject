@@ -1,6 +1,8 @@
 import os
+
 import matplotlib.pyplot as plt
 from github import Github
+
 from generate_histogram import repo_name
 
 # This code generates a scatter diagram with all the

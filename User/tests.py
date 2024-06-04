@@ -1,4 +1,5 @@
 from django.test import TestCase
+
 from Reception.models import HotelUser
 
 USERNAME = 'testuser'

@@ -1,7 +1,8 @@
-from django.http import HttpResponseForbidden
-from django.contrib.auth.decorators import login_required
 from functools import wraps
+
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 
 UserModel = get_user_model()
 

@@ -1,12 +1,14 @@
-from django.shortcuts import render, redirect
+from datetime import datetime
+
 from django.contrib import messages
-from User.decorators import worker_required
 from django.forms import modelform_factory
+from django.shortcuts import render, redirect
+
 from Restaurant.config import Config as c
-from Restaurant.utils import get_ordered_reservations
 from Restaurant.forms import NewRestaurantReservationForm, AddInternalClientForm, CreateExternalClientForm
 from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
-from datetime import datetime
+from Restaurant.utils import get_ordered_reservations
+from User.decorators import worker_required
 
 
 @worker_required('restaurant')

@@ -2,10 +2,10 @@ from django.contrib.messages import get_messages
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
-from django import forms
-from Reception.models import RoomReservation, Client, Room, Worker
+
 from Reception.config import Config as c
 from Reception.forms import SearchReservationForm
+from Reception.models import RoomReservation, Client, Room, Worker, create_despesa
 
 
 class BaseTest(TestCase):
@@ -63,6 +63,13 @@ class BaseTest(TestCase):
             check_in_active=True
         )
 
+        self.despesa = create_despesa(self.reservation,
+                                      self.reservation.pension_type,
+                                      self.room.room_type)
+        self.despesa1 = create_despesa(self.reservationCheckInActive,
+                                       self.reservationCheckInActive.pension_type,
+                                       self.room1.room_type)
+
         self.client.force_login(self.worker)
 
 
@@ -98,7 +105,7 @@ class CheckInFormsAndRedirectsTest(BaseTest):
         self.assertTrue('No existeix cap reserva amb aquest número' in form.errors['__all__'])
 
     def test_check_in_summary_view_status_code(self):
-        url = reverse('check_in_summary', args=[self.reservation.id])
+        url = reverse('print_receipt_check_in', args=[self.client_user.id, self.reservation.id])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -132,7 +139,7 @@ class CheckInViewTest(BaseTest):
         self.assertNotIn(reservation, reservations)
 
     def test_check_in_summary_view_with_reservation(self):
-        url = reverse('check_in_summary', args=[self.reservation.id])
+        url = reverse('print_receipt_check_in', args=[self.client_user.id, self.reservation.id])
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 

@@ -1,14 +1,12 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.urls import reverse
+from django.shortcuts import render, redirect, get_object_or_404
 
+from Planner.config import Config as c
 from Planner.forms import RoomForm, CreateWorker
 from Reception.models import Worker, Room
-from Planner.config import Config as c
-from User.forms import SignUpForm
-from User.decorators import worker_required
 from User.config import Config as uc
+from User.decorators import worker_required
+from User.forms import SignUpForm
 
 
 @worker_required('planner')
@@ -66,9 +64,8 @@ def assign_cleaner_to_room(request, room_id):
         cleaner = get_object_or_404(Worker, pk=cleaner_id)
         room.cleaner = cleaner
         room.save()
-        return redirect('room_assignment')
-    else:
-        return redirect('room_assignment')
+
+    return redirect('planner_room_detail', room_id=room_id)
 
 
 @worker_required('planner')

@@ -1,12 +1,13 @@
 from io import BytesIO
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
-from reportlab.lib.styles import getSampleStyleSheet
-from Reception.models import HotelUser, Client, RoomReservation
-from reportlab.lib import colors
-from reportlab.platypus import Table, TableStyle
+
 from django.shortcuts import get_object_or_404
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.platypus import Table, TableStyle
+
+from Reception.models import HotelUser, Client, RoomReservation
 from Reception.models import create_despesa
 
 

@@ -1,10 +1,11 @@
 from datetime import timedelta, date
+
 from django import forms
-from django.core.validators import RegexValidator
 from django.db.models import Sum
-from User import validators as uv
+
 from Restaurant.config import Config as rc
 from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
+from User import validators as uv
 
 
 def verify_restaurant_reservation(day, num_guests):

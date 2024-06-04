@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from Cleaner.models import CleaningMaterial, Stock, CleanedRoom
 
 admin.site.register(CleaningMaterial)

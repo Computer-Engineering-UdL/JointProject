@@ -1,8 +1,10 @@
 import os
-import pandas as pd
 from datetime import datetime, timedelta
-from github import Github
+
 import matplotlib.pyplot as plt
+import pandas as pd
+from github import Github
+
 from generate_histogram import repo_name
 
 
