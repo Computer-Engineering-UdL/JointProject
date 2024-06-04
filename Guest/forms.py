@@ -23,14 +23,13 @@ class GuestRoomReservationFormStep1(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        entry = cleaned_data.get('entry')
-        exit = cleaned_data.get('exit')
 
         return cleaned_data
 
     class Meta:
         model = RoomReservation
         fields = ['entry', 'exit']
+
 
 class GuestRoomReservationFormStep2(forms.ModelForm):
     pension_type = forms.ChoiceField(choices=c.get_pension_types)

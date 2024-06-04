@@ -1,18 +1,13 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
 from django.forms import modelform_factory
 from django.shortcuts import render, redirect
 
-from Reception.models import create_despesa, Room, Client, RoomReservation
-from Reception.forms import RoomReservationForm
-from Guest.config import Config as c
 from Guest import utils
 from Guest.config import Config as c
 from Guest.forms import GuestRoomReservationFormStep1, GuestRoomReservationFormStep2
 from django.contrib import messages
 from datetime import datetime
-from Restaurant.forms import NewRestaurantReservationForm, AddInternalClientForm, CreateExternalClientForm
 from Guest.forms import RestaurantReservationForm, SearchClientForm
-from Reception.forms import RoomReservationForm
 from Reception.models import RoomReservation, create_despesa, Room, Client
 from Restaurant.forms import CreateExternalClientForm
 from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
@@ -82,7 +77,7 @@ def guest_room_reservation_2(request):
     return render(request, c.get_guest_path(6), {'form': form})
 
 
-def guest_room_reservation_step_3(request):
+def guest_room_reservation_3(request):
     """Show the reservation summary."""
     reservation = get_object_or_404(RoomReservation, pk=request.session.get('reservation_id'))
     room = get_object_or_404(Room, pk=reservation.room_id)
