@@ -31,6 +31,7 @@ def guest_room_reservation_1(request):
 
     return render(request, c.get_guest_path(1), {'form': form})
 
+
 def guest_room_reservation_2(request):
     """Client creates a new reservation."""
     form = GuestRoomReservationFormStep2(request.POST)
@@ -67,17 +68,20 @@ def guest_room_reservation_2(request):
                 )
                 new_rsv.save()
                 create_despesa(new_rsv, new_rsv.pension_type, room.room_type)
-                request.session['reservation_data'] = new_rsv
-                return redirect(c.get_guest_path(7))
+                request.session['reservation_id'] = new_rsv.id
+                return redirect('guest_room_reservation_3')
         else:
-            form = GuestRoomReservationForm()
+            form = GuestRoomReservationFormStep2()
 
     return render(request, c.get_guest_path(6), {'form': form})
 
-def guest_room_reservation_summary(request, pk):
+
+def guest_room_reservation_step_3(request):
     """Show the reservation summary."""
-    reservation = get_object_or_404(RoomReservation, pk=pk)
-    return render(request, c.get_guest_path(7), {'reservation': reservation})
+    reservation = get_object_or_404(RoomReservation, pk=request.session.get('reservation_id'))
+    room = get_object_or_404(Room, pk=reservation.room_id)
+    return render(request, c.get_guest_path(7), {'reservation': reservation, 'room': room})
+
 
 def guest_restaurant_reservation_1(request):
     if request.method == 'POST':
