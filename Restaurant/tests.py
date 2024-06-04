@@ -1,16 +1,10 @@
-from django.contrib.messages import get_messages
 from django.test import TestCase
 from django.urls import reverse
-from django.utils import timezone
-from django import forms
-from Reception.models import RoomReservation, Client, Room, Worker
-from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
-from Restaurant.forms import NewRestaurantReservationForm, AddInternalClientForm, CreateExternalClientForm, \
-    get_available_clients
+
+from Reception.models import Client, Worker
 from Restaurant.config import Config as c
-from Reception.forms import SearchReservationForm
-from Restaurant.views import restaurant_home, new_restaurant_reservation_1, new_restaurant_reservation_2, \
-    new_restaurant_reservation_3
+from Restaurant.forms import NewRestaurantReservationForm, AddInternalClientForm, CreateExternalClientForm
+from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
 from User import gen_dni
 from db_populator import fake
 

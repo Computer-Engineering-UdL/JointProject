@@ -1,13 +1,14 @@
+from datetime import date
+
 from django import forms
 
-from Reception.models import RoomReservation, Room, HotelUser
-from Reception.config import Config as c
+from Guest import forms_verify as gfv
 from Reception import forms_verify as fv
+from Reception.config import Config as c
+from Reception.models import RoomReservation, Room
 from Restaurant import forms_verify as rfv
 from Restaurant.config import Config as rc
 from Restaurant.models import RestaurantReservation
-from Guest import forms_verify as gfv
-from datetime import date
 
 
 class GuestRoomReservationFormStep1(forms.ModelForm):

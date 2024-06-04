@@ -1,12 +1,12 @@
-from django import forms
-from Restaurant.models import RestaurantReservation
-from Reception.models import HotelUser, Client
-from Restaurant.config import Config as rc
-from Reception import utils as u
 from datetime import date
+
+from django import forms
 from django.core.exceptions import ValidationError
-from django.db.models import Sum
+
+from Reception.models import HotelUser, Client
 from Restaurant import forms_verify as fv
+from Restaurant.config import Config as rc
+from Restaurant.models import RestaurantReservation
 
 
 class NewRestaurantReservationForm(forms.ModelForm):

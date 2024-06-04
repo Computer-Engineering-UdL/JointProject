@@ -1,4 +1,5 @@
 import random
+
 from User.validators import get_nif_word, is_valid_dni
 
 

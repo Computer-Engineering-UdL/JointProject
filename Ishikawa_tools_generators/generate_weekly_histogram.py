@@ -1,8 +1,10 @@
-from github import Github
-import matplotlib.pyplot as plt
-from datetime import datetime, timedelta, timezone
-from generate_histogram import token, repo_name, labels_count
 import argparse
+from datetime import datetime, timedelta, timezone
+
+import matplotlib.pyplot as plt
+from github import Github
+
+from generate_histogram import token, repo_name, labels_count
 
 g = Github(token)
 repo = g.get_repo(repo_name)

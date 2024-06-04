@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
-from django import forms
-from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db import models
+
 from Reception.models import HotelUser
 from Restaurant.config import Config as rc
 

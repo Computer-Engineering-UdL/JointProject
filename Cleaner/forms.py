@@ -1,6 +1,6 @@
 from django import forms
+
 from Cleaner.models import Stock, CleaningMaterial, CleanedRoom
-from Reception.models import Room
 
 
 class StockForm(forms.ModelForm):

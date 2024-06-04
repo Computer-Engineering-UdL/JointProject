@@ -1,14 +1,15 @@
+import os
 import random
 from datetime import timedelta
+
+import django
 from django.utils import timezone
 from faker import Faker
-import os
-import django
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "JointProject.settings")
 django.setup()
 
-from Reception.models import HotelUser, Client, Worker, Room, RoomReservation, create_despesa, Despeses, ExtraCosts
+from Reception.models import HotelUser, Client, Worker, Room, RoomReservation, create_despesa, ExtraCosts
 from Cleaner.models import CleaningMaterial, Stock, CleanedRoom
 from Cleaner.config import MATERIALS_NAMES
 from Restaurant.models import RestaurantReservation
