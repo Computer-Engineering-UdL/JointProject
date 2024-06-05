@@ -12,6 +12,7 @@ from Reception.models import RoomReservation, create_despesa, Room, Client
 from Restaurant.forms import CreateExternalClientForm
 from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
 
+
 def guest_home(request):
     return render(request, c.get_guest_home_path())
 
