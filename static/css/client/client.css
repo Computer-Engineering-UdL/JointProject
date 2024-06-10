@@ -17,8 +17,8 @@ header {
     z-index: 2;
 }
 
-.menu li {
-    padding-top: 10px;
+.menu {
+    gap: 15px;
 }
 
 .menu li a {
@@ -30,6 +30,11 @@ header {
     background-color: rgba(255, 255, 255, 0.5);
     color: white;
     box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.5);
+}
+
+.menu button {
+    font-weight: bold;
+    color: #003a86;
 }
 
 /***** User Home *****/
@@ -49,10 +54,14 @@ header {
     opacity: 0.6;
 }
 
-a:has(#current-page) {
-    border-bottom: #9f8227 3px solid;
+.menu a:has(#current-page) {
+    border-bottom: #003a86 2px solid;
 }
-#current-page {
-    font-weight: bold;
-    color: #003a86;
+.menu a:has(#current-page):hover {
+    border-bottom: #003a86 2px solid;
+}
+
+.menu li a:hover {
+    background-color: rgba(247, 202, 62, 0.3);
+    box-shadow: 0 0 10px 10px rgba(247, 202, 62, 0.3);
 }
