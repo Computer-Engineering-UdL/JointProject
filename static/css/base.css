@@ -69,6 +69,7 @@ nav {
 .menu li {
     min-width: max-content;
     height: 100%;
+    width: 22%;
     align-self: center;
 }
 

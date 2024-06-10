@@ -17,6 +17,9 @@ header {
     z-index: 2;
 }
 
+.menu li {
+}
+
 .menu li a:hover {
     background-color: rgba(255, 255, 255, 0.5);
     color: white;
@@ -40,4 +43,10 @@ header {
 
 #user-home img:hover {
     opacity: 0.6;
+}
+
+#current-page {
+    font-weight: bold;
+    color: #003a86;
+    border-bottom: #003a86 4px solid;
 }
