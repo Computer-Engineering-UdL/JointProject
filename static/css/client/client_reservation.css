@@ -1,0 +1,9 @@
+a:has(#current-page):hover {
+    background-color: rgba(247, 202, 62, 0.4);
+    box-shadow: 0 0 10px 10px rgba(247, 202, 62, 0.4);
+}
+
+header {
+    background-color: #d5d5d5;
+    box-shadow: #d5d5d5 0 0 15px 15px;
+}

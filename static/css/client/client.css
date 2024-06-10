@@ -18,13 +18,17 @@ header {
 }
 
 .menu li {
+    padding-top: 10px;
+}
+
+.menu li a {
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 .menu li a:hover {
     background-color: rgba(255, 255, 255, 0.5);
     color: white;
-    padding-bottom: 5px;
-    padding-top: 5px;
     box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.5);
 }
 
@@ -45,8 +49,10 @@ header {
     opacity: 0.6;
 }
 
+a:has(#current-page) {
+    border-bottom: #9f8227 3px solid;
+}
 #current-page {
     font-weight: bold;
     color: #003a86;
-    border-bottom: #003a86 4px solid;
 }
