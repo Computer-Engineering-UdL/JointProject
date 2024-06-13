@@ -6,7 +6,7 @@
 |--------------------|-----------------------------------------------------------------|-----------|
 | Accountant actions | Accountant can check the billing information and extra actions. | No        |
 | Planner actions    | Planner can add new workers and extra actions.                  | Yes       |
-| User               | User can book an hotel room.                                    | Yes       |
+| User               | User can book an hotel room and a restaurant reservation.       | Yes       |
 
 ## Burn-down Graph
 
