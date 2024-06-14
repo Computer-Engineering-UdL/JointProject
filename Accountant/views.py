@@ -1,9 +1,9 @@
 from django.contrib import messages
-from django.db.models import F, Sum
-from django.shortcuts import render, redirect
+from django.db.models import Prefetch, Sum
+from django.shortcuts import redirect, render
 
 from Accountant.config import Config as c
-from Reception.models import RoomReservation
+from Reception.models import RoomReservation, ExtraCosts
 from User.decorators import worker_required
 
 
@@ -41,10 +41,29 @@ def tourist_tax(request):
 
 @worker_required('accountant')
 def billing_data(request):
-    reservations_with_costs = RoomReservation.objects.select_related('room').annotate(
-        total_cost=Sum(
-            F('despeses__room_type_costs') + F('despeses__pension_costs') + F('extracosts__extra_costs_price'))
-    ).order_by('-entry')
+    reservations = RoomReservation.objects.select_related('room').prefetch_related(
+        'despeses',
+        'extracosts_set'
+    )
 
-    return render(request, 'worker/accountant/billing_data.html',
-                  {'reservations_with_costs': reservations_with_costs})
+    reservation_details = []
+    for reservation in reservations:
+        despeses = getattr(reservation, 'despeses', None)
+        extra_costs = ExtraCosts.objects.filter(room_reservation=reservation)
+        total_extra_costs = extra_costs.aggregate(Sum('extra_costs_price'))['extra_costs_price__sum'] or 0
+
+        if despeses:
+            total_price = despeses.room_type_costs + despeses.pension_costs + total_extra_costs
+        else:
+            total_price = total_extra_costs
+
+        reservation_details.append({
+            'reservation': reservation,
+            'despeses': despeses,
+            'extra_costs': extra_costs,
+            'total_price': total_price
+        })
+
+    return render(request, 'worker/accountant/billing_data.html', {
+        'reservation_details': reservation_details
+    })
