@@ -21,6 +21,10 @@
             <a href="{% url 'billing_data' %}">
                 <button class="access-process-button">Dades de facturació</button>
             </a>
+            <form action="{% url 'tourist_tax' %}" method="post">
+                {% csrf_token %}
+                <button class="access-process-button">Pagar la taxa turística</button>
+            </form>
         </div>
     </div>
 {% endblock content %}
