@@ -20,7 +20,7 @@ project.
 
 ![burn_up_chart_sprint3.png](burn_up_chart_sprint3.png)
 
-In this chart it can be seen that not all of the issues have been solved at the time of the end of the sprint, but most
+In this chart it can be seen that not all the issues have been solved at the time of the end of the sprint, but most
 of them do.
 
 ## Client Improvements
