@@ -44,7 +44,7 @@ def billing_data(request):
     reservations = RoomReservation.objects.select_related('room').prefetch_related(
         'despeses',
         'extracosts_set'
-    )
+    ).order_by('entry')
 
     reservation_details = []
     for reservation in reservations:
