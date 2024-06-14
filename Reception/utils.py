@@ -1,3 +1,4 @@
+from datetime import datetime as dat
 from io import BytesIO
 
 from django.shortcuts import get_object_or_404
@@ -9,6 +10,10 @@ from reportlab.platypus import Table, TableStyle
 
 from Reception.models import HotelUser, Client, RoomReservation
 from Reception.models import create_despesa
+
+
+def get_time_now():
+    return dat.now().date()
 
 
 def get_total_price(extra_costs, despeses):

@@ -75,6 +75,7 @@ class RoomReservation(models.Model):
     is_active = models.BooleanField(default=True)
     check_in_active = models.BooleanField(default=False)
     check_out_active = models.BooleanField(default=False)
+    tourist_tax_paid = models.BooleanField(default=False)
 
     class Meta:
         unique_together = ('room', 'entry', 'exit')
