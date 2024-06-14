@@ -1,9 +1,10 @@
+from django.contrib import messages
+from django.db.models import F, Sum
 from django.shortcuts import render, redirect
 
+from Accountant.config import Config as c
 from Reception.models import RoomReservation
 from User.decorators import worker_required
-from Accountant.config import Config as c
-from django.contrib import messages
 
 
 @worker_required('accountant')
@@ -40,4 +41,10 @@ def tourist_tax(request):
 
 @worker_required('accountant')
 def billing_data(request):
-    return render(request, 'worker/accountant/billing_data.html')
+    reservations_with_costs = RoomReservation.objects.select_related('room').annotate(
+        total_cost=Sum(
+            F('despeses__room_type_costs') + F('despeses__pension_costs') + F('extracosts__extra_costs_price'))
+    ).order_by('-entry')
+
+    return render(request, 'worker/accountant/billing_data.html',
+                  {'reservations_with_costs': reservations_with_costs})
