@@ -2,3 +2,59 @@ header {
     background-color: #e5e5e5;
     box-shadow: #e5e5e5 8px -3px 10px 12px;
 }
+
+form select {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+form select option {
+    flex: 1 0 30%;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px;
+    text-align: center;
+}
+
+.grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid columns */
+    gap: 10px; /* Adjust the gap between items */
+    margin-top: 10px;
+}
+
+.grid-item {
+    width: 45%;
+    aspect-ratio: 16/9;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.grid-item input[type="radio"] {
+    display: none;
+}
+
+.grid-item:hover {
+    background-color: #e0e0e0; /* Optional: Highlight on hover */
+}
+
+.grid-item label {
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: pointer;
+}
+
+.room-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: initial;
+    object-fit: cover;
+}

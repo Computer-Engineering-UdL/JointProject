@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.contrib import messages
+from django.templatetags.static import static
 from django.forms import modelform_factory
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -30,7 +31,14 @@ def guest_room_reservation_1(request):
     else:
         form = GuestRoomReservationFormStep1()
 
-    return render(request, c.get_guest_path(1), {'form': form})
+    image_urls = {
+        'individual': static('img/LasPalmeras/rooms/individual.png'),
+        'double': static('img/LasPalmeras/rooms/double.png'),
+        'suite': static('img/LasPalmeras/rooms/suite.png'),
+        'deluxe': static('img/LasPalmeras/rooms/deluxe.png')
+    }
+
+    return render(request, c.get_guest_path(1), {'form': form, 'image_urls': image_urls})
 
 
 def guest_room_reservation_2(request):
