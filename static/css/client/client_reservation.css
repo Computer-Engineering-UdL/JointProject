@@ -14,7 +14,7 @@ form select option {
     padding: 10px;
     background-color: #f0f0f0;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 12px;
     margin: 5px;
     text-align: center;
 }
@@ -24,24 +24,31 @@ form select option {
     flex-wrap: wrap;
     justify-content: center;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid columns */
-    gap: 10px; /* Adjust the gap between items */
+    gap: 15px;
     margin-top: 10px;
 }
 
 .grid-item {
     width: 45%;
+    max-width: 680px;
     aspect-ratio: 16/9;
     position: relative;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 14px;
 }
 
 .grid-item input[type="radio"] {
     display: none;
 }
 
+.grid-item:has(input[type="radio"]:checked) {
+    transform: scale(1.04);
+    filter: brightness(1.2);
+    z-index: 1;
+}
+
 .grid-item:hover {
-    background-color: #e0e0e0; /* Optional: Highlight on hover */
+    background-color: #e0e0e0;
 }
 
 .grid-item label {
@@ -49,6 +56,7 @@ form select option {
     height: 100%;
     display: block;
     cursor: pointer;
+    object-fit: fill;
 }
 
 .room-image {
@@ -56,5 +64,21 @@ form select option {
     width: 100%;
     height: 100%;
     aspect-ratio: initial;
-    object-fit: cover;
 }
+
+.room-type-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 1.7rem;
+    font-weight: bolder;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 1),
+                 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+/***** Date Picker *****/

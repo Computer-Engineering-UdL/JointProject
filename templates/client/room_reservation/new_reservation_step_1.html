@@ -5,7 +5,6 @@
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'css/client/client_reservation.css' %}">
 {% endblock extra_css %}
-    <script src="{% static 'js/room_type.js' %}"></script>
 
 {% block title %}Booking{% endblock title %}
 {% block id_new_reservation %}id="current-page"{% endblock id_new_reservation %}
@@ -16,19 +15,16 @@
         <form method="post" class="general-form">
             <div class="add-reservation-form">
                 {% csrf_token %}
-                <div class="date">
-                    <div class="date-form">
-                        <div class="form-input date-input">
-                            <h5 class="title-input">Data d'entrada</h5>
-                            {{ form.entry }}
-                        </div>
-                        <div class="form-input date-input">
-                            <h5 class="title-input">Data de sortida</h5>
-                            {{ form.exit }}
-                        </div>
+                <div class="date-form">
+                    <div class="form-input date-input">
+                        <h5>Data d'entrada</h5>
+                        {{ form.entry }}
+                    </div>
+                    <div class="form-input date-input">
+                        <h5 class="title-input">Data de sortida</h5>
+                        {{ form.exit }}
                     </div>
                 </div>
-
                 <div class="reservation-info-form">
                     <div class="form-input select-input">
                         <h5 class="title-input">Tipus d'habitació</h5>
@@ -39,6 +35,7 @@
                                         <input type="radio" id="{{ value }}" name="room_type" value="{{ value }}">
                                         <label for="{{ value }}">
                                             <img class="room-image" src="{{ url }}" alt="{{ value }}">
+                                            <span class="room-type-text">{{ value }}</span>
                                         </label>
                                     </div>
                                 {% endif %}
@@ -46,7 +43,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div id="gridContainer"></div> -->
             </div>
             <div class="procedural-buttons">
                 <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>

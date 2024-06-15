@@ -27,15 +27,21 @@ def guest_room_reservation_1(request):
             cleaned_data['entry'] = cleaned_data['entry'].isoformat()
             cleaned_data['exit'] = cleaned_data['exit'].isoformat()
             request.session['step1_data'] = cleaned_data
+            print("valid")
             return redirect('guest_room_reservation_2')
     else:
+        print(form.errors.as_data())
+        print(form.non_field_errors())
+        print(form.fields)
+        print("not valid")
+        print(form.cleaned_data)
         form = GuestRoomReservationFormStep1()
 
     image_urls = {
-        'individual': static('img/LasPalmeras/rooms/individual.png'),
-        'double': static('img/LasPalmeras/rooms/double.png'),
-        'suite': static('img/LasPalmeras/rooms/suite.png'),
-        'deluxe': static('img/LasPalmeras/rooms/deluxe.png')
+        'Individual': static('img/LasPalmeras/rooms/individual.png'),
+        'Double': static('img/LasPalmeras/rooms/double.png'),
+        'Suite': static('img/LasPalmeras/rooms/suite.png'),
+        'Deluxe': static('img/LasPalmeras/rooms/deluxe.png')
     }
 
     return render(request, c.get_guest_path(1), {'form': form, 'image_urls': image_urls})
