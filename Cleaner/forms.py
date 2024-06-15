@@ -35,12 +35,9 @@ class AddNewCleningMaterialForm(forms.ModelForm):
             'image': 'Imagen del material'
         }
 
-
-
     def clean(self):
         cleaned_data = super().clean()
         material_name = cleaned_data.get('material_name')
-
 
         try:
             verify_new_material(material_name)
