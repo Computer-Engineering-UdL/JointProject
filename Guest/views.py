@@ -2,15 +2,16 @@ from datetime import datetime
 
 from django.contrib import messages
 from django.forms import modelform_factory
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from Guest import utils
 from Guest.config import Config as c
+from Guest.forms import GuestRoomReservationFormStep1, GuestRoomReservationFormStep2
 from Guest.forms import RestaurantReservationForm, SearchClientForm
-from Reception.forms import RoomReservationForm
 from Reception.models import RoomReservation, create_despesa, Room, Client
 from Restaurant.forms import CreateExternalClientForm
 from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
+from User import validators as uv
 
 
 def guest_home(request):
@@ -18,43 +19,70 @@ def guest_home(request):
 
 
 def guest_room_reservation_1(request):
-    """Client creates a new reservation."""
+    """Client creates a new reservation step 1."""
+    form = GuestRoomReservationFormStep1(request.POST)
     if request.method == 'POST':
-        form = RoomReservationForm(request.POST)
-        """Get the first available room of the chosen type."""
-        try:
-            room = Room.objects.filter(room_type=request.POST.get('room_type'), is_taken=False).first()
-        except Room.DoesNotExist:
-            messages.error(request, "No hi ha habitacions d'aquest tipus disponibles")
-            room = None
-
-        """Get the client based on the current user session."""
-        try:
-            client = Client.objects.get(id=request.user.id)
-        except Client.DoesNotExist:
-            messages.error(request, "Error al rebre les dades del client. Torna-ho a intentar")
-            client = None
-
-        if room and client:
-            entry_date = datetime.strptime(request.POST.get('entry'), '%d/%m/%Y').strftime('%Y-%m-%d')
-            exit_date = datetime.strptime(request.POST.get('exit'), '%d/%m/%Y').strftime('%Y-%m-%d')
-            new_rsv = RoomReservation(
-                client=client,
-                room=room,
-                entry=entry_date,
-                exit=exit_date,
-                pension_type=request.POST.get('pension_type'),
-                num_guests=request.POST.get('num_guests')
-            )
-            room.is_taken = True
-            room.save()
-            new_rsv.save()
-            create_despesa(new_rsv, new_rsv.pension_type, room.room_type)
-            return redirect(c.get_guest_home_path())
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
+            cleaned_data['entry'] = cleaned_data['entry'].isoformat()
+            cleaned_data['exit'] = cleaned_data['exit'].isoformat()
+            request.session['step1_data'] = cleaned_data
+            return redirect('guest_room_reservation_2')
     else:
-        form = RoomReservationForm()
+        form = GuestRoomReservationFormStep1()
 
     return render(request, c.get_guest_path(1), {'form': form})
+
+
+def guest_room_reservation_2(request):
+    """Client creates a new reservation."""
+    form = GuestRoomReservationFormStep2(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            step1_data = request.session.get('step1_data')
+            """Get the first available room of the chosen type."""
+            try:
+                room = Room.objects.filter(room_type=step1_data['room_type'], is_taken=False).first()
+            except Room.DoesNotExist:
+                messages.error(request, "No hi ha habitacions d'aquest tipus disponibles")
+                room = None
+
+            """Get the client based on the current user session."""
+            try:
+                client = Client.objects.get(id=request.user.id)
+            except Client.DoesNotExist:
+                messages.error(request, "Error al rebre les dades del client. Torna-ho a intentar")
+                client = None
+
+            if room and client:
+                entry_date = step1_data['entry']
+                exit_date = step1_data['exit']
+                room.is_taken = True
+                room.save()
+                new_rsv = RoomReservation(
+                    client=client,
+                    room=room,
+                    entry=entry_date,
+                    exit=exit_date,
+                    num_guests=form.cleaned_data['num_guests'],
+                    pension_type=form.cleaned_data['pension_type'],
+                    is_active=True
+                )
+                new_rsv.save()
+                create_despesa(new_rsv, new_rsv.pension_type, room.room_type)
+                request.session['reservation_id'] = new_rsv.id
+                return redirect('guest_room_reservation_3')
+        else:
+            form = GuestRoomReservationFormStep2()
+
+    return render(request, c.get_guest_path(6), {'form': form})
+
+
+def guest_room_reservation_3(request):
+    """Show the reservation summary."""
+    reservation = get_object_or_404(RoomReservation, pk=request.session.get('reservation_id'))
+    room = get_object_or_404(Room, pk=reservation.room_id)
+    return render(request, c.get_guest_path(7), {'reservation': reservation, 'room': room})
 
 
 def guest_restaurant_reservation_1(request):
@@ -77,6 +105,11 @@ def guest_restaurant_reservation_2(request):
 
     if request.method == 'POST':
         form = SearchClientForm(request.POST)
+
+        id_number = form.data.get('id_number')
+        if not uv.is_valid_dni(id_number) or not uv.is_valid_nie(id_number):
+            messages.error(request, "El número d'identificació no és vàlid")
+            return redirect('guest_restaurant_reservation_2')
 
         if form.is_valid():
             client_type = utils.get_client_type(form.cleaned_data['id_number'])

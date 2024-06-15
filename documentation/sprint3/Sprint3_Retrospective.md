@@ -2,20 +2,17 @@
 
 ## Retrospective Overview
 
-| Team Member | Issue Found |
-|-------------|-------------|
-|             |             |
-|             |             |
-|             |             |
-|             |             |
+| Team Member | Issue Found                                                                       |
+|-------------|-----------------------------------------------------------------------------------|
+| Abel        | Reception room reservation needs to be reproached the order of information input. |
+| Aniol       | Accountant is not fully implemented and needs to be.                              |
 
 ## Retrospective Actions
 
-| Action | Description |
-|--------|-------------|
-|        |             |
-|        |             |
-|        |             |
+| Action           | Description                                                                                    |
+|------------------|------------------------------------------------------------------------------------------------|
+| Finish the tasks | The remaining tasks needs to be finished before the final presentation.                        |
+| Polish some bugs | The system needs to be tested before the presentation in order to find some bugs and fix them. |
 
 ## Next Sprint Team Organization
 

@@ -137,6 +137,14 @@ def populate_reservations(n: int) -> None:
     clients = list(Client.objects.all())
     max_attempts = 5
 
+    guest_limits = {
+        'No seleccionat': (1, 1),
+        'Individual': (1, 1),
+        'Double': (1, 2),
+        'Suite': (1, 4),
+        'Deluxe': (1, 4)
+    }
+
     for _ in range(n):
         reservation_created = False
         attempt = 0
@@ -156,7 +164,9 @@ def populate_reservations(n: int) -> None:
                 check_out_active = check_in_active and random.choice([True, False])
 
                 pension_type = random.choice(pension_types)[0]
-                num_guests = random.randint(1, 4)
+
+                min_guests, max_guests = guest_limits.get(room.room_type, (1, 1))
+                num_guests = random.randint(min_guests, max_guests)
 
                 reservation = RoomReservation(
                     client=client,
