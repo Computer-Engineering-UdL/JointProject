@@ -1,18 +1,41 @@
 {% extends "worker/accountant/base_accountant.html" %}
+<!-- This template shows the cleaner all the cleaning stock and allows to mark each item as 'no stock' -->
+<!-- The items selected as 'no stock' must be showed differently -->
+
+{% block title %}Stock{% endblock title %}
 
 {% load static %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/worker/accountant/accountant.css' %}">
+    <link rel="stylesheet" href="{% static 'css/worker/cleaner/cleaner_stock.css' %}">
 {% endblock extra_css %}
 
-<!-- This block must appear in every reservation template as it is -->
-{% block id_cleaning_material %} id="current-page" {% endblock id_cleaning_material %}
-
-{% block title %}Material de neteja{% endblock title %}
+<!-- This block must appear in every cleaner template as it is -->
+{% block id_cleaner_stock %} id="current-page" {% endblock id_cleaner_stock %}
 
 {% block content %}
     <div class="main">
-        <h2 class="subsection-title">Material de neteja</h2>
-        <!-- Temporal code here -->
+        <h1 class="section-title">STOCK</h1>
+        <form action="{% url 'cleaner_stock' %}" method="post" id="stock-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button id="search" type="submit"><img width="30" src="{% static 'img/icons/lupa-icon.png' %}" alt="Buscar">
+            </button>
+        </form>
+        <form action="{% url 'cleaner_stock' %}" method="post" id="stock_list_form">
+            {% csrf_token %}
+            <div class="stock">
+                {% for item in stock %}
+                    <div class="stock-element">
+                        <input type="checkbox" name="stock[]" value="{{ item.id }}" id="stock_{{ item.id }}"
+                               {% if not item.is_available %} checked {% endif %}>
+                        <label for="stock_{{ item.id }}">
+                            <label id="stock-name" for="stock_{{ item.id }}">{{ item.material.material_name }}</label>
+                            <img src="{{ item.material.image.url }}" alt="{{ item.material.material_name }} image">
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="submit" name="update_stock" id="update-button">Actualitzar</button>
+        </form>
     </div>
 {% endblock content %}
