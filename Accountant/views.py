@@ -1,14 +1,12 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
-
-from Cleaner.models import Stock
-from django.db.models import Prefetch, Sum
+from django.db.models import Sum
 from django.shortcuts import redirect, render
 
 from Accountant.config import Config as c
+from Cleaner.forms import StockForm, AddNewCleningMaterialForm
+from Cleaner.models import Stock
 from Reception.models import RoomReservation, ExtraCosts
 from User.decorators import worker_required
-from Cleaner.forms import StockForm, AddNewCleningMaterialForm
 
 
 @worker_required('accountant')
@@ -47,7 +45,6 @@ def cleaning_material(request):
     return render(request, 'worker/accountant/cleaning_material.html', {'form': form, 'stock': stock})
 
 
-
 @worker_required('accountant')
 def add_new_cleaning_material(request):
     if request.method == 'POST':
@@ -59,6 +56,7 @@ def add_new_cleaning_material(request):
     else:
         form = AddNewCleningMaterialForm()
     return render(request, 'worker/accountant/new_cleaning_material.html', {'form': form})
+
 
 @worker_required('accountant')
 def tourist_tax(request):

@@ -23,10 +23,11 @@ class CleanedRoomForm(forms.Form):
         model = CleanedRoom
         fields = ['missing_objects', 'need_towels', 'additional_comments']
 
-class AddNewCleningMaterialForm(forms.ModelForm):
 
+class AddNewCleningMaterialForm(forms.ModelForm):
     material_name = forms.CharField(label='Nom del material', required=True)
     image = forms.ImageField(label='Imatge del material', required=True)
+
     class Meta:
         model = CleaningMaterial
         fields = ['material_name', 'image']
