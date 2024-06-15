@@ -3,8 +3,31 @@
 
 {% load static %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/client/client_reservation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/client/hotel/client_reservation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/client/hotel/client_reservation_2.css' %}">
 {% endblock extra_css %}
 
 {% block title %}Booking{% endblock title %}
 {% block id_new_reservation %}id="current-page"{% endblock id_new_reservation %}
+
+{% block content %}
+    <div class="main">
+        <form method="post" class="general-form">
+            {% csrf_token %}
+            <div class="add-reservation-form">
+                <div class="form-input number-input">
+                    <h5 class="title-input">Nombre d'hostes <i class="gg-user"></i></h5>
+                    {{ form.num_guests }}
+                </div>
+                <div class="form-input select-input">
+                    <h5 class="title-input">Tipus de pensió <i class="gg-bowl"></i></h5>
+                    {{ form.pension_type }}
+                </div>
+            </div>
+            <div class="procedural-buttons">
+                <button class="button cancel-button" type="button" onclick="goBack()"><i class="gg-arrow-left"></i></button>
+                <button class="button continue-button" type="submit"><i class="gg-arrow-right"></i></button>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

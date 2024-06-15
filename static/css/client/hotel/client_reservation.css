@@ -1,3 +1,7 @@
+.main {
+    top: 80px;
+}
+
 header {
     background-color: #e5e5e5;
     box-shadow: #e5e5e5 8px -3px 10px 12px;
@@ -117,33 +121,6 @@ form select option {
     font-size: 15px;
     font-family: "Gill Sans MT", Arial, sans-serif;
 }
-
-.gg-chevron-double-right {
-    box-sizing: border-box;
-    position: relative;
-    display: block;
-    transform: scale(1.5);
-    width: 22px;
-    height: 22px
-}
-.gg-chevron-double-right::after,
-.gg-chevron-double-right::before {
-    content: "";
-    display: block;
-    box-sizing: border-box;
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    border-right: 2px solid;
-    border-top: 2px solid;
-    transform: rotate(45deg);
-    top: 7px;
-    right: 6px
-}
-.gg-chevron-double-right::after {
-    right: 11px
-}
-
 
 .date-input input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;

@@ -1,0 +1,73 @@
+.main {
+    justify-content: center;
+    top: 0;
+}
+
+.add-reservation-form {
+    width: 500px;
+    display: flex;
+}
+
+.number-input {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    justify-content: center;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.number-input input {
+    width: 30px;
+    height: 30px;
+    cursor: text;
+    padding: 10px;
+    border-radius: 3px;
+    font-size: 24px;
+    font-family: "Gill Sans MT", Arial, sans-serif;
+}
+
+.number-input .title-input {
+    transform: scale(1.5);
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.select-input {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    justify-content: center;
+}
+
+.select-input select {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 3px;
+    font-size: 20px;
+    font-family: "Gill Sans MT", Arial, sans-serif;
+    border-width: 2px;
+}
+
+.select-input .title-input {
+    transform: scale(1.5);
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.procedural-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 60%;
+    max-width: 400px;
+    margin-top: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

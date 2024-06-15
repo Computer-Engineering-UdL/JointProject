@@ -3,7 +3,7 @@
 
 {% load static %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/client/client_reservation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/client/hotel/client_reservation.css' %}">
 {% endblock extra_css %}
 
 {% block title %}Booking{% endblock title %}
@@ -11,7 +11,6 @@
 
 {% block content %}
     <div class="main">
-        <h2 class="subsection-title">Crear nova reserva</h2>
         <form method="post" class="general-form">
             <div class="add-reservation-form">
                 {% csrf_token %}
@@ -27,7 +26,7 @@
                     </section>
                 </div>
                 <div class="reservation-info-form">
-                    <div class="form-input select-input">
+                    <div class="form-input">
                         <div class="grid-container">
                             {% for value, url in image_urls.items %}
                                 {% if value != "No seleccionat" %}
