@@ -82,7 +82,7 @@ form {
     justify-content: space-between;
 }
 
-button {
+.button {
     display: inline-block;
     padding: 20px 46px;
     margin: 10px;
@@ -94,7 +94,7 @@ button {
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-button:hover {
+.button:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
@@ -119,7 +119,7 @@ button:hover {
 }
 
 /* Specific Styles for the Icons */
-button::before {
+.button::before {
     display: inline-block;
     margin-right: 8px;
 }
