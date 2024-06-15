@@ -13,7 +13,7 @@
 {% block content %}
     <div class="main">
         <h1 class="subsection-title">Dades de facturació</h1>
-            <ul class="reservation-list">
+        <ul class="reservation-list">
             <ul class="list-index">
                 <li id="reservation-id">Reserva</li>
                 <li id="entry">Entrada</li>
@@ -41,48 +41,48 @@
                     <td colspan="8">No hi ha dades de facturació disponibles.</td>
                 </tr>
             {% endfor %}
-            </ul>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
         <table class="billing-table">
             <thead>
-            <tr>
-                <th>ID Reserva</th>
-                <th>Data d'entrada</th>
-                <th>Data de sortida</th>
-                <th>Habitació</th>
-                <th>Tipus de pensió</th>
-                <th>Cost Total</th>
-            </tr>
+                <tr>
+                    <th>ID Reserva</th>
+                    <th>Data d'entrada</th>
+                    <th>Data de sortida</th>
+                    <th>Habitació</th>
+                    <th>Tipus de pensió</th>
+                    <th>Cost Total</th>
+                </tr>
             </thead>
             <tbody>
-            {% for detail in reservation_details %}
-                <tr>
-                    <td>{{ detail.reservation.id }}</td>
-                    <td>{{ detail.reservation.room.room_num }}</td>
-                    <td>{{ detail.reservation.room.room_type }}</td>
-                    <td>{{ detail.reservation.entry }}</td>
-                    <td>{{ detail.reservation.exit }}</td>
-                    <td>{{ detail.reservation.pension_type }}</td>
-                    <td>{{ detail.reservation.num_guests }}</td>
-                    <td>{{ detail.total_price }} €</td>
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="8">No hi ha dades de facturació disponibles.</td>
-                </tr>
-            {% endfor %}
+                {% for detail in reservation_details %}
+                    <tr>
+                        <td>{{ detail.reservation.id }}</td>
+                        <td>{{ detail.reservation.room.room_num }}</td>
+                        <td>{{ detail.reservation.room.room_type }}</td>
+                        <td>{{ detail.reservation.entry }}</td>
+                        <td>{{ detail.reservation.exit }}</td>
+                        <td>{{ detail.reservation.pension_type }}</td>
+                        <td>{{ detail.reservation.num_guests }}</td>
+                        <td>{{ detail.total_price }} €</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="8">No hi ha dades de facturació disponibles.</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
