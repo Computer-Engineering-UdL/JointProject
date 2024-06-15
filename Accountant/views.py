@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.db.models import Prefetch, Sum
+from django.db.models import Sum
 from django.shortcuts import redirect, render
 
 from Accountant.config import Config as c
