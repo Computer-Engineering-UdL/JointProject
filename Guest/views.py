@@ -11,6 +11,7 @@ from Guest.forms import RestaurantReservationForm, SearchClientForm
 from Reception.models import RoomReservation, create_despesa, Room, Client
 from Restaurant.forms import CreateExternalClientForm
 from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
+from User import validators as uv
 
 
 def guest_home(request):
@@ -104,6 +105,11 @@ def guest_restaurant_reservation_2(request):
 
     if request.method == 'POST':
         form = SearchClientForm(request.POST)
+
+        id_number = form.data.get('id_number')
+        if not uv.is_valid_dni(id_number) or not uv.is_valid_nie(id_number):
+            messages.error(request, "El número d'identificació no és vàlid")
+            return redirect('guest_restaurant_reservation_2')
 
         if form.is_valid():
             client_type = utils.get_client_type(form.cleaned_data['id_number'])
