@@ -21,6 +21,10 @@ header {
     gap: 15px;
 }
 
+.menu li {
+    max-width: 250px;
+}
+
 .menu li a {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -69,4 +73,116 @@ header {
 /***** Form *****/
 form {
     width: 100%;
+}
+
+/***** Buttons *****/
+.procedural-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+button {
+    display: inline-block;
+    padding: 20px 46px;
+    margin: 10px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Go Back Button */
+.cancel-button {
+    background-color: #d9d9d9;
+    color: #333;
+}
+
+.cancel-button:hover {
+    background-color: #c4c4c4;
+}
+
+/* Continue Button */
+.continue-button {
+    background-color: #003a86;
+    color: white;
+}
+
+.continue-button:hover {
+    background-color: #00245b;
+}
+
+/* Specific Styles for the Icons */
+button::before {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+/***** Arrows *****/
+.gg-arrow-right {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(1.5);
+    width: 22px;
+    height: 22px
+}
+.gg-arrow-right::after,
+.gg-arrow-right::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    right: 3px
+}
+.gg-arrow-right::after {
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid;
+    border-right: 2px solid;
+    transform: rotate(45deg);
+    bottom: 7px
+}
+.gg-arrow-right::before {
+    width: 16px;
+    height: 2px;
+    bottom: 10px;
+    background: currentColor
+}
+
+.gg-arrow-left {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(1.5);
+    width: 22px;
+    height: 22px
+}
+.gg-arrow-left::after,
+.gg-arrow-left::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    left: 3px
+}
+.gg-arrow-left::after {
+    width: 8px;
+    height: 8px;
+    border-bottom: 2px solid;
+    border-left: 2px solid;
+    transform: rotate(45deg);
+    bottom: 7px
+}
+.gg-arrow-left::before {
+    width: 16px;
+    height: 2px;
+    bottom: 10px;
+    background: currentColor
 }

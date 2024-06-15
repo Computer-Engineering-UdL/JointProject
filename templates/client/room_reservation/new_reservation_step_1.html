@@ -16,18 +16,18 @@
             <div class="add-reservation-form">
                 {% csrf_token %}
                 <div class="date-form">
-                    <div class="form-input date-input">
-                        <h5>Data d'entrada</h5>
-                        {{ form.entry }}
-                    </div>
-                    <div class="form-input date-input">
-                        <h5 class="title-input">Data de sortida</h5>
-                        {{ form.exit }}
-                    </div>
+                    <section>
+                        <div class="form-input date-input">
+                            {{ form.entry }}
+                        </div>
+                        <i class="gg-chevron-double-right"></i>
+                        <div class="form-input date-input">
+                            {{ form.exit }}
+                        </div>
+                    </section>
                 </div>
                 <div class="reservation-info-form">
                     <div class="form-input select-input">
-                        <h5 class="title-input">Tipus d'habitació</h5>
                         <div class="grid-container">
                             {% for value, url in image_urls.items %}
                                 {% if value != "No seleccionat" %}
@@ -43,10 +43,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="procedural-buttons">
-                <button class="cancel-button" type="button" onclick="goBack()">&#10092; Cancel·lar</button>
-                <button class="continue-button" type="submit">Next &#10093;</button>
+                <div class="procedural-buttons">
+                    <button class="cancel-button" type="button" onclick="goBack()"><i class="gg-arrow-left"></i></button>
+                    <button class="continue-button" type="submit"><i class="gg-arrow-right"></i></button>
+                </div>
             </div>
         </form>
     </div>
