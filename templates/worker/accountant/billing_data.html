@@ -2,7 +2,7 @@
 
 {% load static %}
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/worker/accountant/accountant.css' %}">
+    <link rel="stylesheet" href="{% static 'css/worker/accountant/accountant_billing_data.css' %}">
 {% endblock extra_css %}
 
 <!-- This block must appear in every reservation template as it is -->
@@ -12,7 +12,35 @@
 
 {% block content %}
     <div class="main">
-        <h2 class="subsection-title">Dades de facturació</h2>
-        <!-- Temporal code here -->
+        <h1 class="subsection-title">Dades de facturació</h1>
+        <ul class="reservation-list">
+            <ul class="list-index">
+                <li id="reservation-id">Reserva</li>
+                <li id="entry">Entrada</li>
+                <li id="exit">Sortida</li>
+                <li id="name">Client (nº hostes)</li>
+                <li id="pension">Pensió</li>
+                <li id="num-guests">Habitació</li>
+                <li id="cost">Preu</li>
+            </ul>
+            <div id="divider"></div>
+            {% for detail in reservation_details %}
+                <div class="list-div">
+                    <li>
+                        <div id="reservation-id">{{ detail.reservation.id }}</div>
+                        <div id="entry">{{ detail.reservation.entry }}</div>
+                        <div id="exit">{{ detail.reservation.exit }}</div>
+                        <div id="name">{{ detail.reservation.client.first_name }} {{ detail.reservation.client.last_name }} ({{ detail.reservation.num_guests }})</div>
+                        <div id="pension">{{ detail.reservation.pension_type }}</div>
+                        <div id="num-guests">{{ detail.reservation.room.room_num }} ({{ detail.reservation.room.room_type }})</div>
+                        <div id="cost">{{ detail.total_price }} €</div>
+                    </li>
+                </div>
+            {% empty %}
+                <tr>
+                    <td colspan="8">No hi ha dades de facturació disponibles.</td>
+                </tr>
+            {% endfor %}
+        </ul>
     </div>
 {% endblock content %}

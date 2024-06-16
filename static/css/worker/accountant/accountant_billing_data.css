@@ -1,0 +1,35 @@
+.reservation-list {
+    width: 100%
+}
+
+#name {
+    width: 27%;
+}
+
+#num-guests {
+    width: 15%;
+    min-width: unset;
+}
+
+#cost {
+    width: 8%;
+}
+
+.list-div li {
+	width: 100%;
+}
+
+.list-index {
+	width: 100%;
+}
+
+.list-extra {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#divider {
+    width: 100%;
+}
