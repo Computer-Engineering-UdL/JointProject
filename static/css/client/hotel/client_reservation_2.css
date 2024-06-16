@@ -9,9 +9,10 @@
 }
 
 .number-input {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
-    gap: 48px;
+    gap: 20px;
     justify-content: center;
     margin-top: 20px;
     align-items: center;
@@ -28,16 +29,18 @@
 }
 
 .number-input .title-input {
-    transform: scale(1.5);
+    margin: 0;
+    font-size: 1.4em;
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    align-items: center;
+    gap: 10px;
 }
 
 .select-input {
     display: flex;
     flex-wrap: wrap;
-    gap: 48px;
+    gap: 20px;
     justify-content: center;
 }
 
@@ -51,10 +54,12 @@
 }
 
 .select-input .title-input {
-    transform: scale(1.5);
+    margin: 0;
+    font-size: 1.4em;
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    align-items: center;
+    gap: 10px;
 }
 
 .procedural-buttons {

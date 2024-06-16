@@ -129,7 +129,7 @@ form {
 /***** User *****/
 .gg-user {
     display: block;
-    transform: scale(1.1);
+    transform: scale(1.6);
     box-sizing: border-box;
     width: 12px;
     height: 18px
@@ -253,7 +253,7 @@ form {
 .gg-bowl {
     display: block;
     position: relative;
-    transform: scale(1.1);
+    transform: scale(1.6);
     box-sizing: border-box;
     width: 20px;
     height: 18px
