@@ -75,45 +75,12 @@ h6 {
 
 /************** Menu **************/
 header {
-    display: flex;
-    align-items: stretch;
-    justify-content: space-between;
     background-color: rgb(184, 189, 201);
     color: white;
-    height: 70px;
-    min-height: 70px;
-}
-
-header button{
-	font-family: "Gill Sans MT", Arial, sans-serif;
-}
-
-nav {
-    display: flex;
-    width: 75%;
-    height: 100%;
-    align-items: center;
-}
-
-.menu {
-    width: 100%;
-    min-width: max-content;
-    height: 100%;
-    order: 1;
-    display: flex;
-    list-style-type: none;
-    color: black;
-    justify-content: flex-start;
-    padding: 0 5px;
-    margin: 0;
-    gap: 5px;
 }
 
 .menu li {
     width: 25%;
-    min-width: max-content;
-    height: 100%;
-    align-self: center;
 }
 
 .menu button {
@@ -154,53 +121,14 @@ nav {
     border-bottom: solid 2px white;
 }
 
-#right-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding-right: 10px;
-}
-
-#language {
-    color: #000000;
-    font-weight: bold;
-}
-
-#separator {
-    width: 1px;
-    background-color: #3d3d3d;
-    border: 1px solid #3d3d3d;
-    border-radius: 50px;
-    height: 65%;
-}
-
 .home {
-    width: 50px;
-    min-width: 50px;
-    height: 50px;
-    margin-right: 5px;
-    margin-left: 5px;
-    align-self: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 40px;
     background-color: #fafafa;
     box-shadow: 0 0 5px 3px #fafafa;
-}
-
-.home img {
-    width: 35px;
-    height: 35px;
 }
 
 .home:hover, #home:focus {
     background-color: #B7C5FB;
     box-shadow: 0 0 5px 3px #B7C5FB;
-}
-
-#user {
-    width: 50px;
 }
 
 input {

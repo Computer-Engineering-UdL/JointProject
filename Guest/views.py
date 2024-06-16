@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.contrib import messages
+from django.templatetags.static import static
 from django.forms import modelform_factory
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -8,7 +9,7 @@ from Guest import utils
 from Guest.config import Config as c
 from Guest.forms import GuestRoomReservationFormStep1, GuestRoomReservationFormStep2
 from Guest.forms import RestaurantReservationForm, SearchClientForm
-from Reception.models import RoomReservation, create_despesa, Room, Client
+from Reception.models import RoomReservation, create_despesa, Room, Client, Despeses
 from Restaurant.forms import CreateExternalClientForm
 from Restaurant.models import RestaurantReservation, ExternalRestaurantClient
 from User import validators as uv
@@ -27,11 +28,24 @@ def guest_room_reservation_1(request):
             cleaned_data['entry'] = cleaned_data['entry'].isoformat()
             cleaned_data['exit'] = cleaned_data['exit'].isoformat()
             request.session['step1_data'] = cleaned_data
+            print("valid")
             return redirect('guest_room_reservation_2')
     else:
+        print(form.errors.as_data())
+        print(form.non_field_errors())
+        print(form.fields)
+        print("not valid")
+        print(form.cleaned_data)
         form = GuestRoomReservationFormStep1()
 
-    return render(request, c.get_guest_path(1), {'form': form})
+    image_urls = {
+        'Individual': static('img/LasPalmeras/rooms/individual.png'),
+        'Double': static('img/LasPalmeras/rooms/double.png'),
+        'Suite': static('img/LasPalmeras/rooms/suite.png'),
+        'Deluxe': static('img/LasPalmeras/rooms/deluxe.png')
+    }
+
+    return render(request, c.get_guest_path(1), {'form': form, 'image_urls': image_urls})
 
 
 def guest_room_reservation_2(request):
@@ -82,7 +96,10 @@ def guest_room_reservation_3(request):
     """Show the reservation summary."""
     reservation = get_object_or_404(RoomReservation, pk=request.session.get('reservation_id'))
     room = get_object_or_404(Room, pk=reservation.room_id)
-    return render(request, c.get_guest_path(7), {'reservation': reservation, 'room': room})
+    despeses = Despeses.objects.filter(room_reservation_id=reservation.id).first()
+    total_price = despeses.pension_costs + despeses.room_type_costs
+    return render(request, c.get_guest_path(7),
+                  {'reservation': reservation, 'room': room, 'despeses': despeses, 'total_price': total_price})
 
 
 def guest_restaurant_reservation_1(request):

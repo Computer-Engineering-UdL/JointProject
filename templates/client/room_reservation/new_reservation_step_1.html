@@ -1,15 +1,52 @@
-{% extends "worker/receptionist/base_receptionist.html" %}
+{% extends "client/base_client.html" %}
 <!-- This template shows the room reservation form, where the receptionist fills all the reservation fields -->
 
 {% load static %}
 {% block extra_css %}
-    <link rel="stylesheet"
-          href="{% static 'css/worker/receptionist/reservation/new_reservation/new_reservation_1.css' %}">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <script src="{% static 'js/date_picker.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/client/hotel/client_reservation.css' %}">
 {% endblock extra_css %}
 
-<!-- This block must appear in every reservation template as it is -->
+{% block title %}Booking{% endblock title %}
+{% block id_new_reservation %}id="current-page"{% endblock id_new_reservation %}
+
+{% block content %}
+    <div class="main">
+        <form method="post" class="general-form">
+            <div class="add-reservation-form">
+                {% csrf_token %}
+                <div class="date-form">
+                    <section>
+                        <div class="form-input date-input">
+                            {{ form.entry }}
+                        </div>
+                        <i class="gg-chevron-double-right"></i>
+                        <div class="form-input date-input">
+                            {{ form.exit }}
+                        </div>
+                    </section>
+                </div>
+                <div class="reservation-info-form">
+                    <div class="form-input">
+                        <div class="grid-container">
+                            {% for value, url in image_urls.items %}
+                                {% if value != "No seleccionat" %}
+                                    <div class="grid-item">
+                                        <input type="radio" id="{{ value }}" name="room_type" value="{{ value }}">
+                                        <label for="{{ value }}">
+                                            <img class="room-image" src="{{ url }}" alt="{{ value }}">
+                                            <span class="room-type-text">{{ value }}</span>
+                                        </label>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="procedural-buttons">
+                    <button class="button cancel-button" type="button" onclick="goBack()"><i class="gg-arrow-left"></i></button>
+                    <button class="button continue-button" type="submit"><i class="gg-arrow-right"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

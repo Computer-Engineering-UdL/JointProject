@@ -2,11 +2,24 @@
 
 {% load static %}
 {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/client/client_home.css' %}">
 {% endblock extra_css %}
 
 
 {% block content %}
     <div class="main">
-        <h1>Guest home</h1>
+        <div id="background-img">
+            <h2 id="las-palmeras-title">Hotel Las Palmeras</h2>
+        </div>
+        <section class="hotel-info">
+            <div class="not-image">
+                <h1 class="info-section-title">Hotel</h1>
+                <hr>
+                <p>L'hotel <strong>Las Palmeras</strong> és un hotel de 4 estrelles situat al cor de la ciutat de <strong>Fuengirola</strong>, just davant del mar i a prop del centre comercial i d'oci de la ciutat. L'hotel disposa de més de <strong>400 habitacions</strong>, totes elles amb terrassa i vistes al mar, i està equipat amb tots els serveis i instal·lacions per fer que la teva estada sigui inoblidable.</p>
+            </div>
+            <aside>
+                <img src="{% static 'img/LasPalmeras/hotel-image-2.jpg' %}" alt="Hotel Las Palmeras">
+            </aside>
+        </section>
     </div>
 {% endblock content %}

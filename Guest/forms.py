@@ -12,8 +12,8 @@ from Restaurant.models import RestaurantReservation
 
 
 class GuestRoomReservationFormStep1(forms.ModelForm):
-    entry = forms.DateField(input_formats=['%d/%m/%Y'])
-    exit = forms.DateField(input_formats=['%d/%m/%Y'])
+    entry = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), initial=date.today, label='Dia')
+    exit = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}), initial=date.today, label='Dia')
     room_type = forms.ChoiceField(choices=c.get_room_types)
 
     def __init__(self, *args, **kwargs):

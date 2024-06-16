@@ -1,10 +1,37 @@
-{% extends "worker/receptionist/base_receptionist.html" %}
+{% extends "client/base_client.html" %}
 <!-- This template shows the room reservation form, where the receptionist fills all the reservation fields -->
 
 {% load static %}
 {% block extra_css %}
-    <link rel="stylesheet"
-          href="{% static 'css/worker/receptionist/reservation/new_reservation/new_reservation_1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/client/hotel/client_reservation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/client/hotel/client_reservation_3.css' %}">
 {% endblock extra_css %}
 
-<!-- This block must appear in every reservation template as it is -->
+{% block title %}Booking{% endblock title %}
+{% block id_new_reservation %}id="current-page"{% endblock id_new_reservation %}
+
+{% block content %}
+    <div class="main">
+        <div class="list">
+            <a class="cross" href="{% url 'guest_home' %}"><i class="gg-close"></i></a>
+            <section class="date">
+                <div class="date-info">
+                    {{ reservation.entry }}
+                </div>
+                <i class="gg-chevron-double-right"></i>
+                <div class="date-info">
+                    {{ reservation.exit }}
+                </div>
+            </section>
+            <section class="info">
+                <div class="yellow-info">
+                    <p><label>Identificador de reserva</label><span>{{ reservation.id }}</span></p>
+                </div>
+                <p><label>Nº d'hostes</label><span>x{{ reservation.num_guests }}</span></p>
+                <p><label>Habitació</label><span>{{ room.room_type }}<cite id="price">{{ despeses.room_type_costs }}€</cite></span></p>
+                <p><label>Pensió</label><span>{{ reservation.pension_type}}<cite id="price">{{ despeses.pension_costs }}€</cite></span></p>
+                <cite id="total-price"><span>Total</span><span>{{ total_price }}€</span></cite>
+            </section>
+        </div>
+    </div>
+{% endblock content %}
