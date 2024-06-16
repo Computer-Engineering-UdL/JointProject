@@ -54,6 +54,11 @@
     padding: 0 24px;
 }
 
+.yellow-info span {
+    font-style: initial;
+    color: black !important;
+}
+
 .info p {
     width: 100%;
     font-size: 1.8em;
