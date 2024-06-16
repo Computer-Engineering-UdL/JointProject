@@ -11,5 +11,24 @@
 {% block id_new_reservation %}id="current-page"{% endblock id_new_reservation %}
 
 {% block content %}
+    <div class="main">
+        <div class="list">
+            <section class="date">
+                <div class="date-info">
+                    {{ reservation.entry }}
+                </div>
+                <i class="gg-chevron-double-right"></i>
+                <div class="date-info">
+                    {{ reservation.exit }}
+                </div>
+            </section>
+            <section class="info">
+                <p><label>Habitació</label><span>{{ room.room_type }}</span></p>
+                <p><label>Nº d'hostes</label><span>{{ reservation.num_guests }}</span></p>
+                <p><label>Pensió</label><span>{{ reservation.pension_type}}</span></p>
+                <p><label>Identificador de reserva</label><span>{{ reservation.id }}</span></p>
+            </section>
+        </div>
 
+    </div>
 {% endblock content %}
