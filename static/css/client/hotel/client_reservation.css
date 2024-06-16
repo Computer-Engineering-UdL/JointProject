@@ -58,6 +58,10 @@ form select option {
     z-index: 1;
 }
 
+.grid-container input[type="radio"]:checked + label .room-type-text {
+    transform: translate(-50%, -50%) scale(1.5);
+}
+
 .grid-item:hover {
     background-color: #e0e0e0;
 }
