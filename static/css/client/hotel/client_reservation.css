@@ -54,12 +54,14 @@ form select option {
 
 .grid-item:has(input[type="radio"]:checked) {
     transform: scale(1.04);
+    transition: transform 0.4s;
     filter: brightness(1.2);
     z-index: 1;
 }
 
 .grid-container input[type="radio"]:checked + label .room-type-text {
     transform: translate(-50%, -50%) scale(1.5);
+    transition: transform 0.5s;
 }
 
 .grid-item:hover {

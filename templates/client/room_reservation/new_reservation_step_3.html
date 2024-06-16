@@ -13,6 +13,7 @@
 {% block content %}
     <div class="main">
         <div class="list">
+            <a class="cross" href="{% url 'guest_home' %}"><i class="gg-close"></i></a>
             <section class="date">
                 <div class="date-info">
                     {{ reservation.entry }}
@@ -23,12 +24,14 @@
                 </div>
             </section>
             <section class="info">
-                <p><label>Habitació</label><span>{{ room.room_type }}</span></p>
-                <p><label>Nº d'hostes</label><span>{{ reservation.num_guests }}</span></p>
-                <p><label>Pensió</label><span>{{ reservation.pension_type}}</span></p>
-                <p><label>Identificador de reserva</label><span>{{ reservation.id }}</span></p>
+                <div class="yellow-info">
+                    <p><label>Identificador de reserva</label><span>{{ reservation.id }}</span></p>
+                </div>
+                <p><label>Nº d'hostes</label><span>x{{ reservation.num_guests }}</span></p>
+                <p><label>Habitació</label><span>{{ room.room_type }}<cite id="price">{{ despeses.room_type_costs }}€</cite></span></p>
+                <p><label>Pensió</label><span>{{ reservation.pension_type}}<cite id="price">{{ despeses.pension_costs }}€</cite></span></p>
+                <cite id="total-price"><span>Total</span><span>{{ total_price }}€</span></cite>
             </section>
         </div>
-
     </div>
 {% endblock content %}
