@@ -97,7 +97,8 @@ def guest_room_reservation_3(request):
     room = get_object_or_404(Room, pk=reservation.room_id)
     despeses = Despeses.objects.filter(room_reservation_id=reservation.id).first()
     total_price = despeses.pension_costs + despeses.room_type_costs
-    return render(request, c.get_guest_path(7), {'reservation': reservation, 'room': room, 'despeses': despeses, 'total_price': total_price})
+    return render(request, c.get_guest_path(7),
+                  {'reservation': reservation, 'room': room, 'despeses': despeses, 'total_price': total_price})
 
 
 def guest_restaurant_reservation_1(request):
