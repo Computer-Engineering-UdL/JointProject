@@ -1,8 +1,89 @@
 .main {
-    top: 80px;
+    top: 0;
+    justify-content: center;
 }
 
 header {
     background-color: #e5e5e5;
     box-shadow: #e5e5e5 8px -3px 10px 12px;
+}
+
+.add-reservation-form {
+    align-items: center;
+}
+
+.form-input input, .form-input select {
+    border: solid black 2px;
+}
+
+.date-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.date-input input{
+    padding: 20px;
+    border-radius: 3px;
+    font-size: 1.6em;
+    width: fit-content;
+    font-family: "Gill Sans MT", Arial, sans-serif;
+}
+
+.number-input select {
+    display: inline-block;
+    padding-block: 1px;
+    padding-inline: 2px;
+    width: 54px;
+    height: 54px;
+    padding: 10px;
+    border-radius: 3px;
+    font-size: 24px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: url("../static/img/icons/down-arrow.png"), pointer;
+    font-family: "Gill Sans MT", Arial, sans-serif;
+}
+
+.number-input select option {
+    font-size: 18px;
+}
+
+.text-input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+    gap: 5px;
+}
+
+.text-input input {
+    width: 350px;
+    padding: 10px;
+    border-radius: 3px;
+    font-size: 20px;
+    font-family: "Gill Sans MT", Arial, sans-serif;
+}
+
+.text-input h5 {
+    font-size: 24px;
+    font-family: "Gill Sans MT", Arial, sans-serif;
+    margin: 0;
+}
+
+.procedural-buttons {
+    margin-top: 30px;
+    justify-content: center;
+    height: 48px;
+}
+
+.procedural-buttons button {
+    font-family: "Gill Sans MT", Arial, sans-serif;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+}
+
+#step2-button{
+    margin-top: 10px;
 }

@@ -1,33 +1,29 @@
-{% extends "worker/receptionist/base_receptionist.html" %}
+{% extends "client/base_client.html" %}
 <!-- This template shows the room reservation form, where the receptionist fills all the reservation fields -->
 
 {% load static %}
 {% block extra_css %}
-
+    <link rel="stylesheet" href="{% static 'css/client/hotel/client_reservation.css' %}">
+    <link rel="stylesheet" href="{% static 'css/client/hotel/client_reservation_2.css' %}">
+    <link rel="stylesheet" href="{% static 'css/client/restaurant/client_restaurant.css' %}">
 {% endblock extra_css %}
 
-<!-- This block must appear in every reservation template as it is -->
-{% block id_reservation %} id="current-page" {% endblock id_reservation %}
-
-{% block title %}Reserva Restaurant{% endblock title %}
+{% block title %}Restaurant{% endblock title %}
+{% block id_restaurant_reservation %}id="current-page"{% endblock id_restaurant_reservation %}
 
 {% block content %}
-
-    <h1 class="text-center">Reserva de Restaurante STEP 2</h1>
-    <br>
-    <form method="post">
-        {% csrf_token %}
-        <br>
-        <div class="form-group">
-            <h5>{{ form.id_number.label }}</h5>
-            {{ form.id_number }}
-        </div>
-        <br>
-        <br>
-
-        <div class="procedural-buttons">
-            <button class="filter-button" type="submit">Continua</button>
-        </div>
-    </form>
-
+    <div class="main">
+        <form method="post" class="general-form">
+            {% csrf_token %}
+            <div class="add-reservation-form">
+                <div class="form-input text-input">
+                    <h5>{{ form.id_number.label }}</h5>
+                    {{ form.id_number }}
+                </div>
+            </div>
+            <div class="procedural-buttons" id="step2-button">
+                <button class="button continue-button" type="submit">Continua</button>
+            </div>
+        </form>
+    </div>
 {% endblock content %}

@@ -110,7 +110,7 @@ form select option {
 .date-form section {
     transform: scale(1.3);
     background: #e5e5e5;
-    box-shadow: #e5e5e5 0 0 10px 12px;;
+    box-shadow: #e5e5e5 0 0 10px 12px;
     padding: 10px;
     border-radius: 0 0 10px 10px;
     display: flex;
