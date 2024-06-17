@@ -11,7 +11,7 @@ from User.decorators import worker_required
 
 @worker_required('accountant')
 def accountant_home(request):
-    return render(request, 'worker/accountant/accountant_home.html')
+    return render(request, c.get_accountant_home_path())
 
 
 @worker_required('accountant')
@@ -42,7 +42,7 @@ def cleaning_material(request):
     else:
         stock = Stock.objects.filter(is_active=True)
 
-    return render(request, 'worker/accountant/cleaning_material.html', {'form': form, 'stock': stock})
+    return render(request, c.get_accountant_cleaning_material_path(), {'form': form, 'stock': stock})
 
 
 @worker_required('accountant')
@@ -105,6 +105,6 @@ def billing_data(request):
             'total_price': total_price
         })
 
-    return render(request, 'worker/accountant/billing_data.html', {
+    return render(request, c.get_accountant_billing_data_path(), {
         'reservation_details': reservation_details
     })
