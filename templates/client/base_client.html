@@ -14,7 +14,7 @@
         <ul class="menu">
             <a class="home" id="user-home" {% block id_home %}{% endblock %} href="{% url 'guest_home' %}"><img src="{% static 'img/test-logo-las-palmeras.png' %}" alt="home"></a>
             <li><a href="{% url 'guest_room_reservation' %}"><button {% block id_new_reservation %}{% endblock %}>Reservar habitació</button></a></li>
-            <li><a><button> {% block id_restaurant_reservation %}{% endblock %}Reservar taula</button></a></li>
+            <li><a href="{% url 'guest_restaurant_reservation_1' %}"><button> {% block id_restaurant_reservation %}{% endblock %}Reservar taula</button></a></li>
         </ul>
     </nav>
     <div id="right-header">
