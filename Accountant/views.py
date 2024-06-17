@@ -105,8 +105,12 @@ def send_guests_data_to_authorities(request):
         if total_reservations == 0 or total_guests == 0:
             messages.warning(request, 'No hi ha noves dades a enviar a les autoritats')
         else:
-            messages.success(request, f"S'han enviat les dades de {total_guests} hostes de {total_reservations} reserves a les autoritats")
+            messages.success(request,
+                             f"S'han enviat les dades de {total_guests} hostes de {total_reservations} "
+                             f"reserves a les autoritats")
     return redirect('accountant_home')
+
+
 def billing_data(request):
     reservations = RoomReservation.objects.select_related('room').prefetch_related(
         'despeses',

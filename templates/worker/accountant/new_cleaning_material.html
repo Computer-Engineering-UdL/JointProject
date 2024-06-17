@@ -15,7 +15,7 @@
         <h2 class="subsection-title">Afegir material de neteja</h2>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            
+
             <br>
             <br>
             <div class="form-group"><h5>{{ form.material_name.label }}</h5> {{ form.material_name }}</div>
@@ -28,7 +28,7 @@
                 <button class="filter-button" type="submit">Continua</button>
             </div>
         </form>
-            
+
         <!-- Temporal code here -->
     </div>
 {% endblock content %}
