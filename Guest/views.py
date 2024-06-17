@@ -124,7 +124,7 @@ def guest_restaurant_reservation_2(request):
         form = SearchClientForm(request.POST)
 
         id_number = form.data.get('id_number')
-        if not uv.is_valid_dni(id_number) or not uv.is_valid_nie(id_number):
+        if not uv.is_valid_dni(id_number) and not uv.is_valid_nie(id_number):
             messages.error(request, "El número d'identificació no és vàlid")
             return redirect('guest_restaurant_reservation_2')
 
@@ -161,15 +161,14 @@ def guest_restaurant_reservation_3(request):
                 service=reservation_data['service'],
                 is_active=True
             )
-            reservation.save()
             del request.session['reservation_data']
             messages.success(request, "S'ha creat la reserva de restaurant amb èxit!")
-            return redirect('guest_home')
+            return redirect('guest_restaurant_reservation_4', reservation)
     form = modelform_factory(ExternalRestaurantClient, form=CreateExternalClientForm)
     return render(request, c.get_guest_path(5), {'form': form})
 
 
-def guest_restaurant_reservation_4(request):
+def guest_restaurant_reservation_4(request, reservation):
     reservation_data = request.session.get('reservation_data')
     if not reservation_data:
         return redirect('guest_restaurant_reservation_1')
@@ -179,6 +178,7 @@ def guest_restaurant_reservation_4(request):
         if reservation_action == 'Confirmar Reserva':
             utils.create_restaurant_reservation(reservation_data)
             del request.session['reservation_data']
+            reservation.save()
             messages.success(request, "S'ha creat la reserva de restaurant amb èxit!")
             return redirect('guest_home')
         elif reservation_action == 'Cancelar Reserva':
