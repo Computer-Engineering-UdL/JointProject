@@ -1,17 +1,19 @@
 from django.contrib import messages
 from django.db.models import Sum
-from django.shortcuts import redirect, render
+from django.http import HttpResponse
+from django.shortcuts import redirect, render, get_object_or_404
 
 from Accountant.config import Config as c
 from Cleaner.forms import StockForm, AddNewCleningMaterialForm
 from Cleaner.models import Stock
-from Reception.models import RoomReservation, ExtraCosts
+from Reception.models import RoomReservation, ExtraCosts, Despeses
+from Reception.utils import create_receipt
 from User.decorators import worker_required
 
 
 @worker_required('accountant')
 def accountant_home(request):
-    return render(request, 'worker/accountant/accountant_home.html')
+    return render(request, c.get_accountant_home_path())
 
 
 @worker_required('accountant')
@@ -42,7 +44,7 @@ def cleaning_material(request):
     else:
         stock = Stock.objects.filter(is_active=True)
 
-    return render(request, 'worker/accountant/cleaning_material.html', {'form': form, 'stock': stock})
+    return render(request, c.get_accountant_cleaning_material_path(), {'form': form, 'stock': stock})
 
 
 @worker_required('accountant')
@@ -105,6 +107,27 @@ def billing_data(request):
             'total_price': total_price
         })
 
-    return render(request, 'worker/accountant/billing_data.html', {
+    return render(request, c.get_accountant_billing_data_path(), {
         'reservation_details': reservation_details
     })
+
+
+@worker_required('accountant')
+def download_receipt(request, reservation_id):
+    reservation = get_object_or_404(RoomReservation, pk=reservation_id)
+    client = reservation.client
+    despeses = Despeses.objects.get(room_reservation=reservation)
+    extra_costs = ExtraCosts.objects.filter(room_reservation=reservation)
+    metadata = {
+        'title': 'Factura de Reserva',
+        'author': 'Nom de l\'Hotel',
+        'subject': 'Factura Detallada de la Reserva',
+        'creator': 'Sistema de Gestió de l\'Hotel',
+        'keywords': 'hotel, factura, reserva'
+    }
+
+    pdf = create_receipt(reservation, client, despeses, extra_costs, metadata)
+
+    response = HttpResponse(pdf.getvalue(), content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="factura_reserva_{reservation.id}.pdf"'
+    return response
