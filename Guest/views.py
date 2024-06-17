@@ -133,9 +133,9 @@ def guest_restaurant_reservation_2(request):
             if client_type == 'internal':
                 reservation_data['id_number'] = form.cleaned_data['id_number']
                 request.session['reservation_data'] = reservation_data
-                return redirect('guest_restaurant_reservation_3')
-            elif client_type == 'external':
                 return redirect('guest_restaurant_reservation_4')
+            elif client_type == 'external':
+                return redirect('guest_restaurant_reservation_3')
 
     else:
         form = SearchClientForm()
@@ -143,27 +143,6 @@ def guest_restaurant_reservation_2(request):
 
 
 def guest_restaurant_reservation_3(request):
-    reservation_data = request.session.get('reservation_data')
-    if not reservation_data:
-        return redirect('guest_restaurant_reservation_1')
-
-    if request.method == 'POST':
-        reservation_action = request.POST.get('reservation_action')
-        if reservation_action == 'Confirmar Reserva':
-            utils.create_restaurant_reservation(reservation_data)
-            del request.session['reservation_data']
-            messages.success(request, "S'ha creat la reserva de restaurant amb èxit!")
-            return redirect('guest_home')
-        elif reservation_action == 'Cancelar Reserva':
-            del request.session['reservation_data']
-            messages.success(request, "S'ha cancelat el proces de reserva de restaurant!")
-
-            return redirect('guest_home')
-
-    return render(request, c.get_guest_path(4))
-
-
-def guest_restaurant_reservation_4(request):
     reservation_data = request.session.get('reservation_data')
     if not reservation_data:
         return redirect('guest_restaurant_reservation_1')
@@ -188,3 +167,24 @@ def guest_restaurant_reservation_4(request):
             return redirect('guest_home')
     form = modelform_factory(ExternalRestaurantClient, form=CreateExternalClientForm)
     return render(request, c.get_guest_path(5), {'form': form})
+
+
+def guest_restaurant_reservation_4(request):
+    reservation_data = request.session.get('reservation_data')
+    if not reservation_data:
+        return redirect('guest_restaurant_reservation_1')
+
+    if request.method == 'POST':
+        reservation_action = request.POST.get('reservation_action')
+        if reservation_action == 'Confirmar Reserva':
+            utils.create_restaurant_reservation(reservation_data)
+            del request.session['reservation_data']
+            messages.success(request, "S'ha creat la reserva de restaurant amb èxit!")
+            return redirect('guest_home')
+        elif reservation_action == 'Cancelar Reserva':
+            del request.session['reservation_data']
+            messages.success(request, "S'ha cancelat el proces de reserva de restaurant!")
+
+            return redirect('guest_home')
+
+    return render(request, c.get_guest_path(4))
