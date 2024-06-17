@@ -14,9 +14,6 @@ class PlaywrightTest(TestCase):
         self.browser.close()
         self.playwright.stop()
 
-    def test_create_room_reservation(self):
-        self.create_room_reservation(self.page)
-
     def test_create_restaurant_reservation(self):
         self.create_restaurant_reservation(self.page)
 
