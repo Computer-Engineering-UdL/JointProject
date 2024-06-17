@@ -54,3 +54,4 @@ class PlaywrightTest(TestCase):
         page.get_by_role("button", name="Buscar").click()
         page.locator("label").first.click()
         page.get_by_role("button", name="Actualitzar").click()
+        
