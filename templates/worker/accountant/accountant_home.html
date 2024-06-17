@@ -25,6 +25,11 @@
                 {% csrf_token %}
                 <button class="access-process-button">Pagar la taxa turística</button>
             </form>
+            <form action="{% url 'send_guests_data_to_authorities' %}" method="post">
+                {% csrf_token %}
+                <button id="send-data-button" class="access-process-button">Enivar dades a les autoritats</button>
+            </form>
         </div>
     </div>
+    
 {% endblock content %}
