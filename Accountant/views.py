@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.contrib import messages
 from django.db.models import Sum
 from django.http import HttpResponse
@@ -83,6 +85,32 @@ def tourist_tax(request):
 
 
 @worker_required('accountant')
+def send_guests_data_to_authorities(request):
+    if request.method == 'POST':
+
+        last_sent = request.session.get('last_sent')
+        today = date.today()
+        request.session['last_sent'] = str(today)
+
+        if last_sent == str(today):
+            messages.warning(request, f'Ja has enviat les dades avui {str(today)}')
+            return redirect('accountant_home')
+
+        reservations = RoomReservation.objects.filter(check_in_active=True, check_out_active=False)
+        total_guests = 0
+        total_reservations = reservations.count()
+        for reservation in reservations:
+            total_guests += reservation.num_guests
+
+        if total_reservations == 0 or total_guests == 0:
+            messages.warning(request, 'No hi ha noves dades a enviar a les autoritats')
+        else:
+            messages.success(request,
+                             f"S'han enviat les dades de {total_guests} hostes de {total_reservations} "
+                             f"reserves a les autoritats")
+    return redirect('accountant_home')
+
+
 def billing_data(request):
     reservations = RoomReservation.objects.select_related('room').prefetch_related(
         'despeses',
