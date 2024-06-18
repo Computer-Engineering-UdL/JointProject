@@ -20,10 +20,11 @@
 }
 
 .list-index {
-	width: 100%;
+	width: 96%;
 }
 
 .list-extra {
+    width: 4%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,5 +32,5 @@
 }
 
 #divider {
-    width: 100%;
+    width: 96%;
 }

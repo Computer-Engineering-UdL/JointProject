@@ -35,6 +35,9 @@
                         <div id="num-guests">{{ detail.reservation.room.room_num }} ({{ detail.reservation.room.room_type }})</div>
                         <div id="cost">{{ detail.total_price }} €</div>
                     </li>
+                    <div class="list-extra">
+                        <a class="icon" href='{% url 'download_receipt' detail.reservation.id %}'><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPUuloPNMfDR8fG02D42g5AXrvJMiBZFW4aQ&s"></a>
+                    </div>
                 </div>
             {% empty %}
                 <tr>
